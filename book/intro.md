@@ -1,6 +1,12 @@
 (intro)=
-# Welcome to the Template Book
+# OWL Ontology Training
 
-_This is the first page the student will see when opening the url._
+Welcome! This is a hands-on training on designing, building, and publishing ontologies with OWL 2 and linked data, for researchers, no prior knowledge of ontologies or OWL required. You'll work on a small ontology of your own throughout, not just read about it.
 
-This book can be used as a template for other books. It includes a starter package of the software developed by the TeachBooks initiative and some exercises to get you going!
+Developed by the TDCC-NES [ontology engineers](https://tdcc.nl/nes/ontology-engineers/).
+
+```{important}
+This training is a work in progress. See [](how-to-use.md) for how it's organised.
+```
+
+Let's get started!
