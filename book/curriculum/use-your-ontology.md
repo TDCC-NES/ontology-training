@@ -4,10 +4,9 @@ Putting a finished ontology to work.
 
 ```{admonition} Under development
 :class: warning
-This chapter has not been written yet. Planned topics:
+This chapter has not been written yet. By the end of it, you will be able to:
 
-- Transforming your data into linked data
-- Connecting instance data to your ontology
-- Querying and visualising your ontology and data
-- Reasoning
+- Transform data into linked data that uses your ontology
+- Connect instance data to an ontology, and query and visualise the result
+- Use a reasoner to draw inferences over instance data
 ```

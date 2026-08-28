@@ -6,6 +6,7 @@ root: intro.md
 parts:
   - caption: About this book
     chapters:
+    - file: overview.md
     - file: how-to-use.md
   - caption: Curriculum
     numbered: true

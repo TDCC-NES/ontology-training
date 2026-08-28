@@ -5,6 +5,8 @@ Welcome! This is a hands-on training on designing, building, and publishing onto
 
 Developed by the TDCC-NES [ontology engineers](https://tdcc.nl/nes/ontology-engineers/).
 
+New here? Check [](overview.md) for who this training is for, what you need beforehand, and what you'll learn.
+
 ```{important}
 This training is a work in progress. See [](how-to-use.md) for how it's organised.
 ```

@@ -4,10 +4,9 @@ Why ontologies matter, what an ontology actually is, and how this training appro
 
 ```{admonition} Under development
 :class: warning
-This chapter has not been written yet. Planned topics:
+This chapter has not been written yet. By the end of it, you will be able to:
 
-- Why OWL ontologies?
-- What is an ontology, and why should you care?
-- Definitions and a first example
-- First, learn to build yourself, then learn to reuse
+- Explain why ontologies matter for research data
+- Define what an ontology is, and distinguish it from a taxonomy or a controlled vocabulary
+- Describe this training's approach: build your own ontology first, then learn to reuse others'
 ```
