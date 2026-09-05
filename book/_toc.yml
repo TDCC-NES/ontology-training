@@ -12,6 +12,8 @@ parts:
     numbered: true
     chapters:
     - file: curriculum/introduction.md
+      sections:
+      - file: curriculum/running-example.md
     - file: curriculum/linked-data-foundations.md
     - file: curriculum/owl2-deep-dive.md
     - file: curriculum/build-your-own-ontology.md
