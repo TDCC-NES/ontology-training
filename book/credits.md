@@ -7,7 +7,7 @@ Developed by the [TDCC-NES Ontology Engineers](https://tdcc.nl/nes/ontology-engi
 
 Unless otherwise stated, this training's content is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). You may share and adapt it, including commercially, with attribution, a link to the licence and an indication of changes.
 
-Third-party material retains its stated licence. The [TDCC-NES logo](https://tdcc.nl/wp-content/uploads/2023/02/TDCC-NES-Logo_RGB-1024x863.png) and [TDCC browser icon](https://tdcc.nl/wp-content/uploads/2023/06/cropped-TDCC-Symbol_RGB_favicon-150x150.png) are used for identification and are excluded from the training's CC BY 4.0 licence.
+Third-party material retains its stated licence.
 
 ## TeachBooks
 
