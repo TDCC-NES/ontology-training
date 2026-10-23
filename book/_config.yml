@@ -1,7 +1,8 @@
 # This config includes an opinionated list of configuration options of TeachBooks, Jupyterbook v1, Sphinx and other extensions part of TeachBooks-Favourites.
 
-author: TDCC-NES Ontology Engineers, built with <a href="https://teachbooks.io">TeachBooks</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer"">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""></a>
-                                                     # Replace TeachBooks Teams with your own name in the line above, configuratin part of JupyterBook: https://jupyterbook.org/en/stable/customize/config.html
+title: OWL Ontology Training
+author: TDCC-NES Ontology Engineers
+
 execute:
   execute_notebooks: "off"                           # Replace this if you want don't have notebooks with output and you want to add notebook output during build, configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
   exclude_patterns:  []                              # Default value (line can be removed), sets a list of patterns to *skip* in execution, configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html), can overwritten by Sphinx-NB-Execution-Patterns (https://teachbooks.io/manual/_git/github.com_TeachBooks_Sphinx-NB-Execution-Patterns/Manual/README.html)
@@ -22,6 +23,7 @@ sphinx:                                              # Options passed on to the 
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
     html_css_files:
     - illustrations.css
+    - branding.css
     myst_fence_as_directive: [mermaid]                 # Render standard Mermaid fences in the book and Markdown previews.
     mermaid_height: auto
     mermaid_init_config:
@@ -34,14 +36,18 @@ sphinx:                                              # Options passed on to the 
     thebe_config:
       use_thebe_lite: true                           # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
       exclude_patterns: ["**/_*.yml", "**/*.md", "**/*.ipynb"] #exclude files which should not be accessible for live code, configuration part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
-    html_favicon: "figures/TB_favicon.ico"           # Replace this with your own favicon, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
+    html_favicon: figures/tdcc-favicon.png
     html_baseurl:  "https://tdcc-nes.github.io/ontology-training"    # Replace this with your own URL, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     html_theme_options:
+      extra_footer: >-
+        Built with <a href="https://teachbooks.io/">TeachBooks</a>.
+        Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>.
       home_page_in_toc: true                         # Replace with false it you don't want the landing page to be shown in the table of contents.
       logo:
-        text:        OWL Ontology Training                      # Replace this with your own book title, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
-        image_light: TeachBooks_logo.svg             # Put your logo for the light mode here (can be the same as image_dark), configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
-        image_dark:  TeachBooks_logo_inverted.svg    # Put your logo for the dark mode here (can be the same as image_light), configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
+        text: OWL Ontology Training
+        alt_text: TDCC-NES — Natural & Engineering Sciences
+        image_light: figures/tdcc-nes-logo.png
+        image_dark: figures/tdcc-nes-logo.png
       repository_url: "https://github.com/TDCC-NES/ontology-training" # Add your own repo URL here, configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
       path_to_docs:          "book"                  # Required for edit_page_button, should be book if you're using TeachBooks package (https://github.com/TeachBooks/TeachBooks) or the TeachBooks deploy book workflow (https://teachbooks.io/manual/external/deploy-book-workflow/README.html), configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
       repository_branch:     "main"                  # Replace when you change the name of your published branch (required for edit_page_button), configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
@@ -51,7 +57,7 @@ sphinx:                                              # Options passed on to the 
       launch_buttons:
         thebe: true                                  # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
       announcement: ""                               # Default value (line can be removed), sets a banner announcement at the top of the site, configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
-    html_show_copyright:   false                     # As the copyright is included in the author field, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
+    html_show_copyright: false                       # Authorship and licence are shown separately in the footer.
     html_last_updated_fmt: ''                        # Adds the date of the last update to the footer, if '' based on value of language, configuration part of sphinx-last-updated-by-git (https://github.com/TeachBooks/sphinx-last-updated-by-git)
     html_static_path: ["_static", "figures"]         # Custom styles and figure assets included in the book.
     mathjax3_config:

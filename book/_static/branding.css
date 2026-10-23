@@ -1,0 +1,8 @@
+/* Preserve the official logo's colours and legibility in both themes. */
+.navbar-brand img.logo__image {
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
