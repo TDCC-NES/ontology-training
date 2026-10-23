@@ -1,0 +1,32 @@
+/* Keep the bicycle on a white canvas in the book and Markdown previews. */
+img[src$="b001-cargo-bicycle.svg"] {
+    display: block;
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+/* Keep a white canvas in both the book and VS Code's Markdown preview. */
+.mermaid-wrapper,
+.mermaid-content,
+pre.mermaid,
+.mermaid svg {
+    background-color: #ffffff !important;
+    color: #182c3e;
+    color-scheme: light;
+}
+
+.mermaid-wrapper,
+pre.mermaid {
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.mermaid .edgeLabel,
+.mermaid .edgeLabel * {
+    color: #182c3e !important;
+    fill: #182c3e !important;
+}

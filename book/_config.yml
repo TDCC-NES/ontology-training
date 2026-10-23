@@ -14,10 +14,23 @@ html:
 sphinx:                                              # Options passed on to the underlying sphinx-parser
   extra_extensions:                                  # Sets a list of extensions to load by sphinx, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     - teachbooks_favourites                          # Gives you a starter package of extensions to use in your book, replace with individual extensions if you prefer some extensions not to be included (https://github.com/TeachBooks/TeachBooks-Favourites)
+    - sphinxcontrib.mermaid
   config:
+    bibtex_default_style: unsrt
     language: en                                     # Defines language (English) of everything except the content itself. For Dutch: replace with `nl`, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     html_js_files:
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
+    html_css_files:
+    - illustrations.css
+    myst_fence_as_directive: [mermaid]                 # Render standard Mermaid fences in the book and Markdown previews.
+    mermaid_height: auto
+    mermaid_init_config:
+      startOnLoad: true
+      fontFamily: Arial, Helvetica, sans-serif
+      flowchart:
+        curve: linear
+        nodeSpacing: 35
+        rankSpacing: 55
     thebe_config:
       use_thebe_lite: true                           # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
       exclude_patterns: ["**/_*.yml", "**/*.md", "**/*.ipynb"] #exclude files which should not be accessible for live code, configuration part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
@@ -40,7 +53,7 @@ sphinx:                                              # Options passed on to the 
       announcement: ""                               # Default value (line can be removed), sets a banner announcement at the top of the site, configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
     html_show_copyright:   false                     # As the copyright is included in the author field, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     html_last_updated_fmt: ''                        # Adds the date of the last update to the footer, if '' based on value of language, configuration part of sphinx-last-updated-by-git (https://github.com/TeachBooks/sphinx-last-updated-by-git)
-    html_static_path: ["figures"]                    # Add folder that contain files that need to be included, such as the location of the logo(s), configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
+    html_static_path: ["_static", "figures"]         # Custom styles and figure assets included in the book.
     mathjax3_config:
       chtml: {
         mtextInheritFont: true                       # To typeset text within math prettier, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)

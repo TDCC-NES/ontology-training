@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="415.975" viewBox="0 0 1100 415.975" role="img" aria-labelledby="title description">
+  <title id="title">B001, a blue cargo bicycle</title>
+  <desc id="description">A simple side-view drawing of a two-wheeled cargo bicycle, with blue frame lines, grey spokes, a saddle, handlebars, a crank and pedal, and a pale cargo box between the rider and front wheel.</desc>
+  <metadata>TDCC-NES Ontology Engineers. Cargo bicycle extracted from the native vector drawing in the source training presentation, slide 11, group 522. Original geometry and colours retained. CC BY 4.0.</metadata>
+  <rect width="1100" height="415.975" fill="#ffffff"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="142.404" cy="273.57" rx="94.404" ry="94.404" fill="none" stroke="#002060" stroke-width="7.444"/>
+    <ellipse cx="142.409" cy="273.575" rx="85.828" ry="85.828" fill="none" stroke="#808080" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 225.749 273.557" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 209.828 322.554" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 168.149 352.835" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 116.631 352.835" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 74.952 322.554" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 59.033 273.557" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 74.952 224.56" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 116.631 194.279" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 168.149 194.279" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 209.828 224.56" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <ellipse cx="142.381" cy="273.548" rx="7.958" ry="7.958" fill="#002060" stroke="#002060" stroke-width="4.357"/>
+    <ellipse cx="957.596" cy="273.57" rx="94.404" ry="94.404" fill="none" stroke="#002060" stroke-width="7.444"/>
+    <ellipse cx="957.601" cy="273.575" rx="85.828" ry="85.828" fill="none" stroke="#808080" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 1040.94 273.557" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 1025.021 322.554" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 983.342 352.835" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 931.824 352.835" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 890.145 322.554" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 874.225 273.557" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 890.145 224.56" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 931.824 194.279" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 983.342 194.279" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <path d="M 957.583 273.557 L 1025.021 224.56" fill="none" stroke="#A5ADB7" stroke-width="4.357"/>
+    <ellipse cx="957.573" cy="273.548" rx="7.958" ry="7.958" fill="#002060" stroke="#002060" stroke-width="4.357"/>
+    <path d="M 142.39 273.557 L 262.524 122.777 L 332.398 273.557 L 142.39 273.557" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 262.524 122.777 L 250.265 73.743" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 206.135 68.84 L 284.589 68.84 L 277.234 78.647 L 219.619 79.872 Z" fill="#002060" stroke="#002060" stroke-width="4.357"/>
+    <path d="M 262.524 122.777 L 470.919 126.455 L 450.08 181.618 L 332.398 273.557" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 450.08 181.618 L 500.34 287.041 L 957.583 287.041 L 957.583 273.557" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 896.29 171.811 L 926.937 181.618 L 957.583 273.557" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 561.632 247.814 L 561.632 287.041" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 822.739 247.814 L 822.739 287.041" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 519.953 126.455 L 869.321 126.455 L 826.416 247.814 L 561.632 247.814 Z" fill="#FFF2CC" stroke="#002060" stroke-width="5.054"/>
+    <path d="M 513.824 125.229 L 876.676 125.229" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <path d="M 696.476 135.036 L 696.476 236.782" fill="none" stroke="#808080" stroke-width="4.357"/>
+    <path d="M 470.919 126.455 L 463.564 48 L 526.082 48" fill="none" stroke="#002060" stroke-width="5.957"/>
+    <ellipse cx="332.364" cy="273.524" rx="23.258" ry="23.258" fill="none" stroke="#002060" stroke-width="4.357"/>
+    <path d="M 332.398 273.557 L 366.722 293.171" fill="none" stroke="#002060" stroke-width="4.459"/>
+    <path d="M 349.56 293.171 L 385.11 293.171" fill="none" stroke="#002060" stroke-width="4.459"/>
+  </g>
+</svg>
