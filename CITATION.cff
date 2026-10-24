@@ -2,8 +2,12 @@ cff-version: 1.2.0
 message: 'If you use this training, please cite it using these metadata.'
 title: 'OWL Ontology Training'
 authors:
-  - name: 'TDCC-NES Ontology Engineers'
-    website: 'https://tdcc.nl/nes/ontology-engineers/'
+  - family-names: 'Füllenbach'
+    given-names: 'Kathrin'
+    affiliation: 'TDCC-NES, TU Delft'
+  - family-names: 'Metilli'
+    given-names: 'Dani'
+    affiliation: 'TDCC-NES, TU Delft'
 url: 'https://tdcc-nes.github.io/ontology-training/'
 repository-code: 'https://github.com/TDCC-NES/ontology-training'
 license: CC-BY-4.0
@@ -11,6 +15,10 @@ preferred-citation:
   type: book
   title: 'OWL Ontology Training'
   authors:
-    - name: 'TDCC-NES Ontology Engineers'
-      website: 'https://tdcc.nl/nes/ontology-engineers/'
+    - family-names: 'Füllenbach'
+      given-names: 'Kathrin'
+      affiliation: 'TDCC-NES, TU Delft'
+    - family-names: 'Metilli'
+      given-names: 'Dani'
+      affiliation: 'TDCC-NES, TU Delft'
   url: 'https://tdcc-nes.github.io/ontology-training/'

@@ -2,23 +2,23 @@
 
 ## Why ontologies?
 
-An ontology is a formal, explicit specification of a shared conceptualization. {cite}`studer1998knowledge`
+Making the meaning of research data explicit can help researchers describe, publish, find, integrate and reuse it. This includes recording domain knowledge independently of individual applications: what the data represents and how the things it describes relate to each other. 
 
-A conceptualization is a model of the things and relationships relevant to a domain, or area of interest. Shared means agreed by a community. The terms and assumptions are stated explicitly, in a formal language that software can interpret.
+In this training, we use the following definition: an ontology is a formal, explicit specification of a shared conceptualization. {cite}`studer1998knowledge`
 
-An ontology represents the meaning of data in a model that can be reused across applications. Shared definitions support standardisation and interoperability by helping projects interpret data consistently and link or combine datasets for further studies. Interoperability is the “I” in [FAIR](https://www.gofair.foundation/fair-principles): Findable, Accessible, Interoperable and Reusable data. People can inspect the model's assumptions and decide whether it fits their data.
+A conceptualization is a model of the things and relationships relevant to a domain, or area of interest. Shared means agreed by a community. The terms and assumptions are stated explicitly, in a formal language that applications can interpret.
+
+Researchers can use an ontology to describe their data, helping others inspect the model's assumptions and assess whether the data fits their own work. Shared definitions help researchers interpret data consistently across projects, supporting standardisation and interoperability. Interoperability is the “I” in [FAIR](https://www.gofair.foundation/fair-principles): Findable, Accessible, Interoperable and Reusable data.
 
 Models from different fields can be connected where their concepts overlap. These links help researchers investigate questions that span disciplines. {cite}`bernerslee2004connectingsciences`
 
 ## Why OWL?
 
-OWL, the Web Ontology Language, is an open W3C standard. This training uses OWL 2. Its public specification gives compatible tools a common language with defined meaning, so models can be exchanged across software.
+OWL, the Web Ontology Language, is an open W3C standard. This training uses OWL 2. Its public specification gives compatible tools a common language with defined meaning, so models can be exchanged across applications.
 
-OWL builds on RDF, the Resource Description Framework, which represents data as linked statements. OWL ontologies can themselves be represented as RDF, so the model can be shared and queried with the same technologies as the data. {cite}`w3c2012owl2overview`
+OWL builds on RDF, the Resource Description Framework, which expresses information as statements about things and their relationships. OWL ontologies can themselves be represented as RDF, so the model can be shared and queried with the same technologies as the data. {cite}`w3c2012owl2overview`
 
-A *reasoner* uses the ontology's statements to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
-
-Terms should ideally have stable web identifiers that are dereferenceable: looking one up retrieves information about the term. Publishers can provide definitions on landing pages for people and RDF descriptions for software. {cite}`sauermann2008cooluris`
+Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
 
 ## Vocabularies, taxonomies and ontologies
 
@@ -37,11 +37,5 @@ Glossaries explain terms; data dictionaries document dataset fields. Both can ac
 ## The bicycle example
 
 We will use a bicycle inventory. The model distinguishes a bicycle from its frame, so “steel” can describe the frame's material.
-
-In OWL, we can define a kind of bicycle as “a bicycle that has a frame made of steel”. A reasoner can then infer that classification from the recorded facts about a bicycle and its frame.
-
-Using the class hierarchy, we can also find bicycles when querying for vehicles.
-
-Continue with the [bicycle example](running-example.md). We start by building a small ontology, then learn how to find, evaluate and reuse existing ones. In a research project, checking existing resources is part of deciding what to build.
 
 Links to the relevant [W3C standards and guides](../references.md) are collected on the References page.

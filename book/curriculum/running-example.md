@@ -50,7 +50,7 @@ block-beta
 
 *Bicycle*, *Vehicle* and *Frame* are classes: they describe kinds of things. Bicycle is a subclass of Vehicle, so every bicycle is a vehicle.
 
-B001 and F001 are individuals: a particular bicycle and its particular frame. B001 is an instance of Bicycle; F001 is an instance of Frame.
+B001 and F001 are individuals: a particular bicycle and its particular frame. B001 is an instance of Bicycle; F001 is an instance of Frame. Because every bicycle is a vehicle, B001 is also a vehicle.
 
 Properties connect these individuals to other individuals or to values. “Has component” links B001 to F001. “Colour” connects B001 to “blue”; “material” connects F001 to “steel”.
 

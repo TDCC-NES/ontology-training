@@ -1,7 +1,7 @@
 (credits)=
 # Credits and licence
 
-Developed by the [TDCC-NES Ontology Engineers](https://tdcc.nl/nes/ontology-engineers/).
+Developed by Kathrin Füllenbach and Dani Metilli ([TDCC-NES](https://tdcc.nl/nes/), [TU Delft](https://www.tudelft.nl/)).
 
 ## Licence
 
@@ -17,6 +17,6 @@ The original template's institutional [waiver](https://github.com/TDCC-NES/ontol
 
 ## Cite this training
 
-> TDCC-NES Ontology Engineers. *OWL Ontology Training*. <https://tdcc-nes.github.io/ontology-training/>.
+> Füllenbach, K., & Metilli, D. *OWL Ontology Training*. <https://tdcc-nes.github.io/ontology-training/>.
 
 For a specific version, include the access date or link to a commit in the [source repository](https://github.com/TDCC-NES/ontology-training). Citation metadata are available in [CITATION.cff](https://github.com/TDCC-NES/ontology-training/blob/main/CITATION.cff).

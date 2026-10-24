@@ -1,7 +1,7 @@
 # This config includes an opinionated list of configuration options of TeachBooks, Jupyterbook v1, Sphinx and other extensions part of TeachBooks-Favourites.
 
 title: OWL Ontology Training
-author: TDCC-NES Ontology Engineers
+author: Kathrin Füllenbach and Dani Metilli
 
 execute:
   execute_notebooks: "off"                           # Replace this if you want don't have notebooks with output and you want to add notebook output during build, configuration part of Jupyterbook v1 (https://jupyterbook.org/en/stable/customize/config.html)
