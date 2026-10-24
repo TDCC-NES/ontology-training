@@ -65,7 +65,9 @@ Bicycle is a *class* representing a kind of thing, shown in a square box. B001 i
 
 RDF Schema (RDFS) provides the *subclass of* relationship between classes. Every instance of Bicycle is also an instance of Vehicle, so B001 also belongs to Vehicle. [RDF subclasses](https://www.w3.org/TR/rdf-schema/#ch_subclassof)
 
-The *ontology layer* defines the classes, properties and class relationships used here. The *instance data layer* records facts about B001 and F001.
+The ontology defines classes such as Bicycle and properties such as “has component”, and states that Bicycle is a subclass of Vehicle. The *instance data* uses the IRIs of these terms to describe B001 and F001. RDF can express both the ontology and the instance data. [RDF vocabularies](https://www.w3.org/TR/rdf11-primer/#section-vocabulary)
+
+Linked Data principles apply to the identifiers for these classes and properties as well as to the identifiers for B001 and F001: looking them up should provide useful descriptions. [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html)
 
 ## Knowledge graphs and ontologies
 
@@ -98,7 +100,9 @@ In Turtle, `2` represents an integer that applications can use in calculations; 
 
 ## Publishing Linked Data
 
-A local Turtle file already expresses RDF. To publish the inventory as Linked Data, provide RDF descriptions when people or applications look up its identifiers. B001's description could link to F001; following that link would retrieve the frame's description and its material. Links can also lead to resources described in other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#distinguishing)
+A local Turtle file already expresses RDF. To publish the inventory as Linked Data, provide RDF descriptions when people or applications look up its identifiers. Looking up B001's IRI should retrieve its description; following its link to F001 should retrieve the frame's description and its material. Links can also lead to resources described in other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#distinguishing)
+
+The class and property IRIs should also lead to their definitions in the ontology. For example, looking up the IRI abbreviated as `vocab:Bicycle` should retrieve a description of that class and its relationship to Vehicle. Reuse the IRIs of suitable published terms, and publish descriptions for any new terms you define. This lets different research groups describe their data using the same terms and definitions. [Publishing RDF vocabularies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
 
 ## How Linked Data can support FAIR
 

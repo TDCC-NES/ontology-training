@@ -20,14 +20,14 @@ These approaches serve different purposes and can be combined.
 | Data dictionary | Descriptions of dataset fields, including their meanings, data types and permitted values |
 | Controlled vocabulary | Agreed terms or concepts for consistent description and indexing |
 | Taxonomy | Concepts organised in a hierarchy of broader and narrower categories |
-| Thesaurus | A hierarchy, plus links between related concepts and links from synonyms to preferred terms |
+| Thesaurus | Hierarchical and associative relationships between concepts, with preferred and alternative labels |
 | Ontology | Classes (kinds of things), properties (attributes and relationships), and formal statements describing them |
 
 These approaches are not muntually exclusive. For example, taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` And an ontology typically includes a taxonomy of classes. {cite}`w3c2012owl2primer`
 
 ## Why OWL?
 
-OWL, the Web Ontology Language, is an open W3C standard. This training uses OWL 2. Its public specification gives tools a common language with defined meaning, so models can be exchanged. Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
+Ontologies can be represented in different ways. This training focuses on OWL 2 (Web Ontology Language), an open W3C standard for representing ontologies on the Web. Its public specification gives tools a common language with defined meaning, so models can be exchanged. Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
 
 OWL builds on RDF, the Resource Description Framework, which is also an open W3C standard and expresses information as statements about things and their relationships. Every OWL 2 ontology has a standard RDF representation, so the model can be shared and queried with the same technologies as the data. {cite}`w3c2012owl2overview`
 
