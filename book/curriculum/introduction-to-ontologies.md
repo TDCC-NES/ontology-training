@@ -23,7 +23,7 @@ These approaches serve different purposes and can be combined.
 | Thesaurus | Hierarchical and associative relationships between concepts, with preferred and alternative labels |
 | Ontology | Classes (kinds of things), properties (attributes and relationships), and formal statements describing them |
 
-These approaches are not muntually exclusive. For example, taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` And an ontology typically includes a taxonomy of classes. {cite}`w3c2012owl2primer`
+These approaches are not mutually exclusive. For example, taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` And an ontology typically includes a taxonomy of classes. {cite}`w3c2012owl2primer`
 
 ## Why OWL?
 
