@@ -7,11 +7,10 @@ parts:
   - caption: About this book
     chapters:
     - file: overview.md
-    - file: how-to-use.md
   - caption: Curriculum
     numbered: true
     chapters:
-    - file: curriculum/introduction.md
+    - file: curriculum/introduction-to-ontologies.md
     - file: curriculum/linked-data-foundations.md
     - file: curriculum/build-your-own-ontology.md
     - file: curriculum/owl2-deep-dive.md

@@ -5,10 +5,9 @@ Welcome! This is a hands-on training on designing, building, and publishing onto
 
 New here? Check [](overview.md) for who this training is for, what you need beforehand, and what you'll learn.
 
-Developed by the [TDCC-NES ontology engineers](https://tdcc.nl/nes/ontology-engineers/) Kathrin Füllenbach and Dani Metilli.
 
 ```{important}
-We are actively developing this training. If you or your team need ontology training or have feedback on these materials, we'd be happy to hear from you at [nes@tdcc.nl](mailto:nes@tdcc.nl). See [](how-to-use.md) for how it's organised.
+This training is actively being developed by the [TDCC-NES ontology engineers](https://tdcc.nl/nes/ontology-engineers/) Kathrin Füllenbach and Dani Metilli. If you or your team need ontology training or have feedback on these materials, we'd be happy to hear from you at [nes@tdcc.nl](mailto:nes@tdcc.nl).
 ```
 
 Let's get started!

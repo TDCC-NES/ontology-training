@@ -22,4 +22,13 @@ By the end of this training, you will be able to:
 7. Map an ontology to relevant external ontologies and vocabularies, and weigh the trade-offs between mapping approaches.
 8. Connect real data to an ontology, and query, visualise, and reason over the result.
 
-See [](how-to-use.md) for how the training itself is organised.
+(how-to-use)=
+## How to use this training
+
+Work through the curriculum in order, completing the exercises as you go. Each chapter builds on the last.
+
+In this training, we first build a small ontology to understand the modelling choices involved, then explore reuse in depth.
+
+Chapters that are still being written are marked as such.
+
+Found an error, or have a suggestion? Use the {octicon}`pencil;1em` edit button at the top of any page to propose a change on GitHub, or [open an issue](https://github.com/TDCC-NES/ontology-training/issues).

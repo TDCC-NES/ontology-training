@@ -107,19 +107,7 @@ The `@prefix` lines declare the abbreviations. Each subsequent line writes a sub
 
 The order of the triples and the positions of the nodes can change without changing the graph.
 
-## Vocabularies, ontologies and knowledge graphs
-
-These approaches support different tasks:
-
-| Approach | Main purpose | Typical use |
-|---|---|---|
-| Controlled vocabulary | Agree on terms or concepts and their use | Selecting keywords or recording values consistently |
-| Taxonomy | Organise concepts in a hierarchy | Browsing or grouping data under broader and narrower categories |
-| Ontology | Specify kinds of things and their relationships, with explicit statements about meaning | Sharing a domain model and deriving consequences from its statements |
-
-These approaches overlap. A taxonomy can be a controlled vocabulary, and an ontology can include a taxonomy. A thesaurus is a controlled vocabulary with relationships such as “broader than”, “narrower than” and “related to” between its concepts.
-
-Glossaries explain terms; data dictionaries document dataset fields. Both can accompany any of these approaches.
+## Knowledge graphs
 
 A *knowledge graph* represents knowledge about entities and their relationships using a graph-based data model. Researchers use such graphs to organise descriptions and connect information from different sources. This training uses RDF for its knowledge graphs; other graph models are also used. [Hogan et al., *Knowledge Graphs*](https://www.aidanhogan.com/docs/knowledge-graphs-computing-surveys.pdf)
 
