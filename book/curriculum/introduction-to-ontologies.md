@@ -23,7 +23,7 @@ These approaches serve different purposes and can be combined.
 | Thesaurus | A hierarchy, plus links between related concepts and links from synonyms to preferred terms |
 | Ontology | Classes (kinds of things), properties (attributes and relationships), and formal statements describing them |
 
-Taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` An ontology typically includes a taxonomy of classes. {cite}`w3c2012owl2primer`
+These approaches are not muntually exclusive. For example, taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` And an ontology typically includes a taxonomy of classes. {cite}`w3c2012owl2primer`
 
 ## Why OWL?
 
@@ -40,6 +40,6 @@ B001 is our fictional blue cargo bicycle, or *bakfiets* in Dutch. It has two whe
 
 ![B001, a blue two-wheeled cargo bicycle with a cargo box in front of the rider.](../figures/b001-cargo-bicycle.svg)
 
-To answer a question such as “Which bicycles have steel frames?”, we need to record which bicycle has which frame and the frame's material.
+To answer a question such as “Which bicycles have steel frames?”, we need to record which bicycle has which frame and the frame's material. An ontology can define bicycles, frames and their properties and relationships in a shared model, so different inventories can describe them consistently.
 
 Links to the relevant [W3C standards and guides](../references.md) are collected on the References page.

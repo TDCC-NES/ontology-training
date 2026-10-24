@@ -1,17 +1,24 @@
 (linked-data-foundations)=
 # Linked Data Foundations
 
-We can express the {ref}`bicycle inventory <running-example>` as statements that applications can share and process.
+## What is Linked Data?
 
-## From descriptions to statements
+*Linked Data* is an approach to publishing structured data on the Web so that people and applications can find related information by following links.
 
-Consider the sentence “B001 has component F001”. It describes a relationship between the bicycle and its frame.
+The approach follows four [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html):
 
-RDF, the Resource Description Framework, provides a common data model for expressing statements about things, called *resources*. Resources can be physical objects, people, documents or concepts.
+1. Use Web identifiers to name things.
+2. Use HTTP or HTTPS identifiers that people and applications can look up.
+3. When an identifier is looked up, provide useful descriptions using the Resource Description Framework (RDF).
+4. Include links to other identifiers, so related information can be discovered.
 
-Each statement has a *subject* (the thing being described), a *predicate* (the property or relationship) and an *object* (what the subject is related to, or a value). These three parts form a *triple*. [RDF Concepts](https://www.w3.org/TR/rdf11-concepts/#section-triples)
+Linked Data can be access-controlled. *Linked Open Data* is openly accessible under an open licence.
 
-In ordinary words, three of our statements are:
+## RDF: the data model for Linked Data
+
+Linked Data uses RDF, a W3C standard data model, to express descriptions and links as statements about *resources*: people, objects, documents or concepts. Each *triple* has a *subject* (what is described), a *predicate* (the property or relationship) and an *object* (what it relates to, or a value). [RDF Primer](https://www.w3.org/TR/rdf11-primer/)
+
+In the {ref}`bicycle inventory <running-example>`, B001 is the bicycle and F001 its frame:
 
 | Subject | Predicate | Object |
 |---|---|---|
@@ -19,129 +26,89 @@ In ordinary words, three of our statements are:
 | B001 | has colour | “blue” |
 | F001 | has material | “steel” |
 
-## Identifiers and values
+RDF uses *IRIs* (Internationalized Resource Identifiers) as names across datasets. Since another inventory could also have a B001, we use `https://example.org/bikes/B001` for our bicycle and `https://example.org/bikes/F001` for its frame. Properties and classes have IRIs too. We use `example.org` as a placeholder domain. [RDF IRIs](https://www.w3.org/TR/rdf11-concepts/#section-IRIs)
 
-### Giving things names
+## Connecting statements into a graph
 
-B001 is an inventory identifier. Another inventory could use B001 for a different bicycle. An *IRI*, or Internationalized Resource Identifier, gives us a name that can be used across applications and datasets.
-
-For this example, we give the bicycle the IRI `https://example.org/bikes/B001` and its frame `https://example.org/bikes/F001`. These are illustrative identifiers.
-
-Properties have IRIs too. We use `https://example.org/bike-vocab#hasComponent` for the relationship between a bicycle and one of its components. [RDF IRIs](https://www.w3.org/TR/rdf11-concepts/#section-IRIs)
-
-### Recording values and types
-
-An object can be a *literal* representing a value, such as the text “blue” or “steel”, a number or a date. A *datatype* indicates how a value is interpreted: for example, the bicycle's wheel count, 2, is an integer. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
-
-We can also state that B001 is a bicycle and F001 is a frame. RDF uses the property `rdf:type` to record these classifications. Bicycle and Frame are *classes*, or kinds of things, and have their own IRIs. [RDF types](https://www.w3.org/TR/rdf-schema/#ch_type)
-
-To keep the diagram and code readable, we shorten IRIs with *prefixes*. For example, `ex:B001` expands to `https://example.org/bikes/B001`.
-
-| Prefix | Beginning of the full IRI |
-|---|---|
-| `ex:` | `https://example.org/bikes/` |
-| `vocab:` | `https://example.org/bike-vocab#` |
-| `rdf:` | `http://www.w3.org/1999/02/22-rdf-syntax-ns#` |
-
-Thus `vocab:Bicycle` names the class Bicycle, while `ex:B001` names our particular bicycle.
-
-## The RDF graph
-
-A set of RDF triples forms an *RDF graph*. We can draw subjects and objects as nodes, with arrows labelled by their predicates. When an IRI appears in several triples, the statements meet at the same node.
-
-The diagram combines our three statements with the two type statements. Rounded nodes stand for IRIs; rectangular nodes contain literal values.
+An *RDF graph* is a set of triples. In this compact view, boxes are *nodes* connected by labelled arrows. Repeated subject or object IRIs connect statements at the same node.
 
 ```mermaid
 ---
 name: bicycle-rdf-graph
 align: center
-caption: Five RDF statements about B001 and F001. Prefixes abbreviate the IRIs; quoted values are literals.
-alt: B001 has component F001 and has colour blue. F001 has material steel. B001 has type Bicycle and F001 has type Frame.
+caption: Six RDF statements. Classes have square corners; instances have rounded corners.
+alt: B001 has component F001 and has colour blue. F001 has material steel. B001 has type Bicycle and F001 has type Frame. Bicycle is a subclass of Vehicle.
 ---
 %%{init: {"theme": "base", "themeVariables": {"darkMode": false, "background": "#ffffff", "lineColor": "#44546a", "textColor": "#182c3e", "primaryTextColor": "#182c3e", "edgeLabelBackground": "#ffffff"}, "themeCSS": "& { background-color: #ffffff !important; } .edgeLabel, .edgeLabel p { color: #182c3e !important; }"}}%%
-flowchart LR
-    B001(["ex:B001"])
-    F001(["ex:F001"])
-    Bicycle(["vocab:Bicycle"])
-    Frame(["vocab:Frame"])
-    Blue["&quot;blue&quot;"]
-    Steel["&quot;steel&quot;"]
+block-beta
+    columns 4
+    Vehicle["Vehicle"] space:3
+    space:4
+    Bicycle["Bicycle"] space:2 Frame["Frame"]
+    space:4
+    B001(["<b>B001</b><br/>has colour: &quot;blue&quot;"]) space:2 F001(["<b>F001</b><br/>has material: &quot;steel&quot;"])
 
-    B001 -->|vocab:hasComponent| F001
-    B001 -->|vocab:hasColour| Blue
-    F001 -->|vocab:hasMaterial| Steel
-    B001 -->|rdf:type| Bicycle
-    F001 -->|rdf:type| Frame
+    Bicycle -- "subclass of" --> Vehicle
+    B001 -- "type" --> Bicycle
+    F001 -- "type" --> Frame
+    B001 -- "has component" --> F001
 
     classDef resource fill:#edf3fb,stroke:#406b92,color:#182c3e,stroke-width:2px
-    classDef literal fill:#e8f4ee,stroke:#36705a,color:#183c2d,stroke-width:2px
-    class B001,F001,Bicycle,Frame resource
-    class Blue,Steel literal
+    classDef instance fill:#e8f4ee,stroke:#36705a,color:#183c2d,stroke-width:2px
+    class Vehicle,Bicycle,Frame resource
+    class B001,F001 instance
 ```
 
-To answer “Which bicycles have steel frames?”, start at `ex:B001`, follow `vocab:hasComponent` to `ex:F001`, then follow `vocab:hasMaterial` to “steel”. The type statements tell us that B001 is a bicycle and F001 is a frame.
+Inside B001's box, “blue” is a text *literal*: a value in the object position of a triple. A literal's *datatype* tells applications how to interpret its written value, for example as text, a number or a date. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
-Try reading the path for B001's colour. Which statement would change if the bicycle were repainted?
+Bicycle is a *class* representing a kind of thing, shown in a square box. B001 is a particular bicycle, an *instance* of that class, shown in a rounded box. The *type* arrow from B001 to Bicycle records this membership. [RDF types](https://www.w3.org/TR/rdf-schema/#ch_type)
 
-```{dropdown} Answer
-The path is `ex:B001` → `vocab:hasColour` → “blue”. To record a new colour, change the value in that statement.
-```
+RDF Schema (RDFS) provides the *subclass of* relationship between classes. Every instance of Bicycle is also an instance of Vehicle, so B001 also belongs to Vehicle. [RDF subclasses](https://www.w3.org/TR/rdf-schema/#ch_subclassof)
 
-## Writing the same graph
+The *ontology layer* defines the classes, properties and class relationships used here. The *instance data layer* records facts about B001 and F001.
 
-An application can read the graph from a text file. *Turtle* is one syntax for writing RDF. The following code contains exactly the five statements in the diagram. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
+## Knowledge graphs and ontologies
+
+A *knowledge graph* represents things and their relationships in a graph data model. [Hogan et al., *Knowledge Graphs*](https://www.aidanhogan.com/docs/knowledge-graphs-computing-surveys.pdf) This course covers only knowledge graphs that use RDF and follow Linked Data principles.
+
+RDF supports a *data-centric approach*: data and their domain definitions can be shared independently of individual applications. Researchers gain flexibility to use the same data and ontology in new applications as their questions develop. Reusing these definitions can improve efficiency by reducing repeated work to encode and maintain the same domain knowledge in each application. [Data-Centric Manifesto](https://datacentricmanifesto.org/), [Domain model reuse](https://www.w3.org/TR/sw-oosd-primer/)
+
+## Writing the graph in Turtle
+
+*Turtle* is one syntax for writing RDF as text. *Prefixes* abbreviate IRIs: `ex:B001` expands to `https://example.org/bikes/B001`. Here, `ex:` abbreviates inventory IRIs; `rdfs:` refers to RDF Schema terms; `vocab:` abbreviates class and property IRIs. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
 ```turtle
 @prefix ex: <https://example.org/bikes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vocab: <https://example.org/bike-vocab#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-ex:B001 vocab:hasComponent ex:F001 .
-ex:B001 vocab:hasColour "blue" .
-ex:F001 vocab:hasMaterial "steel" .
-ex:B001 rdf:type vocab:Bicycle .
-ex:F001 rdf:type vocab:Frame .
+ex:B001 a vocab:Bicycle ;
+    vocab:hasComponent ex:F001 ;
+    vocab:hasColour "blue" .
+
+ex:F001 a vocab:Frame ;
+    vocab:hasMaterial "steel" .
+
+vocab:Bicycle rdfs:subClassOf vocab:Vehicle .
 ```
 
-The `@prefix` lines declare the abbreviations. Each subsequent line writes a subject, predicate and object, ending with a full stop. Quotation marks mark the text literals.
+As a predicate, `a` is Turtle shorthand for `rdf:type`, labelled *type* in the diagram. A semicolon continues statements about the same subject; a full stop ends the block. Triple order does not change the graph.
 
-The order of the triples and the positions of the nodes can change without changing the graph.
+In Turtle, `2` represents an integer that applications can use in calculations; `"2"` represents a text string.
 
-## Knowledge graphs
+## Publishing Linked Data
 
-A *knowledge graph* represents knowledge about entities and their relationships using a graph-based data model. Researchers use such graphs to organise descriptions and connect information from different sources. This training uses RDF for its knowledge graphs; other graph models are also used. [Hogan et al., *Knowledge Graphs*](https://www.aidanhogan.com/docs/knowledge-graphs-computing-surveys.pdf)
-
-Our RDF graph records facts about B001 and F001. An ontology defines terms such as Bicycle, Frame and has component; RDF can represent both that ontology and the data using it.
-
-## Linked Data
-
-*Linked Data* connects data through Web identifiers that people and applications can look up to retrieve useful descriptions and follow links to other resources. [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html)
-
-Imagine publishing the bicycle inventory this way:
-
-1. Looking up the bicycle's HTTPS IRI returns a description of B001, including its link to F001.
-2. Following the frame's IRI retrieves its description, including its material.
-3. Another researcher can refer to those same identifiers when adding information about the bicycle or frame.
-
-Looking up a bicycle or frame identifier retrieves a document describing it. Both descriptions could be served in the same document. [Cool URIs for the Semantic Web](https://www.w3.org/TR/cooluris/#distinguishing)
-
-A Turtle file stored on a researcher's computer already contains RDF. Publishing it as Linked Data also involves arranging these lookups and links. The illustrative `example.org` identifiers used here have no lookup service.
-
-Linked Data can be access-controlled. *Linked Open Data* adds open access and an open licence; the access and reuse conditions should be stated explicitly.
+A local Turtle file already expresses RDF. To publish the inventory as Linked Data, provide RDF descriptions when people or applications look up its identifiers. B001's description could link to F001; following that link would retrieve the frame's description and its material. Links can also lead to resources described in other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#distinguishing)
 
 ## How Linked Data can support FAIR
 
-The FAIR principles concern how people and applications can find, access, interpret and reuse data and its descriptions (*metadata*). They allow different technical approaches. RDF and Linked Data can support their implementation, with further work on the dataset's publication and maintenance. [FAIR principles](https://www.gofair.foundation/fair-principles)
+The [FAIR principles](https://www.gofair.foundation/fair-principles) aim to make research data and their descriptions (*metadata*) Findable, Accessible, Interoperable and Reusable.
 
-| FAIR aspect | Contribution from RDF and Linked Data | What researchers still arrange |
-|---|---|---|
-| Findable | Identifiers and structured descriptions help applications identify resources. | Persistent identifiers, rich dataset metadata and registration in a searchable catalogue or repository. |
-| Accessible | Web identifiers can lead to descriptions through standard protocols. | Reliable access, clear access conditions and metadata that remain available if the data disappears. |
-| Interoperable | A common data model, shared vocabulary terms and explicit relationships help connect descriptions. | Suitable vocabularies that are themselves FAIR, with meaningful links between resources. |
-| Reusable | Descriptions and links provide context for assessing data. | Clear usage licences, provenance describing how the data was produced, and sufficient detail to meet relevant community standards. |
+| FAIR goal | How Linked Data contributes |
+|---|---|
+| Findable | Identifiers and structured metadata help people and applications discover datasets. |
+| Accessible | Looking up Web identifiers retrieves descriptions through HTTP(S). |
+| Interoperable | RDF, shared terms and explicit relationships help applications combine and interpret data. |
+| Reusable | Linked descriptions can record how data were produced and the conditions for reuse. |
 
-The bicycle and frame identifiers name objects in the inventory. The dataset itself also needs an identifier and metadata describing it.
-
-```{note}
-These publication and maintenance tasks take time and resources. Researchers can weigh that effort against the benefits for their project.
-```
+Putting FAIR into practice includes persistent identifiers, searchable metadata, clear access conditions and a reuse licence.
