@@ -1,4 +1,4 @@
-# Introduction
+# Introduction to ontologies
 
 ## Why ontologies?
 
@@ -20,22 +20,17 @@ OWL builds on RDF, the Resource Description Framework, which expresses informati
 
 Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
 
-## Vocabularies, taxonomies and ontologies
-
-These approaches support different tasks:
-
-| Approach | Main purpose | Typical use |
-|---|---|---|
-| Controlled vocabulary | Agree on terms or concepts and their use | Selecting keywords or recording values consistently |
-| Taxonomy | Organise concepts in a hierarchy | Browsing or grouping data under broader and narrower categories |
-| Ontology | Specify kinds of things and their relationships, with explicit statements about meaning | Sharing a domain model and deriving consequences from its statements |
-
-These approaches overlap. A taxonomy can be a controlled vocabulary, and an ontology can include a taxonomy. A thesaurus is a controlled vocabulary with relationships such as “broader than”, “narrower than” and “related to” between its concepts.
-
-Glossaries explain terms; data dictionaries document dataset fields. Both can accompany any of these approaches.
-
+(running-example)=
 ## The bicycle example
 
-We will use a bicycle inventory. The model distinguishes a bicycle from its frame, so “steel” can describe the frame's material.
+We will use a bicycle inventory throughout the training.
+
+B001 is our fictional blue cargo bicycle, or *bakfiets*. It has two wheels, a cargo box and a steel frame, identified as F001. Cargo bicycles are designed to carry loads in addition to the rider, such as shopping, passengers or pets.
+
+![B001, a blue two-wheeled cargo bicycle with a cargo box in front of the rider.](../figures/b001-cargo-bicycle.svg)
+
+Which bicycles have steel frames?
+
+To answer this, we need to connect each bicycle to its frame and record the frame's material. The cargo box may be made of a different material.
 
 Links to the relevant [W3C standards and guides](../references.md) are collected on the References page.
