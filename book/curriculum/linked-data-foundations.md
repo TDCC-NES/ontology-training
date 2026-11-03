@@ -16,7 +16,7 @@ Linked Data can be access-controlled. *Linked Open Data* is openly accessible un
 
 ## RDF: the data model for Linked Data
 
-Linked Data uses RDF, a W3C standard data model, to express descriptions and links as statements about *resources*: people, objects, documents or concepts. Each *triple* has a *subject* (what is described), a *predicate* (the property or relationship) and an *object* (what it relates to, or a value). [RDF Primer](https://www.w3.org/TR/rdf11-primer/)
+Linked Data uses RDF, a W3C standard data model, to express descriptions and links as statements about *resources*: people, objects, documents or concepts. Each statement is a *triple* with a *subject* (what is described), a *predicate* (the property or relationship) and an *object* (what it relates to, or a value). [RDF Primer](https://www.w3.org/TR/rdf11-primer/)
 
 In the {ref}`bicycle inventory <running-example>`, B001 is the bicycle and F001 its frame:
 
@@ -30,7 +30,7 @@ RDF uses *IRIs* (Internationalized Resource Identifiers) as names across dataset
 
 ## Connecting statements into a graph
 
-An *RDF graph* is a set of triples. In this compact view, boxes are *nodes* connected by labelled arrows. Repeated subject or object IRIs connect statements at the same node.
+An *RDF graph* is a set of triples. The diagram adds three statements to those in the table: B001 is a Bicycle, F001 is a Frame, and every Bicycle is a Vehicle. In this compact view, boxes labelled with short resource names are *nodes* connected by labelled arrows. Repeated subject or object IRIs connect statements at the same node.
 
 ```mermaid
 ---
@@ -79,6 +79,12 @@ RDF supports a *data-centric approach*: data and their domain definitions can be
 
 *Turtle* is one syntax for writing RDF as text. *Prefixes* abbreviate IRIs: `ex:B001` expands to `https://example.org/bikes/B001`. Here, `ex:` abbreviates inventory IRIs; `rdfs:` refers to RDF Schema terms; `vocab:` abbreviates class and property IRIs. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
+For example, `vocab:Bicycle` expands to `https://example.org/bike-vocab#Bicycle`.
+
+The `@prefix` declarations below define these abbreviations; the remaining lines express the graph's six statements.
+
+As a predicate, `a` is Turtle shorthand for `rdf:type`, labelled *type* in the diagram. A semicolon continues statements about the same subject; a full stop ends the block. Triple order does not change the graph.
+
 ```turtle
 @prefix ex: <https://example.org/bikes/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -93,8 +99,6 @@ ex:F001 a vocab:Frame ;
 
 vocab:Bicycle rdfs:subClassOf vocab:Vehicle .
 ```
-
-As a predicate, `a` is Turtle shorthand for `rdf:type`, labelled *type* in the diagram. A semicolon continues statements about the same subject; a full stop ends the block. Triple order does not change the graph.
 
 In Turtle, `2` represents an integer that applications can use in calculations; `"2"` represents a text string.
 

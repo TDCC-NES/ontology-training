@@ -1,0 +1,121 @@
+@prefix bike:    <urn:tdcc:bike#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# Which bicycles have steel frames?
+
+<urn:tdcc:bike> a owl:Ontology ;
+    dcterms:title "Bike ontology"@en ;
+    dcterms:description "An ontology of bicycles, their components, colours and materials."@en ;
+    dcterms:creator "TDCC-NES Ontology Engineers"@en ;
+    dcterms:publisher "TDCC-NES"@en ;
+    dcterms:created "2026-10-19"^^xsd:date ;
+    dcterms:modified "2026-10-19"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "1.0.0" .
+
+# Classes
+
+bike:Vehicle a owl:Class ;
+    rdfs:label "vehicle"@en ;
+    rdfs:comment "A physical object designed to transport people or goods."@en .
+
+bike:Bicycle a owl:Class ;
+    rdfs:subClassOf bike:Vehicle ;
+    rdfs:label "bicycle"@en ;
+    rdfs:comment "A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance."@en .
+
+bike:CargoBicycle a owl:Class ;
+    rdfs:subClassOf bike:Bicycle ;
+    rdfs:label "cargo bicycle"@en ;
+    rdfs:comment "A bicycle designed to carry goods or passengers in addition to the rider."@en .
+
+bike:Fatbike a owl:Class ;
+    rdfs:subClassOf bike:Bicycle ;
+    rdfs:label "fatbike"@en ;
+    rdfs:comment "A bicycle designed with unusually wide tyres."@en .
+
+bike:Component a owl:Class ;
+    rdfs:label "component"@en ;
+    rdfs:comment "A physical part of a bicycle."@en .
+
+bike:Frame a owl:Class ;
+    rdfs:subClassOf bike:Component ;
+    rdfs:label "frame"@en ;
+    rdfs:comment "A component forming the main supporting structure of a bicycle."@en .
+
+bike:Wheel a owl:Class ;
+    rdfs:subClassOf bike:Component ;
+    rdfs:label "wheel"@en ;
+    rdfs:comment "A circular component that rotates about an axle and supports a vehicle as it moves."@en .
+
+bike:CargoBox a owl:Class ;
+    rdfs:subClassOf bike:Component ;
+    rdfs:label "cargo box"@en ;
+    rdfs:comment "A box fitted to a vehicle to carry goods or passengers."@en .
+
+# Properties
+# Domain and range statements support inference; they are not validation rules.
+
+bike:hasComponent a owl:ObjectProperty ;
+    rdfs:label "has component"@en ;
+    rdfs:comment "Relates a bicycle to a physical component that is part of it."@en ;
+    rdfs:domain bike:Bicycle ;
+    rdfs:range bike:Component .
+
+# Colour and material can describe both vehicles and components.
+
+bike:hasColour a owl:DatatypeProperty ;
+    rdfs:label "has colour"@en ;
+    rdfs:comment "Records a colour of an object as text."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string .
+
+bike:hasMaterial a owl:DatatypeProperty ;
+    rdfs:label "has material"@en ;
+    rdfs:comment "Records a material an object is made of as text."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range xsd:string .
+
+# Example individuals
+# B001 is the physical bicycle; F001, W001, W002 and CB001 are its parts.
+# Colour and material are string values; labels and descriptions use @en.
+
+bike:B001 a owl:NamedIndividual, bike:CargoBicycle ;
+    rdfs:label "B001"@en ;
+    rdfs:comment "A blue cargo bicycle with a steel frame, two wheels and a cargo box."@en ;
+    bike:hasComponent bike:F001, bike:W001, bike:W002, bike:CB001 ;
+    bike:hasColour "blue" .
+
+bike:F001 a owl:NamedIndividual, bike:Frame ;
+    rdfs:label "frame of B001"@en ;
+    rdfs:comment "The steel frame belonging to B001."@en ;
+    bike:hasMaterial "steel" .
+
+bike:W001 a owl:NamedIndividual, bike:Wheel ;
+    rdfs:label "front wheel of B001"@en ;
+    rdfs:comment "The front wheel belonging to B001."@en .
+
+bike:W002 a owl:NamedIndividual, bike:Wheel ;
+    rdfs:label "rear wheel of B001"@en ;
+    rdfs:comment "The rear wheel belonging to B001."@en .
+
+bike:CB001 a owl:NamedIndividual, bike:CargoBox ;
+    rdfs:label "cargo box of B001"@en ;
+    rdfs:comment "The box belonging to B001, designed to carry goods or children."@en .
+
+# Query the recorded facts without requiring a reasoner:
+#
+# PREFIX bike: <urn:tdcc:bike#>
+# PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+# SELECT DISTINCT ?bicycle ?frame WHERE {
+#     ?bicycle a/rdfs:subClassOf* bike:Bicycle ;
+#              bike:hasComponent ?frame .
+#     ?frame a/rdfs:subClassOf* bike:Frame ;
+#            bike:hasMaterial "steel" .
+# }
+#
+# Expected result: bike:B001, bike:F001.

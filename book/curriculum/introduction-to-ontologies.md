@@ -4,7 +4,9 @@
 
 Making the meaning of research data explicit can help researchers describe, publish, find, integrate and reuse it. This includes recording domain knowledge independently of individual applications: what the data represents and how the things it describes relate to each other. 
 
-In this training, we use the following definition: "*An ontology is a formal, explicit specification of a shared conceptualisation*". {cite}`studer1998knowledge` A conceptualisation is a model of the things and relationships relevant to a domain, or area of interest. Shared means agreed by a community. The terms and assumptions are stated explicitly, in a formal language that applications can interpret.
+In this training, we use the following definition: "*An ontology is a formal, explicit specification of a shared conceptualisation*". {cite}`studer1998knowledge`
+
+A conceptualisation is a model of the things and relationships relevant to a domain, or area of interest. Shared means agreed by a community. The terms and assumptions are stated explicitly, in a formal language that applications can interpret.
 
 Researchers can use an ontology to describe their data, helping others inspect the model's assumptions and assess whether the data fits their own work. Shared definitions help researchers interpret data consistently across projects, supporting standardisation and interoperability, the “I” in [FAIR](https://www.gofair.foundation/fair-principles): Findable, Accessible, Interoperable and Reusable data.
 
@@ -25,9 +27,11 @@ These approaches serve different purposes and can be combined.
 
 These approaches are not mutually exclusive. For example, taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` And an ontology typically includes a taxonomy of classes. {cite}`w3c2012owl2primer`
 
+Choose the level of modelling that serves your research. A data dictionary may be enough to explain the fields in a dataset; a controlled vocabulary can provide agreed terms for description and indexing. An ontology is useful when you need a shared model of the things your data describes, their relationships and the logical statements that support interpretation or inference. Weigh these benefits against the work needed to agree, document and maintain the model. {cite}`noy2001ontology,w3c2017dwbp`
+
 ## Why OWL?
 
-Ontologies can be represented in different ways. This training focuses on OWL 2 (Web Ontology Language), an open W3C standard for representing ontologies on the Web. Its public specification gives tools a common language with defined meaning, so models can be exchanged. Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
+Ontologies can be represented in different ways. This training focuses on OWL 2 (Web Ontology Language), an open standard from the World Wide Web Consortium (W3C) for representing ontologies on the Web. Its public specification gives tools a common language with defined meaning, so models can be exchanged. Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
 
 OWL builds on RDF, the Resource Description Framework, which is also an open W3C standard and expresses information as statements about things and their relationships. Every OWL 2 ontology has a standard RDF representation, so the model can be shared and queried with the same technologies as the data. {cite}`w3c2012owl2overview`
 
@@ -41,5 +45,7 @@ B001 is our fictional blue cargo bicycle, or *bakfiets* in Dutch. It has two whe
 ![B001, a blue two-wheeled cargo bicycle with a cargo box in front of the rider.](../figures/b001-cargo-bicycle.svg)
 
 To answer a question such as “Which bicycles have steel frames?”, we need to record which bicycle has which frame and the frame's material. An ontology can define bicycles, frames and their properties and relationships in a shared model, so different inventories can describe them consistently.
+
+For example, Bicycle and Frame are classes, “has component” is a property, and “Every Bicycle is a Vehicle” is a logical statement. If B001 is recorded as a Bicycle, an application can also infer that it is a Vehicle. {cite}`w3c2012owl2primer`
 
 Links to the relevant [W3C standards and guides](../references.md) are collected on the References page.

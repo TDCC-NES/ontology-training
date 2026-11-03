@@ -1,0 +1,28 @@
+# Fictional inventory records for the ontology training.
+
+@prefix ex: <https://example.org/bikes/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vocab: <https://example.org/bike-vocab#> .
+
+ex:B001 a vocab:Bicycle ;
+    vocab:hasComponent ex:F001 ;
+    vocab:hasColour "blue" .
+
+ex:F001 a vocab:Frame ;
+    vocab:hasMaterial "steel" .
+
+ex:B002 a vocab:Bicycle ;
+    vocab:hasComponent ex:F002 ;
+    vocab:hasColour "red" .
+
+ex:F002 a vocab:Frame ;
+    vocab:hasMaterial "aluminium" .
+
+ex:B003 a vocab:Bicycle ;
+    vocab:hasComponent ex:F003 ;
+    vocab:hasColour "black" .
+
+# No material is recorded for F003.
+ex:F003 a vocab:Frame .
+
+vocab:Bicycle rdfs:subClassOf vocab:Vehicle .
