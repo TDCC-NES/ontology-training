@@ -15,10 +15,10 @@ By the end of this training, you will be able to:
 
 1. Explain what an ontology is, how it differs from a controlled vocabulary or a taxonomy, and why representing meaning in data instead of in code matters for interoperability, reuse, and integration.
 2. Describe the core concepts of linked data, RDF, and OWL 2, and relate them to the FAIR principles.
-3. Turn a real-world use case into competency questions (questions the ontology should help answer) and a shared conceptualization as the basis for an ontology design.
+3. Turn a real-world use case into competency questions (questions the ontology should help answer) and a shared conceptualisation as the basis for an ontology design.
 4. Build an OWL 2 ontology in Protégé, including classes, properties, domains, ranges, datatypes, and axioms, following good practice for IRIs, labels, and definitions.
-5. Validate an ontology using a reasoner, SHACL, and manual checks, and fix common modeling problems.
-6. Publish and document an ontology, and choose a license and versioning approach that fits your project.
+5. Validate an ontology using a reasoner, SHACL, and manual checks, and fix common modelling problems.
+6. Publish and document an ontology, and choose a licence and versioning approach that fits your project.
 7. Reuse terms from relevant external ontologies and vocabularies, map an ontology to them, and weigh the trade-offs between reuse and mapping approaches.
 8. Connect real data to an ontology, and query, visualise, and reason over the result.
 

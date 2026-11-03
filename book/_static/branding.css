@@ -3,3 +3,22 @@
     filter: none !important;
     mix-blend-mode: normal !important;
 }
+
+/* Keep authorship and the update date together, wrapping when needed. */
+.bd-footer-content__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+}
+
+.bd-footer-content__inner > .footer-item {
+    display: contents;
+}
+
+.bd-footer-content .last-updated br {
+    display: none;
+}
+
+.bd-footer-content .extra_footer {
+    flex-basis: 100%;
+}

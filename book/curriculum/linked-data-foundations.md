@@ -65,11 +65,9 @@ Bicycle is a *class* representing a kind of thing, shown in a square box. B001 i
 
 RDF Schema (RDFS) provides the *subclass of* relationship between classes. Every instance of Bicycle is also an instance of Vehicle, so B001 also belongs to Vehicle. [RDF subclasses](https://www.w3.org/TR/rdf-schema/#ch_subclassof)
 
-The ontology defines classes such as Bicycle and properties such as “has component”, and states that Bicycle is a subclass of Vehicle. The *instance data* uses the IRIs of these terms to describe B001 and F001. RDF can express both the ontology and the instance data. [RDF vocabularies](https://www.w3.org/TR/rdf11-primer/#section-vocabulary)
+An ontology defines classes such as Bicycle and properties such as “has component”, and states that Bicycle is a subclass of Vehicle. The *instance data* uses the IRIs of these terms to describe B001 and F001. RDF can express both the ontology and the instance data. [RDF vocabularies](https://www.w3.org/TR/rdf11-primer/#section-vocabulary)
 
-Linked Data principles apply to the identifiers for these classes and properties as well as to the identifiers for B001 and F001: looking them up should provide useful descriptions. [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html)
-
-## Knowledge graphs and ontologies
+## Knowledge graphs and the data-centric approach
 
 A *knowledge graph* represents things and their relationships in a graph data model. [Hogan et al., *Knowledge Graphs*](https://www.aidanhogan.com/docs/knowledge-graphs-computing-surveys.pdf) This course covers only knowledge graphs that use RDF and follow Linked Data principles.
 
@@ -77,13 +75,11 @@ RDF supports a *data-centric approach*: data and their domain definitions can be
 
 ## Writing the graph in Turtle
 
-*Turtle* is one syntax for writing RDF as text. *Prefixes* abbreviate IRIs: `ex:B001` expands to `https://example.org/bikes/B001`. Here, `ex:` abbreviates inventory IRIs; `rdfs:` refers to RDF Schema terms; `vocab:` abbreviates class and property IRIs. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
-
-For example, `vocab:Bicycle` expands to `https://example.org/bike-vocab#Bicycle`.
+*Turtle* is one syntax for writing RDF as text. *Prefixes* abbreviate IRIs: `ex:B001` expands to `https://example.org/bikes/B001`. Here, `ex:` abbreviates inventory IRIs, `rdfs:` RDF Schema terms and `vocab:` class and property IRIs, so `vocab:Bicycle` expands to `https://example.org/bike-vocab#Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
 The `@prefix` declarations below define these abbreviations; the remaining lines express the graph's six statements.
 
-As a predicate, `a` is Turtle shorthand for `rdf:type`, labelled *type* in the diagram. A semicolon continues statements about the same subject; a full stop ends the block. Triple order does not change the graph.
+As a predicate, `a` is Turtle shorthand for the *type* relationship shown in the diagram (the RDF property `rdf:type`). A semicolon continues statements about the same subject; a full stop ends the block. Triple order does not change the graph.
 
 ```turtle
 @prefix ex: <https://example.org/bikes/> .
@@ -100,7 +96,7 @@ ex:F001 a vocab:Frame ;
 vocab:Bicycle rdfs:subClassOf vocab:Vehicle .
 ```
 
-In Turtle, `2` represents an integer that applications can use in calculations; `"2"` represents a text string.
+Quotation marks mark a text literal. If we recorded that B001 has two wheels, `2` would represent an integer that applications can use in calculations, while `"2"` would represent a text string.
 
 ## Publishing Linked Data
 
@@ -110,7 +106,7 @@ The class and property IRIs should also lead to their definitions in the ontolog
 
 ## How Linked Data can support FAIR
 
-The [FAIR principles](https://www.gofair.foundation/fair-principles) aim to make research data and their descriptions (*metadata*) Findable, Accessible, Interoperable and Reusable.
+The [FAIR principles](https://www.gofair.foundation/fair-principles) aim to make research data and their descriptions (*metadata*) Findable, Accessible, Interoperable and Reusable. {cite}`wilkinson2016fair`
 
 | FAIR goal | How Linked Data contributes |
 |---|---|

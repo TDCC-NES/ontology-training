@@ -11,3 +11,8 @@ This training is actively being developed by the [TDCC-NES ontology engineers](h
 ```
 
 Let's get started!
+
+## Contents
+
+```{tableofcontents}
+```
