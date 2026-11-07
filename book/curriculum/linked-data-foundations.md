@@ -118,7 +118,9 @@ The Web server can supply these RDF descriptions from static files, such as down
 
 Class and property IRIs work the same way: `def:Bicycle` can lead to its label and relationship to Vehicle. Publish descriptions for new terms and reuse existing term IRIs exactly, including `http:` in the `rdfs:` namespace. [Publishing vocabularies and ontologies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
 
-Use *persistent identifiers (PIDs)*, managed to remain usable when descriptions move to another Web address. {cite}`w3c2017dwbp` Prefer HTTPS for new IRIs and keep the publishing domain's TLS certificate valid for secure access. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
+Use *persistent identifiers (PIDs)*, managed to remain usable when descriptions move to another Web address. {cite}`w3c2017dwbp` For example, [w3id](https://w3id.org/) provides stable IRIs under `https://w3id.org/` that redirect to your published descriptions. If you move those descriptions, update the redirects while keeping the IRIs unchanged.
+
+Prefer HTTPS for new IRIs and keep the publishing domain's TLS certificate valid for secure access. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
 
 ## How Linked Data can support FAIR
 

@@ -1,0 +1,11 @@
+{# Retain the parent theme's section highlighting and nested-list behaviour in the left sidebar. #}
+{% set page_toc = generate_toc_html() %}
+{% if page_toc %}
+  {% set heading_id = unique_html_id("pst-page-navigation-heading") %}
+  <div id="{{ heading_id }}" class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list" aria-hidden="true"></i> {{ translate(theme_toc_title) }}
+  </div>
+  <nav id="pst-page-toc-nav" class="bd-toc bd-toc-nav page-toc" aria-labelledby="{{ heading_id }}">
+    {{ page_toc }}
+  </nav>
+{% endif %}

@@ -9,6 +9,20 @@
     mix-blend-mode: screen !important;
 }
 
+/* Leave more room for navigation while preserving Wollie's proportions. */
+.bd-sidebar-primary .navbar-brand img.logo__image {
+    max-height: 8rem;
+    max-width: 100%;
+    width: auto;
+    margin-inline: auto;
+    object-fit: contain;
+}
+
+.bd-sidebar-primary .onthispage {
+    font-weight: var(--pst-sidebar-header-font-weight);
+    margin-bottom: 0.5rem;
+}
+
 /* Keep authorship and the update date together, wrapping when needed. */
 .bd-footer-content__inner {
     display: flex;

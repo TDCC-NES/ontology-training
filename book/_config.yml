@@ -37,15 +37,19 @@ sphinx:                                              # Options passed on to the 
       use_thebe_lite: true                           # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
       exclude_patterns: ["**/_*.yml", "**/*.md", "**/*.ipynb"] #exclude files which should not be accessible for live code, configuration part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
     html_favicon: figures/favicon.png
+    templates_path: ["_templates"]
+    html_sidebars:
+      "**": [navbar-logo.html, search-button-field.html, page-toc.html, sbt-sidebar-nav.html]
+    html_extra_path: ["_static/overview.html"]         # Preserve the former course overview URL.
     html_baseurl:  "https://tdcc-nes.github.io/ontology-training"    # Replace this with your own URL, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     html_theme_options:
       secondary_sidebar_items: []                    # Keep navigation in the left sidebar.
-      primary_sidebar_end: [page-toc.html]
+      primary_sidebar_end: []
       toc_title: On this page
       extra_footer: >-
         Built with <a href="https://teachbooks.io/">TeachBooks</a>.
         Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>.
-      home_page_in_toc: true                         # Replace with false it you don't want the landing page to be shown in the table of contents.
+      home_page_in_toc: false                        # The logo and title link to the combined welcome and overview page.
       logo:
         text: OWL Ontology Training
         alt_text: Wollie, a hand-drawn owl reading an open book
