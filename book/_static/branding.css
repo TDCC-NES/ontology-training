@@ -1,7 +1,12 @@
-/* Preserve Wollie's colours and transparency in both themes. */
+/* Preserve Wollie's monochrome artwork. */
 .navbar-brand img.logo__image {
     filter: none !important;
     mix-blend-mode: normal !important;
+}
+
+/* Blend the dark artwork's black backing into the sidebar, keeping dark pupils. */
+.navbar-brand img.logo__image.only-dark {
+    mix-blend-mode: screen !important;
 }
 
 /* Keep authorship and the update date together, wrapping when needed. */
@@ -21,4 +26,9 @@
 
 .bd-footer-content .extra_footer {
     flex-basis: 100%;
+}
+
+/* Hide the page-contents toggle when the right sidebar is disabled. */
+button.sidebar-toggle.secondary-toggle {
+    display: none;
 }

@@ -1,11 +1,11 @@
-# Build Your Own Ontology
+# Conceptual modelling: design your own ontology
 
-In this chapter, we turn the bicycle example into a small ontology design. Starting from a research purpose and a few inventory records, we decide what the model should describe and work towards a shared understanding of its terms. The result is a sketch we can discuss and check against the records, using only pen and paper.
+In this chapter, we turn the bicycle example into a small ontology design. Starting from a research purpose and a few inventory records, we decide what the model should describe and work towards a shared understanding of its terms. The result is a sketch with notes on the meanings and identifiers of its terms. We can develop and check it against the records using only pen and paper.
 
 ```{admonition} Reuse in practice
 :class: note
 
-In practice, check whether existing ontologies or vocabularies can be reused or extended before building your own. Here, we build a small ontology first to understand the modelling choices involved. {cite}`noy2001ontology`
+In practice, check whether existing ontologies or vocabularies can be reused or extended before building your own. Develop new terms for concepts or relationships that suitable existing models do not cover, and combine them with terms you can reuse. Here, we build a small ontology first to understand the modelling choices involved. {cite}`noy2001ontology`
 ```
 
 ## Define the purpose and initial scope
@@ -22,7 +22,7 @@ For the {ref}`bicycle example <running-example>`, imagine a research team compar
 
 We will work with a few *representative records*: examples chosen to show the characteristics and variation the model should cover. They make modelling decisions concrete. We can check whether the model describes the relevant information in each record and whether the same terms work across records.
 
-These fictional inventory records extend the running example. They include the same frame material as B001, a different material and a missing value, so we can consider each situation as we develop the model:
+These fictional inventory records include B001 from the running example and add two bicycles: one with a different frame material and one whose frame material is missing. We can consider each situation as we develop the model:
 
 | Bicycle | Colour | Frame | Frame material |
 |---|---|---|---|
@@ -30,7 +30,7 @@ These fictional inventory records extend the running example. They include the s
 | B002 | red | F002 | aluminium |
 | B003 | black | F003 | Not recorded |
 
-“Not recorded” indicates a missing value. The {download}`Turtle file <../data/bicycle-inventory.ttl>` uses the same classes, properties and prefixes as the earlier graph.
+“Not recorded” marks a missing value in the table. The {download}`Turtle file <../data/bicycle-inventory.ttl>` leaves F003's material value absent and uses the same classes, properties and prefixes as the earlier graph.
 
 ### Setting an initial scope
 
@@ -66,11 +66,9 @@ For research aimed at future reuse, this means agreeing which main characteristi
 
 ## Shared conceptualisation and drawing
 
-With an initial scope and representative records, we can develop a *conceptual model*: a description of the kinds of things in the domain, their relationships and the data values we want to record about them. A sketch and short written explanations give people something concrete to discuss and revise. {cite}`uschold1995methodology`
+With an initial scope and representative records, we can develop a *conceptual model*: a description of the kinds of things in the domain, their relationships and the data values we want to record about them. A sketch and short written explanations give people something concrete to discuss and revise as they work towards a *shared conceptualisation*: an agreed understanding of the model's concepts and relationships. {cite}`uschold1995methodology`
 
-People who know a domain well may still disagree about what a familiar term includes. {cite}`neuhaus2022consensus`
-
-People who collect and interpret the data, as well as those who will reuse it, bring different examples and explanations to this discussion. These can reveal distinctions that one modeller might overlook. Involving them helps make different research practices and needs explicit. {cite}`hocker2020participatory`
+People who know a domain well may still disagree about what a familiar term includes. {cite}`neuhaus2022consensus` People who collect and interpret the data, as well as those who will reuse it, bring different examples and explanations to this discussion. These can reveal distinctions that one modeller might overlook. Involving them helps make different research practices and needs explicit. {cite}`hocker2020participatory`
 
 For example, one colleague might use *bicycle* only for vehicles powered entirely by the rider, while another includes electric assistance. Discussing a concrete example helps them agree what belongs in the model's Bicycle class. A possible agreement is to include two-wheeled cycles designed to be pedalled, with or without electric assistance. Keeping the agreed meaning alongside the example makes the decision understandable to others.
 
@@ -86,50 +84,57 @@ The bicycle records give us concrete things to describe. OWL distinguishes the f
 | Individual | A particular thing; an instance of a class | B001 is an instance of Bicycle; F001 is an instance of Frame |
 | Object property | A property that represents a relationship between individuals | “has component” links B001 to F001 |
 | Datatype property | A property that links an individual to a data value | “has material” links F001 to “steel” |
-| Data value | Text, a number or another value (a *literal* in RDF) | “blue” and “steel” are text values |
+| Data value | Text, a number or another value, represented by a *literal* in RDF | “blue” and “steel” are text values |
 
 Bicycle is one class used to describe B001, B002 and B003; each identifier names a particular bicycle. Frame is another class, used for F001, F002 and F003. Keeping classes and individuals distinct lets the same model describe many records.
 
-For this use case, “steel” and “aluminium” are values of the “has material” property. Different recorded materials can be described using the same Frame class. A separate class is useful when the model needs to distinguish a kind of thing, rather than simply record a different value. {cite}`noy2001ontology`
+For this use case, “steel” and “aluminium” are values of the “has material” property. Different recorded materials can be described using the same Frame class. Agree how to write these values across inventories; using “steel” consistently makes records easier to match. A separate class is useful when the model needs to distinguish a kind of thing, rather than simply record a different value. {cite}`noy2001ontology`
 
-A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
+A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. Frame is a subclass of Component, which covers bicycle parts. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
 
 ### Sketch the model
 
 The following sketch combines the model with one record so we can see how its parts are used. We use square-cornered boxes for classes and rounded boxes for individuals. These are drawing conventions for this course; other shapes work too, as long as classes and individuals are clearly distinguishable and the arrows have clear meanings.
 
-1. We begin with the classes Bicycle and Frame. Vehicle sits above Bicycle, with an arrow from Bicycle to Vehicle labelled “subclass of”: every bicycle is a vehicle.
-2. An arrow from Bicycle to Frame labelled “has component” summarises the intended relationship between their instances: an individual bicycle can have an individual frame as a component.
-3. Inside the class boxes, we list datatype properties and the kinds of values we plan to record: “has colour: text” in Bicycle and “has material: text” in Frame. The frame's material belongs with Frame because it describes that component.
-4. Below the classes, we add the example individuals B001 and F001. Arrows labelled “type” show class membership, as in the RDF graph. B001 links to F001 through “has component”; their recorded values appear inside their boxes.
+1. We begin with the classes Bicycle and Frame. Vehicle sits above Bicycle and Component above Frame, with arrows labelled “subclass of”: every bicycle is a vehicle, and every frame is a component.
+2. Inside the class boxes, we list datatype properties and the kinds of values we plan to record: “has colour: text” in Bicycle and “has material: text” in Frame. The frame's material belongs with Frame because it describes that component.
+3. Below the classes, we add the example individuals B001 and F001. Arrows labelled “type” show class membership, as in the RDF graph. B001 links to F001 through “has component”; their recorded values appear inside their boxes. The same property can link a bicycle to its wheels or other parts.
 
 ```mermaid
 ---
 name: bicycle-conceptual-model
 align: center
 caption: A conceptual model with the B001 example. Class boxes show the model; rounded boxes show the individuals described by one record.
-alt: Vehicle is above its subclass Bicycle. Bicycle lists has colour with text values; Frame lists has material with text values. A has component arrow links Bicycle to Frame. Below, B001 is an instance of Bicycle with colour blue, and F001 is an instance of Frame with material steel. B001 has component F001.
+alt: Vehicle is above its subclass Bicycle, and Component is above its subclass Frame. Bicycle lists has colour with text values; Frame lists has material with text values. Below, B001 is an instance of Bicycle with colour blue, and F001 is an instance of Frame with material steel. B001 has component F001.
 ---
 %%{init: {"theme": "base", "themeVariables": {"darkMode": false, "background": "#ffffff", "lineColor": "#44546a", "textColor": "#182c3e", "primaryTextColor": "#182c3e", "edgeLabelBackground": "#ffffff"}, "themeCSS": "& { background-color: #ffffff !important; } .edgeLabel, .edgeLabel p { color: #182c3e !important; }"}}%%
 block-beta
     columns 4
-    Vehicle["Vehicle"] space:3
+    Vehicle["Vehicle"] space:2 Component["Component"]
     space:4
     Bicycle["Bicycle<br/>has colour: text"] space:2 Frame["Frame<br/>has material: text"]
     space:4
     B001(["<b>B001</b><br/>has colour: &quot;blue&quot;"]) space:2 F001(["<b>F001</b><br/>has material: &quot;steel&quot;"])
 
     Bicycle -- "subclass of" --> Vehicle
-    Bicycle -- "has component" --> Frame
+    Frame -- "subclass of" --> Component
     B001 -- "type" --> Bicycle
     F001 -- "type" --> Frame
     B001 -- "has component" --> F001
 
     classDef resource fill:#edf3fb,stroke:#406b92,color:#182c3e,stroke-width:2px
     classDef instance fill:#e8f4ee,stroke:#36705a,color:#183c2d,stroke-width:2px
-    class Vehicle,Bicycle,Frame resource
+    class Vehicle,Bicycle,Component,Frame resource
     class B001,F001 instance
 ```
+
+### Domains, ranges and datatypes
+
+A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, we use Bicycle as the domain and Component as the range. From “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that B001 is a Bicycle and F001 a Component, even without recorded class memberships. F001's recorded membership in Frame gives its more specific type. {cite}`w3c2012owl2primer`
+
+The Component range lets the same property describe links to frames, wheels and other bicycle parts. Checking that every bicycle has a recorded component is a data-validation task.
+
+For a datatype property, the range is a datatype. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`: `xsd:string` denotes text and `xsd:integer` whole numbers. We use `xsd:string` as the range of both “has colour” and “has material”. In Turtle, `^^` attaches a datatype: `"steel"^^xsd:string` is equivalent to `"steel"`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
 
 ### Check the shared sketch against the records
 
@@ -143,7 +148,7 @@ The agreed sketch is most useful alongside short explanations of its concepts an
 
 ## Lexicalisation: labels, definitions and language tags
 
-Clear labels and definitions are essential for other researchers to understand and reuse an ontology. Here, *lexicalisation* covers choosing labels and writing textual definitions. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
+Clear labels and definitions help other researchers understand and reuse an ontology. Here, *lexicalisation* covers choosing labels and writing textual definitions. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
 
 ### Choose clear labels and definitions
 
@@ -162,6 +167,23 @@ The Bicycle definition preserves our agreement about electric assistance. The pr
 
 ### Add language tags
 
-Add a *language tag* to each label and textual definition to identify the language of the text. In Turtle, `"bicycle"@en` is an English label and `"fiets"@nl` is a Dutch label. Both can label the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
+Add a *language tag* to each label and textual definition to identify the language of the text. In Turtle, `"bicycle"@en` is text tagged as English and `"fiets"@nl` as Dutch. Both can be used as labels for the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
 
 Choose the languages needed by the intended users. When providing translations, keep the intended meaning consistent across languages.
+
+## Choose an IRI strategy
+
+An *IRI strategy* sets a consistent pattern for creating identifiers. For new IRIs, choose a Web domain that can be maintained over time, use HTTPS and plan how looking them up will retrieve descriptions, as discussed in {ref}`Linked Data Foundations <linked-data-foundations>`. {cite}`w3c2017dwbp`
+
+Our example uses:
+
+| Identifies | IRI |
+|---|---|
+| Ontology | `https://example.org/bike` |
+| Class | `https://example.org/bike/def/Bicycle` |
+| Property | `https://example.org/bike/def/hasComponent` |
+| Individual | `https://example.org/bike/id/B001` |
+
+Here, `bike` gives the example's context, `def` groups class and property definitions, and `id` groups individuals. Appending a *local name*, such as `Bicycle`, to the *namespace IRI* `https://example.org/bike/def/` gives the term IRI `https://example.org/bike/def/Bicycle`.
+
+In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Keep IRIs stable when revising labels or adding translations, and preserve existing IRIs when reusing terms.

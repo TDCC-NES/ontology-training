@@ -16,8 +16,10 @@ parts:
     chapters:
     - file: curriculum/introduction-to-ontologies.md
     - file: curriculum/linked-data-foundations.md
-    - file: curriculum/build-your-own-ontology.md
+    - file: curriculum/design-your-own-ontology.md
+    - file: curriculum/build-your-ontology-in-owl.md
     - file: curriculum/owl2-deep-dive.md
+    - file: curriculum/moving-towards-production.md
     - file: curriculum/use-your-ontology.md
     - file: curriculum/map-to-external-ontologies.md
     - file: curriculum/beyond-linked-data.md

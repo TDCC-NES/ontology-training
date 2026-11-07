@@ -1,4 +1,4 @@
-# OWL 2 Deep Dive
+# Logical modelling in OWL
 
 A closer look at how OWL 2 expresses meaning.
 
