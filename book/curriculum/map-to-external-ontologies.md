@@ -8,7 +8,7 @@ This chapter is being written. By the end of it, you will be able to:
 
 - Explain why and when to map an ontology to external ontologies and vocabularies
 - Find suitable ontologies and vocabularies, and suitable terms within them, using standard resources
-- Compare mapping approaches and choose one that fits, including SHACL
+- Compare mapping approaches and choose one that fits, including [SHACL-AF rules](https://www.w3.org/TR/shacl-af/#rules) for deriving RDF triples with terms from another ontology
 ```
 
 ## Reuse, extend or build

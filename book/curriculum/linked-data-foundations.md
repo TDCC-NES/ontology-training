@@ -65,17 +65,25 @@ Bicycle is a *class* representing a kind of thing, shown in a square box. B001 i
 
 RDF Schema (RDFS) provides the *subclass of* relationship between classes. Every instance of Bicycle is also an instance of Vehicle, so B001 also belongs to Vehicle. [RDF subclasses](https://www.w3.org/TR/rdf-schema/#ch_subclassof)
 
-An ontology defines classes such as Bicycle and properties such as “has component”, and states that Bicycle is a subclass of Vehicle. The *instance data* uses the IRIs of these terms to describe B001 and F001. RDF can express both the ontology and the instance data. [RDF vocabularies](https://www.w3.org/TR/rdf11-primer/#section-vocabulary)
+An ontology defines classes such as Bicycle and properties such as “has component”, and states that Bicycle is a subclass of Vehicle. The *instance data* uses the IRIs of these terms to describe B001 and F001. RDF can express both the ontology and the instance data. [Ontology terms in RDF](https://www.w3.org/TR/rdf11-primer/#section-vocabulary)
 
 ## Knowledge graphs and the data-centric approach
 
 A *knowledge graph* represents things and their relationships in a graph data model. [Hogan et al., *Knowledge Graphs*](https://www.aidanhogan.com/docs/knowledge-graphs-computing-surveys.pdf) This course covers only knowledge graphs that use RDF and follow Linked Data principles.
 
-RDF supports a *data-centric approach*: data and their domain definitions can be shared independently of individual applications. Researchers gain flexibility to use the same data and ontology in new applications as their questions develop. Reusing these definitions can improve efficiency by reducing repeated work to encode and maintain the same domain knowledge in each application. [Data-Centric Manifesto](https://datacentricmanifesto.org/), [Domain model reuse](https://www.w3.org/TR/sw-oosd-primer/)
+RDF is *flexible*: researchers can extend a graph with new properties and relationships as research needs develop. [RDF data model](https://www.w3.org/RDF/)
 
-## Writing the graph in Turtle
+Using the same IRI for the same resource connects descriptions across datasets, even when their structures differ. For example, one dataset can link B001 to F001 while another records F001's material. When the graphs are combined, the shared IRI `https://example.org/bikes/F001` connects these statements at the same node. [Combining RDF graphs](https://www.w3.org/TR/rdf11-concepts/#section-multigraph)
 
-*Turtle* is one syntax for writing RDF as text. *Prefixes* abbreviate IRIs: `ex:B001` expands to `https://example.org/bikes/B001`. Here, `ex:` abbreviates inventory IRIs, `rdfs:` RDF Schema terms and `vocab:` class and property IRIs, so `vocab:Bicycle` expands to `https://example.org/bike-vocab#Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
+`http://example.org/bikes/F001` and `https://example.org/bikes/F001` are different IRIs. A browser may follow a redirect between them. SPARQL, the query language for RDF, matches IRIs exactly, so a query using one can miss data recorded with the other. [IRI comparison](https://www.w3.org/TR/rdf11-concepts/#section-IRIs), [SPARQL matching](https://www.w3.org/TR/sparql11-query/#BasicGraphPatternMatching)
+
+In a *data-centric approach*, domain knowledge is represented explicitly in shared data and ontologies, rather than encoded separately in each application's code. An inventory application and an analysis application can reuse the same bicycle data and the statement that Bicycle is a subclass of Vehicle. Managing data and definitions independently of individual applications can reduce repeated work to prepare data and maintain its definitions. [Data-Centric Manifesto](https://datacentricmanifesto.org/principles/), [Sharing data and domain models](https://www.w3.org/TR/sw-oosd-primer/)
+
+## RDF serialisation: Turtle and other formats
+
+*Serialisation* represents an RDF graph in a format for storage or exchange. Turtle, JSON-LD, RDF/XML and N-Triples are RDF serialisation formats: they can represent the same graph using different syntax. [RDF serialisation formats](https://www.w3.org/TR/rdf11-primer/#section-syntax)
+
+We write the bicycle graph in *Turtle*, a compact format for reading and writing RDF by hand. *Prefixes* abbreviate IRIs: `ex:B001` expands to `https://example.org/bikes/B001`. Here, `ex:` abbreviates inventory IRIs, `rdfs:` RDF Schema terms and `vocab:` class and property IRIs, so `vocab:Bicycle` expands to `https://example.org/bike-vocab#Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
 The `@prefix` declarations below define these abbreviations; the remaining lines express the graph's six statements.
 
@@ -96,13 +104,17 @@ ex:F001 a vocab:Frame ;
 vocab:Bicycle rdfs:subClassOf vocab:Vehicle .
 ```
 
-Quotation marks mark a text literal. If we recorded that B001 has two wheels, `2` would represent an integer that applications can use in calculations, while `"2"` would represent a text string.
+If we recorded that B001 has two wheels, `2` would represent an integer that applications can use in calculations, while `"2"` would represent a text string.
 
 ## Publishing Linked Data
 
-A local Turtle file already expresses RDF. To publish the inventory as Linked Data, provide RDF descriptions when people or applications look up its identifiers. Looking up B001's IRI should retrieve its description; following its link to F001 should retrieve the frame's description and its material. Links can also lead to resources described in other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#distinguishing)
+A local Turtle file already expresses RDF. Ideally, published IRIs are *dereferenceable*: looking one up retrieves a description of what it identifies. A *landing page* presents this as a Web page for people; applications can retrieve the description as RDF. For B001, it can include the link to F001, whose description gives the frame's material. Links can also lead to other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#semweb)
 
-The class and property IRIs should also lead to their definitions in the ontology. For example, looking up the IRI abbreviated as `vocab:Bicycle` should retrieve a description of that class and its relationship to Vehicle. Reuse the IRIs of suitable published terms, and publish descriptions for any new terms you define. This lets different research groups describe their data using the same terms and definitions. [Publishing RDF vocabularies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
+Use *persistent identifiers (PIDs)*, managed to remain usable over time even when descriptions move to another Web address. {cite}`w3c2017dwbp`
+
+Prefer HTTPS for new IRIs and maintain a valid TLS certificate for the publishing domain so people and applications can retrieve descriptions securely. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
+
+These practices also apply to vocabularies and ontologies: class and property IRIs can lead to their definitions. For `vocab:Bicycle`, this can include its label and relationship to Vehicle. Reuse suitable published term IRIs exactly as defined, including `http:` where used, as in the `rdfs:` namespace above. Publish descriptions for new terms so research groups can use the same definitions. [Publishing vocabularies and ontologies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
 
 ## How Linked Data can support FAIR
 
@@ -115,4 +127,4 @@ The [FAIR principles](https://www.gofair.foundation/fair-principles) aim to make
 | Interoperable | RDF, shared terms and explicit relationships help applications combine and interpret data. |
 | Reusable | Linked descriptions can record how data were produced and the conditions for reuse. |
 
-Putting FAIR into practice includes persistent identifiers, searchable metadata, clear access conditions and a reuse licence.
+FAIR also involves searchable metadata, clear access conditions and a reuse licence.

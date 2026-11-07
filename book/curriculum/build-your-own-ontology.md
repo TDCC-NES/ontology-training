@@ -8,7 +8,7 @@ In this chapter, we turn the bicycle example into a small ontology design. Start
 In practice, check whether existing ontologies or vocabularies can be reused or extended before building your own. Here, we build a small ontology first to understand the modelling choices involved. {cite}`noy2001ontology`
 ```
 
-## Define the purpose and scope
+## Define the purpose and initial scope
 
 ### Starting from a research purpose
 
@@ -32,23 +32,17 @@ These fictional inventory records extend the running example. They include the s
 
 “Not recorded” indicates a missing value. The {download}`Turtle file <../data/bicycle-inventory.ttl>` uses the same classes, properties and prefixes as the earlier graph.
 
-### Deciding what to include
+### Setting an initial scope
 
-The *scope* describes what the model covers and in how much detail. Choosing a scope helps us concentrate on the information needed for the purpose. {cite}`suarezfigueroa2009requirements` For our frame-material comparison, we include bicycles, their frames, the relationship between them and recorded frame materials such as “steel”. We also keep the classification of bicycles as vehicles used in our example.
+The *scope* describes what the model covers and in how much detail. Choosing an initial scope helps us concentrate on the information needed for the purpose. {cite}`suarezfigueroa2009requirements` For our comparison, we start with bicycle frames and their recorded materials.
 
 Other components and their materials, detailed alloy composition, material performance, and manufacturing or maintenance histories are outside this initial scope: we do not need them for the comparison.
 
-This is enough to describe B001, its frame F001 and the frame's recorded material for the intended comparison. The bicycle's colour is already present in our example data, but it is not needed to select records by frame material.
-
 A short shared description of the purpose, intended users and scope helps the researchers who know the domain and those who will use the data agree what to include. It can be revised as new needs emerge. {cite}`suarezfigueroa2009requirements`
 
-## Starting with competency questions, or not
+## Refine the scope with competency questions
 
 A *competency question* states something the ontology, together with relevant data, should help answer. Writing these questions is one way to make the purpose and scope more precise: each question helps identify what the model needs to represent and provides a way to check its coverage. {cite}`gruninger1995methodology,noy2001ontology`
-
-You can also begin with a use case, representative records or an initial sketch, and develop questions as the intended use becomes clearer. Early modelling can focus on agreeing the important concepts when detailed questions would be too specific. An initial set of questions can be small and grow with discussion. {cite}`uschold1995methodology,noy2001ontology`
-
-For research aimed at future reuse, this means agreeing which main characteristics and relationships to cover while specific research questions are still emerging. {cite}`uschold1995methodology` In the bicycle inventory, this could include colour as well as frame material. Linked Data can also support combinations across research fields that the data's publishers did not anticipate. {cite}`bernerslee2004connectingsciences` Competency questions provide examples for checking coverage; they do not need to anticipate every future use.
 
 ### Using competency questions
 
@@ -56,19 +50,25 @@ For the frame-material use case, one competency question is:
 
 > Which bicycles have a frame recorded as steel?
 
-To support this question, the model needs to represent bicycles, frames, the relationship between them and frame material. This makes our earlier scope concrete. The data needs to identify the particular bicycles and frames and record each frame's material. The expected result is a list of bicycle identifiers.
+To support this question, the model needs to represent bicycles, frames, the relationship between them and frame material. This refines our initial scope. The data needs to identify the particular bicycles and frames and record each frame's material. The expected result is a list of bicycle identifiers.
 
 This wording identifies the relevant component. Asking about “bicycles made of steel” would leave it unclear whether the frame, wheels or another part determines the selection. Recording the intended result alongside the question helps make that requirement precise. {cite}`suarezfigueroa2009requirements`
 
-Competency questions can also concern information inferred from the model. For example, “Which recorded objects can be classified as vehicles?” can include objects recorded as bicycles when the ontology states that every Bicycle is a Vehicle. {cite}`gruninger1995methodology,w3c2012owl2primer`
+Competency questions can also concern information inferred from the model. For example, “Which recorded objects can be classified as vehicles?” can include objects recorded as bicycles when the ontology states that every Bicycle is a Vehicle. We keep this classification from our example. {cite}`gruninger1995methodology,w3c2012owl2primer`
 
-Checking the question against our representative records can reveal missing data as well as modelling gaps. For F003, recording its material would fill a gap in the data; the model already provides a way to represent it.
+Checking the frame-material question against our representative records can reveal missing data as well as modelling gaps. For F003, recording its material would fill a gap in the data; the model already provides a way to represent it.
+
+### Developing questions over time
+
+You can also begin with a use case, representative records or an initial sketch, and develop questions as the intended use becomes clearer. Early modelling can focus on agreeing the important concepts when detailed questions would be too specific. An initial set of questions can be small and grow with discussion. {cite}`uschold1995methodology,noy2001ontology`
+
+For research aimed at future reuse, this means agreeing which main characteristics and relationships to cover while specific research questions are still emerging. {cite}`uschold1995methodology` Here, we retain the bicycle's colour for broader inventory reuse, although it is not needed to select records by frame material. Linked Data can also support combinations across research fields that the data's publishers did not anticipate. {cite}`bernerslee2004connectingsciences` Competency questions provide examples for checking coverage; they do not need to anticipate every future use.
 
 ## Shared conceptualisation and drawing
 
 With an initial scope and representative records, we can develop a *conceptual model*: a description of the kinds of things in the domain, their relationships and the data values we want to record about them. A sketch and short written explanations give people something concrete to discuss and revise. {cite}`uschold1995methodology`
 
-Reaching a shared understanding can take a substantial part of the work in ontology engineering. People who know a domain well may still disagree about what a familiar term includes. {cite}`neuhaus2022consensus`
+People who know a domain well may still disagree about what a familiar term includes. {cite}`neuhaus2022consensus`
 
 People who collect and interpret the data, as well as those who will reuse it, bring different examples and explanations to this discussion. These can reveal distinctions that one modeller might overlook. Involving them helps make different research practices and needs explicit. {cite}`hocker2020participatory`
 
@@ -100,7 +100,7 @@ The following sketch combines the model with one record so we can see how its pa
 
 1. We begin with the classes Bicycle and Frame. Vehicle sits above Bicycle, with an arrow from Bicycle to Vehicle labelled “subclass of”: every bicycle is a vehicle.
 2. An arrow from Bicycle to Frame labelled “has component” summarises the intended relationship between their instances: an individual bicycle can have an individual frame as a component.
-3. Inside the class boxes, we list datatype properties and the kinds of values we plan to record: “has colour: text” in Bicycle and “has material: text” in Frame. The frame's material belongs with Frame because it describes that component. We keep “has colour” because it is already recorded and may serve later questions, as discussed above.
+3. Inside the class boxes, we list datatype properties and the kinds of values we plan to record: “has colour: text” in Bicycle and “has material: text” in Frame. The frame's material belongs with Frame because it describes that component.
 4. Below the classes, we add the example individuals B001 and F001. Arrows labelled “type” show class membership, as in the RDF graph. B001 links to F001 through “has component”; their recorded values appear inside their boxes.
 
 ```mermaid
@@ -143,7 +143,7 @@ The agreed sketch is most useful alongside short explanations of its concepts an
 
 ## Lexicalisation: labels, definitions and language tags
 
-Clear labels and definitions are essential for other researchers to understand and reuse an ontology. Giving its classes and properties clear wording in natural language is called *lexicalisation*. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
+Clear labels and definitions are essential for other researchers to understand and reuse an ontology. Here, *lexicalisation* covers choosing labels and writing textual definitions. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
 
 ### Choose clear labels and definitions
 

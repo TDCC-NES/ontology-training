@@ -7,7 +7,7 @@ This training is for researchers, PhD candidates, and research support staff (fo
 
 ## Prerequisites
 
-No prior experience with ontologies, RDF, OWL, the Semantic Web or programming is required. You don't need a use case of your own to get started: a shared running example is used throughout. You're encouraged to apply what you learn to a domain of your own if you have one. All tools used in the training, such as Protégé, are introduced and installed as you go, so no advance setup is needed.
+No prior experience with ontologies, RDF, OWL, the Semantic Web or programming is required. You don't need a use case of your own to get started: a shared running example is used throughout. All tools used in the training, such as Protégé, are introduced and installed as you go, so no advance setup is needed.
 
 ## What you'll learn
 

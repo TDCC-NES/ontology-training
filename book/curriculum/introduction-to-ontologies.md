@@ -1,6 +1,6 @@
 # Introduction to ontologies
 
-## Why ontologies?
+## What are ontologies, and why use them?
 
 Making the meaning of research data explicit can help researchers describe, publish, find, integrate and reuse it. This includes recording domain knowledge independently of individual applications: what the data represents and how the things it describes relate to each other. 
 

@@ -1,7 +1,7 @@
 (intro)=
 # OWL Ontology Training
 
-Welcome! This is a hands-on training for researchers on designing, building, and publishing ontologies with OWL 2 and linked data. You'll work on a small ontology of your own throughout.
+Welcome! This training introduces researchers to designing, building and publishing ontologies with OWL 2 and linked data. A shared bicycle example illustrates the concepts throughout.
 
 New here? Check [](overview.md) for who this training is for, what you need beforehand, and what you'll learn.
 
