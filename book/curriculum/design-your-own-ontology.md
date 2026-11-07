@@ -1,4 +1,4 @@
-# Conceptual modelling: design your own ontology
+# Design your own ontology
 
 In this chapter, we turn the bicycle example into a small ontology design. Starting from a research purpose and a few inventory records, we decide what the model should describe and work towards a shared understanding of its terms. The result is a sketch with notes on the meanings and identifiers of its terms. We can develop and check it against the records using only pen and paper.
 
@@ -90,7 +90,7 @@ Bicycle is one class used to describe B001, B002 and B003; each identifier names
 
 For this use case, “steel” and “aluminium” are values of the “has material” property. Different recorded materials can be described using the same Frame class. Agree how to write these values across inventories; using “steel” consistently makes records easier to match. A separate class is useful when the model needs to distinguish a kind of thing, rather than simply record a different value. {cite}`noy2001ontology`
 
-A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. Frame is a subclass of Component, which covers bicycle parts. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
+A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. Frame is a subclass of Component, which covers physical parts of objects. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
 
 ### Sketch the model
 
@@ -130,11 +130,13 @@ block-beta
 
 ### Domains, ranges and datatypes
 
-A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, we use Bicycle as the domain and Component as the range. From “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that B001 is a Bicycle and F001 a Component, even without recorded class memberships. F001's recorded membership in Frame gives its more specific type. {cite}`w3c2012owl2primer`
+A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, we use OWL's built-in class `owl:Thing`, which contains every individual, as the domain and Component as the range. This domain also covers objects other than bicycles. From “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that F001 is a Component, even without a recorded class membership. We record B001's Bicycle membership separately. F001's recorded membership in Frame gives its more specific type. {cite}`w3c2012owl2primer`
 
-The Component range lets the same property describe links to frames, wheels and other bicycle parts. Checking that every bicycle has a recorded component is a data-validation task.
+The Component range covers frames, wheels and other physical parts. Checking that every bicycle has a recorded component is a data-validation task.
 
-For a datatype property, the range is a datatype. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`: `xsd:string` denotes text and `xsd:integer` whole numbers. We use `xsd:string` as the range of both “has colour” and “has material”. In Turtle, `^^` attaches a datatype: `"steel"^^xsd:string` is equivalent to `"steel"`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
+For a datatype property, the range is a datatype. We use `rdf:langString` for “has colour” and “has material” because their values are language-tagged text, such as `"steel"@en`. The `rdf:` prefix abbreviates `http://www.w3.org/1999/02/22-rdf-syntax-ns#`. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
+
+For numbers, use a numeric datatype: `xsd:integer` represents whole numbers. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`. In Turtle, `^^` attaches a datatype: `"2"^^xsd:integer` is equivalent to `2`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
 
 ### Check the shared sketch against the records
 
@@ -161,13 +163,13 @@ For a property, explain what it relates or records. For a relationship, make its
 | Label | Definition |
 |---|---|
 | bicycle | A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance. |
-| has component | Relates a bicycle to a physical part of that bicycle. |
+| has component | Relates an object to one of its physical parts. |
 
 The Bicycle definition preserves our agreement about electric assistance. The property definition tells us how to read the link from B001 to F001. Use the sketch and representative records to discuss the wording and agree its meaning together. Where a definition is taken or adapted from an existing source, record that source alongside it.
 
 ### Add language tags
 
-Add a *language tag* to each label and textual definition to identify the language of the text. In Turtle, `"bicycle"@en` is text tagged as English and `"fiets"@nl` as Dutch. Both can be used as labels for the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
+Add a *language tag* to labels, textual definitions and other natural-language text, such as material names. In Turtle, `"bicycle"@en` is text tagged as English and `"fiets"@nl` as Dutch. Both can be used as labels for the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
 
 Choose the languages needed by the intended users. When providing translations, keep the intended meaning consistent across languages.
 
@@ -186,6 +188,6 @@ Our example uses:
 
 Here, `bike` gives the example's context, `def` groups class and property definitions, and `id` groups individuals. Appending a *local name*, such as `Bicycle`, to the *namespace IRI* `https://example.org/bike/def/` gives the term IRI `https://example.org/bike/def/Bicycle`.
 
-In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Choose property local names that make the direction from subject to object clear: `id:F001 def:hasMaterial "steel" .` reads as “F001 has material steel”.
+In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Choose property local names that make the direction from subject to object clear: `id:F001 def:hasMaterial "steel"@en .` reads as “F001 has material steel”.
 
 Keep IRIs stable when revising labels or adding translations, and preserve existing IRIs when reusing terms.

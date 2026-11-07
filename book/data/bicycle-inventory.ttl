@@ -6,21 +6,21 @@
 
 id:B001 a def:Bicycle ;
     def:hasComponent id:F001 ;
-    def:hasColour "blue" .
+    def:hasColour "blue"@en .
 
 id:F001 a def:Frame ;
-    def:hasMaterial "steel" .
+    def:hasMaterial "steel"@en .
 
 id:B002 a def:Bicycle ;
     def:hasComponent id:F002 ;
-    def:hasColour "red" .
+    def:hasColour "red"@en .
 
 id:F002 a def:Frame ;
-    def:hasMaterial "aluminium" .
+    def:hasMaterial "aluminium"@en .
 
 id:B003 a def:Bicycle ;
     def:hasComponent id:F003 ;
-    def:hasColour "black" .
+    def:hasColour "black"@en .
 
 # No material is recorded for F003.
 id:F003 a def:Frame .

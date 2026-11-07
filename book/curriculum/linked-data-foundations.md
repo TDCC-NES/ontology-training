@@ -91,6 +91,8 @@ The `@prefix` declarations below define these abbreviations; the remaining lines
 
 As a predicate, `a` is Turtle shorthand for the *type* relationship shown in the diagram (the RDF property `rdf:type`). A semicolon continues statements about the same subject; a full stop ends the block. Triple order does not change the graph.
 
+The colour and material names use `@en` to identify their language as English.
+
 ```turtle
 @prefix def: <https://example.org/bike/def/> .
 @prefix id: <https://example.org/bike/id/> .
@@ -98,10 +100,10 @@ As a predicate, `a` is Turtle shorthand for the *type* relationship shown in the
 
 id:B001 a def:Bicycle ;
     def:hasComponent id:F001 ;
-    def:hasColour "blue" .
+    def:hasColour "blue"@en .
 
 id:F001 a def:Frame ;
-    def:hasMaterial "steel" .
+    def:hasMaterial "steel"@en .
 
 def:Bicycle rdfs:subClassOf def:Vehicle .
 ```
