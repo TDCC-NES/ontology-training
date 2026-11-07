@@ -140,3 +140,28 @@ The same classes and properties should also describe B002 and F002, with their d
 Comparing two sketches using the same record helps explain the consequences of each choice. For example, writing “has material: steel” inside B001's box would leave the relevant component unspecified. Keeping F001 as a separate individual makes the frame and its material explicit. When a record exposes a missing distinction, we can revise the sketch. {cite}`noy2001ontology` Marking changes in another colour can help others follow the revision.
 
 The agreed sketch is most useful alongside short explanations of its concepts and relationships, the reasons for important choices, and any unresolved points. These notes preserve the reasoning behind the model for the people who will use or change it. {cite}`uschold1995methodology`
+
+## Lexicalisation: labels, definitions and language tags
+
+Clear labels and definitions are essential for other researchers to understand and reuse an ontology. Giving its classes and properties clear wording in natural language is called *lexicalisation*. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
+
+### Choose clear labels and definitions
+
+Choose short, recognisable labels using words familiar to the intended users. Use the same naming conventions throughout the model. Here, class labels are singular nouns such as “bicycle” and “frame”; property labels such as “has component” express how they are used in a statement. {cite}`noy2001ontology`
+
+Write a concise definition for each class and property. A useful class definition starts with a broader kind of thing and states what distinguishes members of the class. Use other, already understood terms to explain the meaning; repeating the label, as in “a bicycle is a type of bicycle”, leaves the reader with the same uncertainty. [Textual definitions](https://obofoundry.org/principles/fp-006-textual-definitions.html)
+
+For a property, explain what it relates or records. For a relationship, make its direction clear. The following definitions describe one class and one property from our sketch:
+
+| Label | Definition |
+|---|---|
+| bicycle | A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance. |
+| has component | Relates a bicycle to a physical part of that bicycle. |
+
+The Bicycle definition preserves our agreement about electric assistance. The property definition tells us how to read the link from B001 to F001. Use the sketch and representative records to discuss the wording and agree its meaning together. Where a definition is taken or adapted from an existing source, record that source alongside it.
+
+### Add language tags
+
+Add a *language tag* to each label and textual definition to identify the language of the text. In Turtle, `"bicycle"@en` is an English label and `"fiets"@nl` is a Dutch label. Both can label the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
+
+Choose the languages needed by the intended users. When providing translations, keep the intended meaning consistent across languages.

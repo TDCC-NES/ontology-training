@@ -3,6 +3,10 @@
 format: jb-book
 root: intro.md
 
+defaults:
+  titlesonly: false
+  maxdepth: -1
+
 parts:
   - caption: About this book
     chapters:

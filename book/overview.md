@@ -25,6 +25,8 @@ By the end of this training, you will be able to:
 (how-to-use)=
 ## How to use this training
 
+Browse all chapters, sections and subsections in the {ref}`course contents <course-contents>`.
+
 Work through the curriculum in order, completing exercises where provided. Each chapter builds on the last.
 
 In this training, we first build a small ontology to understand the modelling choices involved, then explore reuse in depth.
