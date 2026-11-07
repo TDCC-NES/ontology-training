@@ -186,4 +186,6 @@ Our example uses:
 
 Here, `bike` gives the example's context, `def` groups class and property definitions, and `id` groups individuals. Appending a *local name*, such as `Bicycle`, to the *namespace IRI* `https://example.org/bike/def/` gives the term IRI `https://example.org/bike/def/Bicycle`.
 
-In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Keep IRIs stable when revising labels or adding translations, and preserve existing IRIs when reusing terms.
+In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Choose property local names that make the direction from subject to object clear: `id:F001 def:hasMaterial "steel" .` reads as “F001 has material steel”.
+
+Keep IRIs stable when revising labels or adding translations, and preserve existing IRIs when reusing terms.
