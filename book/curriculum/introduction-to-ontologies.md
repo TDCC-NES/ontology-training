@@ -48,4 +48,18 @@ To answer a question such as “Which bicycles have steel frames?”, we need to
 
 For example, Bicycle and Frame are classes, “has component” is a property, and “Every Bicycle is a Vehicle” is a logical statement. If B001 is recorded as a Bicycle, an application can also infer that it is a Vehicle. {cite}`w3c2012owl2primer`
 
+## Open-world assumption and no unique-name assumption
+
+Research groups often describe different aspects of the same things and choose identifiers independently.
+
+*OWL reasoning* derives conclusions that follow logically from the ontology and its data. It follows the open-world assumption and makes no unique-name assumption. {cite}`w3c2012owl2primer`
+
+### Working with incomplete information
+
+OWL makes the *open-world assumption (OWA)*: a statement can be true even when it has not been recorded or inferred. An inventory might describe F001 without recording its material. That omission does not imply that the frame is not steel; our inventory can supply the missing material. This lets research groups contribute complementary descriptions and extend their knowledge as new findings become available. {cite}`w3c2012owl2primer` [Distributed descriptions in OWL](https://www.w3.org/TR/owl-guide/#StructureOfOntologies)
+
+### Linking different identifiers
+
+OWL makes *no unique-name assumption*: different identifiers may refer to the same thing. Another inventory might identify our bicycle as C17. The identifiers B001 and C17 alone do not establish whether they refer to one bicycle or two. This can be stated explicitly or inferred from other statements. Once both identifiers are known to refer to the same bicycle, an application can use OWL reasoning to combine information recorded under either identifier. Research groups can therefore connect their descriptions while retaining their own identifiers. {cite}`w3c2012owl2primer`
+
 Links to the relevant [W3C standards and guides](../references.md) are collected on the References page.
