@@ -53,6 +53,12 @@ The training uses RDF 1.1, OWL 2 and SPARQL 1.1. Start with the primers; consult
 | [Best Practice Recipes for Publishing RDF Vocabularies](https://www.w3.org/TR/swbp-vocab-pub/) | Publishing ontologies and vocabularies |
 | [Data on the Web Best Practices](https://www.w3.org/TR/dwbp/) | Identifiers, documentation, licensing and versioning |
 
+(ontology-development-guidance)=
+## Optional guidance on ontology development
+
+- [Ontology Development 101](https://protege.stanford.edu/publications/ontology_development/ontology101.pdf) (2001): process guidance on scope, reuse and iterative modelling. Its examples use older tools; this course uses OWL 2.
+- [OBO Academy](https://oboacademy.github.io/obook/): community training on OWL and ontology curation, with a biological and biomedical focus. Its [SubClassOf versus EquivalentTo](https://oboacademy.github.io/obook/explanation/subClassOf-vs-equivalentTo/) explanation uses diagrams to compare the two axioms.
+
 ## Bibliography
 
 :::{bibliography}

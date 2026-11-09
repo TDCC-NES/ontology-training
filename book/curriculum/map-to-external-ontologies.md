@@ -1,4 +1,4 @@
-# Reuse Existing Ontologies and Vocabularies
+# Reuse existing ontologies and vocabularies
 
 Reusing existing ontologies and vocabularies, and connecting your ontology to them.
 
@@ -24,3 +24,8 @@ When assessing an existing ontology, check:
 Read the definitions and logical statements behind a promising term: matching labels alone do not establish a match in meaning. {cite}`w3c2017dwbp,w3c2014linkeddata`
 
 In this training, building a small ontology helps you understand these modelling choices. In a research project, evaluating existing ontologies belongs at the beginning.
+
+(owl-imports)=
+## Import an ontology
+
+An `owl:imports` statement brings another ontology's axioms into reasoning, including those of its imports. Using its term IRIs alone does not import their defining axioms. An import can refer to a particular version using its version IRI. [Ontology imports](https://www.w3.org/TR/owl2-syntax/#Imports)

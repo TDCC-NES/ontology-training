@@ -23,6 +23,17 @@
     margin-bottom: 0.5rem;
 }
 
+/* Reclaim the disabled right sidebar's space while keeping a bounded reading column. */
+@media screen and (min-width: 1200px) {
+    .bd-main .bd-content {
+        justify-content: center;
+    }
+
+    .bd-main .bd-content .bd-article-container {
+        max-width: 58rem;
+    }
+}
+
 /* Keep authorship and the update date together, wrapping when needed. */
 .bd-footer-content__inner {
     display: flex;

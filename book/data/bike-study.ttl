@@ -1,0 +1,39 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix def: <https://example.org/bike/def/> .
+@prefix id: <https://example.org/bike/id/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix study: <https://example.org/bike-study/def/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Optional import example. Open with catalog-v001.xml and the complete ontology
+# in the same directory, or use the supplied ZIP. These IRIs are placeholders.
+
+<https://example.org/bike-study> a owl:Ontology ;
+    dcterms:title "Bicycle study cohort"@en ;
+    dcterms:description "A small study ontology importing the complete bicycle example and identifying its three study bicycles."@en ;
+    dcterms:creator "TDCC-NES Ontology Engineers"@en ;
+    dcterms:publisher "TDCC-NES"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:created "2026-11-09"^^xsd:date ;
+    dcterms:modified "2026-11-09"^^xsd:date ;
+    owl:versionIRI <https://example.org/bike-study/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    owl:imports <https://example.org/bike/3.0.0> .
+
+# Dublin Core declarations specify annotation use, without redefining the terms.
+dcterms:created a owl:AnnotationProperty .
+dcterms:creator a owl:AnnotationProperty .
+dcterms:description a owl:AnnotationProperty .
+dcterms:license a owl:AnnotationProperty .
+dcterms:modified a owl:AnnotationProperty .
+dcterms:publisher a owl:AnnotationProperty .
+dcterms:title a owl:AnnotationProperty .
+
+study:CohortBicycle a owl:Class ;
+    rdfs:label "bicycle in the study cohort"@en, "fiets in de onderzoeksgroep"@nl ;
+    rdfs:comment "One of B001, B002 or B003. Another name for a member must identify one of those bicycles."@en ;
+    rdfs:isDefinedBy <https://example.org/bike-study> ;
+    rdfs:subClassOf def:Bicycle ;
+    owl:equivalentClass [ a owl:Class ;
+        owl:oneOf (id:B001 id:B002 id:B003) ] .

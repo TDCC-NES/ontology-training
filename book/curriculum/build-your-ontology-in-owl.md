@@ -83,6 +83,7 @@ Select `def:Frame` in the class hierarchy, then `id:F001` in the individuals lis
 
 Protégé records this as `"steel"@en`: the name is English and describes F001's material, which we want to compare across inventories.
 
+(owl-entity-annotations)=
 ## Add labels, definitions and language tags
 
 Add the labels and definitions agreed during conceptual modelling as *annotations* on the classes and properties. Use the annotation property `rdfs:label` for labels and `rdfs:comment` for definitions. {cite}`w3c2012owl2primer`

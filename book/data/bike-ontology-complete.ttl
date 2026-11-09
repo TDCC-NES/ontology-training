@@ -1,0 +1,841 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix def:     <https://example.org/bike/def/> .
+@prefix id:      <https://example.org/bike/id/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# Complete OWL 2 course reference: a fictional bicycle inventory study.
+# Open this file on its own. It is an expanded alternative to bike-ontology.ttl.
+# Physical bicycles, configuration snapshots, inventory records and measurements
+# are distinct. Counts and allocations describe snapshots, not lifetime limits.
+# See bike-ontology-complete.md for construct coverage and expected inferences.
+# The example.org IRIs are placeholders matching the course examples.
+
+<https://example.org/bike> a owl:Ontology ;
+    dcterms:title "Bicycle inventory study: complete course example"@en ;
+    dcterms:description "A fictional bicycle inventory study illustrating OWL 2 modelling: bicycles and parts, configuration snapshots, inventory identifiers and mass observations. All example.org identifiers are placeholders."@en ;
+    dcterms:creator "TDCC-NES Ontology Engineers"@en ;
+    dcterms:publisher "TDCC-NES"@en ;
+    dcterms:created "2026-10-19"^^xsd:date ;
+    dcterms:modified "2026-11-09"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionIRI <https://example.org/bike/3.0.0> ;
+    owl:versionInfo "3.0.0" .
+
+# Classes
+# The initial model uses Vehicle, Bicycle, Component and Frame.
+# Bicycle types and other components extend this initial scope.
+
+def:Vehicle a owl:Class ;
+    rdfs:label "vehicle"@en ;
+    rdfs:comment "A physical object designed to transport people or goods."@en .
+
+def:Bicycle a owl:Class ;
+    rdfs:subClassOf def:Vehicle ;
+    rdfs:label "bicycle"@en, "fiets"@nl ;
+    rdfs:comment "A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance."@en .
+
+def:CargoBicycle a owl:Class ;
+    rdfs:subClassOf def:Bicycle ;
+    rdfs:label "cargo bicycle"@en ;
+    rdfs:comment "A bicycle designed to carry goods or passengers in addition to the rider."@en .
+
+def:Fatbike a owl:Class ;
+    rdfs:subClassOf def:Bicycle ;
+    rdfs:label "fatbike"@en ;
+    rdfs:comment "A bicycle designed with unusually wide tyres."@en .
+
+def:Component a owl:Class ;
+    rdfs:label "component"@en ;
+    rdfs:comment "A physical part of an object."@en .
+
+def:Frame a owl:Class ;
+    rdfs:subClassOf def:Component ;
+    rdfs:label "frame"@en ;
+    rdfs:comment "A component forming the main supporting structure of a bicycle."@en .
+
+def:Wheel a owl:Class ;
+    rdfs:subClassOf def:Component ;
+    rdfs:label "wheel"@en ;
+    rdfs:comment "A circular component that rotates about an axle and supports a vehicle as it moves."@en .
+
+def:CargoBox a owl:Class ;
+    rdfs:subClassOf def:Component ;
+    rdfs:label "cargo box"@en ;
+    rdfs:comment "A box fitted to a vehicle to carry goods or passengers."@en .
+
+# Properties
+# Domain and range statements support inference; they are not validation rules.
+
+def:hasComponent a owl:ObjectProperty ;
+    rdfs:label "has component"@en ;
+    rdfs:comment "Relates an object to one of its physical parts."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range def:Component .
+
+# Colour and material can describe both vehicles and components.
+
+def:hasColour a owl:DatatypeProperty ;
+    rdfs:label "has colour"@en ;
+    rdfs:comment "Records a colour of an object as text."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range rdf:langString .
+
+def:hasMaterial a owl:DatatypeProperty ;
+    rdfs:label "has material"@en ;
+    rdfs:comment "Records a material an object is made of as text."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range rdf:langString .
+
+# Example individuals
+# B001, B002 and B003 match the representative inventory records.
+# B001 is the physical bicycle; F001, W001, W002 and CB001 are its parts.
+# Colour and material names, labels and descriptions use English language tags.
+
+id:B001 a owl:NamedIndividual, def:Bicycle, def:CargoBicycle ;
+    rdfs:label "B001"@en ;
+    rdfs:comment "A blue cargo bicycle with a steel frame, two wheels and a cargo box."@en ;
+    def:hasComponent id:F001, id:W001, id:W002, id:CB001 ;
+    def:hasColour "blue"@en .
+
+id:F001 a owl:NamedIndividual, def:Frame ;
+    rdfs:label "frame of B001"@en ;
+    rdfs:comment "The steel frame belonging to B001."@en ;
+    def:hasMaterial "steel"@en .
+
+id:W001 a owl:NamedIndividual, def:Wheel ;
+    rdfs:label "front wheel of B001"@en ;
+    rdfs:comment "The front wheel belonging to B001."@en .
+
+id:W002 a owl:NamedIndividual, def:Wheel ;
+    rdfs:label "rear wheel of B001"@en ;
+    rdfs:comment "The rear wheel belonging to B001."@en .
+
+id:CB001 a owl:NamedIndividual, def:CargoBox ;
+    rdfs:label "cargo box of B001"@en ;
+    rdfs:comment "The box belonging to B001, designed to carry goods or children."@en .
+
+id:B002 a owl:NamedIndividual, def:Bicycle ;
+    rdfs:label "B002"@en ;
+    rdfs:comment "A red bicycle with an aluminium frame (F002)."@en ;
+    def:hasComponent id:F002 ;
+    def:hasColour "red"@en .
+
+id:F002 a owl:NamedIndividual, def:Frame ;
+    rdfs:label "frame of B002"@en ;
+    rdfs:comment "The aluminium frame belonging to B002."@en ;
+    def:hasMaterial "aluminium"@en .
+
+id:B003 a owl:NamedIndividual, def:Bicycle ;
+    rdfs:label "B003"@en ;
+    rdfs:comment "A black bicycle with frame F003."@en ;
+    def:hasComponent id:F003 ;
+    def:hasColour "black"@en .
+
+# No material is recorded for F003.
+id:F003 a owl:NamedIndividual, def:Frame ;
+    rdfs:label "frame of B003"@en ;
+    rdfs:comment "The frame belonging to B003."@en .
+
+# Query the recorded facts without requiring a reasoner:
+#
+# PREFIX def: <https://example.org/bike/def/>
+# PREFIX id: <https://example.org/bike/id/>
+# PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#
+# SELECT DISTINCT ?bicycle WHERE {
+#     ?bicycle a/rdfs:subClassOf* def:Bicycle ;
+#              def:hasComponent ?frame .
+#     ?frame a/rdfs:subClassOf* def:Frame ;
+#            def:hasMaterial "steel"@en .
+# }
+#
+# Expected result: id:B001.
+
+
+# Annotation vocabulary
+# Declarations reuse the existing Dublin Core terms without changing their meanings.
+
+dcterms:created a owl:AnnotationProperty .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:modified a owl:AnnotationProperty .
+
+dcterms:publisher a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+
+# Consistent labels for the original vocabulary and records
+# English definitions and all original inventory facts are retained above.
+
+def:Vehicle rdfs:label "voertuig"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:CargoBicycle rdfs:label "bakfiets"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Fatbike rdfs:label "fatbike"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Component rdfs:label "onderdeel"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Frame rdfs:label "frame"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Wheel rdfs:label "wiel"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:CargoBox rdfs:label "laadbak"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:hasComponent rdfs:label "heeft onderdeel"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:hasColour rdfs:label "heeft kleur"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:hasMaterial rdfs:label "heeft materiaal"@nl ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Bicycle rdfs:isDefinedBy <https://example.org/bike> .
+
+id:B001 rdfs:label "B001"@nl .
+
+id:B002 rdfs:label "B002"@nl .
+
+id:B003 rdfs:label "B003"@nl .
+
+id:F001 rdfs:label "frame van B001"@nl .
+
+id:F002 rdfs:label "frame van B002"@nl .
+
+id:F003 rdfs:label "frame van B003"@nl .
+
+id:W001 rdfs:label "voorwiel van B001"@nl .
+
+id:W002 rdfs:label "achterwiel van B001"@nl .
+
+id:CB001 rdfs:label "laadbak van B001"@nl .
+
+
+# Study entities
+# A configuration is a description at one time; it is not a physical part of a bicycle.
+
+def:PhysicalObject a owl:Class ;
+    rdfs:label "physical object"@en, "fysiek object"@nl ;
+    rdfs:comment "A material object, such as a vehicle, component, storage bay or physical inventory tag."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Vehicle rdfs:subClassOf def:PhysicalObject .
+
+def:Component rdfs:subClassOf def:PhysicalObject .
+
+def:ResearchRecord a owl:Class ;
+    rdfs:label "research record"@en, "onderzoeksrecord"@nl ;
+    rdfs:comment "An inventory record, configuration snapshot, mass observation or term record in this teaching model."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:unionOf (def:InventoryRecord def:Configuration def:MassObservation def:TermRecord) ] .
+
+def:InventoryRecord a owl:Class ;
+    rdfs:label "inventory record"@en, "inventarisrecord"@nl ;
+    rdfs:comment "A record identifying one bicycle within one inventory, using a local code."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:ResearchRecord, [ a owl:Restriction ; owl:onProperty def:describesBicycle ; owl:someValuesFrom def:Bicycle ],
+        [ a owl:Restriction ; owl:onProperty def:recordedIn ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass def:Inventory ],
+        [ a owl:Restriction ; owl:onProperty def:inventoryCode ; owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onDataRange xsd:string ],
+        [ a owl:Restriction ; owl:onProperty def:inventoryCode ; owl:maxCardinality "1"^^xsd:nonNegativeInteger ] ;
+    owl:hasKey (def:recordedIn def:inventoryCode) .
+
+def:Configuration a owl:Class ;
+    rdfs:label "configuration snapshot"@en, "configuratiemomentopname"@nl ;
+    rdfs:comment "A record of one bicycle's component and storage configuration at one observation time."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:ResearchRecord, [ a owl:Restriction ; owl:onProperty def:describesBicycle ; owl:someValuesFrom def:Bicycle ],
+        [ a owl:Restriction ; owl:onProperty def:recordedAt ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+def:MassObservation a owl:Class ;
+    rdfs:label "mass observation"@en, "massameting"@nl ;
+    rdfs:comment "A record of one mass measurement in kilograms for one physical object at one time."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:ResearchRecord, [ a owl:Restriction ; owl:onProperty def:observesObject ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass def:PhysicalObject ],
+        [ a owl:Restriction ; owl:onProperty def:massKg ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onDataRange xsd:decimal ],
+        [ a owl:Restriction ; owl:onProperty def:recordedAt ; owl:cardinality "1"^^xsd:nonNegativeInteger ] .
+
+def:TermRecord a owl:Class ;
+    rdfs:label "term record"@en, "begripsrecord"@nl ;
+    rdfs:comment "A catalogue record describing an ontology term, rather than a physical instance of that term."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Inventory a owl:Class ;
+    rdfs:label "inventory"@en, "inventaris"@nl ;
+    rdfs:comment "A collection of records that uses local codes to identify bicycles."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:Organisation a owl:Class ;
+    rdfs:label "organisation"@en, "organisatie"@nl ;
+    rdfs:comment "A group responsible for maintaining an inventory in this study."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> .
+
+def:StorageBay a owl:Class ;
+    rdfs:label "storage bay"@en, "stallingsplek"@nl ;
+    rdfs:comment "A marked physical location to which a bicycle can be allocated in a configuration snapshot."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:PhysicalObject .
+
+def:InventoryTag a owl:Class ;
+    rdfs:label "physical inventory tag"@en, "fysiek inventarislabel"@nl ;
+    rdfs:comment "A physical tag permanently assigned to one bicycle in this study; tags are not transferred between bicycles."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:PhysicalObject .
+
+[] a owl:AllDisjointClasses ;
+    owl:members (def:PhysicalObject def:ResearchRecord def:Inventory def:Organisation) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members (def:InventoryRecord def:Configuration def:MassObservation def:TermRecord) .
+
+
+# Class definitions
+# The recorded material value remains a language-tagged name, not an exhaustive material analysis.
+
+def:SteelFrame a owl:Class ;
+    rdfs:label "frame recorded as steel"@en, "frame vastgelegd als staal"@nl ;
+    rdfs:comment "A Frame with the recorded material value \"steel\" in English. Other material values may also be recorded."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Frame
+        [ a owl:Restriction ; owl:onProperty def:hasMaterial ; owl:hasValue "steel"@en ]
+    ) ] .
+
+def:BicycleWithSteelFrame a owl:Class ;
+    rdfs:label "bicycle with a frame recorded as steel"@en, "fiets met een als staal vastgelegd frame"@nl ;
+    rdfs:comment "A Bicycle with at least one Frame whose recorded material value is \"steel\" in English."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Bicycle
+        [ a owl:Restriction ; owl:onProperty def:hasComponent ; owl:someValuesFrom def:SteelFrame ]
+    ) ] .
+
+def:CargoFatbike a owl:Class ;
+    rdfs:label "cargo fatbike"@en, "bakfiets met brede banden"@nl ;
+    rdfs:comment "A Bicycle that is both a CargoBicycle and a Fatbike."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:CargoBicycle
+        def:Fatbike
+    ) ] .
+
+def:NonCargoBicycle a owl:Class ;
+    rdfs:label "non-cargo bicycle"@en, "fiets zonder laadfunctie"@nl ;
+    rdfs:comment "A Bicycle outside the CargoBicycle class. Missing cargo information alone does not establish membership."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Bicycle
+        [ a owl:Class ; owl:complementOf def:CargoBicycle ]
+    ) ] .
+
+def:StudyComponent a owl:Class ;
+    rdfs:label "studied component"@en, "onderdeel in de studie"@nl ;
+    rdfs:comment "A Frame, Wheel or CargoBox; these three categories are mutually exclusive in this study. Other Components remain possible."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:Component ;
+    owl:disjointUnionOf (def:Frame def:Wheel def:CargoBox) .
+
+def:BicycleComponent a owl:Class ;
+    rdfs:label "component of a bicycle"@en, "onderdeel van een fiets"@nl ;
+    rdfs:comment "A Component linked to at least one Bicycle by the inverse of hasComponent."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Component
+        [ a owl:Restriction ; owl:onProperty [ owl:inverseOf def:hasComponent ] ; owl:someValuesFrom def:Bicycle ]
+    ) ] .
+
+def:AssembledConfiguration a owl:Class ;
+    rdfs:label "assembled two-wheel configuration"@en, "gemonteerde tweewielconfiguratie"@nl ;
+    rdfs:comment "A Configuration with one Frame, two distinct Wheels and at most one CargoBox, and no installed components outside those categories."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subClassOf def:Configuration, [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:allValuesFrom def:StudyComponent ],
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass def:Frame ],
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ; owl:onClass def:Wheel ],
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ; owl:onClass def:Wheel ],
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass def:CargoBox ],
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:minCardinality "3"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:maxCardinality "4"^^xsd:nonNegativeInteger ] .
+
+def:FourComponentConfiguration a owl:Class ;
+    rdfs:label "configuration with four installed components"@en, "configuratie met vier gemonteerde onderdelen"@nl ;
+    rdfs:comment "A Configuration with exactly four distinct installed components. Indirect parts of those components are not counted."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Configuration
+        [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:cardinality "4"^^xsd:nonNegativeInteger ]
+    ) ] .
+
+def:B001Configuration a owl:Class ;
+    rdfs:label "configuration of B001"@en, "configuratie van B001"@nl ;
+    rdfs:comment "A Configuration describing the particular bicycle B001."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Configuration
+        [ a owl:Restriction ; owl:onProperty def:describesBicycle ; owl:hasValue id:B001 ]
+    ) ] .
+
+def:StoredConfiguration a owl:Class ;
+    rdfs:label "configuration with self-sharing storage link"@en, "configuratie met een opslaglink naar zichzelf"@nl ;
+    rdfs:comment "A Configuration explicitly or inferentially related to itself by sharesStorageWith; this records known shared storage, including self-sharing."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:Configuration
+        [ a owl:Restriction ; owl:onProperty def:sharesStorageWith ; owl:hasSelf true ]
+    ) ] .
+
+def:StudyMassObservation a owl:Class ;
+    rdfs:label "mass observation within the study range"@en, "massameting binnen het onderzoeksbereik"@nl ;
+    rdfs:comment "A MassObservation whose mass values all lie above 0 kg and at or below 100 kg, with at least one such value."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
+        def:MassObservation
+        [ a owl:Restriction ; owl:onProperty def:massKg ; owl:someValuesFrom [ a rdfs:Datatype ; owl:intersectionOf (def:StudyMassKg xsd:decimal) ] ]
+        [ a owl:Restriction ; owl:onProperty def:massKg ; owl:allValuesFrom [ a rdfs:Datatype ; owl:intersectionOf (def:StudyMassKg xsd:decimal) ] ]
+    ) ] .
+
+
+# Object properties
+# Only simple properties are used for counts, Self, disjointness and cardinality-related characteristics.
+
+def:hasPart a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "has part"@en, "heeft deel"@nl ;
+    rdfs:comment "Relates an object to a physical part, including parts reached through intermediate parts."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain owl:Thing ;
+    rdfs:range owl:Thing ;
+    owl:inverseOf def:isPartOf .
+
+def:isPartOf a owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "is part of"@en, "is deel van"@nl ;
+    rdfs:comment "Relates a physical part to an object containing it, including through intermediate parts."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain owl:Thing ;
+    rdfs:range owl:Thing ;
+    rdfs:subPropertyOf def:isPartOfOrSelf .
+
+def:hasComponent rdfs:subPropertyOf def:hasPart ;
+    owl:inverseOf def:isComponentOf .
+
+def:isComponentOf a owl:ObjectProperty ;
+    rdfs:label "is component of"@en, "is onderdeel van"@nl ;
+    rdfs:comment "Relates a Component to an object that has it as a physical component."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Component ;
+    rdfs:range owl:Thing ;
+    rdfs:subPropertyOf def:isPartOf .
+
+def:hasDirectComponent a owl:ObjectProperty, owl:AsymmetricProperty, owl:IrreflexiveProperty ;
+    rdfs:label "has direct component"@en, "heeft direct onderdeel"@nl ;
+    rdfs:comment "Relates an object to a component directly attached to it in the described assembly. It is not transitive."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:PhysicalObject ;
+    rdfs:range def:Component ;
+    rdfs:subPropertyOf def:hasComponent .
+
+def:hasFrame a owl:ObjectProperty ;
+    rdfs:label "has frame"@en, "heeft frame"@nl ;
+    rdfs:comment "Relates an object to a Frame that is one of its components."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain owl:Thing ;
+    rdfs:range def:Frame ;
+    rdfs:subPropertyOf def:hasComponent .
+
+def:isPartOfOrSelf a owl:ObjectProperty, owl:ReflexiveProperty, owl:TransitiveProperty ;
+    rdfs:label "is part of or is identical to"@en, "is deel van of is gelijk aan"@nl ;
+    rdfs:comment "Includes physical parthood and the self-link of every individual, including records and organisations."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain owl:Thing ;
+    rdfs:range owl:Thing .
+
+def:hasInstalledComponent a owl:ObjectProperty ;
+    rdfs:label "has installed component"@en, "heeft gemonteerd onderdeel"@nl ;
+    rdfs:comment "Relates a Configuration to a component installed on its bicycle at that observation time."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Configuration ;
+    rdfs:range def:Component ;
+    owl:propertyDisjointWith def:hasSpareComponent .
+
+def:hasInstalledPart a owl:ObjectProperty ;
+    rdfs:label "has installed part"@en, "heeft gemonteerd deel"@nl ;
+    rdfs:comment "A synonymous source-field name for hasInstalledComponent, with the same pairs."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Configuration ;
+    rdfs:range def:Component ;
+    owl:equivalentProperty def:hasInstalledComponent .
+
+def:hasSpareComponent a owl:ObjectProperty ;
+    rdfs:label "has spare component"@en, "heeft reserveonderdeel"@nl ;
+    rdfs:comment "Relates a Configuration to an available spare component that is not installed on its bicycle in that configuration."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Configuration ;
+    rdfs:range def:Component .
+
+def:hasExcludedComponent a owl:ObjectProperty ;
+    rdfs:label "has excluded component"@en, "heeft uitgesloten onderdeel"@nl ;
+    rdfs:comment "Relates a Configuration to a checked component that is neither installed nor available as a spare in that configuration."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Configuration ;
+    rdfs:range def:Component .
+
+[] a owl:AllDisjointProperties ;
+    owl:members (def:hasInstalledComponent def:hasSpareComponent def:hasExcludedComponent) .
+
+def:describesBicycle a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:label "describes bicycle"@en, "beschrijft fiets"@nl ;
+    rdfs:comment "Relates an InventoryRecord or Configuration to the one bicycle it describes."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (def:InventoryRecord def:Configuration) ] ;
+    rdfs:range def:Bicycle .
+
+def:hasAssignedStorageBay a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:label "has assigned storage bay"@en, "heeft toegewezen stallingsplek"@nl ;
+    rdfs:comment "Relates a Configuration to its bicycle's assigned StorageBay at that time. A snapshot has at most one assigned bay."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Configuration ;
+    rdfs:range def:StorageBay .
+
+def:sharesStorageWith a owl:ObjectProperty, owl:SymmetricProperty ;
+    rdfs:label "shares storage with"@en, "deelt stallingsruimte met"@nl ;
+    rdfs:comment "Relates Configurations whose bicycles share storage at the observation time. A self-link records that a Configuration shares its own known storage."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Configuration ;
+    rdfs:range def:Configuration .
+
+def:hasInventoryTag a owl:ObjectProperty, owl:InverseFunctionalProperty ;
+    rdfs:label "has inventory tag"@en, "heeft inventarislabel"@nl ;
+    rdfs:comment "Relates a Bicycle to a physical InventoryTag permanently assigned to that bicycle. Sharing a tag identifies the same bicycle."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Bicycle ;
+    rdfs:range def:InventoryTag .
+
+def:recordedIn a owl:ObjectProperty ;
+    rdfs:label "is recorded in"@en, "is opgenomen in"@nl ;
+    rdfs:comment "Relates a Bicycle or InventoryRecord to an Inventory in which it is recorded."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (def:Bicycle def:InventoryRecord) ] ;
+    rdfs:range def:Inventory .
+
+def:maintainedBy a owl:ObjectProperty ;
+    rdfs:label "is maintained by"@en, "wordt beheerd door"@nl ;
+    rdfs:comment "Relates an Inventory to an Organisation responsible for maintaining it."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:Inventory ;
+    rdfs:range def:Organisation .
+
+def:hasInventoryMaintainer a owl:ObjectProperty ;
+    rdfs:label "has inventory maintainer"@en, "heeft inventarisbeheerder"@nl ;
+    rdfs:comment "Relates a Bicycle or InventoryRecord to an Organisation maintaining an Inventory in which it is recorded."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (def:Bicycle def:InventoryRecord) ] ;
+    rdfs:range def:Organisation ;
+    owl:propertyChainAxiom (def:recordedIn def:maintainedBy) .
+
+def:observesObject a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:label "observes object"@en, "meet object"@nl ;
+    rdfs:comment "Relates a MassObservation to the physical object whose mass was measured."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:MassObservation ;
+    rdfs:range def:PhysicalObject .
+
+
+# Data ranges
+# Inventory codes are machine codes. Their strings do not carry language tags.
+
+def:StudyMassKg a rdfs:Datatype ;
+    rdfs:label "study mass range in kilograms"@en, "massabereik van de studie in kilogram"@nl ;
+    rdfs:comment "Decimal mass values greater than 0 kg and at most 100 kg, the chosen range for this teaching study."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a rdfs:Datatype ; owl:onDatatype xsd:decimal ;
+        owl:withRestrictions ([ xsd:minExclusive "0"^^xsd:decimal ] [ xsd:maxInclusive "100"^^xsd:decimal ]) ] .
+
+def:InventoryCode a rdfs:Datatype ;
+    rdfs:label "non-reserved inventory code"@en, "niet-gereserveerde inventariscode"@nl ;
+    rdfs:comment "A string other than the reserved empty string or UNASSIGNED token. A missing code is left unrecorded."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a rdfs:Datatype ; owl:intersectionOf (
+        xsd:string
+        [ a rdfs:Datatype ; owl:datatypeComplementOf [ a rdfs:Datatype ; owl:oneOf ("" "UNASSIGNED") ] ]
+    ) ] .
+
+def:StudyInventoryCode a rdfs:Datatype ;
+    rdfs:label "five-character study inventory code"@en, "inventariscode van vijf tekens"@nl ;
+    rdfs:comment "A five-character code beginning A- or B- and ending in three digits, such as A-001 or B-017."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    owl:equivalentClass [ a rdfs:Datatype ; owl:intersectionOf (
+        [ a rdfs:Datatype ; owl:onDatatype xsd:string ; owl:withRestrictions ([ xsd:length "5"^^xsd:nonNegativeInteger ]) ]
+        [ a rdfs:Datatype ; owl:unionOf (
+            [ a rdfs:Datatype ; owl:onDatatype xsd:string ; owl:withRestrictions ([ xsd:pattern "A-[0-9]{3}" ]) ]
+            [ a rdfs:Datatype ; owl:onDatatype xsd:string ; owl:withRestrictions ([ xsd:pattern "B-[0-9]{3}" ]) ]
+        ) ]
+    ) ] .
+
+
+# Data properties
+
+def:inventoryCode a owl:DatatypeProperty ;
+    rdfs:label "has local inventory code"@en, "heeft lokale inventariscode"@nl ;
+    rdfs:comment "Records the active local code of an InventoryRecord within its Inventory. The code alone is not a global bicycle identifier."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:InventoryRecord ;
+    rdfs:range def:InventoryCode ;
+    owl:propertyDisjointWith def:retiredInventoryCode .
+
+def:studyInventoryCode a owl:DatatypeProperty ;
+    rdfs:label "has study inventory code"@en, "heeft onderzoeksinventariscode"@nl ;
+    rdfs:comment "Records an active local inventory code using the study's five-character A- or B- format."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:InventoryRecord ;
+    rdfs:range def:StudyInventoryCode ;
+    rdfs:subPropertyOf def:inventoryCode .
+
+def:retiredInventoryCode a owl:DatatypeProperty ;
+    rdfs:label "has retired inventory code"@en, "heeft vervallen inventariscode"@nl ;
+    rdfs:comment "Records a former local code, which cannot simultaneously be active on the same InventoryRecord."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:InventoryRecord ;
+    rdfs:range def:InventoryCode .
+
+def:massKg a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:label "has measured mass in kilograms"@en, "heeft gemeten massa in kilogram"@nl ;
+    rdfs:comment "Records the decimal mass value of a MassObservation, in kilograms. Separate observations represent repeated measurements."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:MassObservation ;
+    rdfs:range xsd:decimal .
+
+def:recordedMassKg a owl:DatatypeProperty ;
+    rdfs:label "has recorded mass in kilograms"@en, "heeft vastgelegde massa in kilogram"@nl ;
+    rdfs:comment "A synonymous source-field name for massKg, with the same observation-value pairs."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain def:MassObservation ;
+    rdfs:range xsd:decimal ;
+    owl:equivalentProperty def:massKg .
+
+def:recordedAt a owl:DatatypeProperty ;
+    rdfs:label "has observation time"@en, "heeft waarnemingstijdstip"@nl ;
+    rdfs:comment "Records the observation time of a Configuration snapshot or MassObservation, including its timezone."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (def:Configuration def:MassObservation) ] ;
+    rdfs:range xsd:dateTimeStamp .
+
+
+# Annotation properties and documented decisions
+
+def:reviewNote a owl:AnnotationProperty ;
+    rdfs:label "review note"@en, "beoordelingsnotitie"@nl ;
+    rdfs:comment "A note explaining an ontology axiom or modelling decision."@en ;
+    rdfs:isDefinedBy <https://example.org/bike> ;
+    rdfs:subPropertyOf rdfs:comment ;
+    rdfs:domain owl:Axiom ;
+    rdfs:range rdf:langString .
+
+_:frameAxiom a owl:Axiom ;
+    owl:annotatedSource def:Frame ;
+    owl:annotatedProperty rdfs:subClassOf ;
+    owl:annotatedTarget def:Component ;
+    def:reviewNote "A bicycle frame forms part of its supporting structure."@en .
+
+[] a owl:Annotation ;
+    owl:annotatedSource _:frameAxiom ;
+    owl:annotatedProperty def:reviewNote ;
+    owl:annotatedTarget "A bicycle frame forms part of its supporting structure."@en ;
+    dcterms:created "2026-11-09"^^xsd:date .
+
+
+# Punning
+# The individual interpretation is a term record; it is independent of the physical Frame class.
+
+def:Frame a owl:NamedIndividual, def:TermRecord .
+
+
+# Example records
+# All individuals and observations below are fictional.
+
+id:B001 def:hasFrame id:F001 ;
+    def:hasDirectComponent id:F001, id:W001, id:W002, id:CB001 ;
+    def:hasInventoryTag id:T001 ;
+    def:recordedIn id:InventoryA ;
+    owl:sameAs id:C17 .
+
+id:B002 a def:NonCargoBicycle .
+
+id:F001 def:hasComponent id:Tube001 .
+
+id:Tube001 a owl:NamedIndividual, def:Component ;
+    rdfs:label "frame tube of F001"@en, "framebuis van F001"@nl ;
+    rdfs:comment "A physical tube in F001, used to show the difference between direct component links and transitive parthood."@en .
+
+id:B004 a owl:NamedIndividual, def:CargoBicycle, def:Fatbike ;
+    rdfs:label "cargo fatbike B004"@en, "bakfiets met brede banden B004"@nl ;
+    rdfs:comment "A fourth bicycle, outside the original three-bicycle cohort, demonstrating that CargoBicycle and Fatbike can overlap."@en .
+
+id:T001 a owl:NamedIndividual, def:InventoryTag ;
+    rdfs:label "permanent tag T001"@en, "permanent label T001"@nl ;
+    rdfs:comment "A physical inventory tag permanently assigned to B001 in this teaching study."@en .
+
+id:C17 a owl:NamedIndividual, def:Bicycle ;
+    rdfs:label "C17 in inventory B"@en, "C17 in inventaris B"@nl ;
+    rdfs:comment "Another known name for B001, recorded by inventory B."@en ;
+    def:recordedIn id:InventoryB .
+
+id:TagAlias001 a owl:NamedIndividual, def:Bicycle ;
+    rdfs:label "bicycle identified through tag T001"@en, "fiets geïdentificeerd via label T001"@nl ;
+    rdfs:comment "An independently recorded bicycle name sharing B001's permanent physical tag; inverse functionality identifies the two."@en ;
+    def:hasInventoryTag id:T001 .
+
+id:InventoryA a owl:NamedIndividual, def:Inventory ;
+    rdfs:label "inventory A"@en, "inventaris A"@nl ;
+    rdfs:comment "The first fictional bicycle inventory."@en ;
+    def:maintainedBy id:TeamA .
+
+id:InventoryB a owl:NamedIndividual, def:Inventory ;
+    rdfs:label "inventory B"@en, "inventaris B"@nl ;
+    rdfs:comment "The second fictional bicycle inventory."@en ;
+    def:maintainedBy id:TeamB .
+
+id:TeamA a owl:NamedIndividual, def:Organisation ;
+    rdfs:label "inventory team A"@en, "inventaristeam A"@nl ;
+    rdfs:comment "The fictional organisation maintaining inventory A."@en .
+
+id:TeamB a owl:NamedIndividual, def:Organisation ;
+    rdfs:label "inventory team B"@en, "inventaristeam B"@nl ;
+    rdfs:comment "The fictional organisation maintaining inventory B."@en .
+
+id:R001 a owl:NamedIndividual, def:InventoryRecord ;
+    rdfs:label "inventory record R001"@en, "inventarisrecord R001"@nl ;
+    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
+    def:recordedIn id:InventoryA ;
+    def:studyInventoryCode "A-001" ;
+    def:describesBicycle id:B001 .
+
+id:R001Duplicate a owl:NamedIndividual, def:InventoryRecord ;
+    rdfs:label "inventory record R001Duplicate"@en, "inventarisrecord R001Duplicate"@nl ;
+    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
+    def:recordedIn id:InventoryA ;
+    def:studyInventoryCode "A-001" ;
+    def:describesBicycle id:C17 .
+
+id:R002 a owl:NamedIndividual, def:InventoryRecord ;
+    rdfs:label "inventory record R002"@en, "inventarisrecord R002"@nl ;
+    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
+    def:recordedIn id:InventoryA ;
+    def:studyInventoryCode "A-002" ;
+    def:describesBicycle id:B002 .
+
+id:R017 a owl:NamedIndividual, def:InventoryRecord ;
+    rdfs:label "inventory record R017"@en, "inventarisrecord R017"@nl ;
+    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
+    def:recordedIn id:InventoryB ;
+    def:studyInventoryCode "B-017" ;
+    def:describesBicycle id:C17 .
+
+id:R002 def:retiredInventoryCode "A-099" .
+
+id:W003 a owl:NamedIndividual, def:Wheel ;
+    rdfs:label "front wheel of B002"@en, "voorwiel van B002"@nl ;
+    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
+
+id:W004 a owl:NamedIndividual, def:Wheel ;
+    rdfs:label "rear wheel of B002"@en, "achterwiel van B002"@nl ;
+    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
+
+id:SW001 a owl:NamedIndividual, def:Wheel ;
+    rdfs:label "spare wheel for configuration C001"@en, "reservewiel voor configuratie C001"@nl ;
+    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
+
+id:EW001 a owl:NamedIndividual, def:Wheel ;
+    rdfs:label "excluded wheel for configuration C001"@en, "uitgesloten wiel voor configuratie C001"@nl ;
+    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
+
+id:S001 a owl:NamedIndividual, def:StorageBay ;
+    rdfs:label "shared storage bay S001"@en, "gedeelde stallingsplek S001"@nl ;
+    rdfs:comment "A fictional storage bay large enough for the two bicycles in configurations C001 and C002."@en .
+
+id:C001 a owl:NamedIndividual, def:AssembledConfiguration ;
+    rdfs:label "configuration of B001 on 9 November"@en, "configuratie van B001 op 9 november"@nl ;
+    rdfs:comment "A complete list of the installed top-level study components at the recorded time; the frame's tube is an indirect part."@en ;
+    def:describesBicycle id:B001 ;
+    def:recordedAt "2026-11-09T10:00:00Z"^^xsd:dateTimeStamp ;
+    def:hasInstalledComponent id:F001, id:W001, id:W002, id:CB001 ;
+    def:hasSpareComponent id:SW001 ;
+    def:hasExcludedComponent id:EW001 ;
+    def:hasAssignedStorageBay id:S001 ;
+    def:sharesStorageWith id:C001, id:C002 ;
+    a [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:allValuesFrom [ a owl:Class ; owl:oneOf (id:F001 id:W001 id:W002 id:CB001) ] ] .
+
+id:C002 a owl:NamedIndividual, def:AssembledConfiguration ;
+    rdfs:label "configuration of B002 on 9 November"@en, "configuratie van B002 op 9 november"@nl ;
+    rdfs:comment "A complete list of B002's three installed top-level study components at the recorded time."@en ;
+    def:describesBicycle id:B002 ;
+    def:recordedAt "2026-11-09T10:00:00Z"^^xsd:dateTimeStamp ;
+    def:hasInstalledPart id:F002, id:W003, id:W004 ;
+    def:hasAssignedStorageBay id:S001 ;
+    a [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:allValuesFrom [ a owl:Class ; owl:oneOf (id:F002 id:W003 id:W004) ] ] .
+
+id:C003 a owl:NamedIndividual, def:Configuration ;
+    rdfs:label "partial configuration of B003"@en, "onvolledige configuratie van B003"@nl ;
+    rdfs:comment "A partial configuration record; its installed component list is not closed."@en ;
+    def:describesBicycle id:B003 ;
+    def:recordedAt "2026-11-09T10:30:00Z"^^xsd:dateTimeStamp ;
+    def:hasInstalledComponent id:F003 ;
+    def:hasSpareComponent [ a def:Frame ; rdfs:comment "An unnamed spare frame, local to this document."@en ] .
+
+id:M001 a owl:NamedIndividual, def:MassObservation ;
+    rdfs:label "mass observation M001"@en, "massameting M001"@nl ;
+    rdfs:comment "A fictional mass observation. Repeated measurements use separate records, even when their values agree."@en ;
+    def:observesObject id:B001 ;
+    def:recordedMassKg "32.5"^^xsd:decimal ;
+    def:recordedAt "2026-11-09T10:05:00Z"^^xsd:dateTimeStamp .
+
+id:M002 a owl:NamedIndividual, def:MassObservation ;
+    rdfs:label "mass observation M002"@en, "massameting M002"@nl ;
+    rdfs:comment "A fictional mass observation. Repeated measurements use separate records, even when their values agree."@en ;
+    def:observesObject id:B002 ;
+    def:recordedMassKg "14.2"^^xsd:decimal ;
+    def:recordedAt "2026-11-09T10:10:00Z"^^xsd:dateTimeStamp .
+
+id:M003 a owl:NamedIndividual, def:MassObservation ;
+    rdfs:label "mass observation M003"@en, "massameting M003"@nl ;
+    rdfs:comment "A fictional mass observation. Repeated measurements use separate records, even when their values agree."@en ;
+    def:observesObject id:B001 ;
+    def:recordedMassKg "32.6"^^xsd:decimal ;
+    def:recordedAt "2026-11-09T10:15:00Z"^^xsd:dateTimeStamp .
+
+
+# Known differences and explicit exclusions
+# Intentional aliases and the duplicate record are excluded from AllDifferent.
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers (
+        id:B001 id:B002 id:B003 id:B004
+        id:F001 id:F002 id:F003 id:W001 id:W002 id:W003 id:W004 id:CB001 id:Tube001 id:SW001 id:EW001 id:T001
+        id:InventoryA id:InventoryB id:TeamA id:TeamB
+        id:R001 id:R002 id:R017
+        id:C001 id:C002 id:C003 id:S001 id:M001 id:M002 id:M003
+    ) .
+
+id:W001 owl:differentFrom id:W002 .
+
+[] a owl:NegativePropertyAssertion ;
+    owl:sourceIndividual id:C002 ;
+    owl:assertionProperty def:hasSpareComponent ;
+    owl:targetIndividual id:CB001 .
+
+[] a owl:NegativePropertyAssertion ;
+    owl:sourceIndividual id:R002 ;
+    owl:assertionProperty def:retiredInventoryCode ;
+    owl:targetValue "A-999" .

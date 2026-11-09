@@ -12,8 +12,6 @@ This training is actively being developed by the [TDCC-NES ontology engineers](h
 :start-after: "# Course overview"
 ```
 
-Let's get started!
-
 (course-contents)=
 ## Course contents
 

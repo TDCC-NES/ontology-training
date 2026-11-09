@@ -83,9 +83,9 @@ In a *data-centric approach*, domain knowledge is represented explicitly in shar
 
 *Serialisation* represents an RDF graph in a format for storage or exchange. Turtle, JSON-LD, RDF/XML and N-Triples are RDF serialisation formats: they can represent the same graph using different syntax. [RDF serialisation formats](https://www.w3.org/TR/rdf11-primer/#section-syntax)
 
-Prefer *Turtle* when creating and sharing ontology files. Its compact syntax makes RDF statements easier to read, edit and check. Use RDF/XML only when no alternative format is supported by the application or publishing workflow. [Discussion of RDF format choice](https://lists.w3.org/Archives/Public/public-lod/2015Sep/0027.html)
+We use *Turtle* for the course examples because its compact syntax makes RDF statements easier to read, edit and check. If an application or publishing workflow supports only RDF/XML, use that format. [Discussion of RDF format choice](https://lists.w3.org/Archives/Public/public-lod/2015Sep/0027.html)
 
-We write the bicycle graph in Turtle. *Prefixes* abbreviate IRIs: `id:B001` expands to `https://example.org/bike/id/B001`. Here, `def:` abbreviates class and property IRIs, `id:` individual IRIs and `rdfs:` RDF Schema terms, so `def:Bicycle` expands to `https://example.org/bike/def/Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
+For the bicycle graph, *prefixes* abbreviate IRIs: `id:B001` expands to `https://example.org/bike/id/B001`. Here, `def:` abbreviates class and property IRIs, `id:` individual IRIs and `rdfs:` RDF Schema terms, so `def:Bicycle` expands to `https://example.org/bike/def/Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
 The `@prefix` declarations below define these abbreviations; the remaining lines express the graph's six statements.
 
@@ -114,7 +114,9 @@ If we recorded that B001 has two wheels, `2` would represent an integer that app
 
 Our Turtle file already expresses RDF. To publish the graph as Linked Data, make its resource IRIs *dereferenceable*: looking one up retrieves a description of what it identifies. Provide a Web page (a *landing page*) for people and RDF for applications. The description of B001 can link to F001, whose description gives the frame's material; links can also lead to other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#semweb)
 
+:::{dropdown} Publishing options (optional)
 The Web server can supply these RDF descriptions from static files, such as downloadable Turtle files, or retrieve them from a *triple store*, a database for storing and querying RDF. A triple store can also offer a *SPARQL endpoint* for queries over HTTP. {cite}`w3c2014linkeddata` Open-source options include [Apache Jena Fuseki with TDB](https://jena.apache.org/documentation/fuseki2/) and [Eclipse RDF4J Server](https://rdf4j.org/documentation/tools/server-workbench/).
+:::
 
 Class and property IRIs work the same way: `def:Bicycle` can lead to its label and relationship to Vehicle. Publish descriptions for new terms and reuse existing term IRIs exactly, including `http:` in the `rdfs:` namespace. [Publishing vocabularies and ontologies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
 

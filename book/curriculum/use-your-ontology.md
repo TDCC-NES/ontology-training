@@ -1,6 +1,6 @@
-# Use Your Ontology
+# Use your ontology
 
-Putting a finished ontology to work.
+Putting an ontology to work.
 
 ```{admonition} Under development
 :class: warning

@@ -2,6 +2,19 @@
 
 In this chapter, we turn the bicycle example into a small ontology design. Starting from a research purpose and a few inventory records, we decide what the model should describe and work towards a shared understanding of its terms. The result is a sketch with notes on the meanings and identifiers of its terms. We can develop and check it against the records using only pen and paper.
 
+(ontology-development-workflow)=
+## An iterative workflow for research groups
+
+Work in small cycles with the people who collect, interpret and reuse the data:
+
+1. Agree the research purpose and initial scope.
+2. Develop shared terms and definitions, and assess existing ontologies for reuse.
+3. Build a small model and use it to describe representative records.
+4. Review the descriptions, answers to relevant questions and inferred conclusions together. Revise the model or address gaps in the data as needed.
+5. Document decisions, share the model and agree who will maintain it.
+
+Repeat these steps as understanding and research needs develop. Check each revision against the examples already covered. This iterative approach is also described in *Ontology Development 101*. {cite}`noy2001ontology` The {ref}`optional reading <ontology-development-guidance>` offers further guidance and examples.
+
 ```{admonition} Reuse in practice
 :class: note
 
@@ -20,7 +33,7 @@ For the {ref}`bicycle example <running-example>`, imagine a research team compar
 
 ### Working with representative records
 
-We will work with a few *representative records*: examples chosen to show the characteristics and variation the model should cover. They make modelling decisions concrete. We can check whether the model describes the relevant information in each record and whether the same terms work across records.
+We will work with a few *representative records*: examples chosen to show the characteristics and variation the model should cover. We can check whether the model describes the relevant information in each record and whether the same terms work across records.
 
 These fictional inventory records include B001 from the running example and add two bicycles: one with a different frame material and one whose frame material is missing. We can consider each situation as we develop the model:
 
@@ -72,7 +85,7 @@ People who know a domain well may still disagree about what a familiar term incl
 
 For example, one colleague might use *bicycle* only for vehicles powered entirely by the rider, while another includes electric assistance. Discussing a concrete example helps them agree what belongs in the model's Bicycle class. A possible agreement is to include two-wheeled cycles designed to be pedalled, with or without electric assistance. Keeping the agreed meaning alongside the example makes the decision understandable to others.
 
-A visible sketch helps everyone refer to the same model during discussion. Unresolved points can be noted for a later discussion. {cite}`uschold1995methodology,neuhaus2022consensus`
+Record unresolved points for later discussion. {cite}`uschold1995methodology,neuhaus2022consensus`
 
 ### Classes, properties and data values
 
@@ -136,7 +149,9 @@ The Component range covers frames, wheels and other physical parts. Checking tha
 
 For a datatype property, the range is a datatype. We use `rdf:langString` for “has colour” and “has material” because their values are language-tagged text, such as `"steel"@en`. The `rdf:` prefix abbreviates `http://www.w3.org/1999/02/22-rdf-syntax-ns#`. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
+:::{dropdown} Numeric values in Turtle (optional)
 For numbers, use a numeric datatype: `xsd:integer` represents whole numbers. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`. In Turtle, `^^` attaches a datatype: `"2"^^xsd:integer` is equivalent to `2`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
+:::
 
 ### Check the shared sketch against the records
 

@@ -14,8 +14,6 @@ Models from different fields can be connected where their concepts overlap. Thes
 
 ## Ontologies and related approaches
 
-These approaches serve different purposes. 
-
 | Approach | What it provides |
 |---|---|
 | Glossary | Explanations of the meanings of terms |
