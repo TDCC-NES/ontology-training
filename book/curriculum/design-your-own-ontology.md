@@ -155,9 +155,7 @@ For numbers, use a numeric datatype: `xsd:integer` represents whole numbers. The
 
 ### Check the shared sketch against the records
 
-A useful check is to read each arrow as a sentence. For example: “B001 is a Bicycle”, “every Bicycle is a Vehicle” and “B001 has component F001”. We can follow the link to F001 to find the frame's material. This *sentence test* helps check that the arrows express the intended meaning and that the information describes the right thing. It works when reviewing a sketch yourself or discussing it with colleagues.
-
-The same classes and properties should also describe B002 and F002, with their different colour and material values. F003 remains a Frame while its material is unrecorded. Its example box can show the class membership and leave the material value absent.
+The classes and properties in the sketch should also describe B002 and F002, with their different colour and material values. F003 remains a Frame while its material is unrecorded. Its example box can show the class membership and leave the material value absent.
 
 Comparing two sketches using the same record helps explain the consequences of each choice. For example, writing “has material: steel” inside B001's box would leave the relevant component unspecified. Keeping F001 as a separate individual makes the frame and its material explicit. When a record exposes a missing distinction, we can revise the sketch. {cite}`noy2001ontology` Marking changes in another colour can help others follow the revision.
 

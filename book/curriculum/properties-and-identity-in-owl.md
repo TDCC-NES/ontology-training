@@ -1,9 +1,9 @@
 (owl-assertions)=
-# Properties and identity
+# Property axioms and identity
 
-Statements such as “B001 is a Bicycle” and “B001 has component F001” are *assertions*: they describe particular individuals through class memberships, relationships and values.
+In the initial OWL walkthrough, we recorded statements such as “B001 is a Bicycle” and “B001 has component F001”. These *assertions* describe particular individuals through class memberships, relationships and values.
 
-Restrictions describe class members. Property axioms describe a property's behaviour across all its uses. The following examples are separate modelling choices.
+Here, property axioms describe a property's behaviour across all its uses. Class restrictions describe conditions on class members. The following examples are separate modelling choices.
 
 (owl-property-axioms)=
 ## Relationships between properties
@@ -26,7 +26,7 @@ def:hasComponent owl:inverseOf def:isComponentOf .
 
 From B001 hasComponent F001, infer F001 isComponentOf B001. Equivalent properties have the same pairs; disjoint properties cannot relate the same pair. Subproperties, equivalence and disjointness also apply to data properties, where the pair contains an individual and a value. [Property axioms](https://www.w3.org/TR/owl2-syntax/#Object_Property_Axioms)
 
-Domains and ranges apply to every use of a property. With Frame as the range of hasFrame, every object of a hasFrame relationship is inferred to be a Frame. A class restriction such as “every hasFrame value of a Bicycle is a Frame” applies to Bicycle subjects. Several domains or ranges all apply; use a union when alternatives are intended. [Domains and ranges](https://www.w3.org/TR/owl2-primer/#Domain_and_Range_Restrictions)
+Domains and ranges apply to every use of a property. With Frame as the range of hasFrame, every object of a hasFrame relationship is inferred to be a Frame. A class restriction such as “every hasFrame value of a Bicycle is a Frame” applies to Bicycle subjects. Several domains or ranges all apply together; use a union when alternatives are intended. [Domains and ranges](https://www.w3.org/TR/owl2-primer/#Domain_and_Range_Restrictions)
 
 ## Property characteristics
 

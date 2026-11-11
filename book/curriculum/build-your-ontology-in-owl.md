@@ -108,7 +108,7 @@ Return to **Entities > Classes**, select `def:Bicycle` and add another `rdfs:lab
 
 Use language tags for natural-language text throughout the ontology. Our English material name, labels and definitions use `en`; the Dutch label uses `nl`.
 
-## Run the reasoner and inspect inferred class memberships
+## Run the reasoner for a first inference
 
 Choose **Reasoner > HermiT**, then **Reasoner > Start reasoner**. Wait for reasoning to finish. HermiT checks whether the statements contradict one another and infers class memberships from them. After editing the ontology, use **Reasoner > Synchronize reasoner** to refresh its results. [Starting a reasoner](https://protegeproject.github.io/protege/getting-started/#reasoning)
 

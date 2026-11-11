@@ -22,8 +22,12 @@ parts:
       - file: curriculum/understanding-owl-reasoning.md
       - file: curriculum/advanced-owl-modelling.md
       - file: curriculum/owl2-cheat-sheet.md
-    - file: curriculum/moving-towards-production.md
+        title: OWL 2 cheat sheet (reference)
+    - file: curriculum/check-your-ontology.md
     - file: curriculum/use-your-ontology.md
+    - file: curriculum/test-with-data.md
+    - file: curriculum/publish-your-ontology.md
+    - file: curriculum/maintain-your-ontology.md
     - file: curriculum/map-to-external-ontologies.md
     - file: curriculum/beyond-linked-data.md
   - caption: Miscellaneous

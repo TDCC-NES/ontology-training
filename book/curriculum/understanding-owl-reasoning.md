@@ -1,11 +1,13 @@
 (owl-reasoning)=
-# Understanding reasoning
+# Interpret inferences and check consistency
+
+For this page, use the {download}`three-record reasoning example (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>` in Protégé with HermiT running.
 
 ## What the reasoner can infer
 
-A reasoner can find inferred subclasses and classify individuals. Our definitions entail that SteelFrame is a subclass of Frame and BicycleWithSteelFrame is a subclass of Bicycle. They also let it infer F001's SteelFrame membership and B001's BicycleWithSteelFrame membership from the recorded facts.
+The class definitions also entail subclass relationships: SteelFrame is a subclass of Frame, and BicycleWithSteelFrame is a subclass of Bicycle.
 
-A *model* is a possible interpretation in which all the ontology's axioms hold together. A statement is *entailed* when it holds in every model. This explains why F001 must be a SteelFrame, while F003's classification remains unresolved. [Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/)
+A *model* is a possible interpretation in which all the ontology's axioms hold together. A statement is *entailed* when it holds in every model. F001 is a SteelFrame in every model. F003 can be a SteelFrame in some models and fall outside that class in others, so its classification remains unresolved. [Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/)
 
 ## Checking and interpreting results
 

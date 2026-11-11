@@ -1,7 +1,7 @@
 (owl-defining-classes)=
-# Defining classes
+# Defining classes using logical conditions
 
-We use class expressions to state conditions and define classes that a reasoner can recognise from the recorded facts.
+We now use class expressions to state conditions for class membership. Our example defines classes that let a reasoner recognise frames recorded as steel and bicycles with those frames.
 
 For the Protégé steps, open `bike-working.ttl` from the preceding chapter and use **File > Save as** to save a Turtle copy as `bike-logical.ttl`. Keep the prefixed-name display.
 
@@ -65,7 +65,7 @@ An object-property restriction describes individuals through their related indiv
 (def:hasComponent some def:Frame) and (def:hasComponent only def:Frame)
 ```
 
-Using `hasComponent only Frame` for B001 would require its wheels and cargo box to be Frames too. A dedicated `def:hasFrame` property can express conditions about its frames alone. [Object restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Restrictions)
+Suppose B001 also has wheels and a cargo box as components. Using `hasComponent only Frame` would require them to be Frames too. A dedicated `def:hasFrame` property can express conditions about its frames alone. [Object restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Restrictions)
 
 Data-property restrictions describe individuals through their data values. For example, `def:hasMaterial value "steel"@en` describes individuals with that recorded material value.
 
@@ -105,9 +105,9 @@ Class: def:BicycleWithSteelFrame
 
 A BicycleWithSteelFrame is a Bicycle with at least one SteelFrame component. F001 is a Frame with material `"steel"@en`, so the reasoner classifies it as a SteelFrame. B001 is a Bicycle with F001 as a component, so it is a BicycleWithSteelFrame.
 
-Synchronise HermiT and query `def:BicycleWithSteelFrame` with **Instances** selected: B001 should appear. Save `bike-logical.ttl`.
+Synchronise HermiT and query `def:BicycleWithSteelFrame` with **Instances** selected: B001 should appear. Save `bike-logical.ttl`; this working copy contains B001 and F001.
 
-To inspect all three inventory records, open the {download}`completed reasoning example <../data/owl2-reasoning.ttl>` through **File > Open** in a new window. Run HermiT and query `def:BicycleWithSteelFrame`: B001 should appear. Query `def:Bicycle and not def:BicycleWithSteelFrame`: no instances should appear.
+To inspect all three inventory records, open the {download}`completed reasoning example (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>` through **File > Open** in a new window. It includes both class definitions above and adds B002 and B003 with their frames F002 and F003. Run HermiT and query `def:BicycleWithSteelFrame`: B001 should appear. Query `def:Bicycle and not def:BicycleWithSteelFrame`: no instances should appear.
 
 B002 has Frame component F002 with the value `"aluminium"@en`; B003 has Frame component F003 with no material recorded. Neither frame is inferred to be a SteelFrame, and neither is inferred to be outside that class. B002 and B003 likewise remain unclassified as BicycleWithSteelFrame: other material values or frames remain possible.
 
@@ -126,12 +126,12 @@ This definition matches recorded wording: `"Steel"@en` and `"steel"@nl` are diff
 | `def:hasComponent max 2 def:Wheel` | At most two distinct Wheel components |
 | `def:hasComponent exactly 2 def:Wheel` | Both the minimum and maximum conditions |
 
-These can describe an assembled study bicycle in its observation context. An *unqualified* restriction, such as `def:hasComponent exactly 2`, counts all components, including its frame and cargo box.
+These can describe an assembled study bicycle in its observation context. An *unqualified* restriction, such as `def:hasComponent exactly 2`, counts all components: a frame or cargo box would count towards that total too.
 
-For B001's wheels W001 and W002, the two names establish a minimum of two only when their difference is known, for example with `id:W001 owl:differentFrom id:W002`. A minimum can also require further, unnamed wheels. Conversely, a maximum of one Frame makes two Frame fillers identical; asserting that they differ creates a contradiction. [Cardinality restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Cardinality_Restrictions)
+For example, suppose we add Wheel individuals W001 and W002 as B001's components. The two names establish a minimum of two only when their difference is known, for example with `id:W001 owl:differentFrom id:W002`. A minimum can also require further, unnamed wheels. Conversely, a maximum of one Frame makes two Frame fillers identical; asserting that they differ creates a contradiction. [Cardinality restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Cardinality_Restrictions)
 
 (owl-restriction-demonstrations)=
-For each demonstration, reopen `bike-logical.ttl` and save a separate Turtle copy. Start HermiT, then synchronise after each change; use **DL Query > Instances** for queries. Return to `bike-logical.ttl` afterwards.
+For each optional demonstration below, reopen your saved `bike-logical.ttl`, containing B001 and F001, and save a separate Turtle copy. Each demonstration adds the classes, properties and individuals it needs. Start HermiT, then synchronise after each change; use **DL Query > Instances** for queries. Return to `bike-logical.ttl` afterwards.
 
 :::{dropdown} In Protégé: what only infers (optional)
 
