@@ -28,7 +28,7 @@ In the {ref}`bicycle inventory <running-example>`, B001 is the bicycle and F001 
 
 RDF uses *IRIs* (Internationalized Resource Identifiers) as names across datasets. The same IRI identifies the same resource wherever it appears, including across datasets. Since another inventory could also have a B001, we use `https://example.org/bike/id/B001` for our bicycle and `https://example.org/bike/id/F001` for its frame. Properties and classes have IRIs too. We use `example.org` as a placeholder domain. [RDF IRIs](https://www.w3.org/TR/rdf11-concepts/#section-IRIs)
 
-## Connecting statements into a knowledge graph
+## From statements to knowledge graphs
 
 A *knowledge graph* represents things and their relationships in a graph data model. [Hogan et al., *Knowledge Graphs*](https://www.aidanhogan.com/docs/knowledge-graphs-computing-surveys.pdf) This course covers only knowledge graphs that use RDF and follow Linked Data principles.
 
@@ -77,9 +77,9 @@ Using the same IRI for the same resource connects descriptions across datasets, 
 
 ## The data-centric approach
 
-In a *data-centric approach*, domain knowledge is represented explicitly in shared data and ontologies, rather than encoded separately in each application's code. An inventory application and an analysis application can reuse the same bicycle data and the statement that Bicycle is a subclass of Vehicle. Managing data and definitions independently of individual applications can reduce repeated work to prepare data and maintain its definitions. [Data-Centric Manifesto](https://datacentricmanifesto.org/principles/), [Sharing data and domain models](https://www.w3.org/TR/sw-oosd-primer/)
+An inventory application and an analysis application can reuse the same bicycle data and the statement that Bicycle is a subclass of Vehicle. This is a *data-centric approach*: recording domain knowledge in shared data and ontologies so applications can use the same definitions. Managing the data and definitions separately from application code can reduce repeated work to prepare data and maintain its definitions. [Data-Centric Manifesto](https://datacentricmanifesto.org/principles/), [Sharing data and domain models](https://www.w3.org/TR/sw-oosd-primer/)
 
-## RDF serialisation: Turtle and other formats
+## Serialisation: Turtle and other formats
 
 *Serialisation* represents an RDF graph in a format for storage or exchange. Turtle, JSON-LD, RDF/XML and N-Triples are RDF serialisation formats: they can represent the same graph using different syntax. [RDF serialisation formats](https://www.w3.org/TR/rdf11-primer/#section-syntax)
 

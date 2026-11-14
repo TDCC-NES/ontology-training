@@ -1,5 +1,5 @@
 (owl-defining-classes)=
-# Defining classes using logical conditions
+# Define classes logically
 
 We now use class expressions to state conditions for class membership. Our example defines classes that let a reasoner recognise frames recorded as steel and bicycles with those frames.
 
@@ -118,7 +118,7 @@ This definition matches recorded wording: `"Steel"@en` and `"steel"@nl` are diff
 (owl-cardinality)=
 ## Cardinality
 
-*Cardinality* counts distinct fillers. A *qualified* cardinality counts only fillers in a specified class:
+*Cardinality* counts distinct fillers: the individuals related through a property. A *qualified* cardinality counts only fillers in a specified class:
 
 | Manchester expression | Meaning |
 |---|---|
@@ -128,7 +128,9 @@ This definition matches recorded wording: `"Steel"@en` and `"steel"@nl` are diff
 
 These can describe an assembled study bicycle in its observation context. An *unqualified* restriction, such as `def:hasComponent exactly 2`, counts all components: a frame or cargo box would count towards that total too.
 
-For example, suppose we add Wheel individuals W001 and W002 as B001's components. The two names establish a minimum of two only when their difference is known, for example with `id:W001 owl:differentFrom id:W002`. A minimum can also require further, unnamed wheels. Conversely, a maximum of one Frame makes two Frame fillers identical; asserting that they differ creates a contradiction. [Cardinality restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Cardinality_Restrictions)
+For example, suppose we add Wheel individuals W001 and W002 as B001's components. The reasoner can count them as two wheels when it knows they are different, for example from `id:W001 owl:differentFrom id:W002`. A minimum can also require further, unnamed wheels.
+
+With a maximum of one Frame component for B001, the reasoner treats two Frame fillers as the same individual. Stating that they are different makes the ontology inconsistent. [Cardinality restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Cardinality_Restrictions)
 
 (owl-restriction-demonstrations)=
 For each optional demonstration below, reopen your saved `bike-logical.ttl`, containing B001 and F001, and save a separate Turtle copy. Each demonstration adds the classes, properties and individuals it needs. Start HermiT, then synchronise after each change; use **DL Query > Instances** for queries. Return to `bike-logical.ttl` afterwards.

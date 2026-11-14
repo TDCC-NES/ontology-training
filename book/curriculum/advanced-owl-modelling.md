@@ -52,7 +52,7 @@ The last expression uses *facets* to narrow a datatype. A datatype-definition ax
 
 Cardinalities count values, not written forms: `"01"^^xsd:integer` and `"1"^^xsd:integer` denote one integer. Unqualified data cardinalities count all values. Data properties have no inverse expressions.
 
-The {ref}`cheat sheet <owl-cheat-datatypes>` lists OWL 2's supported datatypes and facets. OWL 2's 2012 datatype map uses `rdf:PlainLiteral`; RDF 1.1 uses `rdf:langString` for language-tagged text. Our `"steel"@en` values work in both syntax frameworks. The reasoning download leaves the material range open so it does not require rdf:langString as a datatype extension. [Plain literals](https://www.w3.org/TR/rdf-plain-literal/), [RDF 1.1 literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
+The {ref}`cheat sheet <owl-cheat-datatypes>` lists OWL 2's supported datatypes and facets. OWL 2's 2012 datatype map uses `rdf:PlainLiteral`; RDF 1.1 uses `rdf:langString` for language-tagged text. Our `"steel"@en` values work in both syntax frameworks. The course files use the `rdf:langString` range supported by the tested Protégé/HermiT combination in chapter 4. [Plain literals](https://www.w3.org/TR/rdf-plain-literal/), [RDF 1.1 literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
 (owl-more-property-characteristics)=
 ## Further property characteristics

@@ -1,6 +1,7 @@
 @prefix def: <https://example.org/bike/def/> .
 @prefix id: <https://example.org/bike/id/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 # A standalone example for the logical modelling chapter.
@@ -25,10 +26,10 @@ def:hasComponent a owl:ObjectProperty ;
     rdfs:domain owl:Thing ;
     rdfs:range def:Component .
 
-# Language-tagged material values are used directly. The example leaves the
-# range open, avoiding a dependency on a reasoner's RDF 1.1 datatype support.
+# Material values use language-tagged text, as in the building walkthrough.
 def:hasMaterial a owl:DatatypeProperty ;
-    rdfs:domain owl:Thing .
+    rdfs:domain owl:Thing ;
+    rdfs:range rdf:langString .
 
 def:SteelFrame a owl:Class ;
     rdfs:label "frame recorded as steel"@en ;

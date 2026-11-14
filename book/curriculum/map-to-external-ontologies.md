@@ -1,4 +1,4 @@
-# Reuse existing ontologies and vocabularies
+# Reuse ontologies and vocabularies
 
 Reusing existing ontologies and vocabularies, and connecting your ontology to them.
 

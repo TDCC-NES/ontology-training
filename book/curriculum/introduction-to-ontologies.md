@@ -1,6 +1,6 @@
 # Introduction to ontologies
 
-## What are ontologies, and why use them?
+## What are ontologies for?
 
 Making the meaning of research data explicit can help researchers describe, publish, find, integrate and reuse it. This includes recording domain knowledge independently of individual applications: what the data represents and how the things it describes relate to each other. 
 
@@ -12,7 +12,7 @@ When researchers describe their data with an ontology, others can inspect the mo
 
 Models from different fields can be connected where their concepts overlap. These links help researchers investigate questions that span multiple disciplines. {cite}`bernerslee2004connectingsciences`
 
-## Ontologies and related approaches
+## Related approaches
 
 | Approach | What it provides |
 |---|---|
@@ -29,7 +29,7 @@ Choose the level of modelling that serves your research: a data dictionary or co
 
 ## Why OWL?
 
-Ontologies can be represented in different ways. This training focuses on OWL 2 (Web Ontology Language), an open standard from the World Wide Web Consortium (W3C) for representing ontologies on the Web. Its public specification gives applications a common language with defined meaning, so models can be exchanged. Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
+Ontologies can be represented in different ways. This training focuses on OWL 2 (Web Ontology Language), an open standard from the World Wide Web Consortium (W3C) for representing ontologies on the Web. OWL gives applications a shared language for exchanging and interpreting ontologies. Applications can use an OWL ontology to infer additional facts and check for logical inconsistencies. {cite}`w3c2012owl2primer`
 
 OWL builds on RDF, the Resource Description Framework, which is also an open W3C standard and expresses information as statements about things and their relationships. Every OWL 2 ontology has a standard RDF representation, so the model can be shared and queried with the same technologies as the data. {cite}`w3c2012owl2overview`
 
@@ -46,7 +46,7 @@ To answer a question such as “Which bicycles have steel frames?”, we need to
 
 For example, Bicycle and Frame are classes, “has component” is a property, and “Every Bicycle is a Vehicle” is a logical statement. If B001 is recorded as a Bicycle, an application can also infer that it is a Vehicle. {cite}`w3c2012owl2primer`
 
-## Open-world assumption and no unique-name assumption
+## Open-world assumption and identity
 
 Research groups often describe different aspects of the same things and choose identifiers independently.
 

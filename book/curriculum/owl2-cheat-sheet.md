@@ -11,7 +11,7 @@ See {ref}`necessary and sufficient conditions <owl-conditions>` and {ref}`class 
 
 | Concept | What it does | Bicycle example |
 |---|---|---|
-| SubClassOf (⊑) | States a necessary condition; the converse needs a separate axiom | `Class: Bicycle SubClassOf: Vehicle` |
+| SubClassOf (⊑) | States a necessary condition; this does not also say that every Vehicle is a Bicycle | `Class: Bicycle SubClassOf: Vehicle` |
 | EquivalentTo (≡) | States necessary and sufficient conditions | `Class: SteelFrame EquivalentTo: Frame and (hasMaterial value "steel"@en)` |
 | Disjoint classes | Excludes shared members | Frame and Wheel are disjoint |
 | Covering axiom | Makes a class exactly the union of its alternatives; overlap is allowed | `Class: StudyComponent EquivalentTo: Frame or Wheel` |
@@ -42,7 +42,7 @@ See {ref}`object-property restrictions <owl-object-restrictions>`. A *filler* is
 | `exactly n` | Combines the minimum and maximum | `hasComponent exactly 2 Wheel` |
 | Inverse property | Follows a relationship backwards | `inverse hasComponent some Bicycle` |
 
-The wheel counts are *qualified*: they count only Wheel fillers. `hasComponent exactly 2` is unqualified and counts every component. A maximum can infer that two names denote one individual. State known differences with `owl:differentFrom`.
+The wheel counts are *qualified*: they count only Wheel fillers. `hasComponent exactly 2` is unqualified and counts every component. With a maximum of one, a reasoner can infer that two filler names refer to the same individual. State known differences with `owl:differentFrom`.
 
 A closure such as `hasWheel only {id:W001, id:W002}` limits fillers to those two individuals. Add their property assertions to require those links. The `only Frame` example above would be unsuitable for B001's components, which also include wheels and a cargo box.
 
@@ -66,9 +66,9 @@ See {ref}`property axioms <owl-property-axioms>`.
 | Concept | What it does | Bicycle example |
 |---|---|---|
 | Subproperty | A specific relationship entails a broader one | hasFrame is a subproperty of hasComponent |
-| Equivalent properties | Gives two properties the same pairs | Two inventory terms can be declared equivalent when their meanings match |
-| Disjoint properties | Excludes the same pair from both properties | A component cannot be both installed and spare for one bicycle in the study's fixed configuration |
-| Inverse properties | Reverses the direction of each pair | hasComponent / isComponentOf |
+| Equivalent properties | A link using either property also holds with the other | Two inventory terms can be declared equivalent when their meanings match |
+| Disjoint properties | The two properties cannot both link the same subject to the same object | A component cannot be both installed and spare for one bicycle in the study's fixed configuration |
+| Inverse properties | Reverses the direction of each link | hasComponent / isComponentOf |
 | Domain / range | Infers subject and object classes; specifies data ranges | hasFrame has range Frame |
 | Functional | Each subject has at most one filler | hasFrame, if the study permits at most one frame per bicycle |
 | Inverse-functional | Each filler has at most one subject | A physical inventory tag assigned to one bicycle |
@@ -80,7 +80,7 @@ See {ref}`property axioms <owl-property-axioms>`.
 | Property chain | A specified path entails a relationship | recordedIn followed by maintainedBy entails hasInventoryMaintainer |
 | Key | Shared values identify named members of a class | Bicycle identified by recordedIn together with inventoryCode |
 
-Data properties also support subproperties, equivalence, disjointness, domain, range and functionality. Their pairs contain an individual and a data value. Other characteristics and chains apply to object properties.
+Data properties also support subproperties, equivalence, disjointness, domain, range and functionality. They link individuals to data values. Other characteristics and chains apply to object properties.
 
 Functionality allows zero fillers. For a functional object property, all fillers for the same subject must be the same individual; distinct data values on a functional data property cause inconsistency. Several domains or ranges all apply, giving an intersection.
 
@@ -224,7 +224,7 @@ def:StudyMassKg a rdfs:Datatype ;
         ) ] .
 ```
 
-Use built-in datatypes on literals, such as `"23.5"^^xsd:decimal`, and as the bases of facet restrictions. Custom datatypes supply value ranges, with one acyclic definition; they supply no new lexical forms or facets. Standard data ranges are unary. [Data ranges and definitions](https://www.w3.org/TR/owl2-syntax/#Data_Ranges)
+Use built-in datatypes on literals, such as `"23.5"^^xsd:decimal`, and as the bases of facet restrictions. Custom datatypes describe allowed value ranges. Define each custom datatype once; its definition must not depend on itself, directly or through other datatypes. Custom datatypes introduce no new literal forms or facets. Standard data ranges describe one value at a time. [Data ranges and definitions](https://www.w3.org/TR/owl2-syntax/#Data_Ranges)
 :::
 
 :::{dropdown} Complete OWL 2 datatype and facet inventory
@@ -252,7 +252,7 @@ Use built-in datatypes on literals, such as `"23.5"^^xsd:decimal`, and as the ba
 
 Several facet conditions all apply. OWL 2 does not include every XSD datatype or facet; for example, `xsd:date`, `xsd:duration`, `xsd:totalDigits` and `xsd:fractionDigits` are outside this inventory. Consult the [datatype map](https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) for lexical forms, value identity and facet rules.
 
-The earlier chapters use RDF 1.1's `rdf:langString`. OWL 2's 2012 map uses `rdf:PlainLiteral`; the same `"steel"@en` notation remains usable. The reasoning download leaves the material range open to avoid requiring the newer datatype as an extension. [Language-tagged literals](https://www.w3.org/TR/rdf-plain-literal/)
+The course files use RDF 1.1's `rdf:langString`, supported by the tested Protégé/HermiT combination in chapter 4. OWL 2's 2012 map uses `rdf:PlainLiteral`; the same `"steel"@en` notation remains usable. [Language-tagged literals](https://www.w3.org/TR/rdf-plain-literal/)
 :::
 
 (owl-cheat-declarations)=

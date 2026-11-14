@@ -2,15 +2,17 @@
 
 We will describe B001 and its frame F001 in OWL, using the classes and properties from our sketch. We will record that the frame is made of steel and run a reasoner to infer that B001 is a Vehicle.
 
+The walkthrough focuses on the part of our sketch that describes frames and their materials; the expanded reference ontology also includes colour and the other inventory records.
+
 You can write Turtle directly in a text editor or use [Protégé](https://protege.stanford.edu/) or another ontology editor. You can also use AI assistance to draft and revise the ontology.
 
 The walkthrough below uses Protégé as one example. If you prefer a text editor, use the {ref}`Turtle example at the end of this chapter <owl-turtle-example>` as a reference.
 
 ## Get started with Protégé desktop
 
-For the Protégé walkthrough, open [Protégé desktop](https://protege.stanford.edu/). If you need to install it, follow the [installation instructions](https://protegeproject.github.io/protege/installation/). The steps use Protégé 5 and its bundled HermiT reasoner.
+For the Protégé walkthrough, open [Protégé desktop](https://protege.stanford.edu/). If you need to install it, follow the [installation instructions](https://protegeproject.github.io/protege/installation/). The example ontologies were checked with HermiT 1.4.3.456 bundled with Protégé 5.6.7.
 
-## Create an ontology: ontology IRI, term IRIs and prefixes
+## Set up IRIs and prefixes
 
 Choose **File > New** to create an empty ontology. If prompted, open it in a new window.
 
@@ -34,7 +36,7 @@ Choose **View > Render by prefixed name** to display names such as `def:Bicycle`
 
 When a creation dialog asks for a **Name**, enter the prefixed name, such as `def:Bicycle`. Protégé expands the prefix using the mapping you added. Check the IRI shown in the dialog before confirming: `def:Bicycle` should produce exactly `https://example.org/bike/def/Bicycle`. Use `def:` for classes and properties and `id:` for individuals.
 
-## Add classes and subclass relationships
+## Add a class hierarchy
 
 Open **Entities** and select **Classes**. Keep the class hierarchy in **Asserted** mode while editing. *Asserted* statements are those we record explicitly.
 
@@ -49,7 +51,7 @@ The hierarchy starts with `owl:Thing`, the built-in class containing every indiv
 
 Select `def:Bicycle` and check **SubClass Of** in its description: it should contain `def:Vehicle`. For `def:Frame`, it should contain `def:Component`.
 
-## Add individuals and class memberships
+## Add individuals and their types
 
 Open **Individuals by class** and select `def:Bicycle` in the class hierarchy. The individuals list shows members of that class. Use **Add Individual**, enter `id:B001` as the name and confirm. This creates B001 and records its membership in Bicycle. [Creating individuals](https://protegeproject.github.io/protege/views/instances/)
 
@@ -57,7 +59,7 @@ Select `def:Frame` and use the same procedure to create `id:F001` as a Frame.
 
 Check the **Types** section for each individual: B001 should list `def:Bicycle`, and F001 should list `def:Frame`.
 
-## Add object and datatype properties: domains, ranges and values
+## Add properties and values
 
 ### Create the object property
 
@@ -84,7 +86,7 @@ Select `def:Frame` in the class hierarchy, then `id:F001` in the individuals lis
 Protégé records this as `"steel"@en`: the name is English and describes F001's material, which we want to compare across inventories.
 
 (owl-entity-annotations)=
-## Add labels, definitions and language tags
+## Add labels and definitions
 
 Add the labels and definitions agreed during conceptual modelling as *annotations* on the classes and properties. Use the annotation property `rdfs:label` for labels and `rdfs:comment` for definitions. {cite}`w3c2012owl2primer`
 
@@ -108,7 +110,7 @@ Return to **Entities > Classes**, select `def:Bicycle` and add another `rdfs:lab
 
 Use language tags for natural-language text throughout the ontology. Our English material name, labels and definitions use `en`; the Dutch label uses `nl`.
 
-## Run the reasoner for a first inference
+## Run the reasoner
 
 Choose **Reasoner > HermiT**, then **Reasoner > Start reasoner**. Wait for reasoning to finish. HermiT checks whether the statements contradict one another and infers class memberships from them. After editing the ontology, use **Reasoner > Synchronize reasoner** to refresh its results. [Starting a reasoner](https://protegeproject.github.io/protege/getting-started/#reasoning)
 
@@ -120,8 +122,20 @@ In **Individuals by class**, select `def:Bicycle` and then `id:B001` in the indi
 
 The results should include `id:B001`: we recorded it as a Bicycle, and Bicycle is a subclass of Vehicle. The reasoner therefore infers that B001 is also a Vehicle. [DL Query documentation](https://protegewiki.stanford.edu/wiki/DLQueryTab)
 
+## Visualise your ontology
+
+A visual view helps you compare the implemented ontology with your sketch. Choose a view suited to what you want to inspect:
+
+| View | What to use it for | How to open it |
+|---|---|---|
+| Class hierarchy | Explore subclass relationships, such as Bicycle under Vehicle. Switch between **Asserted** and **Inferred** after running the reasoner. | **Entities > Classes**. [Documentation](https://protegeproject.github.io/protege/views/class-hierarchy/) |
+| OntoGraf | Explore classes, individuals and their relationships in a graph. Expand relevant nodes and filter relationships to keep the view readable. | **Window > Tabs > OntoGraf**; bundled with Protégé Desktop. [Documentation](https://protegewiki.stanford.edu/wiki/OntoGraf) |
+| OWLViz | View asserted and inferred class hierarchies as diagrams. | **Window > Tabs > OWLViz**; requires a separate [Graphviz installation](https://github.com/protegeproject/owlviz/blob/master/README.md). |
+
+For the bicycle example, keep Vehicle, Bicycle, Component and Frame in view. In OntoGraf, you can also include B001 and F001 to explore their class memberships and component relationship. Inspect F001's material value in **Individuals by class > Data property assertions**.
+
 (owl-turtle-example)=
-## Save and inspect the ontology in Turtle
+## Save and inspect the Turtle file
 
 Choose **File > Save as**. In the format dialog, select **Turtle Syntax** and choose **OK**. Choose a folder, name the file `bike-working.ttl` and choose **Save**. Use **File > Save** regularly as you make changes. Saving the file leaves the ontology IRI as `https://example.org/bike`.
 
@@ -171,4 +185,4 @@ id:F001 a owl:NamedIndividual, def:Frame ;
 
 Protégé may use a different order or add declarations. Compare the full IRIs and statements with the example. **File > Save** stores the statements you entered, including B001's Bicycle membership. After reopening the file, the reasoner can infer its Vehicle membership again. [Saving and exporting inferences](https://protegeproject.github.io/protege/menus/)
 
-You can reopen `bike-working.ttl` through **File > Open** to inspect the same model in Protégé. The {download}`expanded bicycle ontology <../data/bike-ontology.ttl>` provides the other inventory records, properties and annotations. It also includes additional bicycle types, components and publication metadata.
+Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`expanded bicycle ontology <../data/bike-ontology.ttl>` is a separate reference with the other inventory records, properties and annotations, additional bicycle types and components, and publication metadata.

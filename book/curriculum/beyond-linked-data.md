@@ -1,4 +1,4 @@
-# Ontologies beyond Linked Data
+# Ontologies beyond RDF
 
 Using ontologies outside the RDF and linked data universe.
 

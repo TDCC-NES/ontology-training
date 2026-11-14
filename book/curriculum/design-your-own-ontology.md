@@ -3,7 +3,7 @@
 In this chapter, we turn the bicycle example into a small ontology design. Starting from a research purpose and a few inventory records, we decide what the model should describe and work towards a shared understanding of its terms. The result is a sketch with notes on the meanings and identifiers of its terms. We can develop and check it against the records using only pen and paper.
 
 (ontology-development-workflow)=
-## An iterative workflow for research groups
+## An iterative workflow
 
 Work in small cycles with the people who collect, interpret and reuse the data:
 
@@ -21,7 +21,7 @@ Repeat these steps as understanding and research needs develop. Check each revis
 In practice, check whether existing ontologies or vocabularies can be reused or extended before building your own. Develop new terms for concepts or relationships that suitable existing models do not cover, and combine them with terms you can reuse. Here, we build a small ontology first to understand the modelling choices involved. {cite}`noy2001ontology`
 ```
 
-## Define the purpose and initial scope
+## Define purpose and initial scope
 
 ### Starting from a research purpose
 
@@ -53,7 +53,7 @@ Other components and their materials, detailed alloy composition, material perfo
 
 A short shared description of the purpose, intended users and scope helps the researchers who know the domain and those who will use the data agree what to include. It can be revised as new needs emerge. {cite}`suarezfigueroa2009requirements`
 
-## Refine the scope with competency questions
+## Develop competency questions
 
 A *competency question* states something the ontology, together with relevant data, should help answer. Writing these questions is one way to make the purpose and scope more precise: each question helps identify what the model needs to represent and provides a way to check its coverage. {cite}`gruninger1995methodology,noy2001ontology`
 
@@ -77,7 +77,7 @@ You can also begin with a use case, representative records or an initial sketch,
 
 For research aimed at future reuse, this means agreeing which main characteristics and relationships to cover while specific research questions are still emerging. {cite}`uschold1995methodology` Here, we retain the bicycle's colour for broader inventory reuse, although it is not needed to select records by frame material. Linked Data can also support combinations across research fields that the data's publishers did not anticipate. {cite}`bernerslee2004connectingsciences` Competency questions provide examples for checking coverage; they do not need to anticipate every future use.
 
-## Shared conceptualisation and drawing
+## Agree and sketch the model
 
 With an initial scope and representative records, we can develop a *conceptual model*: a description of the kinds of things in the domain, their relationships and the data values we want to record about them. A sketch and short written explanations give people something concrete to discuss and revise as they work towards a *shared conceptualisation*: an agreed understanding of the model's concepts and relationships. {cite}`uschold1995methodology`
 
@@ -143,11 +143,11 @@ block-beta
 
 ### Domains, ranges and datatypes
 
-A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, we use OWL's built-in class `owl:Thing`, which contains every individual, as the domain and Component as the range. This domain also covers objects other than bicycles. From “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that F001 is a Component, even without a recorded class membership. We record B001's Bicycle membership separately. F001's recorded membership in Frame gives its more specific type. {cite}`w3c2012owl2primer`
+A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, choose Component as the range to cover frames, wheels and other physical parts. Allow subjects beyond bicycles, since other objects can also have components. Chapter 4 implements this broad domain with `owl:Thing`, which contains every individual. {cite}`w3c2012owl2primer`
 
-The Component range covers frames, wheels and other physical parts. Checking that every bicycle has a recorded component is a data-validation task.
+These choices also support inference: from “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that F001 is a Component. Record its more specific Frame membership separately. Checking that every bicycle has a recorded component is a data-validation task.
 
-For a datatype property, the range is a datatype. We use `rdf:langString` for “has colour” and “has material” because their values are language-tagged text, such as `"steel"@en`. The `rdf:` prefix abbreviates `http://www.w3.org/1999/02/22-rdf-syntax-ns#`. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
+For datatype properties, choose the kind of value needed: colour and material names use language-tagged text, such as `"steel"@en`. In RDF 1.1, its datatype is `rdf:langString`; `rdf:` abbreviates `http://www.w3.org/1999/02/22-rdf-syntax-ns#`. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
 :::{dropdown} Numeric values in Turtle (optional)
 For numbers, use a numeric datatype: `xsd:integer` represents whole numbers. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`. In Turtle, `^^` attaches a datatype: `"2"^^xsd:integer` is equivalent to `2`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
@@ -161,9 +161,9 @@ Comparing two sketches using the same record helps explain the consequences of e
 
 The agreed sketch is most useful alongside short explanations of its concepts and relationships, the reasons for important choices, and any unresolved points. These notes preserve the reasoning behind the model for the people who will use or change it. {cite}`uschold1995methodology`
 
-## Lexicalisation: labels, definitions and language tags
+## Labels, definitions and language tags
 
-Clear labels and definitions help other researchers understand and reuse an ontology. Here, *lexicalisation* covers choosing labels and writing textual definitions. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
+Clear labels and definitions help other researchers understand and reuse an ontology. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
 
 ### Choose clear labels and definitions
 
