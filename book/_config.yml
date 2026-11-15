@@ -45,8 +45,8 @@ sphinx:                                              # Options passed on to the 
       "**": [navbar-logo.html, search-button-field.html, page-toc.html, sbt-sidebar-nav.html]
     html_extra_path:
     - _static/overview.html                          # Preserve the former course overview URL.
-    - data/bike-ontology.ttl
-    - data/bike-ontology.html
+    - data/bicycle-ontology.ttl
+    - data/bicycle-ontology.html
     html_baseurl:  "https://tdcc-nes.github.io/ontology-training"    # Replace this with your own URL, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     html_theme_options:
       secondary_sidebar_items: []                    # Keep navigation in the left sidebar.

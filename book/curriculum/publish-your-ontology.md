@@ -15,13 +15,13 @@ Our research team can now use the bicycle ontology to compare inventory records.
 
 The [askwol publication guide](https://lod-4tu.tudelft.nl/askwol/guide) provides the reference explanations and application commands. Here, we apply that guidance to the bicycle ontology and work through one publishing route: GitHub Pages hosts the files, and w3id redirects the identifiers to them.
 
-This course publishes the [bicycle ontology as Turtle](https://tdcc-nes.github.io/ontology-training/main/bike-ontology.ttl) alongside its [pyLODE documentation](https://tdcc-nes.github.io/ontology-training/main/bike-ontology.html). Both are served by the course's GitHub Pages site. The ontology retains the `example.org` identifiers used in the earlier chapters; the walkthrough below shows how to replace these placeholders and configure their resolution for a real publication.
+This course publishes the [bicycle ontology as Turtle](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.ttl) alongside its [pyLODE documentation](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.html). Both are served by the course's GitHub Pages site. The ontology retains the `example.org` identifiers used in the earlier chapters; the walkthrough below shows how to replace these placeholders and configure their resolution for a real publication.
 
 Public deployment in this example requires a GitHub account, permission to publish a public repository and a project identifier you intend to maintain. `YOUR-ACCOUNT` and `YOUR-PROJECT` below are placeholders. Replace them throughout with your GitHub account name and an available project path chosen using [w3id's naming guidance](https://docs.w3id.org/guides/create-an-id#_1-choose-a-name).
 
 ## Metadata and licence
 
-Save a copy of the {download}`expanded bicycle ontology <../data/bike-ontology.ttl>` as `bike.ttl`. Its ontology header already records a title, description, creators, publisher, dates, licence and version. Use the guide's [metadata](https://lod-4tu.tudelft.nl/askwol/guide#metadata) and [licence](https://lod-4tu.tudelft.nl/askwol/guide#license) sections when reviewing these values.
+Save a copy of the {download}`expanded bicycle ontology <../data/bicycle-ontology.ttl>` as `bicycle-ontology.ttl`. Its ontology header already records a title, description, creators, publisher, dates, licence and version. Use the guide's [metadata](https://lod-4tu.tudelft.nl/askwol/guide#metadata) and [licence](https://lod-4tu.tudelft.nl/askwol/guide#license) sections when reviewing these values.
 
 Retain the original attribution and CC BY 4.0 licence for this example. If you adapt it, record your contribution and update the description and modification date to reflect your changes.
 
@@ -32,41 +32,41 @@ Agree any additional project requirements before publication, and use the {ref}`
 
 The supplied ontology records version `2.0.0`. We keep that version for this publication and add its version IRI. Use the guide's [versioning section](https://lod-4tu.tudelft.nl/askwol/guide#versioning) as a reference for the [OWL versioning convention](https://www.w3.org/TR/owl2-syntax/#Versioning_of_OWL_2_Ontologies).
 
-Apply the {doc}`IRI strategy from chapter 3 <design-your-own-ontology>` to the publication copy: replace every occurrence of `https://example.org/bike` with `https://w3id.org/YOUR-PROJECT/bike`. This includes the ontology IRI and the `def:` and `id:` namespace declarations. The resulting identifiers include:
+Apply the {doc}`IRI strategy from chapter 3 <design-your-own-ontology>` to the publication copy: change the ontology IRI from `https://example.org/bike` to `https://w3id.org/YOUR-PROJECT/`. In the `def:` and `id:` namespace declarations, replace `https://example.org/bike/` with `https://w3id.org/YOUR-PROJECT/`. The resulting identifiers include:
 
 | Identifies | IRI |
 |---|---|
-| Ontology | `https://w3id.org/YOUR-PROJECT/bike` |
-| Version | `https://w3id.org/YOUR-PROJECT/bike/2.0.0` |
-| Bicycle class | `https://w3id.org/YOUR-PROJECT/bike/def/Bicycle` |
-| B001 | `https://w3id.org/YOUR-PROJECT/bike/id/B001` |
+| Ontology | `https://w3id.org/YOUR-PROJECT/` |
+| Version | `https://w3id.org/YOUR-PROJECT/2.0.0` |
+| Bicycle class | `https://w3id.org/YOUR-PROJECT/def/Bicycle` |
+| B001 | `https://w3id.org/YOUR-PROJECT/id/B001` |
 
 Add the version statement to the existing ontology header, keeping its other metadata:
 
 ```turtle
-<https://w3id.org/YOUR-PROJECT/bike> a owl:Ontology ;
-    owl:versionIRI <https://w3id.org/YOUR-PROJECT/bike/2.0.0> ;
+<https://w3id.org/YOUR-PROJECT/> a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/YOUR-PROJECT/2.0.0> ;
     owl:versionInfo "2.0.0" .
 ```
 
-The `owl:` prefix is already declared in `bike.ttl`. Here we replace the course's placeholder identifiers before publication; once published, keep your identifiers stable. Apply the same namespace replacement to the queries and shapes used to check this copy.
+The `owl:` prefix is already declared in `bicycle-ontology.ttl`. Here we replace the course's placeholder identifiers before publication; once published, keep your identifiers stable. Apply the same namespace replacement to the queries and shapes used to check this copy.
 
 ## Review with askwol
 
-Open [askwol](https://lod-4tu.tudelft.nl/askwol/) and upload `bike.ttl`. Review the report and follow the guide links beside individual findings. Record which findings you resolve and the reasons for retaining any deliberate modelling or documentation choices.
+Open [askwol](https://lod-4tu.tudelft.nl/askwol/) and upload `bicycle-ontology.ttl`. Review the report and follow the guide links beside individual findings. Record which findings you resolve and the reasons for retaining any deliberate modelling or documentation choices.
 
-For example, Bicycle has an additional Dutch label, while the other classes have English labels only. A language consistency finding therefore calls for a decision about the intended translation coverage. Resolution warnings for the new w3id identifiers can be checked again after their redirects are live.
+The reference ontology provides English and Dutch labels. A language consistency finding on a new term can identify a missing translation. Resolution warnings for the new w3id identifiers can be checked again after their redirects are live.
 
 Use the {ref}`checks from chapter 6 <choose-the-right-check>` to review changes that affect the model or its use. The guide describes [the coverage of askwol's reasoning checks](https://lod-4tu.tudelft.nl/askwol/guide#reasoner).
 
 (owl-ontology-structure)=
 ## Generate and review documentation
 
-Follow the guide's [pyLODE instructions](https://lod-4tu.tudelft.nl/askwol/guide#documentation), using `bike.ttl` as input and `index.html` as output. Local generation requires [Python](https://www.python.org/downloads/). The guide's environment commands use macOS/Linux shell syntax; Python's [environment activation instructions](https://docs.python.org/3/library/venv.html#how-venvs-work) also cover Windows.
+Follow the guide's [pyLODE instructions](https://lod-4tu.tudelft.nl/askwol/guide#documentation), using `bicycle-ontology.ttl` as input and `index.html` as output. Local generation requires [Python](https://www.python.org/downloads/). The guide's environment commands use macOS/Linux shell syntax; Python's [environment activation instructions](https://docs.python.org/3/library/venv.html#how-venvs-work) also cover Windows.
 
-Open `index.html` in a browser. Locate Bicycle and `hasComponent`, and compare their displayed definitions with the RDF. Check that labels and definitions display correctly and that the licence, ontology IRI and version information agree with `bike.ttl`. After correcting the RDF, regenerate the page. Check external term links now and your new term links after publication.
+Open `index.html` in a browser. Locate Bicycle and `hasComponent`, and compare their displayed definitions with the RDF. Check that labels and definitions display correctly and that the licence, ontology IRI and version information agree with `bicycle-ontology.ttl`. After correcting the RDF, regenerate the page. Check external term links now and your new term links after publication.
 
-The [course's generated page](https://tdcc-nes.github.io/ontology-training/main/bike-ontology.html) shows the expected layout for the supplied ontology.
+The [course's generated page](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.html) shows the expected layout for the supplied ontology.
 
 :::{dropdown} Annotations on statements (reference)
 
@@ -80,8 +80,8 @@ The {ref}`cheat sheet <owl-cheat-declarations>` gives the declaration, annotatio
 ### Host the files
 
 1. On GitHub, create a public repository named `bicycle-ontology`, with a README to initialise its `main` branch. A repository stores the files and their change history. See [GitHub's site creation instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
-2. Use **Add file > Upload files** to upload the reviewed `bike.ttl` and generated `index.html` to the repository root. Commit the upload to save it.
-3. Use **Add file > Create new file** to create `releases/2.0.0/bike.ttl`, pasting the reviewed Turtle into it. Create `releases/2.0.0/index.html` with the generated HTML in the same way. These two files preserve this release; the root files provide the current publication.
+2. Use **Add file > Upload files** to upload the reviewed `bicycle-ontology.ttl` and generated `index.html` to the repository root. Commit the upload to save it.
+3. Use **Add file > Create new file** to create `releases/2.0.0/bicycle-ontology.ttl`, pasting the reviewed Turtle into it. Create `releases/2.0.0/index.html` with the generated HTML in the same way. These two files preserve this release; the root files provide the current publication.
 4. Create an empty `.nojekyll` file at the repository root. This tells GitHub Pages to skip its default website builder, Jekyll, and publish the HTML already generated by pyLODE. [Publishing prepared files](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#static-site-generators). Under **Settings > Pages**, select **Deploy from a branch**, `main` and **/(root)**, then save. [Publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
 The repository should contain:
@@ -90,14 +90,14 @@ The repository should contain:
 .nojekyll
 README.md
 index.html
-bike.ttl
+bicycle-ontology.ttl
 releases/
   2.0.0/
     index.html
-    bike.ttl
+    bicycle-ontology.ttl
 ```
 
-When deployment finishes, **Settings > Pages > Visit site** opens `https://YOUR-ACCOUNT.github.io/bicycle-ontology/`. The ontology documentation should appear there. Open its `bike.ttl`, `releases/2.0.0/` and `releases/2.0.0/bike.ttl` URLs too, and confirm that all four files are available before requesting redirects. GitHub Pages determines content types from file extensions; its [MIME type guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#mime-types-on-github-pages) explains how these are assigned.
+When deployment finishes, **Settings > Pages > Visit site** opens `https://YOUR-ACCOUNT.github.io/bicycle-ontology/`. The ontology documentation should appear there. Open its `bicycle-ontology.ttl`, `releases/2.0.0/` and `releases/2.0.0/bicycle-ontology.ttl` URLs too, and confirm that all four files are available before requesting redirects. GitHub Pages determines content types from file extensions; its [MIME type guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#mime-types-on-github-pages) explains how these are assigned.
 
 ### Connect the identifiers
 
@@ -112,14 +112,12 @@ RewriteEngine On
 Header always merge Vary Accept
 
 RewriteCond %{HTTP_ACCEPT} text/turtle [NC]
-RewriteRule ^bike/2\.0\.0/?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/releases/2.0.0/bike.ttl [R=303,L]
-RewriteRule ^bike/2\.0\.0/?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/releases/2.0.0/ [R=303,L]
+RewriteRule ^2\.0\.0/?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/releases/2.0.0/bicycle-ontology.ttl [R=303,L]
+RewriteRule ^2\.0\.0/?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/releases/2.0.0/ [R=303,L]
 
 RewriteCond %{HTTP_ACCEPT} text/turtle [NC]
-RewriteRule ^bike(?:/(?:def|id)/[^/]*)?/?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/bike.ttl [R=303,L]
-RewriteRule ^bike(?:/(?:def|id)/[^/]*)?/?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/ [R=303,L]
-
-RewriteRule ^$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/ [R=302,L]
+RewriteRule ^(?:(?:def|id)(?:/[^/]*)?)?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/bicycle-ontology.ttl [R=303,L]
+RewriteRule ^(?:(?:def|id)(?:/[^/]*)?)?$ https://YOUR-ACCOUNT.github.io/bicycle-ontology/ [R=303,L]
 ```
 
 These rules direct explicit Turtle requests to the RDF and other requests to the documentation. The version IRI selects the preserved release; the ontology, namespace and term IRIs select the current files. The guide explains [HTTP delivery](https://lod-4tu.tudelft.nl/askwol/guide#server-config); w3id documents the [redirect rule syntax](https://docs.w3id.org/guides/htaccess).
@@ -135,18 +133,18 @@ To check RDF access, open a terminal and use [curl](https://curl.se/docs/manpage
 Replace `YOUR-PROJECT` before running:
 
 ```sh
-curl -L -D headers.txt -H "Accept: text/turtle" -o retrieved.ttl "https://w3id.org/YOUR-PROJECT/bike/def/Bicycle"
+curl -L -D headers.txt -H "Accept: text/turtle" -o retrieved.ttl "https://w3id.org/YOUR-PROJECT/def/Bicycle"
 ```
 
 `-L` follows redirects, `-D` saves response headers, `-H` requests Turtle and `-o` saves the response body. Open `headers.txt` and `retrieved.ttl` in a text editor. The expected responses are:
 
 | Requested IRI | Accept header | Redirect destination | Final response |
 |---|---|---|---|
-| `/bike` | `text/html` | `bicycle-ontology/` | `200`, `text/html` |
-| `/bike` | `text/turtle` | `bicycle-ontology/bike.ttl` | `200`, `text/turtle` |
-| `/bike/def/Bicycle` | `text/turtle` | `bicycle-ontology/bike.ttl` | `200`, `text/turtle` |
-| `/bike/def/hasComponent` | `text/turtle` | `bicycle-ontology/bike.ttl` | `200`, `text/turtle` |
-| `/bike/2.0.0` | `text/turtle` | `bicycle-ontology/releases/2.0.0/bike.ttl` | `200`, `text/turtle` |
+| `/` | `text/html` | `bicycle-ontology/` | `200`, `text/html` |
+| `/` | `text/turtle` | `bicycle-ontology/bicycle-ontology.ttl` | `200`, `text/turtle` |
+| `/def/Bicycle` | `text/turtle` | `bicycle-ontology/bicycle-ontology.ttl` | `200`, `text/turtle` |
+| `/def/hasComponent` | `text/turtle` | `bicycle-ontology/bicycle-ontology.ttl` | `200`, `text/turtle` |
+| `/2.0.0` | `text/turtle` | `bicycle-ontology/releases/2.0.0/bicycle-ontology.ttl` | `200`, `text/turtle` |
 
 The request paths above follow `https://w3id.org/YOUR-PROJECT`; destinations follow `https://YOUR-ACCOUNT.github.io/`. Each listed request should first receive a `303` redirect. A final content type may include a character encoding, such as `text/html; charset=utf-8`.
 

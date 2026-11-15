@@ -4,7 +4,7 @@ A reference model for the OWL 2 constructs taught in this course. It extends the
 
 ## Files and opening instructions
 
-- `bike-ontology-complete.ttl`: the complete model and example records. Open it on its own in Protégé. It uses the same ontology and term IRIs as the smaller bicycle example, with version `3.0.0`.
+- `bicycle-ontology-complete.ttl`: the complete model and example records. Open it on its own in Protégé. It uses the same ontology and term IRIs as the smaller bicycle example, with version `3.0.0`.
 - `bike-study.ttl`: an optional study ontology that imports that version and defines the cohort B001–B003.
 - `catalog-v001.xml`: maps the imported version IRI to the local complete model. Keep it beside both Turtle files when opening the study ontology. Protégé uses this catalog to load the import without a Web request.
 

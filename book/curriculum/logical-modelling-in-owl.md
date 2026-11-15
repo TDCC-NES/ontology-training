@@ -20,9 +20,9 @@ The reasoner already classified B001 as a Vehicle. We now add logical conditions
 
 :::{dropdown} Complete bicycle example (reference)
 
-The {download}`complete bicycle ontology <../data/bike-ontology-complete.ttl>` illustrates the course's OWL constructs in a fictional inventory study. Component counts apply to configuration snapshots; each mass measurement has its own record. The smaller walkthrough files remain available.
+The {download}`complete bicycle ontology <../data/bicycle-ontology-complete.ttl>` illustrates the course's OWL constructs in a fictional inventory study. Component counts apply to configuration snapshots; each mass measurement has its own record. The smaller walkthrough files remain available.
 
-The {download}`model guide <../data/bike-ontology-complete.md>` maps constructs to terms and lists expected reasoning results. The {download}`complete package <../data/bike-ontology-complete.zip>` also includes a small study ontology and local catalog for trying imports in Protégé.
+The {download}`model guide <../data/bicycle-ontology-complete.md>` maps constructs to terms and lists expected reasoning results. The {download}`complete package <../data/bicycle-ontology-complete.zip>` also includes a small study ontology and local catalog for trying imports in Protégé.
 
 The identifiers use `example.org` placeholders. Publishing a real ontology also requires maintained identifiers and working Web resolution.
 :::

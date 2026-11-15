@@ -25,14 +25,14 @@ The {download}`supplied inventory RDF <../data/bicycle-inventory.ttl>` lets you 
 (choose-the-right-check)=
 ## Choose appropriate checks
 
-Each check reviews a different aspect of the work:
+The following checks apply to both ontologies and instance data:
 
-| Check | Applies to | What to review | Main explanation |
-|---|---|---|---|
-| Reading statements aloud | Ontology and instance data | Whether the statements express the intended meaning, including which thing a value describes and the direction of a relationship | {ref}`Sketch review <read-model-aloud>` and {ref}`reference RDF <reference-rdf>` |
-| OWL reasoning | Ontology and instance data | Logical consistency, class satisfiability and whether inferred conclusions match the intended meaning | {ref}`Reasoning checks <owl-reasoning>` |
-| Competency-question tests | Ontology and instance data | Whether queries return the expected answers for chosen records and inference settings | {ref}`Query tests <competency-question-tests>` |
-| SHACL validation | Ontology and instance data | Whether selected resources satisfy chosen requirements for recorded values or documentation | {ref}`SHACL basics <shacl-basics>` |
+| Check | What to review | Main explanation |
+|---|---|---|
+| Reading statements aloud | Whether the statements express the intended meaning, including which thing a value describes and the direction of a relationship | {ref}`Sketch review <read-model-aloud>` and {ref}`reference RDF <reference-rdf>` |
+| OWL reasoning | Logical consistency, class satisfiability and whether inferred conclusions match the intended meaning | {ref}`Reasoning checks <owl-reasoning>` |
+| Competency-question tests | Whether queries return the expected answers for chosen records and inference settings | {ref}`Query tests <competency-question-tests>` |
+| SHACL validation | Whether selected resources satisfy chosen requirements for recorded values or documentation | {ref}`SHACL basics <shacl-basics>` |
 
 ## Transform data into RDF
 
@@ -276,7 +276,7 @@ Save the report using its **Turtle** download link. The RDF report records `sh:c
 (ontology-shacl-check)=
 ### Check an ontology requirement
 
-Apply the same method to a documentation requirement: for this check, the Bicycle class must have a label. Use the {download}`expanded bicycle ontology <../data/bike-ontology.ttl>` as **Input Data** and replace the shapes with:
+Apply the same method to a documentation requirement: for this check, the Bicycle class must have a label. Use the {download}`expanded bicycle ontology <../data/bicycle-ontology.ttl>` as **Input Data** and replace the shapes with:
 
 ```turtle
 @prefix def: <https://example.org/bike/def/> .

@@ -10,12 +10,12 @@
 # The example.org IRIs are placeholders matching the course examples.
 
 <https://example.org/bike> a owl:Ontology ;
-    dcterms:title "Bike ontology"@en ;
+    dcterms:title "Bicycle ontology"@en ;
     dcterms:description "An example ontology for describing bicycle inventories and comparing recorded frame materials, with bicycle types, components and colours."@en ;
     dcterms:creator "TDCC-NES Ontology Engineers"@en ;
     dcterms:publisher "TDCC-NES"@en ;
     dcterms:created "2026-10-19"^^xsd:date ;
-    dcterms:modified "2026-11-07"^^xsd:date ;
+    dcterms:modified "2026-11-15"^^xsd:date ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:versionInfo "2.0.0" .
 
@@ -34,7 +34,7 @@ dcterms:title a owl:AnnotationProperty .
 # Bicycle types and other components extend this initial scope.
 
 def:Vehicle a owl:Class ;
-    rdfs:label "vehicle"@en ;
+    rdfs:label "vehicle"@en, "voertuig"@nl ;
     rdfs:comment "A physical object designed to transport people or goods."@en .
 
 def:Bicycle a owl:Class ;
@@ -44,38 +44,38 @@ def:Bicycle a owl:Class ;
 
 def:CargoBicycle a owl:Class ;
     rdfs:subClassOf def:Bicycle ;
-    rdfs:label "cargo bicycle"@en ;
+    rdfs:label "cargo bicycle"@en, "bakfiets"@nl ;
     rdfs:comment "A bicycle designed to carry goods or passengers in addition to the rider."@en .
 
 def:Fatbike a owl:Class ;
     rdfs:subClassOf def:Bicycle ;
-    rdfs:label "fatbike"@en ;
+    rdfs:label "fatbike"@en, "fatbike"@nl ;
     rdfs:comment "A bicycle designed with unusually wide tyres."@en .
 
 def:Component a owl:Class ;
-    rdfs:label "component"@en ;
+    rdfs:label "component"@en, "onderdeel"@nl ;
     rdfs:comment "A physical part of an object."@en .
 
 def:Frame a owl:Class ;
     rdfs:subClassOf def:Component ;
-    rdfs:label "frame"@en ;
+    rdfs:label "frame"@en, "frame"@nl ;
     rdfs:comment "A component forming the main supporting structure of a bicycle."@en .
 
 def:Wheel a owl:Class ;
     rdfs:subClassOf def:Component ;
-    rdfs:label "wheel"@en ;
+    rdfs:label "wheel"@en, "wiel"@nl ;
     rdfs:comment "A circular component that rotates about an axle and supports a vehicle as it moves."@en .
 
 def:CargoBox a owl:Class ;
     rdfs:subClassOf def:Component ;
-    rdfs:label "cargo box"@en ;
+    rdfs:label "cargo box"@en, "laadbak"@nl ;
     rdfs:comment "A box fitted to a vehicle to carry goods or passengers."@en .
 
 # Properties
 # Domain and range statements support inference; they are not validation rules.
 
 def:hasComponent a owl:ObjectProperty ;
-    rdfs:label "has component"@en ;
+    rdfs:label "has component"@en, "heeft onderdeel"@nl ;
     rdfs:comment "Relates an object to one of its physical parts."@en ;
     rdfs:domain owl:Thing ;
     rdfs:range def:Component .
@@ -83,13 +83,13 @@ def:hasComponent a owl:ObjectProperty ;
 # Colour and material can describe both vehicles and components.
 
 def:hasColour a owl:DatatypeProperty ;
-    rdfs:label "has colour"@en ;
+    rdfs:label "has colour"@en, "heeft kleur"@nl ;
     rdfs:comment "Records a colour of an object as text."@en ;
     rdfs:domain owl:Thing ;
     rdfs:range rdf:langString .
 
 def:hasMaterial a owl:DatatypeProperty ;
-    rdfs:label "has material"@en ;
+    rdfs:label "has material"@en, "heeft materiaal"@nl ;
     rdfs:comment "Records a material an object is made of as text."@en ;
     rdfs:domain owl:Thing ;
     rdfs:range rdf:langString .
@@ -97,51 +97,51 @@ def:hasMaterial a owl:DatatypeProperty ;
 # Example individuals
 # B001, B002 and B003 match the representative inventory records.
 # B001 is the physical bicycle; F001, W001, W002 and CB001 are its parts.
-# Colour and material names, labels and descriptions use English language tags.
+# Labels use English and Dutch; descriptions, colour and material names use English.
 
 id:B001 a owl:NamedIndividual, def:Bicycle, def:CargoBicycle ;
-    rdfs:label "B001"@en ;
+    rdfs:label "B001"@en, "B001"@nl ;
     rdfs:comment "A blue cargo bicycle with a steel frame, two wheels and a cargo box."@en ;
     def:hasComponent id:F001, id:W001, id:W002, id:CB001 ;
     def:hasColour "blue"@en .
 
 id:F001 a owl:NamedIndividual, def:Frame ;
-    rdfs:label "frame of B001"@en ;
+    rdfs:label "frame of B001"@en, "frame van B001"@nl ;
     rdfs:comment "The steel frame belonging to B001."@en ;
     def:hasMaterial "steel"@en .
 
 id:W001 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "front wheel of B001"@en ;
+    rdfs:label "front wheel of B001"@en, "voorwiel van B001"@nl ;
     rdfs:comment "The front wheel belonging to B001."@en .
 
 id:W002 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "rear wheel of B001"@en ;
+    rdfs:label "rear wheel of B001"@en, "achterwiel van B001"@nl ;
     rdfs:comment "The rear wheel belonging to B001."@en .
 
 id:CB001 a owl:NamedIndividual, def:CargoBox ;
-    rdfs:label "cargo box of B001"@en ;
+    rdfs:label "cargo box of B001"@en, "laadbak van B001"@nl ;
     rdfs:comment "The box belonging to B001, designed to carry goods or children."@en .
 
 id:B002 a owl:NamedIndividual, def:Bicycle ;
-    rdfs:label "B002"@en ;
+    rdfs:label "B002"@en, "B002"@nl ;
     rdfs:comment "A red bicycle with an aluminium frame (F002)."@en ;
     def:hasComponent id:F002 ;
     def:hasColour "red"@en .
 
 id:F002 a owl:NamedIndividual, def:Frame ;
-    rdfs:label "frame of B002"@en ;
+    rdfs:label "frame of B002"@en, "frame van B002"@nl ;
     rdfs:comment "The aluminium frame belonging to B002."@en ;
     def:hasMaterial "aluminium"@en .
 
 id:B003 a owl:NamedIndividual, def:Bicycle ;
-    rdfs:label "B003"@en ;
+    rdfs:label "B003"@en, "B003"@nl ;
     rdfs:comment "A black bicycle with frame F003."@en ;
     def:hasComponent id:F003 ;
     def:hasColour "black"@en .
 
 # No material is recorded for F003.
 id:F003 a owl:NamedIndividual, def:Frame ;
-    rdfs:label "frame of B003"@en ;
+    rdfs:label "frame of B003"@en, "frame van B003"@nl ;
     rdfs:comment "The frame belonging to B003."@en .
 
 # Query the recorded facts without requiring a reasoner:

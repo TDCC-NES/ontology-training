@@ -204,4 +204,4 @@ id:F001 a owl:NamedIndividual, def:Frame ;
 
 Protégé may use a different order or add declarations. Compare the full IRIs and statements with the example. **File > Save** stores the statements you entered, including B001's Bicycle membership. After reopening the file, the reasoner can infer its Vehicle membership again. [Saving and exporting inferences](https://protegeproject.github.io/protege/menus/)
 
-Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`expanded bicycle ontology <../data/bike-ontology.ttl>` is a separate reference with the other inventory records, properties and annotations, additional bicycle types and components, and publication metadata.
+Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`expanded bicycle ontology <../data/bicycle-ontology.ttl>` is a separate reference with the other inventory records, properties and annotations, additional bicycle types and components, and publication metadata.

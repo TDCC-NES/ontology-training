@@ -19,5 +19,8 @@ _build/
 # Local editor settings
 .vscode/
 
+# Internal working documents
+/Utils/
+
 # PowerPoint temporary lock files
 ~$*.pptx

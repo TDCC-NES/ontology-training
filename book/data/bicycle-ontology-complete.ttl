@@ -7,10 +7,10 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 # Complete OWL 2 course reference: a fictional bicycle inventory study.
-# Open this file on its own. It is an expanded alternative to bike-ontology.ttl.
+# Open this file on its own. It is an expanded alternative to bicycle-ontology.ttl.
 # Physical bicycles, configuration snapshots, inventory records and measurements
 # are distinct. Counts and allocations describe snapshots, not lifetime limits.
-# See bike-ontology-complete.md for construct coverage and expected inferences.
+# See bicycle-ontology-complete.md for construct coverage and expected inferences.
 # The example.org IRIs are placeholders matching the course examples.
 
 <https://example.org/bike> a owl:Ontology ;
