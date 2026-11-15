@@ -20,6 +20,18 @@ python -m http.server 8000 --directory book/_build/html
 
 Open <http://localhost:8000>. Rebuild after editing the source files.
 
+## Ontology documentation
+
+The book build publishes `book/data/bike-ontology.ttl` and its generated `book/data/bike-ontology.html` at `bike-ontology.ttl` and `bike-ontology.html`. Chapter 7 links to both. The ontology's `example.org` identifiers remain teaching placeholders.
+
+After editing the ontology, regenerate the HTML with [pyLODE](https://github.com/RDFLib/pyLODE) installed (currently version 3.6.1), then rebuild the book:
+
+```sh
+python Utils/generate-ontology-documentation.py
+```
+
+The generator adds links to the RDF and chapter 7, and retains member labels as text where pyLODE provides no matching section.
+
 ## Contribute
 
 [Open an issue](https://github.com/TDCC-NES/ontology-training/issues) or submit a pull request. Curriculum pages are in `book/curriculum/`; navigation is configured in `book/_toc.yml`.
