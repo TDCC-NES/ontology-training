@@ -67,7 +67,8 @@ A BicycleWithSteelFrame is a Bicycle with at least one SteelFrame component. F00
 
 Synchronise HermiT and query `def:BicycleWithSteelFrame` with **Instances** selected: B001 should appear. Save `bike-logical.ttl`; this working copy contains B001 and F001.
 
-To inspect all three inventory records, open the {download}`completed reasoning example (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>` through **File > Open** in a new window. It includes both class definitions above and adds B002 and B003 with their frames F002 and F003. Run HermiT and query `def:BicycleWithSteelFrame`: B001 should appear.
+(reasoning-example-files)=
+To inspect all three inventory records, save the {download}`reasoning definitions (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>`, {download}`inventory data <../data/bicycle-inventory.ttl>` and {download}`catalog-v001.xml <../data/catalog-v001.xml>` in the same folder. Open `owl2-reasoning.ttl` through **File > Open** in a new window. It contains both class definitions above and imports the separate inventory records; the catalog resolves that import locally. Run HermiT and query `def:BicycleWithSteelFrame`: B001 should appear.
 
 B002 has Frame component F002 with the value `"aluminium"@en`; B003 has Frame component F003 with no material recorded. Neither frame is inferred to be a SteelFrame, and neither is inferred to be outside that class. B002 and B003 likewise remain unclassified as BicycleWithSteelFrame: other material values or frames remain possible.
 

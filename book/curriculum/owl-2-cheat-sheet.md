@@ -14,8 +14,8 @@ See {ref}`necessary and sufficient conditions <owl-conditions>` and {ref}`class 
 | SubClassOf (⊑) | States a necessary condition; this does not also say that every Vehicle is a Bicycle | `Class: Bicycle SubClassOf: Vehicle` |
 | EquivalentTo (≡) | States necessary and sufficient conditions | `Class: SteelFrame EquivalentTo: Frame and (hasMaterial value "steel"@en)` |
 | Disjoint classes | Excludes shared members | Frame and Wheel are disjoint |
-| Covering axiom | Makes a class exactly the union of its alternatives; overlap is allowed | `Class: StudyComponent EquivalentTo: Frame or Wheel` |
-| Disjoint union | Adds pairwise disjointness to a covering axiom | StudyComponent is the disjoint union of Frame and Wheel |
+| Covering axiom | Makes a class exactly the union of its alternatives; overlap is allowed | `Class: StudyComponent EquivalentTo: Frame or Wheel or CargoBox` |
+| Disjoint union | Adds pairwise disjointness to a covering axiom | StudyComponent is the disjoint union of Frame, Wheel and CargoBox |
 | Intersection (`and`, ⊓) | Requires both conditions | `Frame and (hasMaterial value "steel"@en)` |
 | Union (`or`, ⊔) | Requires at least one alternative | `Frame or Wheel` |
 | Complement (`not`, ¬) | Excludes membership in a class | `Bicycle and not CargoBicycle` |
@@ -23,7 +23,7 @@ See {ref}`necessary and sufficient conditions <owl-conditions>` and {ref}`class 
 | `owl:Thing` (⊤) | Contains every individual | Every Bicycle belongs to Thing |
 | `owl:Nothing` (⊥) | Has no members | `Frame and Wheel` is unsatisfiable when those classes are disjoint |
 
-StudyComponent is a restricted category of frames and wheels; the broader Component class also includes cargo boxes.
+StudyComponent covers frames, wheels and cargo boxes; the broader Component class also includes other kinds of part.
 
 A union need not determine which alternative holds. A complement needs positive evidence of exclusion. Enumeration alone does not establish that all listed names denote different individuals.
 
@@ -78,7 +78,7 @@ See {ref}`property axioms <owl-property-axioms>`.
 | Asymmetric | Each link excludes its reverse | isDirectComponentOf |
 | Transitive | Two consecutive links entail the same relationship | A part of a part is a part |
 | Property chain | A specified path entails a relationship | recordedIn followed by maintainedBy entails hasInventoryMaintainer |
-| Key | Shared values identify named members of a class | Bicycle identified by recordedIn together with inventoryCode |
+| Key | Shared values identify named members of a class | InventoryRecord identified by recordedIn together with inventoryCode |
 
 Data properties also support subproperties, equivalence, disjointness, domain, range and functionality. They link individuals to data values. Other characteristics and chains apply to object properties.
 
@@ -111,8 +111,8 @@ A class may be unsatisfiable while the ontology is consistent: it can stay empty
 These are fragments using the existing course prefixes. Prepend this block when copying them into a separate file:
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
-@prefix id: <https://example.org/bike/id/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
+@prefix id: <https://w3id.org/bicycle-ontology/id/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -143,7 +143,7 @@ For maximum or exact qualified counts, use `owl:maxQualifiedCardinality` or `owl
 | Subclass | `def:Bicycle rdfs:subClassOf def:Vehicle .` |
 | Equivalence | See {ref}`SteelFrame in Turtle <owl-steelframe-turtle>` |
 | Disjointness | `def:Frame owl:disjointWith def:Wheel .` |
-| Disjoint union | `def:StudyComponent owl:disjointUnionOf (def:Frame def:Wheel) .` |
+| Disjoint union | `def:StudyComponent owl:disjointUnionOf (def:Frame def:Wheel def:CargoBox) .` |
 | Several disjoint classes | `[] a owl:AllDisjointClasses; owl:members (def:Frame def:Wheel def:CargoBox) .` |
 
 A covering axiom uses `owl:equivalentClass` with an `owl:unionOf` expression.
@@ -170,12 +170,12 @@ def:SteelFrame a owl:Class ;
 |---|---|
 | Subproperty | `def:hasFrame rdfs:subPropertyOf def:hasComponent .` |
 | Equivalent / disjoint properties | Use `owl:equivalentProperty` / `owl:propertyDisjointWith` between the properties |
-| Several disjoint properties | `[] a owl:AllDisjointProperties; owl:members (def:hasInstalledComponent def:hasSpareComponent def:hasRemovedComponent) .` |
+| Several disjoint properties | `[] a owl:AllDisjointProperties; owl:members (def:hasInstalledComponent def:hasSpareComponent def:hasExcludedComponent) .` |
 | Inverse | `def:hasComponent owl:inverseOf def:isComponentOf .` |
 | Domain / range | `def:hasFrame rdfs:domain def:Bicycle; rdfs:range def:Frame .` |
 | Characteristic | `def:hasFrame a owl:ObjectProperty, owl:FunctionalProperty .` |
 | Chain | `def:hasInventoryMaintainer owl:propertyChainAxiom (def:recordedIn def:maintainedBy) .` |
-| Key | `def:Bicycle owl:hasKey (def:recordedIn def:inventoryCode) .` |
+| Key | `def:InventoryRecord owl:hasKey (def:recordedIn def:inventoryCode) .` |
 | Same / different | `id:B001 owl:sameAs id:C17 .` / `id:W001 owl:differentFrom id:W002 .` |
 | Several different individuals | `[] a owl:AllDifferent; owl:distinctMembers (id:B001 id:B002 id:B003) .` |
 
@@ -283,9 +283,9 @@ Axiom annotations use `owl:Axiom` with `owl:annotatedSource`, `owl:annotatedProp
 Built-in annotation properties: `rdfs:label`, `rdfs:comment`, `rdfs:seeAlso`, `rdfs:isDefinedBy`, `owl:deprecated`, `owl:versionInfo`, `owl:priorVersion`, `owl:backwardCompatibleWith`, `owl:incompatibleWith`.
 
 ```turtle
-<https://example.org/bike/reasoning> a owl:Ontology ;
-    owl:versionIRI <https://example.org/bike/reasoning/1.0> ;
-    owl:imports <https://example.org/inventory/1.0> ;
+<https://w3id.org/bicycle-ontology/reasoning> a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/bicycle-ontology/reasoning/1.0> ;
+    owl:imports <https://w3id.org/bicycle-ontology/> ;
     owl:versionInfo "1.0" .
 ```
 

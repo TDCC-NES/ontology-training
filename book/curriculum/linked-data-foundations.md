@@ -39,7 +39,7 @@ In the {ref}`bicycle inventory <running-example>`, B001 is the bicycle and F001 
 | B001 | has colour | “blue” |
 | F001 | has material | “steel” |
 
-RDF uses *IRIs* (Internationalized Resource Identifiers) as names across datasets. The same IRI identifies the same resource wherever it appears, including across datasets. Since another inventory could also have a B001, we use `https://example.org/bike/id/B001` for our bicycle and `https://example.org/bike/id/F001` for its frame. Properties and classes have IRIs too. We use `example.org` as a placeholder domain. [RDF IRIs](https://www.w3.org/TR/rdf11-concepts/#section-IRIs)
+RDF uses *IRIs* (Internationalized Resource Identifiers) as names across datasets. The same IRI identifies the same resource wherever it appears, including across datasets. Since another inventory could also have a B001, we use `https://w3id.org/bicycle-ontology/id/B001` for our bicycle and `https://w3id.org/bicycle-ontology/id/F001` for its frame. Properties and classes have IRIs too. [RDF IRIs](https://www.w3.org/TR/rdf11-concepts/#section-IRIs)
 
 ## From statements to knowledge graphs
 
@@ -87,9 +87,9 @@ An ontology defines classes such as Bicycle and properties such as “has compon
 
 RDF is *flexible*: researchers can extend a graph with new properties and relationships as research needs develop. [RDF data model](https://www.w3.org/RDF/)
 
-Using the same IRI for the same resource connects descriptions across datasets, even when their structures differ. For example, one dataset can link B001 to F001 while another records F001's material. When the graphs are combined, the shared IRI `https://example.org/bike/id/F001` connects these statements at the same node. [Combining RDF graphs](https://www.w3.org/TR/rdf11-concepts/#section-multigraph)
+Using the same IRI for the same resource connects descriptions across datasets, even when their structures differ. For example, one dataset can link B001 to F001 while another records F001's material. When the graphs are combined, the shared IRI `https://w3id.org/bicycle-ontology/id/F001` connects these statements at the same node. [Combining RDF graphs](https://www.w3.org/TR/rdf11-concepts/#section-multigraph)
 
-`http://example.org/bike/id/F001` and `https://example.org/bike/id/F001` are different IRIs. A browser may follow a redirect between them. Queries match IRIs exactly, so using one can miss data recorded with the other. [IRI comparison](https://www.w3.org/TR/rdf11-concepts/#section-IRIs), [SPARQL matching](https://www.w3.org/TR/sparql11-query/#BasicGraphPatternMatching)
+`http://w3id.org/bicycle-ontology/id/F001` and `https://w3id.org/bicycle-ontology/id/F001` are different IRIs. A browser may follow a redirect between them. Queries match IRIs exactly, so using one can miss data recorded with the other. [IRI comparison](https://www.w3.org/TR/rdf11-concepts/#section-IRIs), [SPARQL matching](https://www.w3.org/TR/sparql11-query/#BasicGraphPatternMatching)
 
 ## The data-centric approach
 
@@ -101,7 +101,7 @@ An inventory application and an analysis application can reuse the same bicycle 
 
 We use *Turtle* for the course examples because its compact syntax makes RDF statements easier to read, edit and check. If an application or publishing workflow supports only RDF/XML, use that format. [Turtle specification](https://www.w3.org/TR/turtle/)
 
-For the bicycle graph, *prefixes* abbreviate IRIs: `id:B001` expands to `https://example.org/bike/id/B001`. Here, `def:` abbreviates class and property IRIs, `id:` individual IRIs and `rdfs:` RDF Schema terms, so `def:Bicycle` expands to `https://example.org/bike/def/Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
+For the bicycle graph, *prefixes* abbreviate IRIs: `id:B001` expands to `https://w3id.org/bicycle-ontology/id/B001`. Here, `def:` abbreviates class and property IRIs, `id:` individual IRIs and `rdfs:` RDF Schema terms, so `def:Bicycle` expands to `https://w3id.org/bicycle-ontology/def/Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
 The `@prefix` declarations below define these abbreviations; the remaining lines express the graph's six statements.
 
@@ -110,8 +110,8 @@ As a predicate, `a` is Turtle shorthand for the *type* relationship shown in the
 The colour and material names use `@en` to identify their language as English.
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
-@prefix id: <https://example.org/bike/id/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
+@prefix id: <https://w3id.org/bicycle-ontology/id/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 id:B001 a def:Bicycle ;
@@ -134,9 +134,9 @@ If we recorded that B001 has two wheels, `2` would represent an integer that app
 For an inventory review that needs recorded materials, we can require each Frame to have at least one `hasMaterial` value. This *property shape* expresses that requirement. The `sh:` prefix names SHACL terms; `shape:` names our example shape:
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shape: <https://example.org/bike/shape/> .
+@prefix shape: <https://w3id.org/bicycle-ontology/shape/> .
 
 shape:FrameMaterial a sh:PropertyShape ;
     sh:targetClass def:Frame ;
@@ -168,7 +168,7 @@ Prefer HTTPS for new IRIs and keep the publishing domain's HTTPS certificate val
 `PREFIX` defines the same IRI abbreviation as `@prefix` in Turtle. Names beginning with `?` are variables whose values will be found by matching the patterns:
 
 ```sparql
-PREFIX def: <https://example.org/bike/def/>
+PREFIX def: <https://w3id.org/bicycle-ontology/def/>
 
 SELECT DISTINCT ?bicycle
 WHERE {
@@ -179,7 +179,7 @@ WHERE {
 }
 ```
 
-The patterns inside `WHERE` use the familiar Turtle forms `a` and `;`. The same `?frame` in both patterns connects each bicycle to its frame's material. `SELECT` chooses the variable to return, and `DISTINCT` returns each matching bicycle once, even if several frames match. The result is `https://example.org/bike/id/B001`; the query interface may display an abbreviated name. [SPARQL basic queries](https://www.w3.org/TR/sparql11-query/#WritingSimpleQueries)
+The patterns inside `WHERE` use the familiar Turtle forms `a` and `;`. The same `?frame` in both patterns connects each bicycle to its frame's material. `SELECT` chooses the variable to return, and `DISTINCT` returns each matching bicycle once, even if several frames match. The result is `https://w3id.org/bicycle-ontology/id/B001`; the query interface may display an abbreviated name. [SPARQL basic queries](https://www.w3.org/TR/sparql11-query/#WritingSimpleQueries)
 
 The material pattern matches the language-tagged value `"steel"@en`. `"Steel"@en`, `"steel"@nl` and the untagged string `"steel"` are different RDF terms. Consistent source-data preparation and conversion make these matches reliable.
 

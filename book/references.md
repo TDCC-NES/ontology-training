@@ -59,6 +59,19 @@ The training uses RDF 1.1, OWL 2 and SPARQL 1.1. Start with the primers; consult
 - [Ontology Development 101](https://protege.stanford.edu/publications/ontology_development/ontology101.pdf) (2001): process guidance on scope, reuse and iterative modelling. Its examples use older tools; this course uses OWL 2.
 - [OBO Academy](https://oboacademy.github.io/obook/): community training on OWL and ontology curation, with a biological and biomedical focus. Its [SubClassOf versus EquivalentTo](https://oboacademy.github.io/obook/explanation/subClassOf-vs-equivalentTo/) explanation uses diagrams to compare the two axioms.
 
+## Related work
+
+### Books
+
+- [Semantic Web for the Working Ontologist](https://www.sciencedirect.com/book/monograph/9780123859655/semantic-web-for-the-working-ontologist) (Allemang and Hendler, 2nd ed., 2011): worked examples of modelling with RDF, RDFS and OWL, and querying with SPARQL.
+- [An Introduction to Ontology Engineering](https://people.cs.uct.ac.za/~mkeet/OEbook/) (Keet, 2nd ed., 2025): a more technical treatment of formal foundations and ontology development methods. The author's site also provides an earlier open edition.
+
+### Ontology development methodologies
+
+- [METHONTOLOGY](https://cdn.aaai.org/Symposia/Spring/1997/SS-97-06/SS97-06-005.pdf) (Fernández-López et al., 1997): a lifecycle approach using evolving prototypes, with evaluation and documentation throughout development.
+- [NeOn](https://doi.org/10.1007/978-3-642-24794-1_2) (Suárez-Figueroa et al., 2012): guidance for different development scenarios, particularly reusing and combining existing knowledge resources.
+- [LOT (Linked Open Terms)](https://lot.linkeddata.es/) ([Poveda-Villalón et al., 2022](https://doi.org/10.1016/j.engappai.2022.104755)): an iterative workflow covering requirements, implementation, publication and maintenance, with practical guidance and workflow diagrams.
+
 ## Bibliography
 
 :::{bibliography}

@@ -1,8 +1,7 @@
 # Fictional inventory records for the ontology training.
 
-@prefix def: <https://example.org/bike/def/> .
-@prefix id: <https://example.org/bike/id/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
+@prefix id: <https://w3id.org/bicycle-ontology/id/> .
 
 id:B001 a def:Bicycle ;
     def:hasComponent id:F001 ;
@@ -24,5 +23,3 @@ id:B003 a def:Bicycle ;
 
 # No material is recorded for F003.
 id:F003 a def:Frame .
-
-def:Bicycle rdfs:subClassOf def:Vehicle .

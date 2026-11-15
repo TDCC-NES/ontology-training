@@ -1,32 +1,32 @@
-@prefix def: <https://example.org/bike/def/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 
-<https://example.org/bike/mapping/Bicycles> a rr:TriplesMap ;
+<https://w3id.org/bicycle-ontology/mapping/Bicycles> a rr:TriplesMap ;
     rml:logicalSource [
         rml:source "bicycle-inventory.csv" ;
         rml:referenceFormulation ql:CSV
     ] ;
     rr:subjectMap [
-        rr:template "https://example.org/bike/id/{bicycle_id}" ;
+        rr:template "https://w3id.org/bicycle-ontology/id/{bicycle_id}" ;
         rr:class def:Bicycle
     ] ;
     rr:predicateObjectMap [
         rr:predicate def:hasComponent ;
-        rr:objectMap [ rr:template "https://example.org/bike/id/{frame_id}" ]
+        rr:objectMap [ rr:template "https://w3id.org/bicycle-ontology/id/{frame_id}" ]
     ], [
         rr:predicate def:hasColour ;
         rr:objectMap [ rml:reference "colour" ; rr:language "en" ]
     ] .
 
-<https://example.org/bike/mapping/Frames> a rr:TriplesMap ;
+<https://w3id.org/bicycle-ontology/mapping/Frames> a rr:TriplesMap ;
     rml:logicalSource [
         rml:source "bicycle-inventory.csv" ;
         rml:referenceFormulation ql:CSV
     ] ;
     rr:subjectMap [
-        rr:template "https://example.org/bike/id/{frame_id}" ;
+        rr:template "https://w3id.org/bicycle-ontology/id/{frame_id}" ;
         rr:class def:Frame
     ] ;
     rr:predicateObjectMap [

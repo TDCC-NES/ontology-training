@@ -193,10 +193,10 @@ For a property, explain what it relates or records. Read a sample statement alou
 
 | Label | Definition |
 |---|---|
-| bicycle | A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance. |
+| bicycle | A vehicle designed to travel on two wheels arranged one behind the other and to be propelled by pedalling, with or without electric assistance. |
 | has component | Relates an object to one of its physical parts. |
 
-The Bicycle definition preserves our agreement about electric assistance. The property definition tells us how to read the link from B001 to F001. Where a definition is taken or adapted from an existing source, record that source alongside it.
+The Bicycle definition draws on [Merriam-Webster's entry](https://www.merriam-webster.com/dictionary/bicycle) and reflects our agreed scope, including electric assistance. The property definition tells us how to read the link from B001 to F001. Where a definition is taken or adapted from an existing source, record that source alongside it.
 
 ### Add language tags
 
@@ -212,12 +212,12 @@ Our example uses:
 
 | Identifies | IRI |
 |---|---|
-| Ontology | `https://example.org/bike` |
-| Class | `https://example.org/bike/def/Bicycle` |
-| Property | `https://example.org/bike/def/hasComponent` |
-| Individual | `https://example.org/bike/id/B001` |
+| Ontology | `https://w3id.org/bicycle-ontology/` |
+| Class | `https://w3id.org/bicycle-ontology/def/Bicycle` |
+| Property | `https://w3id.org/bicycle-ontology/def/hasComponent` |
+| Individual | `https://w3id.org/bicycle-ontology/id/B001` |
 
-Here, `bike` gives the example's context, `def` groups class and property definitions, and `id` groups individuals. Appending a *local name*, such as `Bicycle`, to the *namespace IRI* `https://example.org/bike/def/` gives the term IRI `https://example.org/bike/def/Bicycle`.
+Here, `bicycle-ontology` gives the example's context, `def` groups class and property definitions, and `id` groups individuals. Appending a *local name*, such as `Bicycle`, to the *namespace IRI* `https://w3id.org/bicycle-ontology/def/` gives the term IRI `https://w3id.org/bicycle-ontology/def/Bicycle`.
 
 In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Choose property local names that make the direction from subject to object clear: `id:F001 def:hasMaterial "steel"@en .` reads as “F001 has material steel”.
 

@@ -27,3 +27,5 @@ Read the definitions and logical statements behind a promising term: matching la
 ## Import an ontology
 
 An `owl:imports` statement brings another ontology's axioms into reasoning, including those of its imports. Using its term IRIs alone does not import their defining axioms. An import can refer to a particular version using its version IRI. [Ontology imports](https://www.w3.org/TR/owl2-syntax/#Imports)
+
+<!-- TODO: Develop ontology imports here, with a short Protégé walkthrough using bicycle-example-data.ttl to import bicycle-ontology.ttl. Explain why definitions and instance data are separate, how to add and resolve the import using the local catalog, and how to inspect imported terms and reasoning results. -->

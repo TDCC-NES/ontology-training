@@ -1,7 +1,7 @@
 (owl-reasoning)=
 # Check your ontology with reasoning
 
-Use reasoning to check whether the ontology's statements can hold together and review their consequences against the intended meaning. Open the {download}`three-record reasoning example (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>` in a new Protégé window and start HermiT. This file contains the steel-frame definitions and all three records. After editing, use **Reasoner > Synchronize reasoner** to update the results.
+Use reasoning to check whether the ontology's statements can hold together and review their consequences against the intended meaning. Open `owl2-reasoning.ttl` with its {ref}`separate inventory data and local catalog <reasoning-example-files>` in a new Protégé window and start HermiT. This file contains the steel-frame definitions and imports the three inventory records. After editing, use **Reasoner > Synchronize reasoner** to update the results.
 
 In chapter 3, we used *model* for our conceptual design. In logic, a *model* is a possible interpretation in which all the ontology's axioms hold together. A statement is *entailed* when it holds in every model. F001 is a SteelFrame in every model. F003 can be a SteelFrame in some models and fall outside that class in others, so its classification remains unresolved. [Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/)
 

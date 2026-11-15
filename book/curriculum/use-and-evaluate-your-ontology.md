@@ -64,8 +64,8 @@ Use the IRI strategy agreed in chapter 3. Reuse a resource's IRI when combining 
 Before running a conversion, write the expected RDF for one source record. For B001, the mapping above gives these five reference triples:
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
-@prefix id: <https://example.org/bike/id/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
+@prefix id: <https://w3id.org/bicycle-ontology/id/> .
 
 id:B001 a def:Bicycle ;
     def:hasComponent id:F001 ;
@@ -97,6 +97,7 @@ Download the {download}`source CSV <../data/bicycle-inventory.csv>` and {downloa
 
 The mapping has two *triples maps*: one creates bicycles, their component links and colours; the other creates frames and their materials. `rr:template` builds IRIs from identifier columns, `rr:class` assigns a type, and `rml:reference` reads a column value. Both literal mappings use `rr:language "en"`. Source spellings are preserved; empty material cells produce no material statement in this example.
 
+(rmlmapper-setup)=
 :::{dropdown} Set up RMLMapper
 
 This example was tested with [RMLMapper 8.1.0](https://github.com/RMLio/rmlmapper-java/releases/tag/v8.1.0), which requires Java 21 or newer. A JAR file packages a Java application; a terminal lets you run commands by typing them.
@@ -143,7 +144,7 @@ Use consistent IRI patterns, links, datatypes, language tags and rules for missi
 
 The output contains 14 record triples. Open it in a text editor and check the identifiers, component links, values and language tags against the source records. Read the generated statements as sentences too. For example, B001 should link to F001, whose material is `"steel"@en`; F003 should be recorded as a Frame with no material value. Review any conversion errors and unexpected omissions, and keep the source data and mapping so the process can be repeated when records change.
 
-You can query `inventory-data.ttl` below. The supplied {download}`bicycle inventory <../data/bicycle-inventory.ttl>` contains the same record triples and adds the statement that Bicycle is a subclass of Vehicle.
+You can query `inventory-data.ttl` below. The supplied {download}`bicycle inventory <../data/bicycle-inventory.ttl>` contains the same 14 record triples; the ontology definitions are kept separately.
 
 :::{dropdown} Test a mapping on one record (optional)
 
@@ -189,7 +190,7 @@ Use Protégé from Chapter 4 to query the small inventory:
 
 **SPARQL Query** is the SPARQL editor; **DL Query** uses the Manchester expressions introduced in chapter 5.
 
-The result table below the editor should contain only `https://example.org/bike/id/B001`. Compare the returned identifiers with the expected set, checking both missing and unexpected answers. Result order does not matter for this query.
+The result table below the editor should contain only `https://w3id.org/bicycle-ontology/id/B001`. Compare the returned identifiers with the expected set, checking both missing and unexpected answers. Result order does not matter for this query.
 
 If B001 is missing, inspect the loaded graph, full IRIs, component link and exact material literal, including its language tag. B002 and B003 have no matching steel-frame statements in this graph; B003's frame material remains unknown. These absences do not establish that the bicycles have no steel frames.
 
@@ -210,7 +211,7 @@ To query the inventory in a {ref}`triple store introduced in Chapter 2 <triple-s
 (query-inferences)=
 ### Querying inferred information
 
-For Protégé, open the supplied `bicycle-inventory.ttl`, start HermiT and {ref}`export the inferred class assertions <export-inferred-assertions>`. Open the export in a separate window and use **SPARQL Query** there. The export records HermiT's conclusions as assertions for this tab; starting the reasoner alone leaves the tab querying the asserted statements.
+For Protégé, open the {ref}`reasoning example with its inventory data and catalog <reasoning-example-files>`, start HermiT and {ref}`export the inferred class assertions <export-inferred-assertions>`. Open the export in a separate window and use **SPARQL Query** there. The export records HermiT's conclusions as assertions for this tab; starting the reasoner alone leaves the tab querying the asserted statements.
 
 For example, with Bicycle declared a subclass of Vehicle, RDFS reasoning lets `?bicycle a def:Vehicle` retrieve B001 from its Bicycle membership. The frame-material query matches the recorded statements directly. [SPARQL entailment regimes](https://www.w3.org/TR/sparql11-entailment/)
 
@@ -221,7 +222,7 @@ In a triple store, load the relevant ontology axioms and enable reasoning suppor
 For the vehicle-classification question from Chapter 3, use the same inventory and run:
 
 ```sparql
-PREFIX def: <https://example.org/bike/def/>
+PREFIX def: <https://w3id.org/bicycle-ontology/def/>
 
 SELECT DISTINCT ?item
 WHERE {
@@ -243,15 +244,19 @@ This completeness requirement is a choice for this check. F003 can have a materi
 
 ### Extend the shape
 
-Download {download}`bicycle-shapes.ttl <../data/bicycle-shapes.ttl>`. It keeps the earlier shape's target, property and minimum count, and adds `sh:datatype`:
+Download {download}`bicycle-shapes.ttl <../data/bicycle-shapes.ttl>`. It keeps the earlier shape's target, property and minimum count, and adds `sh:datatype`.
+
+Add a short label with `sh:name` and explain the material field with `sh:description` so colleagues can interpret the shape. [Property shape documentation](https://www.w3.org/TR/shacl/#name)
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shape: <https://example.org/bike/shape/> .
+@prefix shape: <https://w3id.org/bicycle-ontology/shape/> .
 
 shape:FrameMaterial a sh:PropertyShape ;
+    sh:name "Frame material"@en ;
+    sh:description "Material recorded for a bicycle frame."@en ;
     sh:targetClass def:Frame ;
     sh:path def:hasMaterial ;
     sh:minCount 1 ;
@@ -279,12 +284,14 @@ Save the report using its **Turtle** download link. The RDF report records `sh:c
 Apply the same method to a documentation requirement: for this check, the Bicycle class must have a label. Use the {download}`expanded bicycle ontology <../data/bicycle-ontology.ttl>` as **Input Data** and replace the shapes with:
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shape: <https://example.org/bike/shape/> .
+@prefix shape: <https://w3id.org/bicycle-ontology/shape/> .
 
 shape:BicycleLabel a sh:PropertyShape ;
+    sh:name "Bicycle label"@en ;
+    sh:description "A human-readable name for the Bicycle class."@en ;
     sh:targetNode def:Bicycle ;
     sh:path rdfs:label ;
     sh:minCount 1 .

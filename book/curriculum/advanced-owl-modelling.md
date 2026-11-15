@@ -9,22 +9,24 @@ By the end of this page, you will be able to:
 - Distinguish OWL 2 DL restrictions, profiles and writing formats.
 :::
 
-These topics build on {ref}`class restrictions <owl-object-restrictions>` and {ref}`property axioms <owl-property-axioms>`. The examples illustrate separate modelling choices; the {download}`reasoning example <../data/owl2-reasoning.ttl>` contains the steel-frame definitions and bicycle/frame records. Expressions use Manchester syntax; Turtle blocks are fragments using the {ref}`course prefixes <owl-turtle-example>`.
+These topics build on {ref}`class restrictions <owl-object-restrictions>` and {ref}`property axioms <owl-property-axioms>`. The examples illustrate separate modelling choices; the {ref}`reasoning example <reasoning-example-files>` contains the steel-frame definitions and imports the separate bicycle/frame records. Expressions use Manchester syntax; Turtle blocks are fragments using the {ref}`course prefixes <owl-turtle-example>`.
 
 (owl-enumerations)=
 ## Enumerations and disjoint unions
 
-An enumeration fixes a class's members to the individuals denoted by the listed names:
+An enumeration fixes a class's members to the individuals denoted by the listed names. For a study-specific class, `study:` abbreviates `https://w3id.org/bicycle-ontology/study/def/`:
 
 ```text
-{id:B001, id:B002, id:B003}
+Class: study:CohortBicycle
+    SubClassOf: def:Bicycle
+    EquivalentTo: {id:B001, id:B002, id:B003}
 ```
 
-If StudyBicycle is equivalent to this enumeration, another member must be identical to one of those individuals. The names alone do not establish three distinct bicycles. [Class expressions](https://www.w3.org/TR/owl2-syntax/#Propositional_Connectives_and_Enumeration_of_Individuals)
+This cohort contains B001, B002 and B003; known aliases denote members too. Another member must be identical to one of those individuals. The names alone do not establish three distinct bicycles. [Class expressions](https://www.w3.org/TR/owl2-syntax/#Propositional_Connectives_and_Enumeration_of_Individuals)
 
 A single-individual enumeration, such as `{id:B001}`, is a [*nominal*](https://www.cs.ox.ac.uk/people/ian.horrocks/Publications/download/2010/HoPa10a.pdf).
 
-A *disjoint union* makes its alternatives exhaustive and mutually exclusive. For example, defining StudyComponent as the disjoint union of Frame and Wheel says that these are exactly its two categories. The broader Component class also accommodates cargo boxes, so that partition would not suit it. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
+A *disjoint union* makes its alternatives exhaustive and mutually exclusive. In the complete example, StudyComponent is the disjoint union of Frame, Wheel and CargoBox: these are exactly its three categories. The broader Component class also accommodates other kinds of part, so that partition would not suit it. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
 
 (owl-closure)=
 ## Closure axioms
@@ -94,7 +96,7 @@ def:hasInventoryMaintainer a owl:ObjectProperty ;
 
 If B001 is recorded in InventoryA and InventoryA is maintained by TeamA, infer B001 hasInventoryMaintainer TeamA. The reverse implication does not follow. Chains use object properties, including inverse expressions; they cannot traverse material strings. [Property chains](https://www.w3.org/TR/owl2-primer/#Property_Chains)
 
-A *key* specifies identifying properties within a class. For example, a named inventory together with its local code may identify a named Bicycle. Two such Bicycles sharing a value for every key property must be the same individual. Keys allow additional values and require neither existence nor functionality. Use this key only when sharing those values identifies one bicycle. The cheat sheet gives its syntax and precise naming conditions. [Keys](https://www.w3.org/TR/owl2-primer/#Keys)
+A *key* specifies identifying properties within a class. In the complete example, an InventoryRecord identifies one bicycle within one inventory. For named records, the named inventory and local code form the key: two records sharing a value for every key property must be the same individual. Different records can describe the same bicycle. Keys allow additional values and require neither existence nor functionality. Use this key only when sharing those values identifies one record. The cheat sheet gives its syntax and precise naming conditions. [Keys](https://www.w3.org/TR/owl2-primer/#Keys)
 
 (owl-negative-assertions)=
 ## Negative assertions and unnamed individuals

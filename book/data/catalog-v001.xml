@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
-  <uri name="https://example.org/bike/3.0.0" uri="bicycle-ontology-complete.ttl"/>
+  <uri name="https://w3id.org/bicycle-ontology/" uri="bicycle-ontology.ttl"/>
+  <uri name="https://w3id.org/bicycle-ontology/examples/" uri="bicycle-example-data.ttl"/>
+  <uri name="https://w3id.org/bicycle-ontology/inventory/" uri="bicycle-inventory.ttl"/>
 </catalog>

@@ -29,23 +29,23 @@ Choose **File > New** to create an empty ontology. If prompted, open it in a new
 
 Open the **Active ontology** tab. If a tab is missing, enable it through **Window > Tabs**. [Protégé interface](https://protegeproject.github.io/protege/views/)
 
-In **Ontology header**, replace the value in **Ontology IRI** with `https://example.org/bike`, then click outside the field. Leave **Ontology Version IRI** empty. [Setting the ontology IRI](https://protegeproject.github.io/protege/views/ontology-header/)
+In **Ontology header**, replace the value in **Ontology IRI** with `https://w3id.org/bicycle-ontology/`, then click outside the field. Leave **Ontology Version IRI** empty. [Setting the ontology IRI](https://protegeproject.github.io/protege/views/ontology-header/)
 
-This is the ontology IRI agreed in our design. A class such as Bicycle has its own IRI, `https://example.org/bike/def/Bicycle`; an individual such as B001 uses `https://example.org/bike/id/B001`.
+This is the ontology IRI agreed in our design. A class such as Bicycle has its own IRI, `https://w3id.org/bicycle-ontology/def/Bicycle`; an individual such as B001 uses `https://w3id.org/bicycle-ontology/id/B001`.
 
-In **Active ontology**, open **Ontology Prefixes** and use **+** beside **Prefixes**. Enter `def:` under **Prefix name** and `https://example.org/bike/def/` under **Prefix**, then confirm. Add `id:` in the same way, using its mapping below. Check the standard prefixes against the table and add any that are missing.
+In **Active ontology**, open **Ontology Prefixes** and use **+** beside **Prefixes**. Enter `def:` under **Prefix name** and `https://w3id.org/bicycle-ontology/def/` under **Prefix**, then confirm. Add `id:` in the same way, using its mapping below. Check the standard prefixes against the table and add any that are missing.
 
 | Prefix name | Prefix |
 |---|---|
-| `def:` | `https://example.org/bike/def/` |
-| `id:` | `https://example.org/bike/id/` |
+| `def:` | `https://w3id.org/bicycle-ontology/def/` |
+| `id:` | `https://w3id.org/bicycle-ontology/id/` |
 | `owl:` | `http://www.w3.org/2002/07/owl#` |
 | `rdf:` | `http://www.w3.org/1999/02/22-rdf-syntax-ns#` |
 | `rdfs:` | `http://www.w3.org/2000/01/rdf-schema#` |
 
 Choose **View > Render by prefixed name** to display names such as `def:Bicycle` and `id:B001`. These are the names used in the creation dialogs below.
 
-When a creation dialog asks for a **Name**, enter the prefixed name, such as `def:Bicycle`. Protégé expands the prefix using the mapping you added. Check the IRI shown in the dialog before confirming: `def:Bicycle` should produce exactly `https://example.org/bike/def/Bicycle`. Use `def:` for classes and properties and `id:` for individuals.
+When a creation dialog asks for a **Name**, enter the prefixed name, such as `def:Bicycle`. Protégé expands the prefix using the mapping you added. Check the IRI shown in the dialog before confirming: `def:Bicycle` should produce exactly `https://w3id.org/bicycle-ontology/def/Bicycle`. Use `def:` for classes and properties and `id:` for individuals.
 
 ## Add a class hierarchy
 
@@ -104,11 +104,11 @@ Protégé records this as `"steel"@en`: the name is English and describes F001's
 (owl-entity-annotations)=
 ## Add labels and definitions
 
-Add the labels and definitions agreed during conceptual modelling as *annotations* on the classes and properties. Use the annotation property `rdfs:label` for labels and `rdfs:comment` for definitions. {cite}`w3c2012owl2primer`
+Add the labels and definitions agreed during conceptual modelling as *annotations* on the classes and properties. Use `rdfs:label` for labels, `rdfs:comment` for definitions and [`rdfs:seeAlso`](https://www.w3.org/TR/rdf-schema/#ch_seealso) to link a term to further information. {cite}`w3c2012owl2primer`
 
 | Term | English label | English definition |
 |---|---|---|
-| `def:Bicycle` | bicycle | A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance. |
+| `def:Bicycle` | bicycle | A vehicle designed to travel on two wheels arranged one behind the other and to be propelled by pedalling, with or without electric assistance. |
 | `def:hasComponent` | has component | Relates an object to one of its physical parts. |
 
 For Bicycle:
@@ -117,6 +117,7 @@ For Bicycle:
 2. Choose `rdfs:label` as the annotation property and the **Literal** tab for its value.
 3. Enter `bicycle` under **Value** and `en` under **Language Tag**, then confirm.
 4. Add another annotation using `rdfs:comment`. Copy the Bicycle definition from the table and set its language tag to `en`.
+5. Add an `rdfs:seeAlso` annotation linking to the dictionary entry. In the tab for an arbitrary IRI, enter `https://www.merriam-webster.com/dictionary/bicycle` and confirm.
 
 The label appears as `"bicycle"@en` in Turtle. [Adding annotations](https://protegeproject.github.io/protege/views/annotations/)
 
@@ -156,7 +157,7 @@ For the bicycle example, keep Vehicle, Bicycle, Component and Frame in view. In 
 (owl-turtle-example)=
 ## Save and inspect the Turtle file
 
-Choose **File > Save as**. In the format dialog, select **Turtle Syntax** and choose **OK**. Choose a folder, name the file `bike-working.ttl` and choose **Save**. Use **File > Save** regularly as you make changes. Saving the file leaves the ontology IRI as `https://example.org/bike`.
+Choose **File > Save as**. In the format dialog, select **Turtle Syntax** and choose **OK**. Choose a folder, name the file `bike-working.ttl` and choose **Save**. Use **File > Save** regularly as you make changes. Saving the file leaves the ontology IRI as `https://w3id.org/bicycle-ontology/`.
 
 Open the saved file in a text editor. The ontology itself is declared with `owl:Ontology`. The `owl:Class`, `owl:ObjectProperty` and `owl:DatatypeProperty` declarations identify the classes and properties you created. For B001, `owl:NamedIndividual` declares an individual with an IRI, and `def:Bicycle` records its Bicycle membership.
 
@@ -165,20 +166,21 @@ A comma groups objects with the same subject and predicate, as in `id:B001 a owl
 The ontology in Turtle:
 
 ```turtle
-@prefix def: <https://example.org/bike/def/> .
-@prefix id: <https://example.org/bike/id/> .
+@prefix def: <https://w3id.org/bicycle-ontology/def/> .
+@prefix id: <https://w3id.org/bicycle-ontology/id/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://example.org/bike> a owl:Ontology .
+<https://w3id.org/bicycle-ontology/> a owl:Ontology .
 
 def:Vehicle a owl:Class .
 
 def:Bicycle a owl:Class ;
     rdfs:subClassOf def:Vehicle ;
     rdfs:label "bicycle"@en, "fiets"@nl ;
-    rdfs:comment "A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance."@en .
+    rdfs:comment "A vehicle designed to travel on two wheels arranged one behind the other and to be propelled by pedalling, with or without electric assistance."@en ;
+    rdfs:seeAlso <https://www.merriam-webster.com/dictionary/bicycle> .
 
 def:Component a owl:Class .
 
@@ -204,4 +206,4 @@ id:F001 a owl:NamedIndividual, def:Frame ;
 
 Protégé may use a different order or add declarations. Compare the full IRIs and statements with the example. **File > Save** stores the statements you entered, including B001's Bicycle membership. After reopening the file, the reasoner can infer its Vehicle membership again. [Saving and exporting inferences](https://protegeproject.github.io/protege/menus/)
 
-Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`expanded bicycle ontology <../data/bicycle-ontology.ttl>` is a separate reference with the other inventory records, properties and annotations, additional bicycle types and components, and publication metadata.
+Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`complete bicycle ontology <../data/bicycle-ontology.ttl>` is a reference with the full class, property and datatype definitions and publication metadata. Its {download}`sample records <../data/bicycle-example-data.ttl>` are kept separately.

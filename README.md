@@ -22,15 +22,30 @@ Open <http://localhost:8000>. Rebuild after editing the source files.
 
 ## Ontology documentation
 
-The book build publishes `book/data/bicycle-ontology.ttl` and its generated `book/data/bicycle-ontology.html` at `bicycle-ontology.ttl` and `bicycle-ontology.html`. Chapter 7 links to both. The ontology's `example.org` identifiers remain teaching placeholders.
+The ontology publication consists of `book/data/bicycle-ontology.ttl` and its generated `book/data/bicycle-ontology.html`, served at `bicycle-ontology.ttl` and `bicycle-ontology.html`. The ontology contains definitions only. Teaching datasets remain separate course resources. The ontology uses the `https://w3id.org/bicycle-ontology/` namespace; w3id registration is pending.
 
-After editing the ontology, regenerate the HTML with [pyLODE](https://github.com/RDFLib/pyLODE) installed (currently version 3.6.1), then rebuild the book:
+After editing the ontology, regenerate the HTML with [pyLODE](https://github.com/RDFLib/pyLODE) 3.6.1, then rebuild the book:
 
 ```sh
-python scripts/generate-ontology-documentation.py
+python -m pip install pylode==3.6.1
+pylode book/data/bicycle-ontology.ttl -o book/data/bicycle-ontology.html
 ```
 
-The generator adds links to the RDF and chapter 7, and retains member labels as text where pyLODE provides no matching section.
+The `bicycle:` prefix in the RDF lets pyLODE recognise the ontology namespace. Inspect the Turtle file for advanced axioms that pyLODE does not render.
+
+## Ontology validation history
+
+The original combined model was checked on 9 November 2026 with the course's installed OWLAPI 4.5.29 and HermiT 1.4.3.456:
+
+- The combined model and the imported study passed the OWL 2 DL profile check, were consistent, and all their internally defined classes were satisfiable.
+- The combined model passed 60 expected inference/non-inference checks. The imported study passed 66, including the cohort's membership and B004's exclusion.
+- Protégé's bundled catalog resolver loaded the local import and matched its version IRI.
+- Six invalid test variations produced the expected contradictions, covering component roles, functional values, inventory-code ranges and tag-based identity.
+- Ask Wol's offline checks reported no errors, warnings or recommendations. Namespace and HTTP import checks were skipped; Web publication was not tested.
+
+After separating definitions and data on 15 November 2026, 70 checks passed using HermiT and Protégé's XML catalog resolver. They covered OWL 2 DL compliance, consistency, class satisfiability, local imports and the expected classifications and identity inferences. At that stage, the published ontology contained no instance assertions, and combining the separated files preserved the original model statements.
+
+The installed tools support the RDF 1.1 `rdf:langString` datatype used throughout the course. This extends OWL 2's original 2012 datatype map.
 
 ## Contribute
 
