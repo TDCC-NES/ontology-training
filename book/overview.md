@@ -13,14 +13,14 @@ No prior experience with ontologies, RDF, OWL, the Semantic Web or programming i
 
 By the end of this training, you will be able to:
 
-1. Explain what an ontology is, how it differs from a controlled vocabulary or a taxonomy, and why representing meaning in data instead of in code matters for interoperability, reuse, and integration.
-2. Describe the core concepts of linked data, RDF, and OWL 2, and relate them to the FAIR principles.
-3. Turn a real-world use case into competency questions (questions the ontology should help answer) and a shared conceptualisation as the basis for an ontology design.
-4. Build an OWL 2 ontology, including classes, properties, domains, ranges, datatypes, and axioms, following good practice for IRIs, labels, and definitions.
-5. Validate an ontology using a reasoner, SHACL, and manual checks, and fix common modelling problems.
-6. Publish and document an ontology, and choose a licence and versioning approach that fits your project.
-7. Reuse terms from relevant external ontologies and vocabularies, map an ontology to them, and weigh the trade-offs between reuse and mapping approaches.
-8. Connect real data to an ontology, and query, visualise, and reason over the result.
+1. Explain what an ontology is, compare it with controlled vocabularies and taxonomies, and assess its value for describing, publishing, finding, integrating and reusing research data.
+2. Read simple RDF in Turtle and explain how Linked Data and OWL 2 make meaning explicit across applications and support FAIR data.
+3. Define a research purpose and scope, formulate competency questions (questions the ontology should help answer), and sketch a shared model of relevant concepts and relationships.
+4. Build a small OWL 2 ontology with classes, individuals, properties, domains, ranges, datatypes and logical axioms, using consistent IRIs, labels and definitions.
+5. Check logical consistency with a reasoner, validate RDF data with SHACL, and use representative records to identify and correct modelling problems.
+6. Document and publish an ontology, choose a licence and versioning approach that fits your project, and plan how it will be maintained.
+7. Assess existing ontologies and vocabularies, reuse suitable terms, map your ontology to them, and justify your reuse and mapping choices.
+8. Transform source records into RDF using an ontology, query the data with SPARQL, visualise its relationships and interpret inferred statements.
 
 (how-to-use)=
 ## How to use this training

@@ -1,4 +1,4 @@
-# Reuse ontologies and vocabularies
+# Reuse ontologies
 
 Reusing existing ontologies and vocabularies, and connecting your ontology to them.
 
@@ -22,8 +22,6 @@ When assessing an existing ontology, check:
 - Whether documentation, a licence and information about maintenance and versions are available.
 
 Read the definitions and logical statements behind a promising term: matching labels alone do not establish a match in meaning. {cite}`w3c2017dwbp,w3c2014linkeddata`
-
-In this training, building a small ontology helps you understand these modelling choices. In a research project, evaluating existing ontologies belongs at the beginning.
 
 (owl-imports)=
 ## Import an ontology

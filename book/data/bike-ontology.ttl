@@ -19,6 +19,16 @@
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:versionInfo "2.0.0" .
 
+# Ontology metadata properties
+
+dcterms:created a owl:AnnotationProperty .
+dcterms:creator a owl:AnnotationProperty .
+dcterms:description a owl:AnnotationProperty .
+dcterms:license a owl:AnnotationProperty .
+dcterms:modified a owl:AnnotationProperty .
+dcterms:publisher a owl:AnnotationProperty .
+dcterms:title a owl:AnnotationProperty .
+
 # Classes
 # The initial model uses Vehicle, Bicycle, Component and Frame.
 # Bicycle types and other components extend this initial scope.

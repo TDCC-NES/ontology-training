@@ -1,6 +1,18 @@
 # Design your own ontology
 
-In this chapter, we turn the bicycle example into a small ontology design. Starting from a research purpose and a few inventory records, we decide what the model should describe and work towards a shared understanding of its terms. The result is a sketch with notes on the meanings and identifiers of its terms. We can develop and check it against the records using only pen and paper.
+:::{admonition} Learning objectives
+:class: note
+
+By the end of this chapter, you will be able to:
+
+- Define a research purpose and initial scope for an ontology.
+- Formulate competency questions with expected results.
+- Sketch a conceptual model that describes representative records.
+- Document agreed term meanings with labels, definitions and language tags.
+- Choose a consistent IRI pattern for the ontology, its terms and the things it describes.
+:::
+
+We will design a small ontology for comparing frame materials across bicycle inventories, using representative records and a sketch. You can work with pen and paper.
 
 (ontology-development-workflow)=
 ## An iterative workflow
@@ -27,7 +39,7 @@ In practice, check whether existing ontologies or vocabularies can be reused or 
 
 The *purpose* explains why we are developing an ontology. It may come from a task researchers want to carry out, such as comparing data from different studies, or from a broader aim to describe research data consistently for future reuse. Discussing these needs with the people who collect and use the data helps establish what the ontology is for. {cite}`noy2001ontology,suarezfigueroa2009requirements`
 
-A *use case* makes a particular intended use concrete: who will use the ontology, what they want to do with the data and why. It gives us a starting point for deciding what to represent. A detailed use case can develop as the research needs become clearer; a broader purpose and representative records can guide the initial model. {cite}`suarezfigueroa2009requirements,uschold1995methodology`
+A *use case* makes a particular intended use concrete: who will use the ontology, what they want to do with the data and why. It gives us a starting point for deciding what to represent. {cite}`suarezfigueroa2009requirements,uschold1995methodology`
 
 For the {ref}`bicycle example <running-example>`, imagine a research team comparing frame materials across several bicycle inventories. They want to find bicycle records with a specified frame material and bring those records together for analysis. A shared model would help them describe the relationship between each bicycle and its frame, and record the frame's material consistently.
 
@@ -105,20 +117,24 @@ For this use case, “steel” and “aluminium” are values of the “has mate
 
 A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. Frame is a subclass of Component, which covers physical parts of objects. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
 
+(read-model-aloud)=
 ### Sketch the model
 
 The following sketch combines the model with one record so we can see how its parts are used. We use square-cornered boxes for classes and rounded boxes for individuals. These are drawing conventions for this course; other shapes work too, as long as classes and individuals are clearly distinguishable and the arrows have clear meanings.
 
+Read the statements aloud as you sketch, using the terms' agreed meanings: “B001 has component F001” states the link's direction, while “every Bicycle is a Vehicle” states a subclass relationship. Discuss these readings with colleagues and revise any statement that expresses a different meaning from the one intended.
+
 1. We begin with the classes Bicycle and Frame. Vehicle sits above Bicycle and Component above Frame, with arrows labelled “subclass of”: every bicycle is a vehicle, and every frame is a component.
 2. Inside the class boxes, we list datatype properties and the kinds of values we plan to record: “has colour: text” in Bicycle and “has material: text” in Frame. The frame's material belongs with Frame because it describes that component.
 3. Below the classes, we add the example individuals B001 and F001. Arrows labelled “type” show class membership, as in the RDF graph. B001 links to F001 through “has component”; their recorded values appear inside their boxes. The same property can link a bicycle to its wheels or other parts.
+
+<div role="img" aria-label="Vehicle is above its subclass Bicycle, and Component is above its subclass Frame. Bicycle lists has colour with text values; Frame lists has material with text values. Below, B001 is an instance of Bicycle with colour blue, and F001 is an instance of Frame with material steel. B001 has component F001.">
 
 ```mermaid
 ---
 name: bicycle-conceptual-model
 align: center
 caption: A conceptual model with the B001 example. Class boxes show the model; rounded boxes show the individuals described by one record.
-alt: Vehicle is above its subclass Bicycle, and Component is above its subclass Frame. Bicycle lists has colour with text values; Frame lists has material with text values. Below, B001 is an instance of Bicycle with colour blue, and F001 is an instance of Frame with material steel. B001 has component F001.
 ---
 %%{init: {"theme": "base", "themeVariables": {"darkMode": false, "background": "#ffffff", "lineColor": "#44546a", "textColor": "#182c3e", "primaryTextColor": "#182c3e", "edgeLabelBackground": "#ffffff"}, "themeCSS": "& { background-color: #ffffff !important; } .edgeLabel, .edgeLabel p { color: #182c3e !important; }"}}%%
 block-beta
@@ -140,6 +156,8 @@ block-beta
     class Vehicle,Bicycle,Component,Frame resource
     class B001,F001 instance
 ```
+
+</div>
 
 ### Domains, ranges and datatypes
 
@@ -171,14 +189,14 @@ Choose short, recognisable labels using words familiar to the intended users. Us
 
 Write a concise definition for each class and property. A useful class definition starts with a broader kind of thing and states what distinguishes members of the class. Use other, already understood terms to explain the meaning; repeating the label, as in “a bicycle is a type of bicycle”, leaves the reader with the same uncertainty. [Textual definitions](https://obofoundry.org/principles/fp-006-textual-definitions.html)
 
-For a property, explain what it relates or records. For a relationship, make its direction clear. The following definitions describe one class and one property from our sketch:
+For a property, explain what it relates or records. Read a sample statement aloud with the proposed property label to check its direction and meaning. The following definitions describe one class and one property from our sketch:
 
 | Label | Definition |
 |---|---|
 | bicycle | A vehicle with two wheels, designed to be propelled by pedalling, with or without electric assistance. |
 | has component | Relates an object to one of its physical parts. |
 
-The Bicycle definition preserves our agreement about electric assistance. The property definition tells us how to read the link from B001 to F001. Use the sketch and representative records to discuss the wording and agree its meaning together. Where a definition is taken or adapted from an existing source, record that source alongside it.
+The Bicycle definition preserves our agreement about electric assistance. The property definition tells us how to read the link from B001 to F001. Where a definition is taken or adapted from an existing source, record that source alongside it.
 
 ### Add language tags
 

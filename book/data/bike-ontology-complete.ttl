@@ -308,8 +308,8 @@ def:InventoryTag a owl:Class ;
 # The recorded material value remains a language-tagged name, not an exhaustive material analysis.
 
 def:SteelFrame a owl:Class ;
-    rdfs:label "frame recorded as steel"@en, "frame vastgelegd als staal"@nl ;
-    rdfs:comment "A Frame with the recorded material value \"steel\" in English. Other material values may also be recorded."@en ;
+    rdfs:label "frame with material value steel"@en, "frame met materiaalwaarde steel"@nl ;
+    rdfs:comment "A Frame with the material value \"steel\" in English. Other material values may also be present."@en ;
     rdfs:isDefinedBy <https://example.org/bike> ;
     owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
         def:Frame
@@ -317,8 +317,8 @@ def:SteelFrame a owl:Class ;
     ) ] .
 
 def:BicycleWithSteelFrame a owl:Class ;
-    rdfs:label "bicycle with a frame recorded as steel"@en, "fiets met een als staal vastgelegd frame"@nl ;
-    rdfs:comment "A Bicycle with at least one Frame whose recorded material value is \"steel\" in English."@en ;
+    rdfs:label "bicycle with a frame whose material value is steel"@en, "fiets met een frame met materiaalwaarde steel"@nl ;
+    rdfs:comment "A Bicycle with at least one Frame whose material value is \"steel\" in English."@en ;
     rdfs:isDefinedBy <https://example.org/bike> ;
     owl:equivalentClass [ a owl:Class ; owl:intersectionOf (
         def:Bicycle

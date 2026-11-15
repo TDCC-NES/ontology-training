@@ -1,5 +1,16 @@
 # Introduction to ontologies
 
+:::{admonition} Learning objectives
+:class: note
+
+By the end of this chapter, you will be able to:
+
+- Explain how an ontology makes the meaning of research data explicit.
+- Compare ontologies with controlled vocabularies, taxonomies and thesauri for a research task.
+- Explain how OWL supports exchanging ontologies and inferring additional statements.
+- Explain how OWL allows incomplete descriptions and multiple identifiers for the same thing.
+:::
+
 ## What are ontologies for?
 
 Making the meaning of research data explicit can help researchers describe, publish, find, integrate and reuse it. This includes recording domain knowledge independently of individual applications: what the data represents and how the things it describes relate to each other. 

@@ -141,7 +141,7 @@ For maximum or exact qualified counts, use `owl:maxQualifiedCardinality` or `owl
 | Class axiom | Turtle |
 |---|---|
 | Subclass | `def:Bicycle rdfs:subClassOf def:Vehicle .` |
-| Equivalence | `def:SteelFrame owl:equivalentClass [ a owl:Class; owl:intersectionOf (def:Frame [ a owl:Restriction; owl:onProperty def:hasMaterial; owl:hasValue "steel"@en ]) ] .` |
+| Equivalence | See {ref}`SteelFrame in Turtle <owl-steelframe-turtle>` |
 | Disjointness | `def:Frame owl:disjointWith def:Wheel .` |
 | Disjoint union | `def:StudyComponent owl:disjointUnionOf (def:Frame def:Wheel) .` |
 | Several disjoint classes | `[] a owl:AllDisjointClasses; owl:members (def:Frame def:Wheel def:CargoBox) .` |

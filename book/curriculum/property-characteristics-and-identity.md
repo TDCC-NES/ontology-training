@@ -26,7 +26,7 @@ def:hasComponent owl:inverseOf def:isComponentOf .
 
 From B001 hasComponent F001, infer F001 isComponentOf B001. For equivalent properties, a link using either property also holds with the other. Disjoint properties cannot both link the same subject to the same object. Subproperties, equivalence and disjointness also apply to data properties, where the object is a data value. [Property axioms](https://www.w3.org/TR/owl2-syntax/#Object_Property_Axioms)
 
-Domains and ranges apply to every use of a property. With Frame as the range of hasFrame, every object of a hasFrame relationship is inferred to be a Frame. A class restriction such as “every hasFrame value of a Bicycle is a Frame” applies to Bicycle subjects. Several domains or ranges all apply together; use a union when alternatives are intended. [Domains and ranges](https://www.w3.org/TR/owl2-primer/#Domain_and_Range_Restrictions)
+Domains and ranges apply to every use of a property. With Frame as the range of hasFrame, every object of a hasFrame relationship is inferred to be a Frame. A class restriction such as “every hasFrame value of a Bicycle is a Frame” applies to Bicycle subjects. Several domains or ranges all apply together; the {ref}`optional union example <owl-union-complement>` shows how to express alternatives. [Domains and ranges](https://www.w3.org/TR/owl2-primer/#Domain_and_Range_Restrictions)
 
 ## Characteristics and identity
 

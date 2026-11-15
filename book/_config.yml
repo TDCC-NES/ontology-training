@@ -21,6 +21,9 @@ sphinx:                                              # Options passed on to the 
     language: en                                     # Defines language (English) of everything except the content itself. For Dutch: replace with `nl`, configuration part of Sphinx (https://www.sphinx-doc.org/en/master/index.html)
     html_js_files:
     - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js # Required for live code, part of TeachBooks-Sphinx-Thebe (https://teachbooks.io/manual/features/live_code.html)
+    - - https://gc.zgo.at/count.js
+      - data-goatcounter: https://ontologytraining.goatcounter.com/count
+        async: async
     html_css_files:
     - illustrations.css
     - branding.css

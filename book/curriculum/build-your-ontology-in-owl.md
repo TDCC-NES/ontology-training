@@ -1,5 +1,16 @@
 # Build your ontology in OWL
 
+:::{admonition} Learning objectives
+:class: note
+
+By the end of this chapter, you will be able to:
+
+- Implement a conceptual sketch as OWL classes, individuals and properties with suitable domains, ranges and datatypes.
+- Annotate terms with labels and definitions in the intended languages.
+- Use a reasoner to inspect inferred class memberships.
+- Compare the ontology's graph and Turtle representations with the conceptual sketch.
+:::
+
 We will describe B001 and its frame F001 in OWL, using the classes and properties from our sketch. We will record that the frame is made of steel and run a reasoner to infer that B001 is a Vehicle.
 
 The walkthrough focuses on the part of our sketch that describes frames and their materials; the expanded reference ontology also includes colour and the other inventory records.
@@ -61,27 +72,32 @@ Check the **Types** section for each individual: B001 should list `def:Bicycle`,
 
 ## Add properties and values
 
+Read a sample statement aloud when creating each property, such as “B001 has component F001” or “F001 has material steel”, to check its intended direction and meaning.
+
 ### Create the object property
 
-In **Entities**, select **Object properties**. Select the built-in root `owl:topObjectProperty` and use **Add sub property** to create `def:hasComponent`.
+1. In **Entities**, select **Object properties**. Select the built-in root `owl:topObjectProperty` and use **Add sub property** to create `def:hasComponent`.
+2. With `def:hasComponent` selected, use **+** beside **Domains (intersection)** in its description. Open **Class hierarchy**, select `owl:Thing` and choose **OK**.
+3. Use **+** beside **Ranges (intersection)**. In **Class hierarchy**, expand `owl:Thing` if needed, select `def:Component` and choose **OK**.
 
-With `def:hasComponent` selected, use **+** beside **Domains (intersection)** in its description. In the dialog, open **Class hierarchy**, select `owl:Thing` and choose **OK**. To set the range, use **+** beside **Ranges (intersection)**. In **Class hierarchy**, expand `owl:Thing` if needed, select `def:Component` and choose **OK**.
-
-The domain `owl:Thing` includes all individuals, so it also covers objects other than bicycles. With Component as the range, a reasoner can infer from “B001 has component F001” that F001 is a Component. We record B001's Bicycle membership separately. [Property domains and ranges](https://protegeproject.github.io/protege/views/object-property-description/)
+Using `owl:Thing` as the domain allows subjects other than bicycles. With Component as the range, a reasoner can infer from “B001 has component F001” that F001 is a Component. We record B001's Bicycle membership separately. [Property domains and ranges](https://protegeproject.github.io/protege/views/object-property-description/)
 
 ### Create the datatype property
 
-Protégé calls datatype properties **Data properties**. Open that section in **Entities**, select `owl:topDataProperty` and use **Add sub property** to create `def:hasMaterial`.
+Protégé calls datatype properties **Data properties**.
 
-In its description, use **+** beside **Domains (intersection)**, select `owl:Thing` in **Class hierarchy** and choose **OK**. Use **+** beside **Ranges**, open **Built in datatypes**, select `rdf:langString` and choose **OK**.
+1. Open **Data properties** in **Entities**, select `owl:topDataProperty` and use **Add sub property** to create `def:hasMaterial`.
+2. In its description, use **+** beside **Domains (intersection)**, select `owl:Thing` in **Class hierarchy** and choose **OK**.
+3. Use **+** beside **Ranges**, open **Built in datatypes**, select `rdf:langString` and choose **OK**.
 
-The range `rdf:langString` is the datatype for language-tagged text. The domain `owl:Thing` includes all individuals, including bicycles and frames. If we used Bicycle as the domain of `hasMaterial`, a reasoner would also classify F001 as a Bicycle when we record its material. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
+The range `rdf:langString` is the datatype for language-tagged text. If we used Bicycle as the domain of `hasMaterial`, a reasoner would also classify F001 as a Bicycle when we record its material. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
 ### Enter relationships and values
 
-Return to **Individuals by class**. Select `def:Bicycle` in the class hierarchy, then `id:B001` in the individuals list. Use **+** beside **Object property assertions**. Enter `def:hasComponent` as the property and `id:F001` as the individual, then confirm. This records the link from the bicycle to its frame.
-
-Select `def:Frame` in the class hierarchy, then `id:F001` in the individuals list. Use **+** beside **Data property assertions** and select `def:hasMaterial` in the **Data Property** panel. Enter `steel` under **Value** and `en` under **Language Tag**, then confirm. Enter the text without Turtle quotation marks; the editor supplies the literal syntax when saving. [Property assertions](https://protegewiki.stanford.edu/wiki/Pr4_UG_rv_In_Prop_assertions)
+1. Return to **Individuals by class**. Select `def:Bicycle` in the class hierarchy, then `id:B001` in the individuals list.
+2. Use **+** beside **Object property assertions**. Enter `def:hasComponent` as the property and `id:F001` as the individual, then confirm. This records the link from the bicycle to its frame.
+3. Select `def:Frame` in the class hierarchy, then `id:F001` in the individuals list.
+4. Use **+** beside **Data property assertions** and select `def:hasMaterial` in the **Data Property** panel. Enter `steel` under **Value** and `en` under **Language Tag**, then confirm. Enter the text without Turtle quotation marks; the editor supplies the literal syntax when saving. [Property assertions](https://protegewiki.stanford.edu/wiki/Pr4_UG_rv_In_Prop_assertions)
 
 Protégé records this as `"steel"@en`: the name is English and describes F001's material, which we want to compare across inventories.
 
@@ -122,6 +138,7 @@ In **Individuals by class**, select `def:Bicycle` and then `id:B001` in the indi
 
 The results should include `id:B001`: we recorded it as a Bicycle, and Bicycle is a subclass of Vehicle. The reasoner therefore infers that B001 is also a Vehicle. [DL Query documentation](https://protegewiki.stanford.edu/wiki/DLQueryTab)
 
+(visualise-ontology)=
 ## Visualise your ontology
 
 A visual view helps you compare the implemented ontology with your sketch. Choose a view suited to what you want to inspect:
@@ -133,6 +150,8 @@ A visual view helps you compare the implemented ontology with your sketch. Choos
 | OWLViz | View asserted and inferred class hierarchies as diagrams. | **Window > Tabs > OWLViz**; requires a separate [Graphviz installation](https://github.com/protegeproject/owlviz/blob/master/README.md). |
 
 For the bicycle example, keep Vehicle, Bicycle, Component and Frame in view. In OntoGraf, you can also include B001 and F001 to explore their class memberships and component relationship. Inspect F001's material value in **Individuals by class > Data property assertions**.
+
+[Mermaid](https://mermaid.js.org/syntax/flowchart.html) renders text descriptions as diagrams of nodes and labelled links. A SPARQL query can generate Mermaid diagram text from selected classes, individuals and relationships in your ontology, which you can then render with Mermaid. The [EasyGraph developer manual](https://easygraph.graphifi.com/docs/docs/easygraph.html) documents this approach.
 
 (owl-turtle-example)=
 ## Save and inspect the Turtle file

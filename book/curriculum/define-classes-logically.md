@@ -1,7 +1,7 @@
 (owl-defining-classes)=
 # Define classes logically
 
-We now use class expressions to state conditions for class membership. Our example defines classes that let a reasoner recognise frames recorded as steel and bicycles with those frames.
+We now use class expressions to state conditions for class membership. Our example defines classes that let a reasoner recognise frames with the material value `"steel"@en` and bicycles with those frames.
 
 For the Protégé steps, open `bike-working.ttl` from the preceding chapter and use **File > Save as** to save a Turtle copy as `bike-logical.ttl`. Keep the prefixed-name display.
 
@@ -27,52 +27,12 @@ Read this as “has at least one component that is a Frame”. `some` is a keywo
 
 An *expression* describes a class, property or range of data values. `def:Frame` is a simple class expression. The expression above is a *restriction*: it describes individuals through a property. An axiom can use that expression to describe or define a class.
 
-(owl-class-expressions)=
-## Combining and separating classes
-
-Class expressions combine conditions with `and`, `or` and `not`. For these examples, Wheel groups wheel components, CargoBicycle describes bicycles designed to carry extra loads, and Fatbike describes bicycles with unusually wide tyres.
-
-| Manchester expression | Meaning |
-|---|---|
-| `def:CargoBicycle and def:Fatbike` | Individuals in both classes; an intersection |
-| `def:Frame or def:Wheel` | Individuals in either class or both; an inclusive union |
-| `def:Bicycle and not def:CargoBicycle` | Bicycles outside CargoBicycle; uses a complement |
-
-Membership in a union need not establish which alternative holds. A complement expresses non-membership: absence of CargoBicycle membership alone does not establish `not CargoBicycle`.
-
-Classes may overlap: a bicycle can be both a CargoBicycle and a Fatbike. Use *disjointness* when shared membership would contradict the model:
-
-```turtle
-def:Frame owl:disjointWith def:Wheel .
-```
-
-No individual can then be both a Frame and a Wheel. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
-
-(owl-object-restrictions)=
-## Describing relationships with restrictions
-
-An object-property restriction describes individuals through their related individuals, called *fillers*.
-
-| Manchester expression | What it says about a member |
-|---|---|
-| `def:hasComponent some def:Frame` | It has at least one Frame component |
-| `def:hasComponent only def:Frame` | Every component it has is a Frame |
-| `def:hasComponent value id:F001` | It has the particular component F001 |
-
-`only` restricts all fillers, including any not yet recorded. It also holds for an individual with no fillers. To require at least one Frame and allow only Frames, combine both:
-
-```text
-(def:hasComponent some def:Frame) and (def:hasComponent only def:Frame)
-```
-
-Suppose B001 also has wheels and a cargo box as components. Using `hasComponent only Frame` would require them to be Frames too. A dedicated `def:hasFrame` property can express conditions about its frames alone. [Object restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Restrictions)
-
-Data-property restrictions describe individuals through their data values. For example, `def:hasMaterial value "steel"@en` describes individuals with that recorded material value.
-
 (owl-conditions)=
 ## Necessary and sufficient conditions
 
-Introduce `def:SteelFrame` for Frames with the recorded material value `"steel"@en`. Following the {ref}`iterative workflow <ontology-development-workflow>`, we choose an axiom that expresses the agreed meaning and check its consequences on the example records.
+`and` combines conditions: an individual must satisfy each one. Data-property restrictions describe individuals through their data values. For example, `def:hasMaterial value "steel"@en` describes individuals with that material value.
+
+Introduce `def:SteelFrame` for Frames with the material value `"steel"@en`. Following the {ref}`iterative workflow <ontology-development-workflow>`, we choose an axiom that expresses the agreed meaning and check its consequences on the example records.
 
 Use `SubClassOf` to state necessary conditions. In **Entities > Classes**, keep **Asserted** mode, select `owl:Thing` and create `def:SteelFrame`. With it selected, use **+** beside **SubClass Of** and choose **Class expression editor**. Enter only the expression after `SubClassOf:` below, then confirm. [Editing class descriptions](https://protegeproject.github.io/protege/views/class-description/)
 
@@ -81,11 +41,11 @@ Class: def:SteelFrame
     SubClassOf: def:Frame and (def:hasMaterial value "steel"@en)
 ```
 
-Every SteelFrame must be a Frame and have this material value. These are *necessary conditions*: asserting that F001 is a SteelFrame lets the reasoner infer both facts. Having those facts alone does not establish SteelFrame membership from this axiom.
+Every SteelFrame must be a Frame and have this material value. These are *necessary conditions*: asserting that F001 is a SteelFrame lets the reasoner infer both facts, even if its material value has not been entered explicitly. Having those facts alone does not establish SteelFrame membership from this axiom.
 
 Start HermiT, or synchronise it if already running. In **DL Query**, enter `def:SteelFrame`, select **Instances** and **Execute**: F001 should not appear.
 
-If being a Frame with that recorded material value is also sufficient for SteelFrame membership, use `EquivalentTo`. Remove the expression from **SubClass Of** and add it under **Equivalent To**, again using **Class expression editor**. The reasoner can then recognise matching frames:
+If being a Frame with that material value is also sufficient for SteelFrame membership, use `EquivalentTo`. Remove the expression from **SubClass Of** and add it under **Equivalent To**, again using **Class expression editor**. The reasoner can then recognise matching frames:
 
 ```text
 Class: def:SteelFrame
@@ -107,16 +67,64 @@ A BicycleWithSteelFrame is a Bicycle with at least one SteelFrame component. F00
 
 Synchronise HermiT and query `def:BicycleWithSteelFrame` with **Instances** selected: B001 should appear. Save `bike-logical.ttl`; this working copy contains B001 and F001.
 
-To inspect all three inventory records, open the {download}`completed reasoning example (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>` through **File > Open** in a new window. It includes both class definitions above and adds B002 and B003 with their frames F002 and F003. Run HermiT and query `def:BicycleWithSteelFrame`: B001 should appear. Query `def:Bicycle and not def:BicycleWithSteelFrame`: no instances should appear.
+To inspect all three inventory records, open the {download}`completed reasoning example (owl2-reasoning.ttl) <../data/owl2-reasoning.ttl>` through **File > Open** in a new window. It includes both class definitions above and adds B002 and B003 with their frames F002 and F003. Run HermiT and query `def:BicycleWithSteelFrame`: B001 should appear.
 
 B002 has Frame component F002 with the value `"aluminium"@en`; B003 has Frame component F003 with no material recorded. Neither frame is inferred to be a SteelFrame, and neither is inferred to be outside that class. B002 and B003 likewise remain unclassified as BicycleWithSteelFrame: other material values or frames remain possible.
 
 `some` requires a relationship to exist, even if its filler is unnamed. Asserting that B003 has some SteelFrame does not identify F003 as that frame; another frame could satisfy the condition.
 
-This definition matches recorded wording: `"Steel"@en` and `"steel"@nl` are different values from `"steel"@en`.
+This definition uses an exact text value: `"Steel"@en` and `"steel"@nl` are different values from `"steel"@en`.
+
+(owl-class-expressions)=
+## Combining and separating classes
+
+Use *disjointness* when shared membership would contradict the model. For example, Frame and Wheel describe separate kinds of component:
+
+```turtle
+def:Frame owl:disjointWith def:Wheel .
+```
+
+No individual can then be both a Frame and a Wheel. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
+
+(owl-union-complement)=
+:::{dropdown} Intersection, union and complement (optional)
+
+Class expressions combine conditions with `and`, `or` and `not`. For these examples, Wheel groups wheel components, CargoBicycle describes bicycles designed to carry extra loads, and Fatbike describes bicycles with unusually wide tyres.
+
+| Manchester expression | Meaning |
+|---|---|
+| `def:CargoBicycle and def:Fatbike` | Individuals in both classes; an intersection |
+| `def:Frame or def:Wheel` | Individuals in either class or both; an inclusive union |
+| `def:Bicycle and not def:CargoBicycle` | Bicycles outside CargoBicycle; uses a complement |
+
+Membership in a union need not establish which alternative holds. A complement expresses non-membership: absence of CargoBicycle membership alone does not establish `not CargoBicycle`.
+
+Classes may overlap: a bicycle can be both a CargoBicycle and a Fatbike.
+
+For the completed reasoning example above, query `def:Bicycle and not def:BicycleWithSteelFrame`: no instances should appear.
+:::
+
+(owl-object-restrictions)=
+## Describing relationships with restrictions
+
+An object-property restriction describes individuals through their related individuals, called *fillers*.
+
+| Manchester expression | What it says about a member |
+|---|---|
+| `def:hasComponent some def:Frame` | It has at least one Frame component |
+| `def:hasComponent only def:Frame` | Every component it has is a Frame |
+| `def:hasComponent value id:F001` | It has the particular component F001 |
+
+`only` restricts all fillers, including any not yet recorded. It also holds for an individual with no fillers. To require at least one Frame and allow only Frames, combine both:
+
+```text
+(def:hasComponent some def:Frame) and (def:hasComponent only def:Frame)
+```
+
+Suppose B001 also has wheels and a cargo box as components. Using `hasComponent only Frame` would require them to be Frames too. A dedicated `def:hasFrame` property can express conditions about its frames alone. [Object restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Restrictions)
 
 (owl-cardinality)=
-## Cardinality
+:::{dropdown} Cardinality (optional)
 
 *Cardinality* counts distinct fillers: the individuals related through a property. A *qualified* cardinality counts only fillers in a specified class:
 
@@ -131,6 +139,8 @@ These can describe an assembled study bicycle in its observation context. An *un
 For example, suppose we add Wheel individuals W001 and W002 as B001's components. The reasoner can count them as two wheels when it knows they are different, for example from `id:W001 owl:differentFrom id:W002`. A minimum can also require further, unnamed wheels.
 
 With a maximum of one Frame component for B001, the reasoner treats two Frame fillers as the same individual. Stating that they are different makes the ontology inconsistent. [Cardinality restrictions](https://www.w3.org/TR/owl2-syntax/#Object_Property_Cardinality_Restrictions)
+
+:::
 
 (owl-restriction-demonstrations)=
 For each optional demonstration below, reopen your saved `bike-logical.ttl`, containing B001 and F001, and save a separate Turtle copy. Each demonstration adds the classes, properties and individuals it needs. Start HermiT, then synchronise after each change; use **DL Query > Instances** for queries. Return to `bike-logical.ttl` afterwards.

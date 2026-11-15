@@ -1,0 +1,12 @@
+# Material-completeness check for the fictional inventory.
+
+@prefix def: <https://example.org/bike/def/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shape: <https://example.org/bike/shape/> .
+
+shape:FrameMaterial a sh:PropertyShape ;
+    sh:targetClass def:Frame ;
+    sh:path def:hasMaterial ;
+    sh:minCount 1 ;
+    sh:datatype rdf:langString .

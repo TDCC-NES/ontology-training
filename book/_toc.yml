@@ -17,18 +17,17 @@ parts:
     - file: curriculum/build-your-ontology-in-owl.md
     - file: curriculum/logical-modelling-in-owl.md
       sections:
-      - file: curriculum/defining-classes-in-owl.md
-      - file: curriculum/properties-and-identity-in-owl.md
-      - file: curriculum/understanding-owl-reasoning.md
+      - file: curriculum/define-classes-logically.md
+      - file: curriculum/property-characteristics-and-identity.md
+      - file: curriculum/check-your-ontology-with-reasoning.md
       - file: curriculum/advanced-owl-modelling.md
-      - file: curriculum/owl2-cheat-sheet.md
+      - file: curriculum/owl-2-cheat-sheet.md
         title: OWL 2 cheat sheet (reference)
-    - file: curriculum/use-your-ontology.md
-    - file: curriculum/test-with-data.md
+    - file: curriculum/use-and-evaluate-your-ontology.md
     - file: curriculum/publish-your-ontology.md
     - file: curriculum/maintain-your-ontology.md
-    - file: curriculum/map-to-external-ontologies.md
-    - file: curriculum/beyond-linked-data.md
+    - file: curriculum/reuse-ontologies.md
+    - file: curriculum/ontologies-beyond-rdf.md
   - caption: Miscellaneous
     chapters:
     - file: references.md

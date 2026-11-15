@@ -1,11 +1,20 @@
 # Advanced OWL modelling (optional)
 
-These topics extend the core logical modelling chapter. The examples illustrate separate modelling choices; the {download}`reasoning example <../data/owl2-reasoning.ttl>` contains the steel-frame definitions and bicycle/frame records. Expressions use Manchester syntax and the {ref}`course prefixes <owl-turtle-example>`.
+:::{admonition} Learning objectives
+:class: note
+
+By the end of this page, you will be able to:
+
+- Predict inferences and contradictions from the advanced modelling examples.
+- Distinguish OWL 2 DL restrictions, profiles and writing formats.
+:::
+
+These topics build on {ref}`class restrictions <owl-object-restrictions>` and {ref}`property axioms <owl-property-axioms>`. The examples illustrate separate modelling choices; the {download}`reasoning example <../data/owl2-reasoning.ttl>` contains the steel-frame definitions and bicycle/frame records. Expressions use Manchester syntax; Turtle blocks are fragments using the {ref}`course prefixes <owl-turtle-example>`.
 
 (owl-enumerations)=
 ## Enumerations and disjoint unions
 
-An enumeration, also called a *nominal*, fixes a class's members to the individuals denoted by the listed names:
+An enumeration fixes a class's members to the individuals denoted by the listed names:
 
 ```text
 {id:B001, id:B002, id:B003}
@@ -13,12 +22,14 @@ An enumeration, also called a *nominal*, fixes a class's members to the individu
 
 If StudyBicycle is equivalent to this enumeration, another member must be identical to one of those individuals. The names alone do not establish three distinct bicycles. [Class expressions](https://www.w3.org/TR/owl2-syntax/#Propositional_Connectives_and_Enumeration_of_Individuals)
 
+A single-individual enumeration, such as `{id:B001}`, is a [*nominal*](https://www.cs.ox.ac.uk/people/ian.horrocks/Publications/download/2010/HoPa10a.pdf).
+
 A *disjoint union* makes its alternatives exhaustive and mutually exclusive. For example, defining StudyComponent as the disjoint union of Frame and Wheel says that these are exactly its two categories. The broader Component class also accommodates cargo boxes, so that partition would not suit it. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
 
 (owl-closure)=
 ## Closure axioms
 
-A *closure axiom* records a local boundary. Suppose W001 and W002 are all B001's wheel fillers, using a new property `def:hasWheel`:
+A *closure axiom* records a local boundary. Suppose W001 and W002 are all B001's wheel fillers, using a new object property `def:hasWheel`:
 
 ```text
 Individual: id:B001
@@ -26,7 +37,7 @@ Individual: id:B001
     Facts: def:hasWheel id:W001, def:hasWheel id:W002
 ```
 
-Every wheel filler must be one of those individuals. The facts supply the links; the restriction excludes additional, different fillers. Their difference still needs to be stated. `def:hasComponent max 0 def:CargoBox` similarly excludes any CargoBox component; missing cargo-box links alone do not establish it.
+Every wheel filler must be one of those individuals. The facts supply the links; the restriction excludes additional, different fillers. State `id:W001 owl:differentFrom id:W002 .` to require two distinct wheels. `def:hasComponent max 0 def:CargoBox` similarly excludes any CargoBox component; missing cargo-box links alone do not establish it.
 
 (owl-inverse-self)=
 ## Inverse and self restrictions
@@ -74,6 +85,9 @@ Reflexivity applies to every individual, so combining it with a domain can class
 A property chain derives a relationship from an ordered path. Introduce recordedIn from a bicycle to an inventory, and maintainedBy from an inventory to its maintaining organisation:
 
 ```turtle
+def:recordedIn a owl:ObjectProperty .
+def:maintainedBy a owl:ObjectProperty .
+
 def:hasInventoryMaintainer a owl:ObjectProperty ;
     owl:propertyChainAxiom (def:recordedIn def:maintainedBy) .
 ```

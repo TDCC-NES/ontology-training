@@ -10,7 +10,7 @@
 
 <https://example.org/bike/reasoning> a owl:Ontology ;
     rdfs:label "Bicycle frame-material reasoning example"@en ;
-    rdfs:comment "Classifies bicycles with a frame recorded as steel. Material names describe recorded wording, including its language tag."@en .
+    rdfs:comment "Classifies bicycles with a frame whose material value is steel in English. Classification uses the exact text value and language tag."@en .
 
 def:Vehicle a owl:Class .
 
@@ -32,7 +32,7 @@ def:hasMaterial a owl:DatatypeProperty ;
     rdfs:range rdf:langString .
 
 def:SteelFrame a owl:Class ;
-    rdfs:label "frame recorded as steel"@en ;
+    rdfs:label "frame with material value steel"@en ;
     owl:equivalentClass [ a owl:Class ;
         owl:intersectionOf (
             def:Frame
@@ -42,7 +42,7 @@ def:SteelFrame a owl:Class ;
         ) ] .
 
 def:BicycleWithSteelFrame a owl:Class ;
-    rdfs:label "bicycle with a frame recorded as steel"@en ;
+    rdfs:label "bicycle with a frame whose material value is steel"@en ;
     owl:equivalentClass [ a owl:Class ;
         owl:intersectionOf (
             def:Bicycle

@@ -1,6 +1,19 @@
 (linked-data-foundations)=
 # Linked Data Foundations
 
+:::{admonition} Learning objectives
+:class: note
+
+By the end of this chapter, you will be able to:
+
+- Explain how Linked Data connects research data across datasets and applications.
+- Read a simple RDF graph in Turtle, including IRIs, prefixes and literals.
+- Interpret a simple SHACL shape and its validation outcome.
+- Describe what is needed to publish RDF as Linked Data.
+- Interpret a basic SPARQL query and its result.
+- Explain how Linked Data can support FAIR research data.
+:::
+
 ## What is Linked Data?
 
 *Linked Data* is an approach to publishing structured data on the Web so that people and applications can find related information by following links.
@@ -34,12 +47,13 @@ A *knowledge graph* represents things and their relationships in a graph data mo
 
 An *RDF graph* is a set of triples. The diagram adds three statements to those in the table: B001 is a Bicycle, F001 is a Frame, and every Bicycle is a Vehicle. In this compact view, boxes labelled with short resource names are *nodes* connected by labelled arrows. Repeated subject or object IRIs connect statements at the same node.
 
+<div role="img" aria-label="B001 has component F001 and has colour blue. F001 has material steel. B001 has type Bicycle and F001 has type Frame. Bicycle is a subclass of Vehicle.">
+
 ```mermaid
 ---
 name: bicycle-rdf-graph
 align: center
 caption: Six RDF statements. Classes have square corners; instances have rounded corners.
-alt: B001 has component F001 and has colour blue. F001 has material steel. B001 has type Bicycle and F001 has type Frame. Bicycle is a subclass of Vehicle.
 ---
 %%{init: {"theme": "base", "themeVariables": {"darkMode": false, "background": "#ffffff", "lineColor": "#44546a", "textColor": "#182c3e", "primaryTextColor": "#182c3e", "edgeLabelBackground": "#ffffff"}, "themeCSS": "& { background-color: #ffffff !important; } .edgeLabel, .edgeLabel p { color: #182c3e !important; }"}}%%
 block-beta
@@ -61,6 +75,8 @@ block-beta
     class B001,F001 instance
 ```
 
+</div>
+
 Inside B001's box, “blue” is a text *literal*: a value in the object position of a triple. A literal's *datatype* tells applications how to interpret its written value, for example as text, a number or a date. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
 Bicycle is a *class* representing a kind of thing, shown in a square box. B001 is a particular bicycle, an *instance* of that class, shown in a rounded box. The *type* arrow from B001 to Bicycle records this membership. [RDF types](https://www.w3.org/TR/rdf-schema/#ch_type)
@@ -73,7 +89,7 @@ RDF is *flexible*: researchers can extend a graph with new properties and relati
 
 Using the same IRI for the same resource connects descriptions across datasets, even when their structures differ. For example, one dataset can link B001 to F001 while another records F001's material. When the graphs are combined, the shared IRI `https://example.org/bike/id/F001` connects these statements at the same node. [Combining RDF graphs](https://www.w3.org/TR/rdf11-concepts/#section-multigraph)
 
-`http://example.org/bike/id/F001` and `https://example.org/bike/id/F001` are different IRIs. A browser may follow a redirect between them. SPARQL, the query language for RDF, matches IRIs exactly, so a query using one can miss data recorded with the other. [IRI comparison](https://www.w3.org/TR/rdf11-concepts/#section-IRIs), [SPARQL matching](https://www.w3.org/TR/sparql11-query/#BasicGraphPatternMatching)
+`http://example.org/bike/id/F001` and `https://example.org/bike/id/F001` are different IRIs. A browser may follow a redirect between them. Queries match IRIs exactly, so using one can miss data recorded with the other. [IRI comparison](https://www.w3.org/TR/rdf11-concepts/#section-IRIs), [SPARQL matching](https://www.w3.org/TR/sparql11-query/#BasicGraphPatternMatching)
 
 ## The data-centric approach
 
@@ -83,7 +99,7 @@ An inventory application and an analysis application can reuse the same bicycle 
 
 *Serialisation* represents an RDF graph in a format for storage or exchange. Turtle, JSON-LD, RDF/XML and N-Triples are RDF serialisation formats: they can represent the same graph using different syntax. [RDF serialisation formats](https://www.w3.org/TR/rdf11-primer/#section-syntax)
 
-We use *Turtle* for the course examples because its compact syntax makes RDF statements easier to read, edit and check. If an application or publishing workflow supports only RDF/XML, use that format. [Discussion of RDF format choice](https://lists.w3.org/Archives/Public/public-lod/2015Sep/0027.html)
+We use *Turtle* for the course examples because its compact syntax makes RDF statements easier to read, edit and check. If an application or publishing workflow supports only RDF/XML, use that format. [Turtle specification](https://www.w3.org/TR/turtle/)
 
 For the bicycle graph, *prefixes* abbreviate IRIs: `id:B001` expands to `https://example.org/bike/id/B001`. Here, `def:` abbreviates class and property IRIs, `id:` individual IRIs and `rdfs:` RDF Schema terms, so `def:Bicycle` expands to `https://example.org/bike/def/Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
@@ -110,19 +126,71 @@ def:Bicycle rdfs:subClassOf def:Vehicle .
 
 If we recorded that B001 has two wheels, `2` would represent an integer that applications can use in calculations, while `"2"` would represent a text string.
 
+(shacl-basics)=
+## Validate RDF with SHACL
+
+*SHACL* (Shapes Constraint Language) is a W3C standard for validating RDF graphs against chosen requirements, expressed as *shapes*. Shapes are themselves RDF. A validator takes the graph to check (the *data graph*) and a *shapes graph*, and produces a validation report. [SHACL specification](https://www.w3.org/TR/shacl/)
+
+For an inventory review that needs recorded materials, we can require each Frame to have at least one `hasMaterial` value. This *property shape* expresses that requirement. The `sh:` prefix names SHACL terms; `shape:` names our example shape:
+
+```turtle
+@prefix def: <https://example.org/bike/def/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shape: <https://example.org/bike/shape/> .
+
+shape:FrameMaterial a sh:PropertyShape ;
+    sh:targetClass def:Frame ;
+    sh:path def:hasMaterial ;
+    sh:minCount 1 .
+```
+
+`sh:targetClass` selects Frame instances, `sh:path` names the property to check and `sh:minCount 1` requires at least one recorded value. [Property shapes](https://www.w3.org/TR/shacl/#property-shapes), [minimum count](https://www.w3.org/TR/shacl/#MinCountConstraintComponent)
+
+The bicycle graph above conforms: F001 has a recorded material. If its material statement were removed, the report would identify F001 and `hasMaterial` as failing the minimum-count requirement.
+
+The data graph can also be an ontology: a shape could check that its classes have labels. SHACL can therefore check chosen requirements for both ontology descriptions and instance data. [Data graphs](https://www.w3.org/TR/shacl/#data-graph)
+
 ## Publishing Linked Data
 
 Our Turtle file already expresses RDF. To publish the graph as Linked Data, make its resource IRIs *dereferenceable*: looking one up retrieves a description of what it identifies. Provide a Web page (a *landing page*) for people and RDF for applications. The description of B001 can link to F001, whose description gives the frame's material; links can also lead to other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#semweb)
-
-:::{dropdown} Publishing options (optional)
-The Web server can supply these RDF descriptions from static files, such as downloadable Turtle files, or retrieve them from a *triple store*, a database for storing and querying RDF. A triple store can also offer a *SPARQL endpoint* for queries over HTTP. {cite}`w3c2014linkeddata` Open-source options include [Apache Jena Fuseki with TDB](https://jena.apache.org/documentation/fuseki2/) and [Eclipse RDF4J Server](https://rdf4j.org/documentation/tools/server-workbench/).
-:::
 
 Class and property IRIs work the same way: `def:Bicycle` can lead to its label and relationship to Vehicle. Publish descriptions for new terms and reuse existing term IRIs exactly, including `http:` in the `rdfs:` namespace. [Publishing vocabularies and ontologies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
 
 Use *persistent identifiers (PIDs)*, managed to remain usable when descriptions move to another Web address. {cite}`w3c2017dwbp` For example, [w3id](https://w3id.org/) provides stable IRIs under `https://w3id.org/` that redirect to your published descriptions. If you move those descriptions, update the redirects while keeping the IRIs unchanged.
 
-Prefer HTTPS for new IRIs and keep the publishing domain's TLS certificate valid for secure access. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
+Prefer HTTPS for new IRIs and keep the publishing domain's HTTPS certificate valid for secure access. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
+
+(sparql-basics)=
+## Query RDF with SPARQL
+
+*SPARQL* is a query language for RDF, whether loaded locally or made available through a service. A query describes a pattern of statements to match and specifies what information to return. The following query searches the bicycle graph above for bicycles with frames recorded as steel. It needs no reasoning.
+
+`PREFIX` defines the same IRI abbreviation as `@prefix` in Turtle. Names beginning with `?` are variables whose values will be found by matching the patterns:
+
+```sparql
+PREFIX def: <https://example.org/bike/def/>
+
+SELECT DISTINCT ?bicycle
+WHERE {
+    ?bicycle a def:Bicycle ;
+        def:hasComponent ?frame .
+    ?frame a def:Frame ;
+        def:hasMaterial "steel"@en .
+}
+```
+
+The patterns inside `WHERE` use the familiar Turtle forms `a` and `;`. The same `?frame` in both patterns connects each bicycle to its frame's material. `SELECT` chooses the variable to return, and `DISTINCT` returns each matching bicycle once, even if several frames match. The result is `https://example.org/bike/id/B001`; the query interface may display an abbreviated name. [SPARQL basic queries](https://www.w3.org/TR/sparql11-query/#WritingSimpleQueries)
+
+The material pattern matches the language-tagged value `"steel"@en`. `"Steel"@en`, `"steel"@nl` and the untagged string `"steel"` are different RDF terms. Consistent source-data preparation and conversion make these matches reliable.
+
+(triple-stores)=
+:::{dropdown} Triple stores and SPARQL endpoints (optional)
+
+The Web server can supply RDF descriptions from static files, such as downloadable Turtle files, or retrieve them from a *triple store*, a database for storing and querying RDF. Researchers can use its query interface; applications can send SPARQL queries over HTTP to its *SPARQL endpoint*. {cite}`w3c2014linkeddata`
+
+Options include [QLever](https://docs.qlever.dev/quickstart/), [Apache Jena Fuseki with TDB](https://jena.apache.org/documentation/fuseki2/fuseki-quick-start.html) and [Eclipse RDF4J Server and Workbench](https://rdf4j.org/documentation/tools/server-workbench/). Follow the chosen application's setup and loading instructions: QLever builds an index from RDF files; Fuseki also offers file uploads.
+
+:::
 
 ## How Linked Data can support FAIR
 

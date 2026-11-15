@@ -1,15 +1,19 @@
-# Logical modelling in OWL 2
+# Logical modelling in OWL
 
-In the preceding chapter, the reasoner inferred that B001 is a Vehicle. Here, we define classes using logical conditions so it can recognise bicycles whose frames are recorded as steel. We also explore property axioms and identity, interpret inferences and check consistency.
+:::{admonition} Learning objectives
+:class: note
 
-{doc}`advanced-owl-modelling` covers optional constructs and language choices. The {doc}`OWL 2 cheat sheet <owl2-cheat-sheet>` provides the syntax reference.
+By the end of this chapter, you will be able to:
 
-<!-- Existing learning-outcome draft, retained for later course development:
-By the end of it, you will be able to:
+- Define classes using logical expressions and property restrictions.
+- Explain the consequences of property axioms for relationships and identity.
+- Use a reasoner to check consistency and class satisfiability.
+- Explain inferred class memberships and unresolved classifications using the example records.
+:::
 
-- Read and write OWL 2 axioms, restrictions, and expressions
-- Use the cheat sheet to look up OWL 2 syntax while modelling
--->
+The reasoner already classified B001 as a Vehicle. We now add logical conditions for recognising bicycles with frames whose material value is `"steel"@en`.
+
+{doc}`advanced-owl-modelling` covers optional constructs and language choices. The {doc}`OWL 2 cheat sheet <owl-2-cheat-sheet>` provides the syntax reference.
 
 ```{tableofcontents}
 ```
