@@ -17,4 +17,4 @@ The original template's institutional [waiver](https://github.com/TDCC-NES/ontol
 
 ## Cite this training
 
-> Füllenbach, K., & Metilli, D. *OWL Ontology Training*. <https://tdcc-nes.github.io/ontology-training/>.
+> Füllenbach, K., & Metilli, D. *Working with Ontologies*. <https://tdcc-nes.github.io/ontology-training/>.

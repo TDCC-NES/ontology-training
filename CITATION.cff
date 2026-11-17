@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: 'If you use this training, please cite it using these metadata.'
-title: 'OWL Ontology Training'
+title: 'Working with Ontologies'
 authors:
   - family-names: 'Füllenbach'
     given-names: 'Kathrin'
@@ -13,7 +13,7 @@ repository-code: 'https://github.com/TDCC-NES/ontology-training'
 license: CC-BY-4.0
 preferred-citation:
   type: book
-  title: 'OWL Ontology Training'
+  title: 'Working with Ontologies'
   authors:
     - family-names: 'Füllenbach'
       given-names: 'Kathrin'

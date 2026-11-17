@@ -1,6 +1,7 @@
 (intro)=
 (overview)=
-# OWL Ontology Training
+# Working with Ontologies
+* A Hands-On Introduction to Creating and Using OWL Ontologies
 
 Welcome! This practical training introduces researchers to designing, building and publishing ontologies with OWL 2 and linked data. You will apply the concepts as you work through a shared bicycle example, building an ontology and using it to describe and query data.
 

@@ -1,6 +1,6 @@
 # This config includes an opinionated list of configuration options of TeachBooks, Jupyterbook v1, Sphinx and other extensions part of TeachBooks-Favourites.
 
-title: OWL Ontology Training
+title: Working with Ontologies
 author: Kathrin Füllenbach and Dani Metilli
 
 execute:
@@ -57,7 +57,7 @@ sphinx:                                              # Options passed on to the 
         Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>.
       home_page_in_toc: false                        # The logo and title link to the combined welcome and overview page.
       logo:
-        text: OWL Ontology Training
+        text: Working with Ontologies
         alt_text: Wollie, a hand-drawn owl reading an open book
         image_light: figures/wollie-light.png
         image_dark: figures/wollie-dark.png

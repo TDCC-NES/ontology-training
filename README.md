@@ -1,4 +1,4 @@
-# OWL Ontology Training
+# Working with Ontologies
 
 An open training on designing, building and publishing OWL ontologies for researchers. Developed by the [TDCC-NES Ontology Engineers](https://tdcc.nl/nes/ontology-engineers/).
 
