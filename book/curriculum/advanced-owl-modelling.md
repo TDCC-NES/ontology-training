@@ -6,7 +6,7 @@
 By the end of this page, you will be able to:
 
 - Predict inferences and contradictions from the advanced modelling examples.
-- Distinguish OWL 2 DL restrictions, profiles and writing formats.
+- Distinguish OWL 2 DL's modelling restrictions, OWL profiles and formats for writing ontologies.
 :::
 
 These topics build on {ref}`class restrictions <owl-object-restrictions>` and {ref}`property axioms <owl-property-axioms>`. The examples illustrate separate modelling choices; the {ref}`reasoning example <reasoning-example-files>` contains the steel-frame definitions and imports the separate bicycle/frame records. Expressions use Manchester syntax; Turtle blocks are fragments using the {ref}`course prefixes <owl-turtle-example>`.

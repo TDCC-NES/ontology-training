@@ -6,9 +6,9 @@
 By the end of this chapter, you will be able to:
 
 - Prepare an ontology's metadata and version identifiers for publication.
-- Review an askwol report and generated documentation.
+- Assess askwol findings and check generated documentation against the ontology's RDF.
 - Publish RDF and documentation using stable Web identifiers.
-- Check that those identifiers retrieve the intended descriptions.
+- Check that ontology and term IRIs retrieve the intended RDF and documentation.
 :::
 
 Our research team can now use the bicycle ontology to compare inventory records. We will prepare it for publication so other researchers can inspect its definitions and reuse its terms.

@@ -7,10 +7,11 @@
 By the end of this chapter, you will be able to:
 
 - Explain how Linked Data connects research data across datasets and applications.
-- Read a simple RDF graph in Turtle, including IRIs, prefixes and literals.
-- Interpret a simple SHACL shape and its validation outcome.
+- Identify the subject, predicate and object of an RDF statement and explain what it records.
+- Interpret a simple Turtle example by expanding prefixed names to full IRIs and identifying literal values.
+- Explain the requirement expressed by a simple SHACL shape and whether an example graph meets it.
 - Describe what is needed to publish RDF as Linked Data.
-- Interpret a basic SPARQL query and its result.
+- Explain which statements a basic SPARQL query matches and why it returns its result.
 - Explain how Linked Data can support FAIR research data.
 :::
 

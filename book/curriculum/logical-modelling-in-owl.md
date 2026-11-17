@@ -8,7 +8,7 @@ By the end of this chapter, you will be able to:
 - Define classes using logical expressions and property restrictions.
 - Explain the consequences of property axioms for relationships and identity.
 - Use a reasoner to check consistency and class satisfiability.
-- Explain inferred class memberships and unresolved classifications using the example records.
+- Explain why particular class memberships follow from the example records and others remain undetermined.
 :::
 
 The reasoner already classified B001 as a Vehicle. We now add logical conditions for recognising bicycles with frames whose material value is `"steel"@en`.

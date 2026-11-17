@@ -14,7 +14,7 @@ No prior experience with ontologies, RDF, OWL, the Semantic Web or programming i
 By the end of this training, you will be able to:
 
 1. Explain what an ontology is, compare it with controlled vocabularies and taxonomies, and assess its value for describing, publishing, finding, integrating and reusing research data.
-2. Read simple RDF in Turtle and explain how Linked Data and OWL 2 make meaning explicit across applications and support FAIR data.
+2. Explain the relationships and values expressed in a simple RDF example written in Turtle. Describe how Linked Data and OWL 2 can help applications interpret data consistently and support FAIR research data.
 3. Define a research purpose and scope, formulate competency questions (questions the ontology should help answer), and sketch a shared model of relevant concepts and relationships.
 4. Build a small OWL 2 ontology with classes, individuals, properties, domains, ranges, datatypes and logical axioms, using consistent IRIs, labels and definitions.
 5. Check logical consistency with a reasoner, validate RDF data with SHACL, and use representative records to identify and correct modelling problems.

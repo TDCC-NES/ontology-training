@@ -6,9 +6,9 @@
 By the end of this chapter, you will be able to:
 
 - Define a research purpose and initial scope for an ontology.
-- Formulate competency questions with expected results.
-- Sketch a conceptual model that describes representative records.
-- Document agreed term meanings with labels, definitions and language tags.
+- Formulate competency questions and state the expected answers for representative records.
+- Sketch a conceptual model and use it to describe representative records.
+- Write labels and definitions that express agreed term meanings, with language tags for the intended languages.
 - Choose a consistent IRI pattern for the ontology, its terms and the things it describes.
 :::
 

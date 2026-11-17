@@ -7,8 +7,8 @@ By the end of this chapter, you will be able to:
 
 - Implement a conceptual sketch as OWL classes, individuals and properties with suitable domains, ranges and datatypes.
 - Annotate terms with labels and definitions in the intended languages.
-- Use a reasoner to inspect inferred class memberships.
-- Compare the ontology's graph and Turtle representations with the conceptual sketch.
+- Use a reasoner to identify class memberships that follow from the recorded statements.
+- Compare graph views and the saved Turtle statements with the conceptual sketch.
 :::
 
 We will describe B001 and its frame F001 in OWL, using the classes and properties from our sketch. We will record that the frame is made of steel and run a reasoner to infer that B001 is a Vehicle.

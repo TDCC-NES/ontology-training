@@ -8,7 +8,7 @@ By the end of this chapter, you will be able to:
 - Explain how an ontology makes the meaning of research data explicit.
 - Compare ontologies with controlled vocabularies, taxonomies and thesauri for a research task.
 - Explain how OWL supports exchanging ontologies and inferring additional statements.
-- Explain how OWL allows incomplete descriptions and multiple identifiers for the same thing.
+- Explain how OWL reasoning handles missing information and identifiers that may refer to the same thing.
 :::
 
 ## What are ontologies for?

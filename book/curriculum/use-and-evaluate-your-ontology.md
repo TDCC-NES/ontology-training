@@ -10,11 +10,11 @@ By the end of this chapter, you will be able to:
 
 - Choose checks for intended meaning, logical consistency and data requirements.
 - Transform source records into RDF using an ontology and a supplied mapping.
-- Check that generated RDF preserves the intended identifiers, relationships and values.
+- Compare generated RDF with source records to check identifiers, relationships and values.
 - Use a SPARQL query to answer a competency question.
-- Compare competency-query results with expected answers.
-- Explain how ontology axioms and inference support affect query results.
-- Validate ontology and instance data with SHACL shapes and interpret the reports.
+- Compare SPARQL results with the expected answers to a competency question.
+- Explain how ontology axioms and the availability of inferred statements affect query results.
+- Use SHACL shapes to check ontology documentation and instance data, and interpret the validation reports.
 - Use findings to decide what needs revision and repeat the relevant checks.
 :::
 
