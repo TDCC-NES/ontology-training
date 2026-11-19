@@ -13,7 +13,7 @@ By the end of this chapter, you will be able to:
 
 We will describe B001 and its frame F001 in OWL, using the classes and properties from our sketch. We will record that the frame is made of steel and run a reasoner to infer that B001 is a Vehicle.
 
-The walkthrough focuses on the part of our sketch that describes frames and their materials; the expanded reference ontology also includes colour and the other inventory records.
+The walkthrough focuses on the part of our sketch that describes frames and their materials; the reference example also includes colour and the other inventory records.
 
 You can write Turtle directly in a text editor or use [Protégé](https://protege.stanford.edu/) or another ontology editor. You can also use AI assistance to draft and revise the ontology.
 
@@ -125,6 +125,8 @@ Open **Entities > Object properties**, select `def:hasComponent` and add its lab
 
 Return to **Entities > Classes**, select `def:Bicycle` and add another `rdfs:label` with text `fiets` and language tag `nl`. Both labels describe the same class, with the same IRI.
 
+Give individuals recognisable labels too. For example, F001's label in the sample records is “frame of B001”. Add it through the individual's **Annotations** panel using the same `rdfs:label` procedure.
+
 Use language tags for natural-language text throughout the ontology. Our English material name, labels and definitions use `en`; the Dutch label uses `nl`.
 
 ## Run the reasoner
@@ -201,9 +203,10 @@ id:B001 a owl:NamedIndividual, def:Bicycle ;
     def:hasComponent id:F001 .
 
 id:F001 a owl:NamedIndividual, def:Frame ;
+    rdfs:label "frame of B001"@en ;
     def:hasMaterial "steel"@en .
 ```
 
 Protégé may use a different order or add declarations. Compare the full IRIs and statements with the example. **File > Save** stores the statements you entered, including B001's Bicycle membership. After reopening the file, the reasoner can infer its Vehicle membership again. [Saving and exporting inferences](https://protegeproject.github.io/protege/menus/)
 
-Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`complete bicycle ontology <../data/bicycle-ontology.ttl>` is a reference with the full class, property and datatype definitions and publication metadata. Its {download}`sample records <../data/bicycle-example-data.ttl>` are kept separately.
+Keep `bike-working.ttl` as the starting point for chapter 5; reopen it through **File > Open**. The {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` includes documented definitions and publication metadata. Its {download}`sample records <../data/bicycle-example-data.ttl>` are kept separately.

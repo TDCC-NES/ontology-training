@@ -1,7 +1,7 @@
 (owl-cheat-sheet)=
 # OWL 2 cheat sheet
 
-A reference for {doc}`logical-modelling-in-owl`, including optional constructs explained in {doc}`advanced-owl-modelling`. Examples use the bicycle model; they illustrate separate modelling choices. Manchester syntax is used for class expressions. Turtle patterns and less common features are collected below.
+A reference for {doc}`logical-modelling-in-owl`, including optional constructs explained in {doc}`advanced-owl-modelling`. Examples use and extend the bicycle model; they illustrate separate modelling choices. Manchester syntax is used for class expressions. Turtle patterns and less common features are collected below.
 
 Short Manchester examples omit `def:`, writing `Bicycle` for `def:Bicycle`. Individual names keep `id:`.
 

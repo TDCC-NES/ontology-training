@@ -115,6 +115,8 @@ Bicycle is one class used to describe B001, B002 and B003; each identifier names
 
 For this use case, “steel” and “aluminium” are values of the “has material” property. Different recorded materials can be described using the same Frame class. Agree how to write these values across inventories; using “steel” consistently makes records easier to match. A separate class is useful when the model needs to distinguish a kind of thing, rather than simply record a different value. {cite}`noy2001ontology`
 
+Use an individual with an IRI when the material needs its own description or links to other data, and an object property to relate the frame to it. [OWL properties and data values](https://www.w3.org/TR/owl2-primer/#Datatypes)
+
 A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. Frame is a subclass of Component, which covers physical parts of objects. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
 
 (read-model-aloud)=

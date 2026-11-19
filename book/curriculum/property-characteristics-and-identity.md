@@ -30,13 +30,15 @@ Domains and ranges apply to every use of a property. With Frame as the range of 
 
 ## Characteristics and identity
 
-| Characteristic | Consequence | Possible relationship |
-|---|---|---|
-| Functional | Each subject has at most one filler | hasAssignedStorageBay in a fixed allocation |
-| Symmetric | A link entails its reverse | sharesStorageWith |
-| Transitive | Two consecutive links entail a direct link | isPartOf |
+For these examples, suppose the team assigns storage bays to its bicycles. Tube001 is a tube in B001's frame F001.
 
-Functionality allows zero fillers. If a functional object property links one subject to two names, both names must identify the same individual. Stating that they differ makes the ontology inconsistent. For a functional data property, distinct values cause inconsistency. Data properties support functionality but none of the other characteristics in this table. [Property characteristics](https://www.w3.org/TR/owl2-primer/#Property_Characteristics)
+| Characteristic | Consequence | Bicycle example |
+|---|---|---|
+| Functional | Each subject has at most one filler | B001 hasAssignedStorageBay Bay01 in a fixed allocation. |
+| Symmetric | A link entails its reverse | B001 sharesStorageWith B002 entails B002 sharesStorageWith B001. |
+| Transitive | Two consecutive links entail a direct link | Tube001 isPartOf F001 and F001 isPartOf B001 entail Tube001 isPartOf B001. |
+
+Functionality allows zero fillers. If B001's functional hasAssignedStorageBay property also links it to Bay02, Bay01 and Bay02 must name the same bay. Stating that the bays differ makes the ontology inconsistent. For a functional data property, distinct values cause inconsistency. Data properties support functionality but none of the other characteristics in this table. [Property characteristics](https://www.w3.org/TR/owl2-primer/#Property_Characteristics)
 
 Identity and difference can also be stated explicitly: `owl:sameAs` states that two names identify the same individual, so class memberships and property assertions about either name apply to both. `owl:differentFrom` states difference. Similarity or matching labels alone justify neither. [Assertions](https://www.w3.org/TR/owl2-syntax/#Assertions)
 

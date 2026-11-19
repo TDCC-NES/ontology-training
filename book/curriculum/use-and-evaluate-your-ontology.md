@@ -58,6 +58,8 @@ Mapping data to RDF means choosing which resources the records describe and whic
 
 Use the IRI strategy agreed in chapter 3. Reuse a resource's IRI when combining descriptions of that same resource. [RDF descriptions and identifiers](https://www.w3.org/TR/rdf11-primer/#section-data-model)
 
+If a source field contains several separate values, map each to its own statement so it can be queried separately. Agree how the source separates values before splitting the field; a comma within a name may belong to one value.
+
 (reference-rdf)=
 ### Review the reference RDF
 
@@ -211,7 +213,7 @@ To query the inventory in a {ref}`triple store introduced in Chapter 2 <triple-s
 (query-inferences)=
 ### Querying inferred information
 
-For Protégé, open the {ref}`reasoning example with its inventory data and catalog <reasoning-example-files>`, start HermiT and {ref}`export the inferred class assertions <export-inferred-assertions>`. Open the export in a separate window and use **SPARQL Query** there. The export records HermiT's conclusions as assertions for this tab; starting the reasoner alone leaves the tab querying the asserted statements.
+Protégé's **SPARQL Query** tab searches asserted statements; starting HermiT alone leaves these results unchanged. Exported inferred class assertions make HermiT's conclusions available as recorded statements for this tab.
 
 For example, with Bicycle declared a subclass of Vehicle, RDFS reasoning lets `?bicycle a def:Vehicle` retrieve B001 from its Bicycle membership. The frame-material query matches the recorded statements directly. [SPARQL entailment regimes](https://www.w3.org/TR/sparql11-entailment/)
 
@@ -230,7 +232,11 @@ WHERE {
 }
 ```
 
-On the supplied inventory, this query gives no results: it contains no explicit Vehicle memberships. Follow the instructions to {ref}`export the inferred class assertions and open the export in Protégé <query-inferences>`, then run the query again. B001, B002 and B003 should now match through the Bicycle-to-Vehicle subclass statement. Compare their full IRIs with the result. A triple store with RDFS inference enabled can produce the same answers. Keep the inference or export settings with the test. [SPARQL entailment regimes](https://www.w3.org/TR/sparql11-entailment/)
+On the supplied inventory, this query gives no results: it contains no explicit Vehicle memberships.
+
+For Protégé, open the {ref}`reasoning example with its inventory data and catalog <reasoning-example-files>`, start HermiT and {ref}`export the inferred class assertions <export-inferred-assertions>`. Open the export in a separate window and use **SPARQL Query** there to run the query again.
+
+B001, B002 and B003 should now match through the Bicycle-to-Vehicle subclass statement. Compare their full IRIs with the result. A triple store with RDFS inference enabled can produce the same answers. Keep the inference or export settings with the test. [SPARQL entailment regimes](https://www.w3.org/TR/sparql11-entailment/)
 :::
 
 (shacl-validation)=
@@ -281,7 +287,7 @@ Save the report using its **Turtle** download link. The RDF report records `sh:c
 (ontology-shacl-check)=
 ### Check an ontology requirement
 
-Apply the same method to a documentation requirement: for this check, the Bicycle class must have a label. Use the {download}`expanded bicycle ontology <../data/bicycle-ontology.ttl>` as **Input Data** and replace the shapes with:
+Apply the same method to a documentation requirement: for this check, the Bicycle class must have a label. Use the {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` as **Input Data** and replace the shapes with:
 
 ```turtle
 @prefix def: <https://w3id.org/bicycle-ontology/def/> .

@@ -13,15 +13,15 @@ By the end of this chapter, you will be able to:
 
 Our research team can now use the bicycle ontology to compare inventory records. We will prepare it for publication so other researchers can inspect its definitions and reuse its terms.
 
-The [askwol publication guide](https://lod-4tu.tudelft.nl/askwol/guide) provides the reference explanations and application commands. Here, we apply that guidance to the bicycle ontology and work through one publishing route: GitHub Pages hosts the files, and w3id redirects the identifiers to them.
+The [askwol publication guide](https://askwol.net/guide) provides the reference explanations and application commands. Here, we apply that guidance to the bicycle ontology and work through one publishing route: GitHub Pages hosts the files, and w3id redirects the identifiers to them.
 
-This course publishes the [bicycle ontology as Turtle](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.ttl) alongside its [pyLODE documentation](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.html). Both are served by the course's GitHub Pages site. The ontology contains definitions only. It uses the `https://w3id.org/bicycle-ontology/` namespace throughout the course; its w3id registration is pending. The walkthrough below shows how to prepare your own publication and configure identifier resolution.
+This course publishes the [bicycle ontology as Turtle](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.ttl) alongside its [pyLODE documentation](https://w3id.org/bicycle-ontology/). Both are served by the course's GitHub Pages site. The ontology contains definitions only. It uses the `https://w3id.org/bicycle-ontology/` namespace throughout the course, with w3id redirects to these files. The walkthrough below shows how to prepare your own publication and configure identifier resolution.
 
 Public deployment in this example requires a GitHub account, permission to publish a public repository and a project identifier you intend to maintain. Replace `YOUR-OWNER` below with the repository owner's GitHub username or organisation name, and `YOUR-PROJECT` with an available project path chosen using [w3id's naming guidance](https://docs.w3id.org/guides/create-an-id#_1-choose-a-name).
 
 ## Metadata and licence
 
-Save a copy of the {download}`complete bicycle ontology <../data/bicycle-ontology.ttl>` as `bicycle-ontology.ttl`. Its ontology header already records a title, description, creators, publisher, dates, licence and version. Use the guide's [metadata](https://lod-4tu.tudelft.nl/askwol/guide#metadata) and [licence](https://lod-4tu.tudelft.nl/askwol/guide#license) sections when reviewing these values.
+Save a copy of the {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` as `bicycle-ontology.ttl`. Its ontology header already records a title, description, creators, publisher, dates, licence and version. Use the guide's [metadata](https://askwol.net/guide#metadata) and [licence](https://askwol.net/guide#license) sections when reviewing these values.
 
 Retain the original attribution and CC BY 4.0 licence for this example. If you adapt it, record your contribution and update the description and modification date to reflect your changes.
 
@@ -32,7 +32,7 @@ If you also publish research data described using your ontology, provide metadat
 (owl-versioning)=
 ## Version identifiers
 
-The supplied ontology records version `1.0.0` with `owl:versionInfo`. A separate version IRI is optional; the {ref}`version-specific publication instructions <version-specific-publication>` show how to preserve a release at its own IRI. Use the guide's [versioning section](https://lod-4tu.tudelft.nl/askwol/guide#versioning) as a reference for the [OWL versioning convention](https://www.w3.org/TR/owl2-syntax/#Versioning_of_OWL_2_Ontologies).
+The supplied ontology records version `1.0.0` with `owl:versionInfo`. A separate version IRI is optional; the {ref}`version-specific publication instructions <version-specific-publication>` show how to preserve a release at its own IRI. Use the guide's [versioning section](https://askwol.net/guide#versioning) as a reference for the [OWL versioning convention](https://www.w3.org/TR/owl2-syntax/#Versioning_of_OWL_2_Ontologies).
 
 For your own publication, apply the {doc}`IRI strategy from chapter 3 <design-your-own-ontology>`: replace `https://w3id.org/bicycle-ontology/` with `https://w3id.org/YOUR-PROJECT/` throughout the publication copy. This updates the ontology IRI and its namespace declarations. The resulting identifiers include:
 
@@ -49,26 +49,26 @@ The publication copy's ontology header retains its other metadata and version in
     owl:versionInfo "1.0.0" .
 ```
 
-The `owl:` prefix is already declared in `bicycle-ontology.ttl`. Apply the same namespace replacement to the queries and shapes used to check this copy.
+The `owl:` prefix is already declared in `bicycle-ontology.ttl`. Apply the same namespace replacement to copies of the data, mappings, queries and shapes used to check this ontology. Update any `owl:imports` IRIs and local catalog entries that use the old namespace.
 
 Before publishing, check that the ontology and term IRIs are spelled correctly and follow your chosen IRI strategy, since users will rely on these identifiers remaining stable. Changing them later can require time-consuming updates to datasets and queries and leave users unsure which IRIs to use. See the W3C's guidance on [identifier persistence](https://www.w3.org/TR/webarch/#URI-persistence) and [the costs of multiple identifiers for the same resource](https://www.w3.org/TR/webarch/#uri-aliases).
 
 ## Review with askwol
 
-Open [askwol](https://lod-4tu.tudelft.nl/askwol/) and upload the prepared `bicycle-ontology.ttl` to review its contents before generating documentation. Follow the guide links beside individual findings as you review the report, and record which findings you resolve and the reasons for retaining any deliberate modelling or documentation choices.
+Open [askwol](https://askwol.net/) and upload the prepared `bicycle-ontology.ttl` to review its contents before generating documentation. Follow the guide links beside individual findings as you review the report, and record which findings you resolve and the reasons for retaining any deliberate modelling or documentation choices.
 
 The reference ontology provides English and Dutch labels. A language consistency finding on a new term can identify a missing translation.
 
 Because askwol also checks whether namespaces resolve on the Web, a warning for your new namespace is expected until its w3id redirects are live. Investigate findings about existing external vocabularies now, and recheck your new namespace after deployment.
 
-Use the {ref}`checks from chapter 6 <choose-the-right-check>` to review changes that affect the model or its use. The guide describes [the coverage of askwol's reasoning checks](https://lod-4tu.tudelft.nl/askwol/guide#reasoner).
+Use the {ref}`checks from chapter 6 <choose-the-right-check>` to review changes that affect the model or its use. The guide describes [the coverage of askwol's reasoning checks](https://askwol.net/guide#reasoner).
 
 (owl-ontology-structure)=
 ## Generate and review documentation
 
 Local generation requires [Python 3.12 or newer](https://www.python.org/downloads/). Open a terminal and use `cd` to select the folder containing `bicycle-ontology.ttl`, as in the {ref}`conversion setup <rmlmapper-setup>`.
 
-On macOS/Linux, use the environment creation and activation commands in the guide's [setup instructions](https://lod-4tu.tudelft.nl/askwol/guide#documentation). On Windows PowerShell, use:
+On macOS/Linux, use the environment creation and activation commands in the guide's [setup instructions](https://askwol.net/guide#documentation). On Windows PowerShell, use:
 
 ```powershell
 python -m venv .venv
@@ -82,9 +82,11 @@ python -m pip install pylode==3.6.1
 pylode bicycle-ontology.ttl -o index.html
 ```
 
-Open `index.html` in a browser. Locate Bicycle and `hasComponent`, and compare their displayed definitions with the RDF. Check that labels and definitions display correctly and that the licence, ontology IRI and version information agree with `bicycle-ontology.ttl`. Inspect advanced axioms, such as InventoryRecord's key, in the Turtle file: pyLODE does not render every construct. After correcting the RDF, regenerate the page. Check external term links now and your new term links after publication.
+Open `index.html` in a browser. Locate Bicycle and `hasComponent`, and compare their displayed definitions with the RDF. Check that labels and definitions display correctly and that the licence, ontology IRI and version information agree with `bicycle-ontology.ttl`. Inspect the steel-frame class expressions in the Turtle file as well: pyLODE does not render every construct. After correcting the RDF, regenerate the page. Check external term links now and your new term links after publication.
 
-The [course's generated page](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.html) shows the expected layout for the supplied ontology.
+In pyLODE 3.6.1, bilingual labels appear joined in headings and navigation, for example “bicyclefiets”. Preserve the separate language-tagged labels in the RDF.
+
+The [course's generated page](https://w3id.org/bicycle-ontology/) shows the expected layout for the supplied ontology.
 
 :::{dropdown} Annotations on statements (reference)
 
@@ -129,7 +131,7 @@ RewriteRule ^(?:def(?:/[^/]*)?)?$ https://YOUR-OWNER.github.io/bicycle-ontology/
 RewriteRule ^(?:def(?:/[^/]*)?)?$ https://YOUR-OWNER.github.io/bicycle-ontology/ [R=303,L]
 ```
 
-These rules direct explicit Turtle requests to the RDF and other requests to the documentation. The ontology, namespace and term IRIs select the current files. The guide explains [HTTP delivery](https://lod-4tu.tudelft.nl/askwol/guide#server-config); w3id documents the [redirect rule syntax](https://docs.w3id.org/guides/htaccess).
+These rules direct explicit Turtle requests to the RDF and other requests to the documentation. The ontology, namespace and term IRIs select the current files. The guide explains [HTTP delivery](https://askwol.net/guide#server-config); w3id documents the [redirect rule syntax](https://docs.w3id.org/guides/htaccess).
 
 (version-specific-publication)=
 :::{dropdown} Version-specific publication (optional)
@@ -152,6 +154,8 @@ To preserve version `1.0.0` at `https://w3id.org/YOUR-PROJECT/1.0.0`:
    RewriteRule ^1\.0\.0/?$ https://YOUR-OWNER.github.io/bicycle-ontology/releases/1.0.0/bicycle-ontology.ttl [R=303,L]
    RewriteRule ^1\.0\.0/?$ https://YOUR-OWNER.github.io/bicycle-ontology/releases/1.0.0/ [R=303,L]
    ```
+
+In pyLODE 3.6.1, the generated link for `owl:versionIRI` points to a missing `#1.0.0` fragment. Use the full version IRI for the checks below.
 
 The version IRI selects the preserved release; the root files provide the current publication. Keep the release files unchanged when publishing a later version. After deployment, check the version IRI with both Accept headers: expect a `303` redirect to the release's Turtle or HTML, followed by `200` with the corresponding content type. At this first publication, the current and version-specific RDF should contain the same statements.
 :::

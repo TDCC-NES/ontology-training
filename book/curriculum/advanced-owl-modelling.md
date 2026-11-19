@@ -26,7 +26,7 @@ This cohort contains B001, B002 and B003; known aliases denote members too. Anot
 
 A single-individual enumeration, such as `{id:B001}`, is a [*nominal*](https://www.cs.ox.ac.uk/people/ian.horrocks/Publications/download/2010/HoPa10a.pdf).
 
-A *disjoint union* makes its alternatives exhaustive and mutually exclusive. In the complete example, StudyComponent is the disjoint union of Frame, Wheel and CargoBox: these are exactly its three categories. The broader Component class also accommodates other kinds of part, so that partition would not suit it. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
+A *disjoint union* makes its alternatives exhaustive and mutually exclusive. For a study limited to frames, wheels and cargo boxes, a StudyComponent class could be the disjoint union of Frame, Wheel and CargoBox: these would be exactly its three categories. The broader Component class also accommodates other kinds of part, so that partition would not suit it. [Class axioms](https://www.w3.org/TR/owl2-syntax/#Class_Expression_Axioms)
 
 (owl-closure)=
 ## Closure axioms
@@ -96,7 +96,7 @@ def:hasInventoryMaintainer a owl:ObjectProperty ;
 
 If B001 is recorded in InventoryA and InventoryA is maintained by TeamA, infer B001 hasInventoryMaintainer TeamA. The reverse implication does not follow. Chains use object properties, including inverse expressions; they cannot traverse material strings. [Property chains](https://www.w3.org/TR/owl2-primer/#Property_Chains)
 
-A *key* specifies identifying properties within a class. In the complete example, an InventoryRecord identifies one bicycle within one inventory. For named records, the named inventory and local code form the key: two records sharing a value for every key property must be the same individual. Different records can describe the same bicycle. Keys allow additional values and require neither existence nor functionality. Use this key only when sharing those values identifies one record. The cheat sheet gives its syntax and precise naming conditions. [Keys](https://www.w3.org/TR/owl2-primer/#Keys)
+A *key* specifies identifying properties within a class. For example, an InventoryRecord could identify one bicycle within one inventory. For named records, the named inventory and local code can form the key: two records sharing a value for every key property must be the same individual. Different records can describe the same bicycle. Keys allow additional values and require neither existence nor functionality. Use this key only when sharing those values identifies one record. The cheat sheet gives its syntax and precise naming conditions. [Keys](https://www.w3.org/TR/owl2-primer/#Keys)
 
 (owl-negative-assertions)=
 ## Negative assertions and unnamed individuals
@@ -119,7 +119,7 @@ A blank node in an individual position can describe an unnamed component: `id:B0
 
 OWL 2 DL restricts the combinations of axioms to support decidable reasoning under Direct Semantics: an algorithm can finish with the correct answer for the supported reasoning tasks. RDF-Based Semantics interprets OWL directly on RDF graphs; OWL 2 Full allows combinations beyond DL's restrictions, with undecidable general reasoning. [OWL 2 semantics](https://www.w3.org/TR/owl2-overview/#Semantics)
 
-For example, a transitive property cannot be used in an object cardinality restriction in OWL 2 DL. To count direct components while also modelling transitive parts, keep a separate hasDirectComponent property for counts and make it a subproperty of hasPart. The counting property must meet OWL's *simplicity* restrictions, which also account for chains and inverses. A profile checker tests the complete combination of axioms, including those of {ref}`imported ontologies <owl-imports>`; the cheat sheet summarises the restrictions. [Global restrictions](https://www.w3.org/TR/owl2-syntax/#Global_Restrictions_on_Axioms_in_OWL_2_DL)
+For example, a transitive property cannot be used in an object cardinality restriction in OWL 2 DL. For the component counts used here, keep hasComponent non-transitive and make it a subproperty of hasPart. The counting property must meet OWL's *simplicity* restrictions, which also account for chains and inverses. A profile checker tests the complete combination of axioms, including those of {ref}`imported ontologies <owl-imports>`; the cheat sheet summarises the restrictions. [Global restrictions](https://www.w3.org/TR/owl2-syntax/#Global_Restrictions_on_Axioms_in_OWL_2_DL)
 
 OWL 2 DL also permits *punning*: a class and an individual may use the same IRI, with independent interpretations. Describing Frame as a catalogue entry then describes that entry, without applying its properties to every frame. [Metamodeling](https://www.w3.org/TR/owl2-syntax/#Metamodeling)
 

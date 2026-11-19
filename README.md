@@ -22,7 +22,7 @@ Open <http://localhost:8000>. Rebuild after editing the source files.
 
 ## Ontology documentation
 
-The ontology publication consists of `book/data/bicycle-ontology.ttl` and its generated `book/data/bicycle-ontology.html`, served at `bicycle-ontology.ttl` and `bicycle-ontology.html`. The ontology contains definitions only. Teaching datasets remain separate course resources. The ontology uses the `https://w3id.org/bicycle-ontology/` namespace; w3id registration is pending.
+The ontology publication consists of `book/data/bicycle-ontology.ttl` and its generated `book/data/bicycle-ontology.html`, served at `bicycle-ontology.ttl` and `bicycle-ontology.html`. The ontology contains definitions only. Teaching datasets remain separate course resources. The ontology uses the `https://w3id.org/bicycle-ontology/` namespace; w3id redirects the ontology and term IRIs to the published RDF and documentation.
 
 After editing the ontology, regenerate the HTML with [pyLODE](https://github.com/RDFLib/pyLODE) 3.6.1, then rebuild the book:
 
@@ -31,7 +31,7 @@ python -m pip install pylode==3.6.1
 pylode book/data/bicycle-ontology.ttl -o book/data/bicycle-ontology.html
 ```
 
-The `bicycle:` prefix in the RDF lets pyLODE recognise the ontology namespace. Inspect the Turtle file for advanced axioms that pyLODE does not render.
+The `bicycle:` prefix in the RDF lets pyLODE recognise the ontology namespace. Use the Turtle file to inspect the full logical class definitions.
 
 ## Ontology validation history
 
@@ -44,6 +44,8 @@ The original combined model was checked on 9 November 2026 with the course's ins
 - Ask Wol's offline checks reported no errors, warnings or recommendations. Namespace and HTTP import checks were skipped; Web publication was not tested.
 
 After separating definitions and data on 15 November 2026, 70 checks passed using HermiT and Protégé's XML catalog resolver. They covered OWL 2 DL compliance, consistency, class satisfiability, local imports and the expected classifications and identity inferences. At that stage, the published ontology contained no instance assertions, and combining the separated files preserved the original model statements.
+
+The simplified reference model was checked on 19 November 2026 with the same OWLAPI/HermiT versions and catalog resolver. All 40 checks passed, covering OWL 2 DL compliance, consistency, class satisfiability, local imports, expected inferences and a contradictory wheel-count variation. The steel-frame query and SHACL checks retained their expected results.
 
 The installed tools support the RDF 1.1 `rdf:langString` datatype used throughout the course. This extends OWL 2's original 2012 datatype map.
 

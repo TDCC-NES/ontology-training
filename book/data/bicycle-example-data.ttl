@@ -2,273 +2,92 @@
 @prefix def:     <https://w3id.org/bicycle-ontology/def/> .
 @prefix id:      <https://w3id.org/bicycle-ontology/id/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 # Fictional sample records, kept separate from the ontology definitions.
 # Keep bicycle-ontology.ttl and catalog-v001.xml beside this file for local imports.
 
 <https://w3id.org/bicycle-ontology/examples/> a owl:Ontology ;
     dcterms:title "Bicycle example data"@en ;
-    dcterms:description "Fictional bicycle inventories, component configurations and mass observations for testing the course ontology."@en ;
+    dcterms:description "Fictional bicycle and component records for testing the course ontology."@en ;
     dcterms:creator "TDCC-NES Ontology Engineers"@en ;
     dcterms:publisher "TDCC-NES"@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     owl:imports <https://w3id.org/bicycle-ontology/> .
 
-# Example individuals
-# B001, B002 and B003 match the representative inventory records.
-# B001 is the physical bicycle; F001, W001, W002 and CB001 are its parts.
-# Colour and material names, labels and descriptions use English language tags.
+# B001 and its components
 
 id:B001 a owl:NamedIndividual, def:Bicycle, def:CargoBicycle ;
-    rdfs:label "B001"@en ;
+    rdfs:label "B001"@en, "B001"@nl ;
     rdfs:comment "A blue cargo bicycle with a steel frame, two wheels and a cargo box."@en ;
     def:hasComponent id:F001, id:W001, id:W002, id:CB001 ;
-    def:hasColour "blue"@en .
+    def:hasFrame id:F001 ;
+    def:hasColour "blue"@en ;
+    owl:sameAs id:C17 .
 
 id:F001 a owl:NamedIndividual, def:Frame ;
-    rdfs:label "frame of B001"@en ;
+    rdfs:label "frame of B001"@en, "frame van B001"@nl ;
     rdfs:comment "The steel frame belonging to B001."@en ;
+    def:hasComponent id:Tube001 ;
     def:hasMaterial "steel"@en .
 
 id:W001 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "front wheel of B001"@en ;
+    rdfs:label "front wheel of B001"@en, "voorwiel van B001"@nl ;
     rdfs:comment "The front wheel belonging to B001."@en .
 
 id:W002 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "rear wheel of B001"@en ;
+    rdfs:label "rear wheel of B001"@en, "achterwiel van B001"@nl ;
     rdfs:comment "The rear wheel belonging to B001."@en .
 
 id:CB001 a owl:NamedIndividual, def:CargoBox ;
-    rdfs:label "cargo box of B001"@en ;
+    rdfs:label "cargo box of B001"@en, "laadbak van B001"@nl ;
     rdfs:comment "The box belonging to B001, designed to carry goods or children."@en .
 
+id:Tube001 a owl:NamedIndividual, def:Component ;
+    rdfs:label "frame tube of F001"@en, "framebuis van F001"@nl ;
+    rdfs:comment "A tube forming part of frame F001."@en .
+
+# B002 and B003 retain the other representative inventory records.
+
 id:B002 a owl:NamedIndividual, def:Bicycle ;
-    rdfs:label "B002"@en ;
+    rdfs:label "B002"@en, "B002"@nl ;
     rdfs:comment "A red bicycle with an aluminium frame (F002)."@en ;
     def:hasComponent id:F002 ;
     def:hasColour "red"@en .
 
 id:F002 a owl:NamedIndividual, def:Frame ;
-    rdfs:label "frame of B002"@en ;
+    rdfs:label "frame of B002"@en, "frame van B002"@nl ;
     rdfs:comment "The aluminium frame belonging to B002."@en ;
     def:hasMaterial "aluminium"@en .
 
 id:B003 a owl:NamedIndividual, def:Bicycle ;
-    rdfs:label "B003"@en ;
+    rdfs:label "B003"@en, "B003"@nl ;
     rdfs:comment "A black bicycle with frame F003."@en ;
     def:hasComponent id:F003 ;
     def:hasColour "black"@en .
 
 # No material is recorded for F003.
 id:F003 a owl:NamedIndividual, def:Frame ;
-    rdfs:label "frame of B003"@en ;
+    rdfs:label "frame of B003"@en, "frame van B003"@nl ;
     rdfs:comment "The frame belonging to B003."@en .
 
-# Dutch labels for the original records
-
-id:B001 rdfs:label "B001"@nl .
-
-id:B002 rdfs:label "B002"@nl .
-
-id:B003 rdfs:label "B003"@nl .
-
-id:F001 rdfs:label "frame van B001"@nl .
-
-id:F002 rdfs:label "frame van B002"@nl .
-
-id:F003 rdfs:label "frame van B003"@nl .
-
-id:W001 rdfs:label "voorwiel van B001"@nl .
-
-id:W002 rdfs:label "achterwiel van B001"@nl .
-
-id:CB001 rdfs:label "laadbak van B001"@nl .
-
-# Punning
-# The individual interpretation is a term record; it is independent of the physical Frame class.
-
-def:Frame a owl:NamedIndividual, def:TermRecord .
-
-# Example records
-# All individuals and observations below are fictional.
-
-id:B001 def:hasFrame id:F001 ;
-    def:hasDirectComponent id:F001, id:W001, id:W002, id:CB001 ;
-    def:hasInventoryTag id:T001 ;
-    def:recordedIn id:InventoryA ;
-    owl:sameAs id:C17 .
-
-id:B002 a def:NonCargoBicycle .
-
-id:F001 def:hasComponent id:Tube001 .
-
-id:Tube001 a owl:NamedIndividual, def:Component ;
-    rdfs:label "frame tube of F001"@en, "framebuis van F001"@nl ;
-    rdfs:comment "A physical tube in F001, used to show the difference between direct component links and transitive parthood."@en .
+# Overlapping classes and another name for B001
 
 id:B004 a owl:NamedIndividual, def:CargoBicycle, def:Fatbike ;
     rdfs:label "cargo fatbike B004"@en, "bakfiets met brede banden B004"@nl ;
-    rdfs:comment "A fourth bicycle, outside the original three-bicycle cohort, demonstrating that CargoBicycle and Fatbike can overlap."@en .
-
-id:T001 a owl:NamedIndividual, def:InventoryTag ;
-    rdfs:label "permanent tag T001"@en, "permanent label T001"@nl ;
-    rdfs:comment "A physical inventory tag permanently assigned to B001 in this teaching study."@en .
+    rdfs:comment "A cargo bicycle that is also a fatbike."@en .
 
 id:C17 a owl:NamedIndividual, def:Bicycle ;
     rdfs:label "C17 in inventory B"@en, "C17 in inventaris B"@nl ;
-    rdfs:comment "Another known name for B001, recorded by inventory B."@en ;
-    def:recordedIn id:InventoryB .
+    rdfs:comment "Another known name for B001, recorded by inventory B."@en .
 
-id:TagAlias001 a owl:NamedIndividual, def:Bicycle ;
-    rdfs:label "bicycle identified through tag T001"@en, "fiets geïdentificeerd via label T001"@nl ;
-    rdfs:comment "An independently recorded bicycle name sharing B001's permanent physical tag; inverse functionality identifies the two."@en ;
-    def:hasInventoryTag id:T001 .
-
-id:InventoryA a owl:NamedIndividual, def:Inventory ;
-    rdfs:label "inventory A"@en, "inventaris A"@nl ;
-    rdfs:comment "The first fictional bicycle inventory."@en ;
-    def:maintainedBy id:TeamA .
-
-id:InventoryB a owl:NamedIndividual, def:Inventory ;
-    rdfs:label "inventory B"@en, "inventaris B"@nl ;
-    rdfs:comment "The second fictional bicycle inventory."@en ;
-    def:maintainedBy id:TeamB .
-
-id:TeamA a owl:NamedIndividual, def:Organisation ;
-    rdfs:label "inventory team A"@en, "inventaristeam A"@nl ;
-    rdfs:comment "The fictional organisation maintaining inventory A."@en .
-
-id:TeamB a owl:NamedIndividual, def:Organisation ;
-    rdfs:label "inventory team B"@en, "inventaristeam B"@nl ;
-    rdfs:comment "The fictional organisation maintaining inventory B."@en .
-
-id:R001 a owl:NamedIndividual, def:InventoryRecord ;
-    rdfs:label "inventory record R001"@en, "inventarisrecord R001"@nl ;
-    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
-    def:recordedIn id:InventoryA ;
-    def:studyInventoryCode "A-001" ;
-    def:describesBicycle id:B001 .
-
-id:R001Duplicate a owl:NamedIndividual, def:InventoryRecord ;
-    rdfs:label "inventory record R001Duplicate"@en, "inventarisrecord R001Duplicate"@nl ;
-    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
-    def:recordedIn id:InventoryA ;
-    def:studyInventoryCode "A-001" ;
-    def:describesBicycle id:C17 .
-
-id:R002 a owl:NamedIndividual, def:InventoryRecord ;
-    rdfs:label "inventory record R002"@en, "inventarisrecord R002"@nl ;
-    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
-    def:recordedIn id:InventoryA ;
-    def:studyInventoryCode "A-002" ;
-    def:describesBicycle id:B002 .
-
-id:R017 a owl:NamedIndividual, def:InventoryRecord ;
-    rdfs:label "inventory record R017"@en, "inventarisrecord R017"@nl ;
-    rdfs:comment "A fictional inventory record; matching inventory and active local code identify the same record."@en ;
-    def:recordedIn id:InventoryB ;
-    def:studyInventoryCode "B-017" ;
-    def:describesBicycle id:C17 .
-
-id:R002 def:retiredInventoryCode "A-099" .
-
-id:W003 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "front wheel of B002"@en, "voorwiel van B002"@nl ;
-    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
-
-id:W004 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "rear wheel of B002"@en, "achterwiel van B002"@nl ;
-    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
-
-id:SW001 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "spare wheel for configuration C001"@en, "reservewiel voor configuratie C001"@nl ;
-    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
-
-id:EW001 a owl:NamedIndividual, def:Wheel ;
-    rdfs:label "excluded wheel for configuration C001"@en, "uitgesloten wiel voor configuratie C001"@nl ;
-    rdfs:comment "A distinct fictional wheel in the bicycle study."@en .
-
-id:S001 a owl:NamedIndividual, def:StorageBay ;
-    rdfs:label "shared storage bay S001"@en, "gedeelde stallingsplek S001"@nl ;
-    rdfs:comment "A fictional storage bay large enough for the two bicycles in configurations C001 and C002."@en .
-
-id:C001 a owl:NamedIndividual, def:AssembledConfiguration ;
-    rdfs:label "configuration of B001 on 9 November"@en, "configuratie van B001 op 9 november"@nl ;
-    rdfs:comment "A complete list of the installed top-level study components at the recorded time; the frame's tube is an indirect part."@en ;
-    def:describesBicycle id:B001 ;
-    def:recordedAt "2026-11-09T10:00:00Z"^^xsd:dateTimeStamp ;
-    def:hasInstalledComponent id:F001, id:W001, id:W002, id:CB001 ;
-    def:hasSpareComponent id:SW001 ;
-    def:hasExcludedComponent id:EW001 ;
-    def:hasAssignedStorageBay id:S001 ;
-    def:sharesStorageWith id:C001, id:C002 ;
-    a [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:allValuesFrom [ a owl:Class ; owl:oneOf (id:F001 id:W001 id:W002 id:CB001) ] ] .
-
-id:C002 a owl:NamedIndividual, def:AssembledConfiguration ;
-    rdfs:label "configuration of B002 on 9 November"@en, "configuratie van B002 op 9 november"@nl ;
-    rdfs:comment "A complete list of B002's three installed top-level study components at the recorded time."@en ;
-    def:describesBicycle id:B002 ;
-    def:recordedAt "2026-11-09T10:00:00Z"^^xsd:dateTimeStamp ;
-    def:hasInstalledPart id:F002, id:W003, id:W004 ;
-    def:hasAssignedStorageBay id:S001 ;
-    a [ a owl:Restriction ; owl:onProperty def:hasInstalledComponent ; owl:allValuesFrom [ a owl:Class ; owl:oneOf (id:F002 id:W003 id:W004) ] ] .
-
-id:C003 a owl:NamedIndividual, def:Configuration ;
-    rdfs:label "partial configuration of B003"@en, "onvolledige configuratie van B003"@nl ;
-    rdfs:comment "A partial configuration record; its installed component list is not closed."@en ;
-    def:describesBicycle id:B003 ;
-    def:recordedAt "2026-11-09T10:30:00Z"^^xsd:dateTimeStamp ;
-    def:hasInstalledComponent id:F003 ;
-    def:hasSpareComponent [ a def:Frame ; rdfs:comment "An unnamed spare frame, local to this document."@en ] .
-
-id:M001 a owl:NamedIndividual, def:MassObservation ;
-    rdfs:label "mass observation M001"@en, "massameting M001"@nl ;
-    rdfs:comment "A fictional mass observation. Repeated measurements use separate records, even when their values agree."@en ;
-    def:observesObject id:B001 ;
-    def:recordedMassKg "32.5"^^xsd:decimal ;
-    def:recordedAt "2026-11-09T10:05:00Z"^^xsd:dateTimeStamp .
-
-id:M002 a owl:NamedIndividual, def:MassObservation ;
-    rdfs:label "mass observation M002"@en, "massameting M002"@nl ;
-    rdfs:comment "A fictional mass observation. Repeated measurements use separate records, even when their values agree."@en ;
-    def:observesObject id:B002 ;
-    def:recordedMassKg "14.2"^^xsd:decimal ;
-    def:recordedAt "2026-11-09T10:10:00Z"^^xsd:dateTimeStamp .
-
-id:M003 a owl:NamedIndividual, def:MassObservation ;
-    rdfs:label "mass observation M003"@en, "massameting M003"@nl ;
-    rdfs:comment "A fictional mass observation. Repeated measurements use separate records, even when their values agree."@en ;
-    def:observesObject id:B001 ;
-    def:recordedMassKg "32.6"^^xsd:decimal ;
-    def:recordedAt "2026-11-09T10:15:00Z"^^xsd:dateTimeStamp .
-
-
-# Known differences and explicit exclusions
-# Intentional aliases and the duplicate record are excluded from AllDifferent.
+# Known differences; C17 is omitted because it names B001.
 
 [] a owl:AllDifferent ;
     owl:distinctMembers (
         id:B001 id:B002 id:B003 id:B004
-        id:F001 id:F002 id:F003 id:W001 id:W002 id:W003 id:W004 id:CB001 id:Tube001 id:SW001 id:EW001 id:T001
-        id:InventoryA id:InventoryB id:TeamA id:TeamB
-        id:R001 id:R002 id:R017
-        id:C001 id:C002 id:C003 id:S001 id:M001 id:M002 id:M003
+        id:F001 id:F002 id:F003 id:W001 id:W002 id:CB001 id:Tube001
     ) .
-
-id:W001 owl:differentFrom id:W002 .
-
-[] a owl:NegativePropertyAssertion ;
-    owl:sourceIndividual id:C002 ;
-    owl:assertionProperty def:hasSpareComponent ;
-    owl:targetIndividual id:CB001 .
-
-[] a owl:NegativePropertyAssertion ;
-    owl:sourceIndividual id:R002 ;
-    owl:assertionProperty def:retiredInventoryCode ;
-    owl:targetValue "A-999" .
 
 # Query the recorded facts without requiring a reasoner:
 #
