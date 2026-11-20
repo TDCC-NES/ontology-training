@@ -125,9 +125,9 @@ Open **Entities > Object properties**, select `def:hasComponent` and add its lab
 
 Return to **Entities > Classes**, select `def:Bicycle` and add another `rdfs:label` with text `fiets` and language tag `nl`. Both labels describe the same class, with the same IRI.
 
-Give individuals recognisable labels too. For example, F001's label in the sample records is “frame of B001”. Add it through the individual's **Annotations** panel using the same `rdfs:label` procedure.
+Recognisable labels help identify individuals in the editor. For example, F001's label in the sample records is “frame of B001”. Add it through the individual's **Annotations** panel using the same `rdfs:label` procedure.
 
-Use language tags for natural-language text throughout the ontology. Our English material name, labels and definitions use `en`; the Dutch label uses `nl`.
+Language tags identify the language of natural-language text throughout the ontology. Our English material name, labels and definitions use `en`; the Dutch label uses `nl`.
 
 ## Run the reasoner
 
@@ -144,17 +144,21 @@ The results should include `id:B001`: we recorded it as a Bicycle, and Bicycle i
 (visualise-ontology)=
 ## Visualise your ontology
 
-A visual view helps you compare the implemented ontology with your sketch. Choose a view suited to what you want to inspect:
+A visual view helps you compare the implemented ontology with your sketch. In this walkthrough, use the class hierarchy for subclass relationships and OntoGraf for the graph:
 
 | View | What to use it for | How to open it |
 |---|---|---|
-| Class hierarchy | Explore subclass relationships, such as Bicycle under Vehicle. Switch between **Asserted** and **Inferred** after running the reasoner. | **Entities > Classes**. [Documentation](https://protegeproject.github.io/protege/views/class-hierarchy/) |
-| OntoGraf | Explore classes, individuals and their relationships in a graph. Expand relevant nodes and filter relationships to keep the view readable. | **Window > Tabs > OntoGraf**; bundled with Protégé Desktop. [Documentation](https://protegewiki.stanford.edu/wiki/OntoGraf) |
-| OWLViz | View asserted and inferred class hierarchies as diagrams. | **Window > Tabs > OWLViz**; requires a separate [Graphviz installation](https://github.com/protegeproject/owlviz/blob/master/README.md). |
+| Class hierarchy | Explore subclass relationships, such as Bicycle under Vehicle. Switch between **Asserted** and **Inferred** after running the reasoner. | **Entities > Classes**. [Class hierarchy documentation](https://protegeproject.github.io/protege/views/class-hierarchy/) |
+| OntoGraf | Explore classes, individuals and their relationships in a graph. Expand relevant nodes and filter relationships to keep the view readable. | **Window > Tabs > OntoGraf**; bundled with Protégé Desktop. [OntoGraf documentation](https://protegewiki.stanford.edu/wiki/OntoGraf) |
 
 For the bicycle example, keep Vehicle, Bicycle, Component and Frame in view. In OntoGraf, you can also include B001 and F001 to explore their class memberships and component relationship. Inspect F001's material value in **Individuals by class > Data property assertions**.
 
+:::{dropdown} Other visualisation options (optional)
+
+OWLViz displays asserted and inferred class hierarchies as diagrams. Open it through **Window > Tabs > OWLViz**; it requires a separate [Graphviz installation](https://github.com/protegeproject/owlviz/blob/master/README.md).
+
 [Mermaid](https://mermaid.js.org/syntax/flowchart.html) renders text descriptions as diagrams of nodes and labelled links. A SPARQL query can generate Mermaid diagram text from selected classes, individuals and relationships in your ontology, which you can then render with Mermaid. The [EasyGraph developer manual](https://easygraph.graphifi.com/docs/docs/easygraph.html) documents this approach.
+:::
 
 (owl-turtle-example)=
 ## Save and inspect the Turtle file

@@ -25,12 +25,12 @@ Work in small cycles with the people who collect, interpret and reuse the data:
 4. Review the descriptions, answers to relevant questions and inferred conclusions together. Revise the model or address gaps in the data as needed.
 5. Document decisions, share the model and agree who will maintain it.
 
-Repeat these steps as understanding and research needs develop. Check each revision against the examples already covered. This iterative approach is also described in *Ontology Development 101*. {cite}`noy2001ontology` The {ref}`optional reading <ontology-development-guidance>` offers further guidance and examples.
+As understanding and research needs develop, the cycle repeats. Comparing each revision with the earlier examples shows whether it still covers them. This iterative approach is also described in *Ontology Development 101*. {cite}`noy2001ontology` The {ref}`optional reading <ontology-development-guidance>` offers further guidance and examples.
 
 ```{admonition} Reuse in practice
 :class: note
 
-In practice, check whether existing ontologies or vocabularies can be reused or extended before building your own. Develop new terms for concepts or relationships that suitable existing models do not cover, and combine them with terms you can reuse. Here, we build a small ontology first to understand the modelling choices involved. {cite}`noy2001ontology`
+Assessing existing ontologies and vocabularies before building can reveal terms or models to reuse or extend. New terms can fill the remaining gaps alongside reused terms. Here, we build a small ontology first to understand the modelling choices involved. {cite}`noy2001ontology`
 ```
 
 ## Define purpose and initial scope
@@ -97,7 +97,7 @@ People who know a domain well may still disagree about what a familiar term incl
 
 For example, one colleague might use *bicycle* only for vehicles powered entirely by the rider, while another includes electric assistance. Discussing a concrete example helps them agree what belongs in the model's Bicycle class. A possible agreement is to include two-wheeled cycles designed to be pedalled, with or without electric assistance. Keeping the agreed meaning alongside the example makes the decision understandable to others.
 
-Record unresolved points for later discussion. {cite}`uschold1995methodology,neuhaus2022consensus`
+Notes on unresolved points keep them available for later discussion. {cite}`uschold1995methodology,neuhaus2022consensus`
 
 ### Classes, properties and data values
 
@@ -113,9 +113,9 @@ The bicycle records give us concrete things to describe. OWL distinguishes the f
 
 Bicycle is one class used to describe B001, B002 and B003; each identifier names a particular bicycle. Frame is another class, used for F001, F002 and F003. Keeping classes and individuals distinct lets the same model describe many records.
 
-For this use case, “steel” and “aluminium” are values of the “has material” property. Different recorded materials can be described using the same Frame class. Agree how to write these values across inventories; using “steel” consistently makes records easier to match. A separate class is useful when the model needs to distinguish a kind of thing, rather than simply record a different value. {cite}`noy2001ontology`
+For this use case, “steel” and “aluminium” are values of the “has material” property. Different recorded materials can be described using the same Frame class. Agreed spellings across inventories, such as “steel”, make records easier to match. A separate class is useful when the model needs to distinguish a kind of thing, rather than simply record a different value. {cite}`noy2001ontology`
 
-Use an individual with an IRI when the material needs its own description or links to other data, and an object property to relate the frame to it. [OWL properties and data values](https://www.w3.org/TR/owl2-primer/#Datatypes)
+A material represented as an individual with an IRI can have its own description and links to other data. An object property relates the frame to it. [OWL properties and data values](https://www.w3.org/TR/owl2-primer/#Datatypes)
 
 A *subclass* is a more specific class. Bicycle is a subclass of Vehicle: every instance of Bicycle is also an instance of Vehicle. Frame is a subclass of Component, which covers physical parts of objects. A component relationship has a different meaning. F001 is a component of B001; making Frame a subclass of Bicycle would say that every frame is itself a bicycle. {cite}`w3c2012owl2primer`
 
@@ -163,14 +163,14 @@ block-beta
 
 ### Domains, ranges and datatypes
 
-A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, choose Component as the range to cover frames, wheels and other physical parts. Allow subjects beyond bicycles, since other objects can also have components. Chapter 4 implements this broad domain with `owl:Thing`, which contains every individual. {cite}`w3c2012owl2primer`
+A property's *domain* specifies a class that all its subjects belong to; an object property's *range* specifies a class that all its objects belong to. For “has component”, Component covers frames, wheels and other physical parts, so it is a suitable range. Other objects can also have components, so the domain needs to allow subjects beyond bicycles. Chapter 4 implements this broad domain with `owl:Thing`, which contains every individual. {cite}`w3c2012owl2primer`
 
-These choices also support inference: from “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that F001 is a Component. Record its more specific Frame membership separately. Checking that every bicycle has a recorded component is a data-validation task.
+These choices also support inference: from “B001 has component F001”, an application using OWL reasoning (a *reasoner*) can infer that F001 is a Component. Its more specific Frame membership is recorded separately. Checking that every bicycle has a recorded component is a data-validation task.
 
-For datatype properties, choose the kind of value needed: colour and material names use language-tagged text, such as `"steel"@en`. In RDF 1.1, its datatype is `rdf:langString`; `rdf:` abbreviates `http://www.w3.org/1999/02/22-rdf-syntax-ns#`. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
+The intended kind of value guides the choice of datatype. Our colour and material names are natural-language text, so we use language-tagged values such as `"steel"@en`. In RDF 1.1, its datatype is `rdf:langString`; `rdf:` abbreviates `http://www.w3.org/1999/02/22-rdf-syntax-ns#`. [RDF literals](https://www.w3.org/TR/rdf11-concepts/#section-Graph-Literal)
 
 :::{dropdown} Numeric values in Turtle (optional)
-For numbers, use a numeric datatype: `xsd:integer` represents whole numbers. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`. In Turtle, `^^` attaches a datatype: `"2"^^xsd:integer` is equivalent to `2`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
+The numeric datatype `xsd:integer` represents whole numbers. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`. In Turtle, `^^` attaches a datatype: `"2"^^xsd:integer` is equivalent to `2`. [Turtle literals](https://www.w3.org/TR/turtle/#literals)
 :::
 
 ### Check the shared sketch against the records
@@ -183,32 +183,32 @@ The agreed sketch is most useful alongside short explanations of its concepts an
 
 ## Labels, definitions and language tags
 
-Clear labels and definitions help other researchers understand and reuse an ontology. Develop and refine labels and definitions together with domain experts as part of the shared conceptualisation, alongside the sketch. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
+Clear labels and definitions help other researchers understand and reuse an ontology. Domain experts help develop and refine labels and definitions alongside the sketch, as part of the shared conceptualisation. Drafting, discussing and refining that wording can take a substantial part of ontology development: it makes the agreed meaning explicit and can reveal differences in understanding that still need to be resolved. {cite}`uschold1995methodology,neuhaus2022consensus`
 
 ### Choose clear labels and definitions
 
-Choose short, recognisable labels using words familiar to the intended users. Use the same naming conventions throughout the model. Here, class labels are singular nouns such as “bicycle” and “frame”; property labels such as “has component” express how they are used in a statement. {cite}`noy2001ontology`
+Short, recognisable labels use words familiar to the intended users. Here, we follow consistent naming conventions: class labels are singular nouns such as “bicycle” and “frame”; property labels such as “has component” express how they are used in a statement. {cite}`noy2001ontology`
 
-Write a concise definition for each class and property. A useful class definition starts with a broader kind of thing and states what distinguishes members of the class. Use other, already understood terms to explain the meaning; repeating the label, as in “a bicycle is a type of bicycle”, leaves the reader with the same uncertainty. [Textual definitions](https://obofoundry.org/principles/fp-006-textual-definitions.html)
+Concise definitions make the intended meaning of each class and property explicit. A useful class definition starts with a broader kind of thing and states what distinguishes members of the class. It uses other, already understood terms to explain the meaning; repeating the label, as in “a bicycle is a type of bicycle”, leaves the reader with the same uncertainty. [Textual definitions](https://obofoundry.org/principles/fp-006-textual-definitions.html)
 
-For a property, explain what it relates or records. Read a sample statement aloud with the proposed property label to check its direction and meaning. The following definitions describe one class and one property from our sketch:
+A property's definition explains what it relates or records. Read a sample statement aloud with the proposed property label to check its direction and meaning. The following definitions describe one class and one property from our sketch:
 
 | Label | Definition |
 |---|---|
 | bicycle | A vehicle designed to travel on two wheels arranged one behind the other and to be propelled by pedalling, with or without electric assistance. |
 | has component | Relates an object to one of its physical parts. |
 
-The Bicycle definition draws on [Merriam-Webster's entry](https://www.merriam-webster.com/dictionary/bicycle) and reflects our agreed scope, including electric assistance. The property definition tells us how to read the link from B001 to F001. Where a definition is taken or adapted from an existing source, record that source alongside it.
+The Bicycle definition draws on [Merriam-Webster's entry](https://www.merriam-webster.com/dictionary/bicycle) and reflects our agreed scope, including electric assistance. The property definition tells us how to read the link from B001 to F001. A source reference alongside a quoted or adapted definition lets readers consult the original wording.
 
 ### Add language tags
 
-Add a *language tag* to labels, textual definitions and other natural-language text, such as material names. In Turtle, `"bicycle"@en` is text tagged as English and `"fiets"@nl` as Dutch. Both can be used as labels for the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
+A *language tag* identifies the language of labels, textual definitions and other natural-language text, such as material names. In Turtle, `"bicycle"@en` is text tagged as English and `"fiets"@nl` as Dutch. Both can be used as labels for the same Bicycle class. Applications can use these tags to select text in a user's preferred language. [RDF labels and language tags](https://www.w3.org/TR/rdf-schema/#ch_label)
 
-Choose the languages needed by the intended users. When providing translations, keep the intended meaning consistent across languages.
+The intended users determine which languages are useful. Translations express the same intended meaning in each language.
 
 ## Choose an IRI strategy
 
-An *IRI strategy* sets a consistent pattern for creating identifiers. For new IRIs, choose a Web domain that can be maintained over time, use HTTPS and plan how looking them up will retrieve descriptions, as discussed in {ref}`Linked Data Foundations <linked-data-foundations>`. {cite}`w3c2017dwbp`
+An *IRI strategy* sets a consistent pattern for creating identifiers. For new IRIs, this includes a Web domain that can be maintained over time, HTTPS and a plan for retrieving descriptions, as discussed in {ref}`Linked Data Foundations <linked-data-foundations>`. {cite}`w3c2017dwbp`
 
 Our example uses:
 
@@ -221,6 +221,6 @@ Our example uses:
 
 Here, `bicycle-ontology` gives the example's context, `def` groups class and property definitions, and `id` groups individuals. Appending a *local name*, such as `Bicycle`, to the *namespace IRI* `https://w3id.org/bicycle-ontology/def/` gives the term IRI `https://w3id.org/bicycle-ontology/def/Bicycle`.
 
-In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Choose property local names that make the direction from subject to object clear: `id:F001 def:hasMaterial "steel"@en .` reads as “F001 has material steel”.
+In our example, class local names start with an uppercase letter and property local names with a lowercase letter; subsequent words are capitalised, as in `hasComponent`. Our property local names express the direction from subject to object: `id:F001 def:hasMaterial "steel"@en .` reads as “F001 has material steel”.
 
-Keep IRIs stable when revising labels or adding translations, and preserve existing IRIs when reusing terms.
+An IRI identifies a term independently of its label or translations. Keeping the IRI stable when revising that text lets existing records continue to refer to the same term. Reusing a term's existing IRI likewise connects the records to its published definition.

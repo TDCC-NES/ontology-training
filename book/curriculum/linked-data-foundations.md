@@ -100,7 +100,7 @@ An inventory application and an analysis application can reuse the same bicycle 
 
 *Serialisation* represents an RDF graph in a format for storage or exchange. Turtle, JSON-LD, RDF/XML and N-Triples are RDF serialisation formats: they can represent the same graph using different syntax. [RDF serialisation formats](https://www.w3.org/TR/rdf11-primer/#section-syntax)
 
-We use *Turtle* for the course examples because its compact syntax makes RDF statements easier to read, edit and check. If an application or publishing workflow supports only RDF/XML, use that format. [Turtle specification](https://www.w3.org/TR/turtle/)
+We use *Turtle* for the course examples because its compact syntax makes RDF statements easier to read, edit and check. RDF/XML is an alternative when an application or publishing workflow requires it. [Turtle specification](https://www.w3.org/TR/turtle/)
 
 For the bicycle graph, *prefixes* abbreviate IRIs: `id:B001` expands to `https://w3id.org/bicycle-ontology/id/B001`. Here, `def:` abbreviates class and property IRIs, `id:` individual IRIs and `rdfs:` RDF Schema terms, so `def:Bicycle` expands to `https://w3id.org/bicycle-ontology/def/Bicycle`. [RDF Turtle](https://www.w3.org/TR/turtle/#simple-triples)
 
@@ -153,13 +153,13 @@ The data graph can also be an ontology: a shape could check that its classes hav
 
 ## Publishing Linked Data
 
-Our Turtle file already expresses RDF. To publish the graph as Linked Data, make its resource IRIs *dereferenceable*: looking one up retrieves a description of what it identifies. Provide a Web page (a *landing page*) for people and RDF for applications. The description of B001 can link to F001, whose description gives the frame's material; links can also lead to other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#semweb)
+Our Turtle file already expresses RDF. Publishing the graph as Linked Data also involves making its resource IRIs *dereferenceable*: looking one up retrieves a description of what it identifies. A Web page (a *landing page*) provides a readable description for people; RDF provides it for applications. The description of B001 can link to F001, whose description gives the frame's material; links can also lead to other datasets. [Cool URIs](https://www.w3.org/TR/cooluris/#semweb)
 
-Class and property IRIs work the same way: `def:Bicycle` can lead to its label and relationship to Vehicle. Publish descriptions for new terms and reuse existing term IRIs exactly, including `http:` in the `rdfs:` namespace. [Publishing vocabularies and ontologies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
+Class and property IRIs work the same way: `def:Bicycle` can lead to its label and relationship to Vehicle. New terms need published descriptions. Existing terms retain their exact IRIs, including `http:` in the `rdfs:` namespace, so the data continues to identify those terms. [Publishing vocabularies and ontologies](https://www.w3.org/TR/swbp-vocab-pub/#requirements)
 
-Use *persistent identifiers (PIDs)*, managed to remain usable when descriptions move to another Web address. {cite}`w3c2017dwbp` For example, [w3id](https://w3id.org/) provides stable IRIs under `https://w3id.org/` that redirect to your published descriptions. If you move those descriptions, update the redirects while keeping the IRIs unchanged.
+*Persistent identifiers (PIDs)* are managed to remain usable when descriptions move to another Web address. {cite}`w3c2017dwbp` For example, [w3id](https://w3id.org/) provides stable IRIs under `https://w3id.org/` that redirect to your published descriptions. When the descriptions move, changing the redirect destinations keeps the IRIs usable.
 
-Prefer HTTPS for new IRIs and keep the publishing domain's HTTPS certificate valid for secure access. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
+For new IRIs, HTTPS supports secure access, which depends on maintaining a valid certificate for the publishing domain. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
 
 (sparql-basics)=
 ## Query RDF with SPARQL

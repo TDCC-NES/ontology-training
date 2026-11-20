@@ -7,7 +7,7 @@ This training is for researchers, PhD candidates, and research support staff (fo
 
 ## Prerequisites
 
-No prior experience with ontologies, RDF, OWL, the Semantic Web or programming is required. You don't need a use case of your own to get started: a shared running example is used throughout. All tools used in the training, such as Protégé, are introduced and installed as you go, so no advance setup is needed.
+No prior experience with ontologies, RDF, OWL, the Semantic Web or programming is required. You do not need a use case of your own to get started: a shared running example is used throughout. All tools used in the training, such as Protégé, are introduced and installed as you go, so no advance setup is needed.
 
 ## What you'll learn
 
@@ -27,7 +27,7 @@ By the end of this training, you will be able to:
 
 Browse all chapters, sections and subsections in the {ref}`course contents <course-contents>`.
 
-Work through the curriculum in order, completing exercises where provided. Each chapter builds on the last.
+Work through the curriculum in order, following the examples and walkthroughs. Each chapter builds on the last.
 
 In this training, we first build a small ontology to understand the modelling choices involved, then explore reuse in depth.
 

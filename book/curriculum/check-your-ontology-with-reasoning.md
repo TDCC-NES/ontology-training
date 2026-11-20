@@ -1,7 +1,7 @@
 (owl-reasoning)=
 # Check your ontology with reasoning
 
-Use reasoning to check whether the ontology's statements can hold together and review their consequences against the intended meaning. Open `owl2-reasoning.ttl` with its {ref}`separate inventory data and local catalog <reasoning-example-files>` in a new Protégé window and start HermiT. This file contains the steel-frame definitions and imports the three inventory records. After editing, use **Reasoner > Synchronize reasoner** to update the results.
+Reasoning checks whether the ontology's statements can hold together and identifies consequences to compare with the intended meaning. Open `owl2-reasoning.ttl` with its {ref}`separate inventory data and local catalog <reasoning-example-files>` in a new Protégé window and start HermiT. This file contains the steel-frame definitions and imports the three inventory records. After editing, use **Reasoner > Synchronize reasoner** to update the results.
 
 In chapter 3, we used *model* for our conceptual design. In logic, a *model* is a possible interpretation in which all the ontology's axioms hold together. A statement is *entailed* when it holds in every model. F001 is a SteelFrame in every model. F003 can be a SteelFrame in some models and fall outside that class in others, so its classification remains unresolved. [Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/)
 
@@ -40,7 +40,7 @@ Compare the inferred hierarchy with the intended class relationships. The exampl
 
 In Protégé, open **Individuals by class**, select Frame and then F001. Beside its inferred **SteelFrame** type, click **?** (**Explain inference**). The explanation should connect F001's Frame membership and material value with the SteelFrame definition. If inferred types are hidden, enable their display in the [reasoner preferences](https://protegeproject.github.io/protege/preferences/reasoner/).
 
-OWL reasoning is *monotonic*: adding axioms preserves earlier entailments. Correcting a mistaken axiom requires removing or replacing it and reasoning again. Choose a reasoner that supports the ontology's features and datatypes; a timeout or unsupported construct can leave an inference unresolved. [Inference problems](https://www.w3.org/TR/owl2-direct-semantics/#Inference_Problems)
+OWL reasoning is *monotonic*: adding axioms preserves earlier entailments. Correcting a mistaken axiom requires removing or replacing it and reasoning again. Reasoner support for the ontology's features and datatypes matters: a timeout or unsupported construct can leave an inference unresolved. [Inference problems](https://www.w3.org/TR/owl2-direct-semantics/#Inference_Problems)
 
 Checks such as “every record must contain a material value” concern data completeness and belong in a validation layer, such as SHACL. Calculations belong in applications or queries.
 

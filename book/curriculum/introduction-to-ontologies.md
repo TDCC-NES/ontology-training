@@ -36,7 +36,7 @@ Models from different fields can be connected where their concepts overlap. Thes
 
 These approaches are not mutually exclusive. For example, taxonomies and thesauri are forms of controlled vocabulary. {cite}`isaac2009skosprimer` And an ontology typically organises its classes in a taxonomic hierarchy. {cite}`noy2001ontology,w3c2012owl2primer`
 
-Choose the level of modelling that serves your research: a data dictionary or controlled vocabulary may be enough. An ontology is useful when you need a shared model of the things your data describes, their relationships and the logical statements that support interpretation or inference. Weigh these benefits against the work needed to agree, document and maintain the model. {cite}`noy2001ontology,w3c2017dwbp`
+The appropriate level of modelling depends on the research task: a data dictionary or controlled vocabulary may be enough. An ontology is useful when you need a shared model of the things your data describes, their relationships and the logical statements that support interpretation or inference. Its value depends on whether these benefits justify the work needed to agree, document and maintain the model. {cite}`noy2001ontology,w3c2017dwbp`
 
 ## Why OWL?
 

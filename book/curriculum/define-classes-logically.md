@@ -79,7 +79,7 @@ This definition uses an exact text value: `"Steel"@en` and `"steel"@nl` are diff
 (owl-class-expressions)=
 ## Combining and separating classes
 
-Use *disjointness* when shared membership would contradict the model. For example, Frame and Wheel describe separate kinds of component:
+*Disjointness* expresses that shared membership would contradict the model. For example, Frame and Wheel describe separate kinds of component:
 
 ```turtle
 def:Frame owl:disjointWith def:Wheel .

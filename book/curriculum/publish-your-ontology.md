@@ -7,7 +7,7 @@ By the end of this chapter, you will be able to:
 
 - Prepare an ontology's metadata and version identifiers for publication.
 - Assess askwol findings and check generated documentation against the ontology's RDF.
-- Publish RDF and documentation using stable Web identifiers.
+- Prepare RDF and documentation for publication using stable Web identifiers.
 - Check that ontology and term IRIs retrieve the intended RDF and documentation.
 :::
 
@@ -17,24 +17,24 @@ The [askwol publication guide](https://askwol.net/guide) provides the reference 
 
 This course publishes the [bicycle ontology as Turtle](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.ttl) alongside its [pyLODE documentation](https://w3id.org/bicycle-ontology/). Both are served by the course's GitHub Pages site. The ontology contains definitions only. It uses the `https://w3id.org/bicycle-ontology/` namespace throughout the course, with w3id redirects to these files. The walkthrough below shows how to prepare your own publication and configure identifier resolution.
 
-Public deployment in this example requires a GitHub account, permission to publish a public repository and a project identifier you intend to maintain. Replace `YOUR-OWNER` below with the repository owner's GitHub username or organisation name, and `YOUR-PROJECT` with an available project path chosen using [w3id's naming guidance](https://docs.w3id.org/guides/create-an-id#_1-choose-a-name).
+During the taught session, we prepare and review the RDF and documentation locally, then check Web access using the course's published example. Publishing your own ontology is follow-up work: w3id activation requires external review and deployment. [w3id review process](https://docs.w3id.org/guides/create-an-id#_8-after-it-is-merged)
 
 ## Metadata and licence
 
-Save a copy of the {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` as `bicycle-ontology.ttl`. Its ontology header already records a title, description, creators, publisher, dates, licence and version. Use the guide's [metadata](https://askwol.net/guide#metadata) and [licence](https://askwol.net/guide#license) sections when reviewing these values.
+Save a copy of the {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` as `bicycle-ontology.ttl`. We use this completed reference rather than `bike-logical.ttl` because it keeps the reusable definitions separate from the example records and includes publication metadata. Its ontology header already records a title, description, creators, publisher, dates, licence and version. Use the guide's [metadata](https://askwol.net/guide#metadata) and [licence](https://askwol.net/guide#license) sections when reviewing these values.
 
 Retain the original attribution and CC BY 4.0 licence for this example. If you adapt it, record your contribution and update the description and modification date to reflect your changes.
 
-Agree any additional project requirements before publication, and use the {ref}`ontology-validation method <ontology-shacl-check>` to check their presence in the RDF. For example, a project can require an ontology title and a licence IRI. [TIB's draft metadata recommendations](https://github.com/TIBHannover/terminology-metadata) provide examples for ontologies and their terms.
+Additional project requirements can be checked with the {ref}`ontology-validation method <ontology-shacl-check>` once the team has agreed them. For example, a project can require an ontology title and a licence IRI. [TIB's draft metadata recommendations](https://github.com/TIBHannover/terminology-metadata) provide examples for ontologies and their terms.
 
-If you also publish research data described using your ontology, provide metadata for the dataset and its downloadable files. See the W3C's [guidance on descriptive metadata](https://www.w3.org/TR/dwbp/#DescriptiveMetadata), which recommends the [Data Catalog Vocabulary (DCAT)](https://www.w3.org/TR/vocab-dcat-3/).
+For research data described using the ontology, metadata for the dataset and its downloadable files helps others find and assess that data. See the W3C's [guidance on descriptive metadata](https://www.w3.org/TR/dwbp/#DescriptiveMetadata), which recommends the [Data Catalog Vocabulary (DCAT)](https://www.w3.org/TR/vocab-dcat-3/).
 
 (owl-versioning)=
 ## Version identifiers
 
 The supplied ontology records version `1.0.0` with `owl:versionInfo`. A separate version IRI is optional; the {ref}`version-specific publication instructions <version-specific-publication>` show how to preserve a release at its own IRI. Use the guide's [versioning section](https://askwol.net/guide#versioning) as a reference for the [OWL versioning convention](https://www.w3.org/TR/owl2-syntax/#Versioning_of_OWL_2_Ontologies).
 
-For your own publication, apply the {doc}`IRI strategy from chapter 3 <design-your-own-ontology>`: replace `https://w3id.org/bicycle-ontology/` with `https://w3id.org/YOUR-PROJECT/` throughout the publication copy. This updates the ontology IRI and its namespace declarations. The resulting identifiers include:
+For your own publication, choose an available project path you intend to maintain using [w3id's naming guidance](https://docs.w3id.org/guides/create-an-id#_1-choose-a-name). Use that path in place of `YOUR-PROJECT` below. Apply the {doc}`IRI strategy from chapter 3 <design-your-own-ontology>`: replace `https://w3id.org/bicycle-ontology/` with `https://w3id.org/YOUR-PROJECT/` throughout the publication copy. This updates the ontology IRI and its namespace declarations. The resulting identifiers include:
 
 | Identifies | IRI |
 |---|---|
@@ -96,6 +96,8 @@ The {ref}`cheat sheet <owl-cheat-declarations>` gives the declaration, annotatio
 :::
 
 ## Publish RDF and documentation
+
+To publish your own ontology after the taught session, you need a GitHub account and permission to publish a public repository. Replace `YOUR-OWNER` below with the repository owner's GitHub username or organisation name.
 
 ### Host the files
 
@@ -164,29 +166,31 @@ Use w3id's [testing instructions](https://docs.w3id.org/guides/testing) before s
 
 ## Check Web access
 
-Once the redirects are live, open the ontology IRI and Bicycle class IRI in a browser. Each should lead to the documentation. Follow term links on the page and check that you can find the corresponding definitions.
+During the taught session, use the course's published ontology for these checks. After your own redirects are live, repeat them with your project IRIs and hosting addresses.
+
+Open `https://w3id.org/bicycle-ontology/` and `https://w3id.org/bicycle-ontology/def/Bicycle` in a browser. Each should lead to the documentation. Follow term links on the page and check that you can find the corresponding definitions.
 
 To check RDF access, open a terminal and use [curl](https://curl.se/docs/manpage.html), a command-line application for making Web requests. The command is `curl` on macOS/Linux and `curl.exe` in Windows PowerShell. If it is unavailable, follow curl's [installation guidance](https://curl.se/download.html).
 
-Replace `YOUR-PROJECT` before running:
+Run:
 
 ```sh
-curl -L -D headers.txt -H "Accept: text/turtle" -o retrieved.ttl "https://w3id.org/YOUR-PROJECT/def/Bicycle"
+curl -L -D headers.txt -H "Accept: text/turtle" -o retrieved.ttl "https://w3id.org/bicycle-ontology/def/Bicycle"
 ```
 
 `-L` follows redirects, `-D` saves response headers, `-H` requests Turtle and `-o` saves the response body. Open `headers.txt` and `retrieved.ttl` in a text editor. The expected responses are:
 
 | Requested IRI | Accept header | Redirect destination | Final response |
 |---|---|---|---|
-| `/` | `text/html` | `bicycle-ontology/` | `200`, `text/html` |
-| `/` | `text/turtle` | `bicycle-ontology/bicycle-ontology.ttl` | `200`, `text/turtle` |
-| `/def/Bicycle` | `text/turtle` | `bicycle-ontology/bicycle-ontology.ttl` | `200`, `text/turtle` |
-| `/def/hasComponent` | `text/turtle` | `bicycle-ontology/bicycle-ontology.ttl` | `200`, `text/turtle` |
+| `/` | `text/html` | `ontology-training/main/bicycle-ontology.html` | `200`, `text/html` |
+| `/` | `text/turtle` | `ontology-training/main/bicycle-ontology.ttl` | `200`, `text/turtle` |
+| `/def/Bicycle` | `text/turtle` | `ontology-training/main/bicycle-ontology.ttl` | `200`, `text/turtle` |
+| `/def/hasComponent` | `text/turtle` | `ontology-training/main/bicycle-ontology.ttl` | `200`, `text/turtle` |
 
-The request paths above follow `https://w3id.org/YOUR-PROJECT`; destinations follow `https://YOUR-OWNER.github.io/`. Each listed request should first receive a `303` redirect. A final content type may include a character encoding, such as `text/html; charset=utf-8`.
+The request paths above follow `https://w3id.org/bicycle-ontology`; destinations follow `https://tdcc-nes.github.io/`. Each listed request should first receive a `303` redirect. A final content type may include a character encoding, such as `text/html; charset=utf-8`.
 
 Repeat the command for the other paths, using `Accept: text/html` and `-o retrieved.html` for the HTML check. Load the retrieved Turtle in Protégé and confirm that it contains the expected ontology IRI, version information, Bicycle's definition and `hasComponent`'s domain and range.
 
-Upload `retrieved.ttl` to askwol to review the published RDF, checking that your new namespace now resolves. If a request fails, use the recorded redirect destination to locate whether the problem is in the w3id rule or the hosted file. If you correct the RDF, regenerate its documentation and republish the affected files. Repeat the affected checks once any file or redirect corrections are deployed.
+Upload `retrieved.ttl` to askwol to review the published RDF, checking that its namespace resolves. If a request fails, use the recorded redirect destination to locate whether the problem is in the w3id rule or the hosted file. For your own publication, regenerate the documentation after correcting the RDF and republish the affected files. Repeat the affected checks once any file or redirect corrections are deployed.
 
-After the checks pass, share the ontology IRI with the research community and, where suitable, submit it to a relevant vocabulary catalogue.
+After your own publication passes these checks, share its ontology IRI with the research community and, where suitable, submit it to a relevant vocabulary catalogue.

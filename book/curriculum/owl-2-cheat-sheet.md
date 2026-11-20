@@ -302,7 +302,7 @@ OWL 2 DL supports decidable reasoning under Direct Semantics. OWL 2 Full uses RD
 
 Object cardinalities, Self, functional/inverse-functional/irreflexive/asymmetric characteristics and object-property disjointness require *simple* properties. Transitive properties, chain superproperties, their inverses and superproperties are non-simple, as are the top and bottom object properties. Chains need a regular hierarchy; controlled recursion, including transitivity, is permitted.
 
-Punning permits separate uses of one IRI, such as class and individual. It excludes class–datatype overlap and overlap between property types. Anonymous individuals have restricted tree-like assertion patterns and cannot occur in object enumerations/value restrictions, identity/difference axioms or negative property assertions. `owl:topDataProperty` can occur only as the superproperty in data-subproperty axioms. Apply DL checks across imports. [Global restrictions](https://www.w3.org/TR/owl2-syntax/#Global_Restrictions_on_Axioms_in_OWL_2_DL)
+Punning permits separate uses of one IRI, such as class and individual. It excludes class–datatype overlap and overlap between property types. Anonymous individuals have restricted tree-like assertion patterns and cannot occur in object enumerations/value restrictions, identity/difference axioms or negative property assertions. `owl:topDataProperty` can occur only as the superproperty in data-subproperty axioms. These DL restrictions also apply across imports. [Global restrictions](https://www.w3.org/TR/owl2-syntax/#Global_Restrictions_on_Axioms_in_OWL_2_DL)
 
 | Profile | Intended setting |
 |---|---|
@@ -310,7 +310,7 @@ Punning permits separate uses of one IRI, such as class and individual. It exclu
 | QL | Query rewriting over large datasets |
 | RL | Rule-based reasoning |
 
-Each profile restricts allowed constructs and their positions. Check the ontology and the chosen reasoner's support. [Profiles](https://www.w3.org/TR/owl2-profiles/)
+Each profile restricts allowed constructs and their positions. Reasoners differ in which profiles and constructs they support. [Profiles](https://www.w3.org/TR/owl2-profiles/)
 :::
 
 For the specification's construct names and complete mappings, consult the [OWL 2 Quick Reference](https://www.w3.org/TR/owl2-quick-reference/).

@@ -10,6 +10,7 @@ By the end of this chapter, you will be able to:
 - Explain why and when to map an ontology to external ontologies and vocabularies.
 - Find suitable ontologies and vocabularies, and suitable terms within them, using standard resources.
 - Assess a term's meaning and logical consequences before reusing or mapping it.
+- Choose between OWL subclasses and controlled-vocabulary concepts for a modelling need.
 - Compare mapping approaches and choose one that fits, including [SHACL-AF rules](https://www.w3.org/TR/shacl-af/#rules) for deriving RDF triples with terms from another ontology.
 :::
 
@@ -35,23 +36,27 @@ These resources help locate candidate terms:
 | [Linked Open Vocabularies (LOV)](https://lov.linkeddata.es/) | Vocabulary and term records, with links to definitions and publishers |
 | [Schema.org](https://schema.org/docs/schemas.html) | Broad terms for describing things such as people, organisations, datasets and products on the Web |
 
-Use catalogue results to find candidates, then consult the vocabulary's own documentation and RDF. For a controlled vocabulary, also look for individual concepts that could supply values, such as a language or material identifier.
+Catalogue results identify candidates; the vocabulary's own documentation and RDF provide the information needed to assess them. A controlled vocabulary may also supply individual concepts to use as values, such as a language or material identifier.
+
+For measurements, [QUDT](https://www.qudt.org/pages/QUDToverviewPage.html) and the [Ontology of units of Measure (OM)](https://github.com/HajoRijgersberg/OM) provide models and vocabularies for quantities and units. The {ref}`massKg example <owl-data-ranges>` fixes the unit as kilograms. Recording each numeric value with its unit explicitly supports combining measurements from sources that use different units.
 
 ### Reuse, extend or build
 
-Before creating a new ontology, check which ontologies your research community uses and which terms the datasets you want to use already refer to. In RDF data, the class and property IRIs can identify those terms. You can reuse suitable terms, extend an existing ontology with missing concepts, or create new terms where existing models do not express the meaning you need. These choices can be combined. {cite}`noy2001ontology`
+The ontologies used by your research community and the terms already used in relevant datasets are starting points for finding a model to reuse. In RDF data, the class and property IRIs can identify those terms. Assessing them before creating a new ontology can reveal suitable terms to reuse, an existing model to extend, or gaps that need new terms. These choices can be combined. {cite}`noy2001ontology`
 
-When assessing an existing ontology, check:
+Assessing an existing ontology involves considering:
 
 - Whether its definitions, relationships and logical statements fit your intended meaning and level of detail.
 - Whether relevant research communities or collaborating projects use it.
 - Whether documentation, a licence and information about maintenance and versions are available.
 
-Read the definitions and logical statements behind a promising term: matching labels alone do not establish a match in meaning. {cite}`w3c2017dwbp,w3c2014linkeddata`
+If one ontology fits the central concepts and research purpose, it can serve as a *reference ontology*: the main model you reuse and extend, adding suitable terms from other models where needed. {cite}`noy2001ontology` For example, the W3C's [Organization Ontology (ORG)](https://www.w3.org/TR/vocab-org/) provides a core model for organisations that projects can extend with their own distinctions.
 
-For a property, check its direction, domains, ranges and any restrictions or characteristics. A property whose domain is Bicycle would classify all its subjects as bicycles, including a frame if used on F001. Multiple RDFS domains or ranges apply together, as explained in {ref}`chapter 5 <owl-property-axioms>`.
+Definitions and logical statements reveal whether a promising term has the intended meaning; matching labels alone do not establish that match. {cite}`w3c2017dwbp,w3c2014linkeddata`
 
-Read vocabulary-specific conventions too. Schema.org uses `domainIncludes` and `rangeIncludes` to describe expected uses; these differ from the RDFS domain and range axioms used in our ontology. [Schema.org data model](https://schema.org/docs/datamodel.html)
+A property's direction, domains, ranges, restrictions and characteristics determine its logical consequences. A property whose domain is Bicycle would classify all its subjects as bicycles, including a frame if used on F001. Multiple RDFS domains or ranges apply together, as explained in {ref}`chapter 5 <owl-property-axioms>`.
+
+Vocabularies can follow different conventions. Schema.org uses `domainIncludes` and `rangeIncludes` to describe expected uses; these differ from the RDFS domain and range axioms used in our ontology. [Schema.org data model](https://schema.org/docs/datamodel.html)
 
 The following decisions apply to each needed term, so one ontology can combine several approaches:
 
@@ -70,7 +75,7 @@ flowchart TD
 
 </div>
 
-Keep a short record of the chosen terms, sources and versions, why they fit and which alternatives were rejected. Revisit existing mappings when either model changes.
+Recording the chosen terms, sources and versions, why they fit and which alternatives were rejected lets later maintainers check whether an update still fits those choices. A mapping may need revision when either model changes.
 
 ## Choose a reuse or mapping approach
 
@@ -90,9 +95,9 @@ id:B001 a schema:Vehicle ;
 
 This description can be combined with the bicycle inventory through B001's shared IRI. It supplies a broad type and colour; our frame relationships still provide the detail needed for the frame-material question.
 
-Direct reuse avoids maintaining a local term for the same meaning. It also makes your data depend on the external definition and its maintenance. Preserve the publisher's IRI exactly, including its HTTP or HTTPS scheme.
+Direct reuse avoids maintaining a local term for the same meaning. It also makes your data depend on the external definition and its maintenance. Using the publisher's exact IRI, including its HTTP or HTTPS scheme, connects the data to that term; a different spelling gives a different IRI, which can prevent queries from matching the data.
 
-The same approach applies to values drawn from controlled vocabularies: use a selected concept's IRI as the object of an appropriate relationship. Keep its label for display. Reusing a concept IRI connects records even when their display labels use different languages. [SKOS concepts and labels](https://www.w3.org/TR/skos-primer/#secconcept)
+For values drawn from controlled vocabularies, a selected concept's IRI can be the object of an appropriate relationship, while its label serves for display. Reusing a concept IRI connects records even when their display labels use different languages. [SKOS concepts and labels](https://www.w3.org/TR/skos-primer/#secconcept)
 
 (owl-imports)=
 ### Import an ontology
@@ -117,7 +122,9 @@ To inspect this import in Protégé:
 
 To add an import to a working ontology, use **+** beside **Direct imports** in **Active ontology**. In the import wizard, choose the local-file option and select the ontology file. Check the ontology IRI and source location before finishing. Protégé adds `owl:imports` to the working ontology and records the local file location in `catalog-v001.xml`. [Import wizard and catalogs](https://protegewiki.stanford.edu/wiki/Importing_Ontologies_in_P41)
 
-An import provides the axioms needed for these inferences, while keeping the files separate. It also adds dependencies: check that imports resolve and that the combined ontology meets the chosen reasoner's requirements. Record the versions you test, and review updates before adopting them.
+An import provides the axioms needed for these inferences, while keeping the files separate. These inferences depend on the imported axioms being available and supported by the chosen reasoner. Recording the tested versions makes that combination identifiable; an update to an import needs review before adoption.
+
+Axioms that work separately can produce unintended classifications or contradictions when combined through imports and mappings. The {ref}`reasoning checks <owl-reasoning>` and {ref}`competency-question tests <competency-question-tests>` let us compare the combined model's inferences and answers with the expected results for representative records. [Combined axioms through imports](https://www.w3.org/TR/owl2-syntax/#Imports)
 
 ### Extend with subclasses and subproperties
 
@@ -133,19 +140,25 @@ def:Bicycle rdfs:subClassOf schema:Vehicle .
 
 With RDFS inference, B001's Bicycle membership then also establishes its Schema.org Vehicle membership. The reverse does not follow. Likewise, `rdfs:subPropertyOf` is suitable when every use of the local property also expresses the broader external relationship. The {ref}`hasFrame/hasComponent example <owl-property-axioms>` shows this direction.
 
-Extension preserves a useful local distinction. Check the inherited consequences, including external domains and ranges, before adopting it. [Class and property hierarchies](https://www.w3.org/TR/owl2-primer/#Property_Hierarchies)
+Extension preserves a useful local distinction while retaining the broader meaning. The external axioms still apply: for example, a subproperty inherits the typing consequences of its superproperty's domains and ranges. These consequences are part of assessing whether the extension fits the intended use. [Class and property hierarchies](https://www.w3.org/TR/owl2-primer/#Property_Hierarchies)
 
 ### Align existing classes and properties
 
 *Alignment* records a relationship between terms in existing models. Subclass and subproperty axioms can express a narrower meaning; `owl:equivalentClass` and `owl:equivalentProperty` express equivalence in both directions. The former gives classes the same members; the latter gives properties the same subject–object pairs. [OWL equivalence](https://www.w3.org/TR/owl2-primer/#Classes.2C_Properties.2C_and_Individuals_.E2.80.93_And_Basic_Modeling_With_Them)
 
-Compare the complete intended meanings before declaring equivalence. Our `hasColour` property can describe components as well as bicycles, while Schema.org documents `color` for products. A colour export for bicycles can be useful without making a global equivalence claim about those properties.
+An equivalence claim concerns the terms' complete intended meanings. Our `hasColour` property can describe components as well as bicycles, while Schema.org documents `color` for products. A colour export for bicycles can be useful without making a global equivalence claim about those properties.
 
-For individuals, `owl:sameAs` asserts that two IRIs identify the same thing, as with B001 and C17. Use it only when identity is justified. Similar names or related concepts alone do not establish identity.
+For individuals, `owl:sameAs` asserts that two IRIs identify the same thing, as with B001 and C17. An identity claim needs justification: similar names or related concepts alone do not establish identity.
 
 ### Map concepts with SKOS
 
-SKOS represents controlled-vocabulary concepts as resources. Its mapping properties connect concepts in different schemes. Suppose two fictional inventory teams have compared their definitions of steel and agreed that both concepts cover the same material category. Their mapping could be:
+SKOS represents controlled-vocabulary concepts as resources. Its mapping properties connect concepts in different schemes.
+
+A SKOS concept scheme provides categories for description or retrieval, with labels, definitions and broader/narrower relationships. OWL subclasses support logical statements about the categories' members, such as the conditions used to recognise SteelFrame instances. The appropriate approach depends on the meaning and inferences needed; the number of categories alone does not determine it. [SKOS, RDF and OWL](https://www.w3.org/TR/skos-reference/#L1045)
+
+In the example below, `invA:steel` identifies a material category and is an individual of `skos:Concept`. F001 identifies a particular physical frame. A material relationship can link that frame to the vocabulary concept; the {ref}`SteelFrame definition <owl-conditions>` instead describes a class of frames. An ontology can combine OWL classes and SKOS concepts. [SKOS concepts](https://www.w3.org/TR/skos-reference/#concepts)
+
+Suppose two fictional inventory teams have compared their definitions of steel and agreed that both concepts cover the same material category. Their mapping could be:
 
 ```turtle
 @prefix invA: <https://example.org/inventory-a/material/> .
@@ -160,7 +173,7 @@ invB:steel a skos:Concept ;
     skos:prefLabel "staal"@nl .
 ```
 
-Use `skos:exactMatch` when the concepts can be used interchangeably across a wide range of retrieval applications, or `skos:closeMatch` for a more limited match. `skos:broadMatch` points to a broader concept in another scheme; `skos:narrowMatch` points to a narrower one. These describe concept mappings, rather than OWL class equivalence or individual identity. [SKOS mapping guidance](https://www.w3.org/TR/skos-reference/#mapping)
+`skos:exactMatch` links concepts that can be used interchangeably across a wide range of retrieval applications; `skos:closeMatch` expresses a more limited match. `skos:broadMatch` points to a broader concept in another scheme; `skos:narrowMatch` points to a narrower one. These describe concept mappings, rather than OWL class equivalence or individual identity. [SKOS mapping guidance](https://www.w3.org/TR/skos-reference/#mapping)
 
 This example maps vocabulary concepts. The course's existing `"steel"@en` material values remain literals; adopting concept IRIs would also require updating the property, conversion mapping, queries and shapes.
 
@@ -188,9 +201,9 @@ shape:BicycleColourExport a sh:NodeShape ;
 
 For each selected bicycle, `sh:this` supplies the subject and the path expression reads its recorded colour. On the inventory, the rule adds `id:B001 schema:color "blue"@en`, and corresponding statements for B002 and B003. It makes no global equivalence claim about the two properties.
 
-Executing this example requires a processor with SHACL-AF rule support and its rule mode enabled. Keep the rules and the source data so the derived descriptions can be regenerated after changes.
+Executing this example requires a processor with SHACL-AF rule support and its rule mode enabled. Keeping the rules and source data allows the derived descriptions to be regenerated after changes.
 :::
 
 An explicit transformation is useful when another application needs a selected description or a different structure. It requires maintaining and rerunning the mapping. Chapter 6's source-comparison and expected-result checks apply to these derived descriptions too.
 
-For any approach, review the mapping statements and their consequences with domain experts. Test representative records, including cases that should remain outside the match, and record the source terms, versions, mapping direction and reasons for the decision.
+For any approach, domain experts can compare the mapping statements and their consequences with the intended meaning. Testing both intended matches and records that should remain outside the match can expose mappings that are too broad. Recording the source terms, versions, mapping direction and reasons for the decision makes later review possible.

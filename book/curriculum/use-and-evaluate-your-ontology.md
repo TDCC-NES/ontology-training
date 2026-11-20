@@ -20,7 +20,7 @@ By the end of this chapter, you will be able to:
 
 Our research team wants to compare recorded frame materials across bicycle inventories. We now use the ontology to represent the records as RDF and answer the competency question from chapter 3: “Which bicycles have a frame recorded as steel?”
 
-The {download}`supplied inventory RDF <../data/bicycle-inventory.ttl>` lets you follow the checks without running the conversion.
+The inventory records are kept in their own RDF file, separate from chapter 5's ontology definitions. You can generate `inventory-data.ttl` through the conversion below or use the equivalent {download}`supplied inventory RDF <../data/bicycle-inventory.ttl>` to follow the checks without running the conversion.
 
 (choose-the-right-check)=
 ## Choose appropriate checks
@@ -40,9 +40,9 @@ We will apply the supplied mapping to the three inventory records and inspect th
 
 ### Check the source data
 
-Check data quality before designing the conversion. Look for missing or duplicate identifiers, incorrect links between records, inconsistent material names and differences in datatypes or units. For example, establish whether `steel` and `Steel` mean the same material in the source inventories, and agree a consistent output value. Preserve the original data and record any changes you make.
+Source-data checks can uncover missing or duplicate identifiers, incorrect links between records, inconsistent material names and differences in datatypes or units before designing the conversion. For example, `steel` and `Steel` may refer to the same material; an agreed output value allows those records to match. Keeping the original data and a record of changes lets the team check how the source was prepared.
 
-For our records, “Not recorded” marks a missing material value. Leave that value absent in RDF, as for F003; this preserves the distinction between a material name and missing information.
+For our records, “Not recorded” marks a missing material value. Leaving that value absent in RDF, as for F003, preserves the distinction between a material name and missing information.
 
 ### Map the source fields
 
@@ -56,14 +56,14 @@ Mapping data to RDF means choosing which resources the records describe and whic
 | Frame material | `def:hasMaterial` links the frame to language-tagged text |
 | Bicycle colour | `def:hasColour` links the bicycle to language-tagged text |
 
-Use the IRI strategy agreed in chapter 3. Reuse a resource's IRI when combining descriptions of that same resource. [RDF descriptions and identifiers](https://www.w3.org/TR/rdf11-primer/#section-data-model)
+Chapter 3's IRI strategy keeps identifiers consistent across converted records. Reusing a resource's IRI connects descriptions of that same resource. [RDF descriptions and identifiers](https://www.w3.org/TR/rdf11-primer/#section-data-model)
 
-If a source field contains several separate values, map each to its own statement so it can be queried separately. Agree how the source separates values before splitting the field; a comma within a name may belong to one value.
+Separate values in a source field can become separate RDF statements so each can be queried. The source's conventions determine how a field can be split: a comma within a name may belong to one value.
 
 (reference-rdf)=
 ### Review the reference RDF
 
-Before running a conversion, write the expected RDF for one source record. For B001, the mapping above gives these five reference triples:
+A small reference graph gives us something to compare with a conversion's output. Before running a conversion, write the expected RDF for one source record. For B001, the mapping above gives these five reference triples:
 
 ```turtle
 @prefix def: <https://w3id.org/bicycle-ontology/def/> .
@@ -127,7 +127,7 @@ java -jar rmlmapper.jar -m bicycle-inventory.rml.ttl -o inventory-data.ttl -s tu
 
 :::{dropdown} Conversion methods (optional)
 
-Choose a method that suits the source format, required transformations and the team's experience.
+The source format, required transformations and the team's experience guide the choice of conversion method.
 
 | Method | How it applies the mapping |
 |---|---|
@@ -137,7 +137,7 @@ Choose a method that suits the source format, required transformations and the t
 
 These methods can be combined: scripts can clean material names before an RML conversion, run the conversion when records change and load the results into a triple store.
 
-Use consistent IRI patterns, links, datatypes, language tags and rules for missing values across conversion methods.
+Whichever method produces the RDF, consistent IRI patterns, links, datatypes, language tags and rules for missing values let us combine its output with the other inventory records.
 :::
 
 (check-the-converted-rdf)=
@@ -171,9 +171,9 @@ Once the sample matches, check records with other materials and missing values b
 (competency-question-tests)=
 ### Test competency questions against expected answers
 
-Use the {ref}`frame-material query from Chapter 2 <sparql-basics>` on the converted inventory to test the competency question from Chapter 3. Record the question, query, data and ontology versions, inference settings and expected answers together as a repeatable check of the ontology's coverage. {cite}`noy2001ontology,gruninger1995methodology`
+The {ref}`frame-material query from Chapter 2 <sparql-basics>` tests the competency question from Chapter 3 against the converted inventory. The question, query, data and ontology versions, inference settings and expected answers together form a repeatable check of the ontology's coverage. {cite}`noy2001ontology,gruninger1995methodology`
 
-Establish the expected answers from the source records before running the query:
+The source records establish the expected answers independently of the query:
 
 | Bicycle | Recorded frame material | Expected in the steel-frame result |
 |---|---|---|
@@ -198,8 +198,6 @@ If B001 is missing, inspect the loaded graph, full IRIs, component link and exac
 
 Repeat the comparison after relevant changes, and record the reason for any change to the expected answers.
 
-You can also use SPARQL to generate Mermaid diagram text from selected relationships in your data, as described in {ref}`Visualise your ontology <visualise-ontology>`.
-
 (load-and-query-the-data-in-a-triple-store)=
 :::{dropdown} Query in a triple store (optional)
 
@@ -217,7 +215,7 @@ Protégé's **SPARQL Query** tab searches asserted statements; starting HermiT a
 
 For example, with Bicycle declared a subclass of Vehicle, RDFS reasoning lets `?bicycle a def:Vehicle` retrieve B001 from its Bicycle membership. The frame-material query matches the recorded statements directly. [SPARQL entailment regimes](https://www.w3.org/TR/sparql11-entailment/)
 
-In a triple store, load the relevant ontology axioms and enable reasoning supported by the store, or load previously inferred statements. Using ontology term IRIs in the data does not load the axioms. Check which RDFS or OWL features the store supports. [RDF4J configuration](https://rdf4j.org/documentation/programming/repository/), [Jena inference support](https://jena.apache.org/documentation/inference/)
+A triple store can derive inferences when the relevant ontology axioms are loaded and its supported reasoning is enabled. Previously inferred statements can also be loaded for querying. Using ontology term IRIs in the data does not load the axioms. The available inferences depend on which RDFS or OWL features the store supports. [RDF4J configuration](https://rdf4j.org/documentation/programming/repository/), [Jena inference support](https://jena.apache.org/documentation/inference/)
 
 :::{dropdown} Test inferred answers (optional)
 
@@ -287,7 +285,7 @@ Save the report using its **Turtle** download link. The RDF report records `sh:c
 (ontology-shacl-check)=
 ### Check an ontology requirement
 
-Apply the same method to a documentation requirement: for this check, the Bicycle class must have a label. Use the {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` as **Input Data** and replace the shapes with:
+To check an ontology documentation requirement, switch to the {download}`bicycle reference ontology <../data/bicycle-ontology.ttl>` as **Input Data**: for this check, the Bicycle class must have a label. Replace the shapes with:
 
 ```turtle
 @prefix def: <https://w3id.org/bicycle-ontology/def/> .
@@ -311,6 +309,6 @@ Keep the same options and validate. The supplied ontology conforms because Bicyc
 
 For the inventory, F003's finding identifies a gap in the source information that the conversion correctly preserved. Obtain the material from an appropriate source if possible, and record where it came from. If missing material is acceptable for the intended use, remove `sh:minCount 1` from a copy of `bicycle-shapes.ttl` and rerun validation on the inventory RDF. It then conforms to the remaining datatype condition. Document why that requirement changed.
 
-Replacing F001's `"steel"@en` with `"aluminium"@en` would satisfy both material conditions for that frame while disagreeing with our source record. The {ref}`source comparison above <rdf-conversion-checks>` and expected steel-frame answer would expose that difference. Use the findings to locate the cause in the model, source data, mapping, query or validation requirements before making changes.
+Replacing F001's `"steel"@en` with `"aluminium"@en` would satisfy both material conditions for that frame while disagreeing with our source record. The {ref}`source comparison above <rdf-conversion-checks>` and expected steel-frame answer would expose that difference. Together, the checks help locate the cause in the model, source data, mapping, query or validation requirements before changes are made.
 
-Retain the source data, mapping where used, ontology, queries, expected answers, shapes and reports with their versions or dates. After a revision, repeat the affected checks on the earlier examples as well as any new records. Recheck logical consistency and intended inferences when changing OWL axioms.
+The source data, mapping where used, ontology, queries, expected answers, shapes and reports, with their versions or dates, form a record that allows the checks to be repeated. Repeating the affected checks on earlier examples and new records reveals the effects of a revision. Changes to OWL axioms can affect consistency and inferred conclusions, making reasoning part of that review.

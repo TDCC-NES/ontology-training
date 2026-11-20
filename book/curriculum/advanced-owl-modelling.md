@@ -6,6 +6,7 @@
 By the end of this page, you will be able to:
 
 - Predict inferences and contradictions from the advanced modelling examples.
+- Represent roles together with their project and time context.
 - Distinguish OWL 2 DL's modelling restrictions, OWL profiles and formats for writing ontologies.
 :::
 
@@ -39,7 +40,7 @@ Individual: id:B001
     Facts: def:hasWheel id:W001, def:hasWheel id:W002
 ```
 
-Every wheel filler must be one of those individuals. The facts supply the links; the restriction excludes additional, different fillers. State `id:W001 owl:differentFrom id:W002 .` to require two distinct wheels. `def:hasComponent max 0 def:CargoBox` similarly excludes any CargoBox component; missing cargo-box links alone do not establish it.
+Every wheel filler must be one of those individuals. The facts supply the links; the restriction excludes additional, different fillers. The statement `id:W001 owl:differentFrom id:W002 .` establishes that the wheels are distinct. `def:hasComponent max 0 def:CargoBox` similarly excludes any CargoBox component; missing cargo-box links alone do not establish it.
 
 (owl-inverse-self)=
 ## Inverse and self restrictions
@@ -53,7 +54,7 @@ An inverse expression follows a relationship backwards: `inverse def:hasComponen
 
 Data-property restrictions use the same `some`, `only`, `value`, `min`, `max` and `exactly` patterns, with data values and *data ranges* in place of individuals and classes.
 
-For these examples, introduce `def:massKg` for decimal mass measurements in kilograms within the study's observation context. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`.
+For these examples, `def:massKg` records decimal mass measurements in kilograms within the study's observation context. The `xsd:` prefix abbreviates `http://www.w3.org/2001/XMLSchema#`.
 
 | Manchester expression | Meaning |
 |---|---|
@@ -84,7 +85,7 @@ Reflexivity applies to every individual, so combining it with a domain can class
 (owl-chains-keys)=
 ## Chains and keys
 
-A property chain derives a relationship from an ordered path. Introduce recordedIn from a bicycle to an inventory, and maintainedBy from an inventory to its maintaining organisation:
+A property chain derives a relationship from an ordered path. Here, recordedIn links a bicycle to an inventory, and maintainedBy links an inventory to its maintaining organisation:
 
 ```turtle
 def:recordedIn a owl:ObjectProperty .
@@ -94,9 +95,34 @@ def:hasInventoryMaintainer a owl:ObjectProperty ;
     owl:propertyChainAxiom (def:recordedIn def:maintainedBy) .
 ```
 
-If B001 is recorded in InventoryA and InventoryA is maintained by TeamA, infer B001 hasInventoryMaintainer TeamA. The reverse implication does not follow. Chains use object properties, including inverse expressions; they cannot traverse material strings. [Property chains](https://www.w3.org/TR/owl2-primer/#Property_Chains)
+If B001 is recorded in InventoryA and InventoryA is maintained by TeamA, the chain entails B001 hasInventoryMaintainer TeamA. The reverse implication does not follow. Chains use object properties, including inverse expressions; they cannot traverse material strings. [Property chains](https://www.w3.org/TR/owl2-primer/#Property_Chains)
 
-A *key* specifies identifying properties within a class. For example, an InventoryRecord could identify one bicycle within one inventory. For named records, the named inventory and local code can form the key: two records sharing a value for every key property must be the same individual. Different records can describe the same bicycle. Keys allow additional values and require neither existence nor functionality. Use this key only when sharing those values identifies one record. The cheat sheet gives its syntax and precise naming conditions. [Keys](https://www.w3.org/TR/owl2-primer/#Keys)
+A *key* specifies identifying properties within a class. For example, an InventoryRecord could identify one bicycle within one inventory. For named records, the named inventory and local code can form the key: two records sharing a value for every key property must be the same individual. Different records can describe the same bicycle. Keys allow additional values and require neither existence nor functionality. This key fits cases where sharing those values identifies one record. The cheat sheet gives its syntax and precise naming conditions. [Keys](https://www.w3.org/TR/owl2-primer/#Keys)
+
+(owl-roles-context)=
+## Roles and context
+
+An organisation may be a contractor on one project and a subcontractor on another. Recording its Contractor and Subcontractor types alone would leave the projects unspecified. An individual for each *role assignment* links the organisation, project, role and relevant period. This follows the W3C's [n-ary relation pattern](https://www.w3.org/TR/swbp-n-aryRelations/#pattern1), which groups the participants in a relationship involving more than two things.
+
+This separate fragment uses fictional terms and individuals under `ex:`. RoleAssignment is the class of assignments; ContractorRole and SubcontractorRole identify the roles. The `actor`, `project`, `role` and `during` properties link each assignment to its context:
+
+```turtle
+@prefix ex: <https://example.org/renovation/> .
+
+ex:Assignment1 a ex:RoleAssignment ;
+    ex:actor ex:CompanyA ;
+    ex:project ex:ProjectA ;
+    ex:role ex:ContractorRole ;
+    ex:during ex:Period1 .
+
+ex:Assignment2 a ex:RoleAssignment ;
+    ex:actor ex:CompanyA ;
+    ex:project ex:ProjectB ;
+    ex:role ex:SubcontractorRole ;
+    ex:during ex:Period2 .
+```
+
+Both assignments concern CompanyA. Following each assignment keeps its project, role and period together; separate lists of roles and projects on CompanyA would lose those pairings. The periods can have their own descriptions with start and end dates. The [Organization Ontology's membership example](https://www.w3.org/TR/vocab-org/#membership-n-ary-relationship) applies the same pattern to roles within organisations, including the relevant time interval.
 
 (owl-negative-assertions)=
 ## Negative assertions and unnamed individuals
@@ -112,14 +138,14 @@ A *negative property assertion* excludes a particular pair. For example, inspect
 
 For a negative object-property assertion, use `owl:targetIndividual` instead of `owl:targetValue`. Missing data supplies neither negative assertion. Negative class information uses a complement: asserting F002 in `not def:SteelFrame` excludes its membership. [Assertions](https://www.w3.org/TR/owl2-syntax/#Assertions)
 
-A blank node in an individual position can describe an unnamed component: `id:B004 def:hasComponent [ a def:Frame ]`. Blank-node labels are local to their document. Use an IRI when researchers need to refer to the component across datasets.
+A blank node in an individual position can describe an unnamed component: `id:B004 def:hasComponent [ a def:Frame ]`. Blank-node labels are local to their document. An IRI allows researchers to refer to the component across datasets.
 
 (owl-language-choices)=
 ## Language choices and reasoning boundaries
 
 OWL 2 DL restricts the combinations of axioms to support decidable reasoning under Direct Semantics: an algorithm can finish with the correct answer for the supported reasoning tasks. RDF-Based Semantics interprets OWL directly on RDF graphs; OWL 2 Full allows combinations beyond DL's restrictions, with undecidable general reasoning. [OWL 2 semantics](https://www.w3.org/TR/owl2-overview/#Semantics)
 
-For example, a transitive property cannot be used in an object cardinality restriction in OWL 2 DL. For the component counts used here, keep hasComponent non-transitive and make it a subproperty of hasPart. The counting property must meet OWL's *simplicity* restrictions, which also account for chains and inverses. A profile checker tests the complete combination of axioms, including those of {ref}`imported ontologies <owl-imports>`; the cheat sheet summarises the restrictions. [Global restrictions](https://www.w3.org/TR/owl2-syntax/#Global_Restrictions_on_Axioms_in_OWL_2_DL)
+For example, a transitive property cannot be used in an object cardinality restriction in OWL 2 DL. For the component counts used here, hasComponent stays non-transitive and is a subproperty of hasPart. The counting property must meet OWL's *simplicity* restrictions, which also account for chains and inverses. A profile checker tests the complete combination of axioms, including those of {ref}`imported ontologies <owl-imports>`; the cheat sheet summarises the restrictions. [Global restrictions](https://www.w3.org/TR/owl2-syntax/#Global_Restrictions_on_Axioms_in_OWL_2_DL)
 
 OWL 2 DL also permits *punning*: a class and an individual may use the same IRI, with independent interpretations. Describing Frame as a catalogue entry then describes that entry, without applying its properties to every frame. [Metamodeling](https://www.w3.org/TR/owl2-syntax/#Metamodeling)
 
@@ -131,6 +157,6 @@ OWL 2 provides three restricted profiles for different reasoning needs:
 | QL | Query rewriting over large instance datasets, including relational databases |
 | RL | Rule-based reasoning over RDF data |
 
-Each profile permits particular constructs in particular positions. Check both the ontology's profile and the application's support. Turtle, Manchester, Functional Syntax and OWL/XML are writing formats; choosing one does not choose a profile or semantics. [Profiles](https://www.w3.org/TR/owl2-profiles/)
+Each profile permits particular constructs in particular positions. The ontology's profile and the application's support determine which constructs can be used for reasoning. Turtle, Manchester, Functional Syntax and OWL/XML are writing formats; choosing one does not choose a profile or semantics. [Profiles](https://www.w3.org/TR/owl2-profiles/)
 
 The [OWL 2 Primer](https://www.w3.org/TR/owl2-primer/) provides further explanations, the [Structural Specification](https://www.w3.org/TR/owl2-syntax/) defines the language, and the [Document Overview](https://www.w3.org/TR/owl2-overview/) maps the companion specifications.

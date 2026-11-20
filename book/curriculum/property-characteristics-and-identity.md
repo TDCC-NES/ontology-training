@@ -8,7 +8,7 @@ Here, property axioms describe a property's behaviour across all its uses. Class
 (owl-property-axioms)=
 ## Relationships between properties
 
-Make hasFrame a more specific relationship than hasComponent:
+A subproperty axiom makes hasFrame a more specific relationship than hasComponent:
 
 ```turtle
 def:hasFrame a owl:ObjectProperty ;
@@ -24,7 +24,7 @@ This entails B001 hasComponent F001. A general component link alone does not ent
 def:hasComponent owl:inverseOf def:isComponentOf .
 ```
 
-From B001 hasComponent F001, infer F001 isComponentOf B001. For equivalent properties, a link using either property also holds with the other. Disjoint properties cannot both link the same subject to the same object. Subproperties, equivalence and disjointness also apply to data properties, where the object is a data value. [Property axioms](https://www.w3.org/TR/owl2-syntax/#Object_Property_Axioms)
+From B001 hasComponent F001, the inverse axiom entails F001 isComponentOf B001. For equivalent properties, a link using either property also holds with the other. Disjoint properties cannot both link the same subject to the same object. Subproperties, equivalence and disjointness also apply to data properties, where the object is a data value. [Property axioms](https://www.w3.org/TR/owl2-syntax/#Object_Property_Axioms)
 
 Domains and ranges apply to every use of a property. With Frame as the range of hasFrame, every object of a hasFrame relationship is inferred to be a Frame. A class restriction such as “every hasFrame value of a Bicycle is a Frame” applies to Bicycle subjects. Several domains or ranges all apply together; the {ref}`optional union example <owl-union-complement>` shows how to express alternatives. [Domains and ranges](https://www.w3.org/TR/owl2-primer/#Domain_and_Range_Restrictions)
 
@@ -42,4 +42,4 @@ Functionality allows zero fillers. If B001's functional hasAssignedStorageBay pr
 
 Identity and difference can also be stated explicitly: `owl:sameAs` states that two names identify the same individual, so class memberships and property assertions about either name apply to both. `owl:differentFrom` states difference. Similarity or matching labels alone justify neither. [Assertions](https://www.w3.org/TR/owl2-syntax/#Assertions)
 
-For changing configurations or repeated measurements, represent the observation context explicitly before imposing functionality or cardinality limits.
+The functional property above describes one fixed allocation. For a bicycle that uses Bay01 and Bay02 at different times, a separate allocation for each period can link the bicycle to the relevant bay. This also illustrates why repeated measurements need an observation context before functionality or cardinality limits are imposed. The {ref}`optional role example <owl-roles-context>` shows how to group contextual information.
