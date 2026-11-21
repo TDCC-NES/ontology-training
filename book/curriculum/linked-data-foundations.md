@@ -9,9 +9,9 @@ By the end of this chapter, you will be able to:
 - Explain how Linked Data connects research data across datasets and applications.
 - Identify the subject, predicate and object of an RDF statement and explain what it records.
 - Interpret a simple Turtle example by expanding prefixed names to full IRIs and identifying literal values.
+- Explain which statements a basic SPARQL query matches and why it returns its result.
 - Explain the requirement expressed by a simple SHACL shape and whether an example graph meets it.
 - Describe what is needed to publish RDF as Linked Data.
-- Explain which statements a basic SPARQL query matches and why it returns its result.
 - Explain how Linked Data can support FAIR research data.
 :::
 
@@ -127,6 +127,29 @@ def:Bicycle rdfs:subClassOf def:Vehicle .
 
 If we recorded that B001 has two wheels, `2` would represent an integer that applications can use in calculations, while `"2"` would represent a text string.
 
+(sparql-basics)=
+## Query RDF with SPARQL
+
+*SPARQL* is a query language for RDF, whether loaded locally or made available through a service. A query describes a pattern of statements to match and specifies what information to return. The following query searches the bicycle graph above for bicycles with frames recorded as steel. It needs no reasoning.
+
+`PREFIX` defines the same IRI abbreviation as `@prefix` in Turtle. Names beginning with `?` are variables whose values will be found by matching the patterns:
+
+```sparql
+PREFIX def: <https://w3id.org/bicycle-ontology/def/>
+
+SELECT DISTINCT ?bicycle
+WHERE {
+    ?bicycle a def:Bicycle ;
+        def:hasComponent ?frame .
+    ?frame a def:Frame ;
+        def:hasMaterial "steel"@en .
+}
+```
+
+The patterns inside `WHERE` use the familiar Turtle forms `a` and `;`. The same `?frame` in both patterns connects each bicycle to its frame's material. `SELECT` chooses the variable to return, and `DISTINCT` returns each matching bicycle once, even if several frames match. The result is `https://w3id.org/bicycle-ontology/id/B001`; the query interface may display an abbreviated name. [SPARQL basic queries](https://www.w3.org/TR/sparql11-query/#WritingSimpleQueries)
+
+The material pattern matches the language-tagged value `"steel"@en`. `"Steel"@en`, `"steel"@nl` and the untagged string `"steel"` are different RDF terms. Consistent source-data preparation and conversion make these matches reliable.
+
 (shacl-basics)=
 ## Validate RDF with SHACL
 
@@ -160,29 +183,6 @@ Class and property IRIs work the same way: `def:Bicycle` can lead to its label a
 *Persistent identifiers (PIDs)* are managed to remain usable when descriptions move to another Web address. {cite}`w3c2017dwbp` For example, [w3id](https://w3id.org/) provides stable IRIs under `https://w3id.org/` that redirect to your published descriptions. When the descriptions move, changing the redirect destinations keeps the IRIs usable.
 
 For new IRIs, HTTPS supports secure access, which depends on maintaining a valid certificate for the publishing domain. [HTTPS requirements](https://www.rfc-editor.org/rfc/rfc9110.html#section-4.3.3)
-
-(sparql-basics)=
-## Query RDF with SPARQL
-
-*SPARQL* is a query language for RDF, whether loaded locally or made available through a service. A query describes a pattern of statements to match and specifies what information to return. The following query searches the bicycle graph above for bicycles with frames recorded as steel. It needs no reasoning.
-
-`PREFIX` defines the same IRI abbreviation as `@prefix` in Turtle. Names beginning with `?` are variables whose values will be found by matching the patterns:
-
-```sparql
-PREFIX def: <https://w3id.org/bicycle-ontology/def/>
-
-SELECT DISTINCT ?bicycle
-WHERE {
-    ?bicycle a def:Bicycle ;
-        def:hasComponent ?frame .
-    ?frame a def:Frame ;
-        def:hasMaterial "steel"@en .
-}
-```
-
-The patterns inside `WHERE` use the familiar Turtle forms `a` and `;`. The same `?frame` in both patterns connects each bicycle to its frame's material. `SELECT` chooses the variable to return, and `DISTINCT` returns each matching bicycle once, even if several frames match. The result is `https://w3id.org/bicycle-ontology/id/B001`; the query interface may display an abbreviated name. [SPARQL basic queries](https://www.w3.org/TR/sparql11-query/#WritingSimpleQueries)
-
-The material pattern matches the language-tagged value `"steel"@en`. `"Steel"@en`, `"steel"@nl` and the untagged string `"steel"` are different RDF terms. Consistent source-data preparation and conversion make these matches reliable.
 
 (triple-stores)=
 :::{dropdown} Triple stores and SPARQL endpoints (optional)
