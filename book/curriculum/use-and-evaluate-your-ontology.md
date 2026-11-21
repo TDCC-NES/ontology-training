@@ -97,7 +97,7 @@ We will use [RML (RDF Mapping Language)](https://rml.io/specs/rml/), a mapping l
 
 Download the {download}`source CSV <../data/bicycle-inventory.csv>` and {download}`RML mapping <../data/bicycle-inventory.rml.ttl>` into the same folder. The CSV contains the three records from chapter 3; F003's material cell is empty.
 
-The mapping has two *triples maps*: one creates bicycles, their component links and colours; the other creates frames and their materials. `rr:template` builds IRIs from identifier columns, `rr:class` assigns a type, and `rml:reference` reads a column value. Both literal mappings use `rr:language "en"`. Source spellings are preserved; empty material cells produce no material statement in this example.
+Open the mapping in a text editor. It has two *triples maps*: one creates bicycles, their component links and colours; the other creates frames and their materials. `rr:template` builds IRIs from identifier columns, `rr:class` assigns a type, and `rml:reference` reads a column value. Both literal mappings use `rr:language "en"`. Source spellings are preserved; empty material cells produce no material statement in this example.
 
 (rmlmapper-setup)=
 :::{dropdown} Set up RMLMapper
@@ -250,7 +250,7 @@ This completeness requirement is a choice for this check. F003 can have a materi
 
 Download {download}`bicycle-shapes.ttl <../data/bicycle-shapes.ttl>`. It keeps the earlier shape's target, property and minimum count, and adds `sh:datatype`.
 
-Add a short label with `sh:name` and explain the material field with `sh:description` so colleagues can interpret the shape. [Property shape documentation](https://www.w3.org/TR/shacl/#name)
+The file also includes a short label with `sh:name` and an explanation of the material field with `sh:description` so colleagues can interpret the shape. [Property shape documentation](https://www.w3.org/TR/shacl/#name)
 
 ```turtle
 @prefix def: <https://w3id.org/bicycle-ontology/def/> .

@@ -20,9 +20,9 @@ The {ref}`file guide <course-example-files>` summarises the roles of the working
 ```{tableofcontents}
 ```
 
-:::{dropdown} Bicycle reference example
+:::{dropdown} Course files and extended bicycle reference example
 
-The reference ontology brings together the bicycle hierarchy, component relationships and steel-frame definitions. Separate fictional data illustrates their use. The smaller walkthrough files remain the starting points for the lessons.
+The walkthroughs use the smaller working files listed below. The extended reference ontology brings together the bicycle hierarchy, component relationships and steel-frame definitions, with separate fictional data illustrating their use.
 
 (course-example-files)=
 ## Files and opening instructions

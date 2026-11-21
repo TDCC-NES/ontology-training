@@ -13,9 +13,7 @@ By the end of this chapter, you will be able to:
 
 Our research team can now use the bicycle ontology to compare inventory records. We will prepare it for publication so other researchers can inspect its definitions and reuse its terms.
 
-The [askwol publication guide](https://askwol.net/guide) provides the reference explanations and application commands. Here, we apply that guidance to the bicycle ontology and work through one publishing route: GitHub Pages hosts the files, and w3id redirects the identifiers to them.
-
-This course publishes the [bicycle ontology as Turtle](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.ttl) alongside its [pyLODE documentation](https://w3id.org/bicycle-ontology/). Both are served by the course's GitHub Pages site. The ontology contains definitions only. It uses the `https://w3id.org/bicycle-ontology/` namespace throughout the course, with w3id redirects to these files. The walkthrough below shows how to prepare your own publication and configure identifier resolution.
+The [askwol publication guide](https://askwol.net/guide) provides the reference explanations and application commands for this walkthrough. GitHub Pages hosts the course's published [ontology definitions in Turtle](https://tdcc-nes.github.io/ontology-training/main/bicycle-ontology.ttl) and [pyLODE documentation](https://w3id.org/bicycle-ontology/). w3id redirects the ontology and term IRIs in the course's `https://w3id.org/bicycle-ontology/` namespace to these files.
 
 During the taught session, we prepare and review the RDF and documentation locally, then check Web access using the course's published example. Publishing your own ontology is follow-up work: w3id activation requires external review and deployment. [w3id review process](https://docs.w3id.org/guides/create-an-id#_8-after-it-is-merged)
 
@@ -84,7 +82,7 @@ pylode bicycle-ontology.ttl -o index.html
 
 Open `index.html` in a browser. Locate Bicycle and `hasComponent`, and compare their displayed definitions with the RDF. Check that labels and definitions display correctly and that the licence, ontology IRI and version information agree with `bicycle-ontology.ttl`. Inspect the steel-frame class expressions in the Turtle file as well: pyLODE does not render every construct. After correcting the RDF, regenerate the page. Check external term links now and your new term links after publication.
 
-In pyLODE 3.6.1, bilingual labels appear joined in headings and navigation, for example “bicyclefiets”. Preserve the separate language-tagged labels in the RDF.
+In pyLODE 3.6.1, bilingual labels appear joined in headings and navigation, for example “bicyclefiets”. It also displays `"steel"@en` as a broken class link labelled “steel”. Keep the separate language-tagged labels and the literal value in the RDF.
 
 The [course's generated page](https://w3id.org/bicycle-ontology/) shows the expected layout for the supplied ontology.
 

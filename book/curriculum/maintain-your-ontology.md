@@ -5,16 +5,11 @@
 
 By the end of this chapter, you will be able to:
 
-- Agree responsibilities for reviewing changes and maintaining an ontology's publication.
+- Identify responsibilities for reviewing changes and maintaining an ontology's publication.
 - Compare versioning approaches for an ontology and its term IRIs.
 - Assess how a proposed change affects existing data, queries and inferences.
-- Prepare a documented release and explain how to retire a term while keeping its meaning available.
+- Describe how to prepare a documented release and retire a term while keeping its meaning available.
 :::
-
-```{admonition} Under development
-:class: warning
-This chapter is a draft.
-```
 
 Maintaining the bicycle ontology means reviewing changes and helping users update their inventories and queries.
 

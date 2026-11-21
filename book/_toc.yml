@@ -27,7 +27,6 @@ parts:
     - file: curriculum/publish-your-ontology.md
     - file: curriculum/maintain-your-ontology.md
     - file: curriculum/reuse-ontologies.md
-    - file: curriculum/ontologies-beyond-rdf.md
   - caption: Miscellaneous
     chapters:
     - file: references.md
